@@ -46,3 +46,4 @@ backend/.DS_Store
 backend/.env
 backend/data/devdb.sqlite3
 backend/test.db
+shrinkwrap.yaml
