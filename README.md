@@ -106,13 +106,14 @@ In order for the app to function correctly, the user must set up their own envir
     *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
     *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
     *  REACT_APP_databaseURL - in the Firebase dashboard
-    *  REACT_APP_projectID - in the Firebase dashboard
+    *  REACT_APP_projectId - in the Firebase dashboard
     *  REACT_APP_storageBucket - in the Firebase dashboard
     *  REACT_APP_messagingSenderId - in the Firebase dashboard
     *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
     *  REACT_APP_backendURL - optional for your local development server
     *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
     *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
+    *  REACT_APP_browser_key=same as REACT_APP_apiKey
 
 In your backend, create a .env file that includes the following:  
 
@@ -120,7 +121,13 @@ In your backend, create a .env file that includes the following:
 	*  NODE_ENV - set to "development" until ready for "production"  
 	*  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])  
 	*  SENDGRID_API_KEY - this is generated in your Sendgrid account  
-	*  stripe_secret - this is generated in the Stripe dashboard  
+	*  stripe_secret - this is generated in the Stripe dashboard
+    *  DATABASE_URL - url to your production database when deployed
+    *  AWS_KEY - api key for access aws s3
+    *  AWE_SECRET - secret key for access to aws s3
+    *  REGION - Not quite sure yet but it has to do with aws s3
+    *  PORT - Port that you want to serve data on. Defaults to 4500
+    *  PUBLIC_URL - Not totally sure what this is yet.
 
 ## Testing
 
