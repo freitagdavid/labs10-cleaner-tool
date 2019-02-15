@@ -32,6 +32,8 @@ frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
 frontend/yarn.lock
+##Lock for pnpm
+shrinkwrap.yaml
 
 # Backend
 ## dependencies
