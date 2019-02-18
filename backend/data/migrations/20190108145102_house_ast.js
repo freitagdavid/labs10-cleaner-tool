@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
       .onDelete('CASCADE');
   });
 };
-//making another comment comment
+
 exports.down = function(knex, Promise) {
   return knex.schema.dropTable('house_ast');
 };
