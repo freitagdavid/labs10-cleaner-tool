@@ -13,7 +13,7 @@ import db from '../../data/dbConfig';
 const testDb = knex(knexConfig.test);
 // @ts-ignore
 db.mockImplementation((table: string) => testDb(table));
-
+//
 // Temporary access token to test authentication
 const token: string = jwt.sign(
   {
