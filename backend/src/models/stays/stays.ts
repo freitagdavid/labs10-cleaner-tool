@@ -22,7 +22,7 @@ export function findStaySummary(stayId: number): QueryBuilder {
   // TODO: Query list status once lists are set up
   return db('stay')
     .where({ 'stay.id': stayId })
-    .select(
+    .select( //select all this stuff FROM the stay table gives bacl the matching reservation for each guest
       'user.full_name AS guestName',
       'house.id AS houseId',
       'house.name AS houseName',
@@ -36,8 +36,8 @@ export function findStaySummary(stayId: number): QueryBuilder {
       'check_in',
       'check_out',
     )
-    .join('user', 'user.id', '=', 'stay.guest_id')
-    .join('house', 'house.id', '=', 'stay.house_id')
+    .join('user', 'user.id', '=', 'stay.guest_id') //finds matching user for the reservation
+    .join('house', 'house.id', '=', 'stay.house_id') // only return the matching house for the reservation 
     .first();
 }
 
