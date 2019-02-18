@@ -15,6 +15,7 @@ exports.up = function(knex, Promise) {
       .references('stay.id')
       .onDelete('CASCADE');
     table.boolean('complete').defaultTo(false);
+    //comment
   });
 };
 

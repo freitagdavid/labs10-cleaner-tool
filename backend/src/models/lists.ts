@@ -5,10 +5,10 @@ import { List } from '../interface';
 // this will output an object with all lists for a house
 export const findLists = async (houseId: number) => {
   try {
-    const before = await db('list')
-      .where({ house_id: houseId, type: 'before' })
-      .leftJoin('items', { 'list.id': 'items.list_id' })
-      .select('list.id as list_id', 'items.task', 'items.id as items_id')
+    const before = await db('list') //get all rows from the list table(left table)
+      .where({ house_id: houseId, type: 'before' }) //only return before list for specific house 
+      .leftJoin('items', { 'list.id': 'items.list_id' }) //join it with the items table  ON list.id = ittems.list_id only show me matching items for that list
+      .select('list.id as list_id', 'items.task', 'items.id as items_id') //select these coulumns
       .orderBy('items.id')
       .then((e) => {
         return { before: e, before_id: e[0].list_id };
