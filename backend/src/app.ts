@@ -22,6 +22,37 @@ setGeneralMiddleware(server);
 server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
+//dev endpoints 
+import db from '../data/dbConfig';
+
+server.get('/data', async(req,res)=>{
+  try{
+  const users = await db('user')
+  res.json(users);
+  }catch(e){res.json(e)}
+})
+
+server.get('/surveys', async(req,res)=>{
+  try{
+  const data = await db('surveys')
+  res.json(data);
+  }catch(e){res.json(e)}
+})
+server.get('/questions', async(req,res)=>{
+  try{
+  const data = await db('questions')
+  res.json(data);
+  }catch(e){res.json(e)}
+})
+server.get('/questionanswers', async(req,res)=>{
+  try{
+  const data = await db('questionAnswers')
+  res.json(data);
+  }catch(e){res.json(e)}
+})
+
+
+
 server
   .route('/users')
   .get(verifyToken, users.get)
