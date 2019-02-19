@@ -4,7 +4,9 @@ exports.up = function(knex, Promise) {
       .increments('id')
       .unique()
       .primary();
-    table.string('answer').notNullable();
+    table.string('answer').defaultsTo(null);
+    table.boolean('yes_no').defaultsTo(null);
+    table.integer('stars').defaultsTo(null);
     table.integer('question_id');
     table
       .foreign('question_id')

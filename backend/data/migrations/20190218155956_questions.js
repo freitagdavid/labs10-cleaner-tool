@@ -10,6 +10,10 @@ exports.up = function(knex, Promise) {
       .foreign('survey_id')
       .references('surveys.id')
       .onDelete('CASCADE');
+    table
+      .integer('question_type')
+      .notNullable()
+      .defaultsTo(1);
   });
 };
 
