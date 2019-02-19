@@ -90,6 +90,7 @@ const Login: FunctionComponent<LoginProps> = ({ history, location }) => {
         const { data } = await axios.post(`${url}/users/`, nUser);
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
+        console.log(data.role)
         localStorage.setItem('subscription', data.stripePlan);
 
         if (data.first) {
