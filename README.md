@@ -103,7 +103,7 @@ Leaflet Maps is a lightweight API that provides basic map services. The map is r
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file in the frontend folder containing the following:
 
-    *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
+    *  REACT_APP_apiKey - this is your Firebase API key, which can be generated in the Firebase Console
     *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
     *  REACT_APP_databaseURL - in the Firebase dashboard
     *  REACT_APP_projectId - in the Firebase dashboard
