@@ -16,21 +16,61 @@ import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
 import path from 'path';
 
+import getSurveyQuestions from './models/surveys';
+
+import db from '../data/dbConfig';
+
 export const server = express();
 setGeneralMiddleware(server);
 
+server.get('/data', async(req,res)=>{
+  try{
+  const users = await db('user')
+  console.log(users)
+  res.json(users);
+  }catch(e){res.json(e)}
+})
 server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
+ 
+  
+  server.get('/surveys', async(req,res)=>{
+    try{
+    const data = await db('surveys')
+    res.json(data);
+    }catch(e){res.json(e)}
+  })
+
+  server.get('/surveysquestions', async(req,res)=>{
+    
+    try{
+    const data = await getSurveyQuestions()
+    console.log(data)
+    res.json(data);
+    }catch(e){res.json(e)}
+  })
+
+  server.get('/questions', async(req,res)=>{
+    try{
+    const data = await db('questions')
+    res.json(data);
+    }catch(e){res.json(e)}
+  })
+  server.get('/questionanswers', async(req,res)=>{
+    try{
+    const data = await db('questionAnswers')
+    res.json(data);
+    }catch(e){res.json(e)}
+  })
+// Authentication Middleware for *all* routes after this line
+server.use(verifyToken);
 server
   .route('/users')
   .get(verifyToken, users.get)
   .post(users.post)
   .put(verifyToken, users.putByExtId);
-
-// Authentication Middleware for *all* routes after this line
-server.use(verifyToken);
-
+  
 server
   .route('/users/:id')
   .get(users.get)
@@ -104,6 +144,11 @@ server
   .route('/stays/:id')
   .get(stays.get)
   .put(stays.put);
+
+  //dev endpoints 
+
+
+
 
 const options = {
   filePath: '../uploads',

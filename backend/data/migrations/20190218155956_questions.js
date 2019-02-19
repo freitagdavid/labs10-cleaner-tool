@@ -8,9 +8,9 @@ exports.up = function (knex, Promise) {
             .string('name')
         table
             .boolean('isGuest')
-        table.integer('house_id').unsigned();
+        table.integer('survey_id').unsigned();
         table
-            .foreign('house_id')
+            .foreign('survey_id')
             .references('house.id')
             .onDelete('CASCADE');
     })
