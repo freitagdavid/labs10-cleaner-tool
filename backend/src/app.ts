@@ -34,7 +34,7 @@ server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
  
-  
+
   server.get('/surveys', async(req,res)=>{
     try{
     const data = await db('surveys')
@@ -42,6 +42,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     }catch(e){res.json(e)}
   })
 
+ 
   server.get('/surveysquestions/:id', async(req,res)=>{
     try{
       const { id } = req.params
