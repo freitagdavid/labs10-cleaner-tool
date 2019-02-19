@@ -7,7 +7,7 @@ interface Surveys {
     isGuest: boolean
 }
 
-export function getSurveyQuestions() {
+export function getSurveyQuestions(id: number) {
     return db('surveys')
     // .join('survey', 'survey.id', '=', 'questions.survey_id')
     // .select('questions.id', 'surveys.id', 'surveys.name', 'surveys.isGuest', 'questions.name', 'questions.isGuest' )
