@@ -16,7 +16,7 @@ import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
 import path from 'path';
 
-import getSurveyQuestions from './models/surveys';
+import { getSurveyQuestions, getSurvey } from './models/surveys'
 
 import db from '../data/dbConfig';
 
@@ -42,13 +42,15 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     }catch(e){res.json(e)}
   })
 
-  server.get('/surveysquestions', async(req,res)=>{
-    
+  server.get('/surveysquestions/:id', async(req,res)=>{
     try{
-    const data = await getSurveyQuestions()
-    console.log(data)
-    res.json(data);
-    }catch(e){res.json(e)}
+      const { id } = req.params
+      const survey = await db('surveys').where({ id }).first()
+      if(survey) {
+        const questions = await db('questions').where({ survey_id: id })
+        res.json({ survey, questions });
+      }
+    }catch(e){res.json(e), console.log(e)}
   })
 
   server.get('/questions', async(req,res)=>{
