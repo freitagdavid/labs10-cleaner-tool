@@ -33,8 +33,6 @@ server.get('/data', async(req,res)=>{
 server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
- 
-
   server.get('/surveys', async(req,res)=>{
     try{
     const data = await db('surveys')
