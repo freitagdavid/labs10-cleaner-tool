@@ -13,7 +13,7 @@ export function getSurvey(id: number ): QueryBuilder {
 }
 
 
-export function getSurveyQuestions(id: number): QueryBuilder {
+export function getSurveyResponse(id: number): QueryBuilder {
     return db('survey')
         .join('questions', 'questions.survey_id', '=', 'survey.id')
         .select('survey.name', 'question.question', 'survey.isGuest')

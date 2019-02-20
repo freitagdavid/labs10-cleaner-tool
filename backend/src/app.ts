@@ -16,7 +16,7 @@ import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
 import path from 'path';
 
-import { getSurveyQuestions, getSurvey, getQuestionsAnswers } from './models/surveys'
+import { getSurveyResponse, getSurvey, getQuestionsAnswers } from './models/surveys'
 
 import db from '../data/dbConfig';
 
@@ -55,7 +55,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
   server.get('/surveysquestions/:id', async(req,res)=>{
     try{
       const { id } = req.params
-      const survey = await getSurveyQuestions(id)
+      const survey = await getSurveyResponse(id)
         res.json({ survey });   
     }catch(e){
       res.json(e), console.log(e)
@@ -72,7 +72,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
   server.get('/questionanswers', async(req,res)=>{
     try{
       const { id } = req.params
-    const questionAnswers = await getQuestionsAnswers(id)
+    const questionAnswers = await db('questionAnswers')
     res.json(questionAnswers);
     }catch(e){res.json(e)}
   })
