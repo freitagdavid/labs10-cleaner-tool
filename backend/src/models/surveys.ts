@@ -9,21 +9,22 @@ interface Surveys {
 }
 
 export function getSurvey(id: number ): QueryBuilder {
-    return db('survey')
+    return db('surveys').where({ id })
 }
 
 
 export function getSurveyResponse(id: number): QueryBuilder {
-    return db('survey')
+    return db('surveys')
         .join('questions', 'questions.survey_id', '=', 'survey.id')
-        .select('survey.name', 'question.question', 'survey.isGuest')
-        .where({ survey_id: id })
+        .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
+        .select('survey.name', 'questions.question', 'survey.isGuest', 'questions.question', 'questionAnswers.answer')
+        .where({ survey_id: id, question_id: id })
 }
 
 export function getQuestionsAnswers(id: number): QueryBuilder {
-    return db('question')
-        .join('questionAnswers', 'questionAnswers.question_id', '=', 'question.id')
-        .select('question.question', 'questionAnswer.answer')
+    return db('questions')
+        .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
+        .select('questions.question', 'questionAnswers.answer')
         .where({ question_id: id})
 }
 
