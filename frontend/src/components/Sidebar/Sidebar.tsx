@@ -82,6 +82,9 @@ const Sidebar = (props: LinkProps) => {
                 <MenuItem onClick={goAndClose('/assistants')}>
                   Assistants
                 </MenuItem>
+                <MenuItem onClick={goAndClose('/surveys')}>
+                  Surveys
+                </MenuItem>
                 <MenuItem onClick={goAndClose('/billing')}>Subscribe</MenuItem>
               </>
             )}
@@ -159,6 +162,25 @@ const Sidebar = (props: LinkProps) => {
                         }}
                       >
                         Assistants
+                      </h4>
+                    </StyledLink>
+                  </>
+                )}
+              </div>
+              <div>
+                {role === 'manager' && (
+                  <>
+                    <StyledLink to='/surveys'>
+                      <h4
+                        style={{
+                          borderBottom: props.location.pathname.match(
+                            '/surveys/*.*?',
+                          )
+                            ? '2px solid var(--color-accent-alt)'
+                            : '0',
+                        }}
+                      >
+                        Surveys
                       </h4>
                     </StyledLink>
                   </>
