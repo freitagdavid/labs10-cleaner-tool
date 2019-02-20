@@ -1,10 +1,8 @@
-const data = require('./data/usersData');
-
 exports.seed = async function(knex, Promise) {
   // Deletes ALL existing entries
   // await knex.raw('TRUNCATE TABLE questionAnswers RESTART IDENTITY CASCADE');
-  await knex.raw('TRUNCATE TABLE questions RESTART IDENTITY CASCADE');
   await knex.raw('TRUNCATE TABLE surveys RESTART IDENTITY CASCADE');
+  await knex.raw('TRUNCATE TABLE questions RESTART IDENTITY CASCADE');
   // await knex.raw('TRUNCATE TABLE houst_ast RESTART IDENTITY CASCADE');
   // await knex.raw('TRUNCATE TABLE items_complete RESTART IDENTITY CASCADE');
   await knex.raw('TRUNCATE TABLE after_list RESTART IDENTITY CASCADE');
@@ -15,4 +13,5 @@ exports.seed = async function(knex, Promise) {
   await knex.raw('TRUNCATE TABLE manager_ast RESTART IDENTITY CASCADE');
   await knex.raw('TRUNCATE TABLE assistant RESTART IDENTITY CASCADE');
   await knex.raw('TRUNCATE TABLE manager RESTART IDENTITY CASCADE');
+  // await knex.raw('TRUNCATE TABLE user RESTART IDENTITY CASCADE');
 };
