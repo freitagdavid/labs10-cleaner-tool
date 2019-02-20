@@ -16,7 +16,7 @@ import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
 import path from 'path';
 
-import { getSurveyQuestions, getSurvey } from './models/surveys'
+import { getSurveyResponse, getSurvey, getQuestionsAnswers } from './models/surveys'
 
 import db from '../data/dbConfig';
 
@@ -41,26 +41,28 @@ server.get('/', (__, res) => res.sendFile('index.html'));
   })
 
  
-  // server.get('/surveysquestions/:id', async(req,res)=>{
-  //   try{
-  //     const { id } = req.params
-  //     const survey = await db('surveys').where({ id }).first()
-  //     if(survey) {
-  //       const questions = await db('questions').where({ survey_id: id })
-  //       res.json({ survey, questions });
-  //     }
-  //   }catch(e){res.json(e), console.log(e)}
-  // })
-
-  server.get('/surveysquestions/:id', async(req,res)=>{
+  server.get('/surveyResponses/:id', async(req,res)=>{
     try{
       const { id } = req.params
-      const survey = await getSurveyQuestions(id)
-        res.json({ survey });   
-    }catch(e){
-      res.json(e), console.log(e)
-    }
-  });
+      console.log(id)
+      const survey = await getSurvey(id)
+      console.log(survey)
+      if(survey) {
+        const questionsAnswers = await getQuestionsAnswers(id)
+        res.json({ survey, questionsAnswers });
+      }
+    }catch(e){res.json(e), console.log(e)}
+  })
+
+  // server.get('/surveysquestions/:id', async(req,res)=>{ 
+  //   try{
+  //     const { id } = req.params
+  //     const survey = await getSurveyResponse(id)
+  //       res.json({ survey });   
+  //   }catch(e){
+  //     res.json(e), console.log(e)
+  //   }
+  // });
 
   server.get('/questions', async(req,res)=>{
     try{
@@ -69,10 +71,11 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     }catch(e){res.json(e)}
   })
   
-  server.get('/questionanswers', async(req,res)=>{
+  server.get('/questionanswers/:id', async(req,res)=>{
     try{
-    const data = await db('questionAnswers')
-    res.json(data);
+      const { id } = req.params
+      const questionAnswers = await getQuestionsAnswers(id)
+      res.json({questionAnswers});
     }catch(e){res.json(e)}
   })
   
@@ -157,11 +160,6 @@ server
   .route('/stays/:id')
   .get(stays.get)
   .put(stays.put);
-
-  //dev endpoints 
-
-
-
 
 const options = {
   filePath: '../uploads',
