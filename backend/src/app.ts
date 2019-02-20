@@ -76,13 +76,14 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     }catch(e){res.json(e)}
   })
   
-// Authentication Middleware for *all* routes after this line
-server.use(verifyToken);
 server
   .route('/users')
   .get(verifyToken, users.get)
   .post(users.post)
   .put(verifyToken, users.putByExtId);
+// Authentication Middleware for *all* routes after this line
+server.use(verifyToken);
+
   
 server
   .route('/users/:id')
