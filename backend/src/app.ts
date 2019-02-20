@@ -66,6 +66,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     res.json(data);
     }catch(e){res.json(e)}
   })
+  
 // Authentication Middleware for *all* routes after this line
 server.use(verifyToken);
 server
