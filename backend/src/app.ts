@@ -16,66 +16,73 @@ import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
 import path from 'path';
 
-import { getSurveyQuestions, getSurvey } from './models/surveys'
+import { getSurveyQuestions, getSurvey } from './models/surveys';
 
 import db from '../data/dbConfig';
 
 export const server = express();
 setGeneralMiddleware(server);
 
-server.get('/data', async(req,res)=>{
-  try{
-  const users = await db('user')
-  console.log(users)
-  res.json(users);
-  }catch(e){res.json(e)}
-})
+server.get('/data', async (req, res) => {
+  try {
+    const users = await db('user');
+    console.log(users);
+    res.json(users);
+  } catch (e) {
+    res.json(e);
+  }
+});
 server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
-  server.get('/surveys', async(req,res)=>{
-    try{
-    const data = await db('surveys')
+server.get('/surveys', async (req, res) => {
+  try {
+    const data = await db('surveys');
     res.json(data);
-    }catch(e){res.json(e)}
-  })
+  } catch (e) {
+    res.json(e);
+  }
+});
 
- 
-  // server.get('/surveysquestions/:id', async(req,res)=>{
-  //   try{
-  //     const { id } = req.params
-  //     const survey = await db('surveys').where({ id }).first()
-  //     if(survey) {
-  //       const questions = await db('questions').where({ survey_id: id })
-  //       res.json({ survey, questions });
-  //     }
-  //   }catch(e){res.json(e), console.log(e)}
-  // })
+// server.get('/surveysquestions/:id', async(req,res)=>{
+//   try{
+//     const { id } = req.params
+//     const survey = await db('surveys').where({ id }).first()
+//     if(survey) {
+//       const questions = await db('questions').where({ survey_id: id })
+//       res.json({ survey, questions });
+//     }
+//   }catch(e){res.json(e), console.log(e)}
+// })
 
-  server.get('/surveysquestions/:id', async(req,res)=>{
-    try{
-      const { id } = req.params
-      const survey = await getSurveyQuestions(id)
-        res.json({ survey });   
-    }catch(e){
-      res.json(e), console.log(e)
-    }
-  });
+server.get('/surveysquestions/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const survey = await getSurveyQuestions(id);
+    res.json({ survey });
+  } catch (e) {
+    res.json(e), console.log(e);
+  }
+});
 
-  server.get('/questions', async(req,res)=>{
-    try{
-    const data = await db('questions')
+server.get('/questions', async (req, res) => {
+  try {
+    const data = await db('questions');
     res.json(data);
-    }catch(e){res.json(e)}
-  })
-  
-  server.get('/questionanswers', async(req,res)=>{
-    try{
-    const data = await db('questionAnswers')
+  } catch (e) {
+    res.json(e);
+  }
+});
+
+server.get('/questionanswers', async (req, res) => {
+  try {
+    const data = await db('questionAnswers');
     res.json(data);
-    }catch(e){res.json(e)}
-  })
-  
+  } catch (e) {
+    res.json(e);
+  }
+});
+
 // Authentication Middleware for *all* routes after this line
 server.use(verifyToken);
 server
@@ -83,7 +90,7 @@ server
   .get(verifyToken, users.get)
   .post(users.post)
   .put(verifyToken, users.putByExtId);
-  
+
 server
   .route('/users/:id')
   .get(users.get)
@@ -158,10 +165,11 @@ server
   .get(stays.get)
   .put(stays.put);
 
-  //dev endpoints 
+// server
+//   .route('/surveys/:id')
+//   .get(surveys.getByid)
 
-
-
+// dev endpoints
 
 const options = {
   filePath: '../uploads',
