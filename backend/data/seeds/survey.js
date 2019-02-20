@@ -1,10 +1,9 @@
-const data = require('./data/questionsData.js')
-
+const data = require('./data/surveyData');
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('questions').del()
+  return knex('surveys').del()
     .then(function () {
       // Inserts seed entries
-      return knex('questions').insert(data);
+      return knex('surveys').insert(data);
     });
 };
