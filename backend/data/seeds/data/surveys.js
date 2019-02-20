@@ -19,4 +19,9 @@ module.exports = [
     isGuest: true,
     house_id: 2,
   },
+  {
+    name: 'survey 5',
+    isGuest: true,
+    house_id: 3,
+  },
 ];
