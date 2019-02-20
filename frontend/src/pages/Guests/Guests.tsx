@@ -16,7 +16,7 @@ import loadingIndicator from '../utils/loading.svg';
 
 const Guests = () => {
   const url =
-    process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com/';
+    process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
   const [active, setActive] = useState('upcoming' as FilterArgs);
   const [stays, error, loading] = useFetch(`${url}/stays?filter=${active}`);
 

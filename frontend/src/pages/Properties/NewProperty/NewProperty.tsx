@@ -32,7 +32,7 @@ const NewProperty = (props: RouteComponentProps) => {
   useEffect(() => {
     // Get list of assistants from backend
     const url =
-      process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com/';
+      process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
     const headers: AxiosRequestConfig = {
       headers: {
@@ -135,7 +135,7 @@ const NewProperty = (props: RouteComponentProps) => {
 
     try {
       const url =
-        process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com/';
+        process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
       const headers: AxiosRequestConfig = {
         headers: {

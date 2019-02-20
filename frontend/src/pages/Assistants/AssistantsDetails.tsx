@@ -18,7 +18,7 @@ import defaultUser from '../../assets/default-user.jpg';
 import loadingIndicator from '../utils/loading.svg';
 
 const url =
-  process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com/';
+  process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
 const AssistantCard = (props: any) => {
   const [taskLoad, setTaskLoad] = useState(0);
