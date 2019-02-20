@@ -5,11 +5,13 @@ exports.up = function (knex, Promise) {
             .unique()
             .primary()
         table
-            .string('question')
+            .string('name')
+        table
+            .boolean('isGuest')
         table.integer('survey_id').unsigned();
         table
             .foreign('survey_id')
-            .references('surveys.id')
+            .references('house.id')
             .onDelete('CASCADE');
     })
 };
