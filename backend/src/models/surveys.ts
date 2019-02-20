@@ -3,22 +3,32 @@ import db from '../../data/dbConfig';
 
 
 interface Surveys {
-    id: number,
+    id?: number,
     name: string,
     isGuest: boolean
+    query: any
+}
+
+export function getSurveys(): QueryBuilder {
+    return db('surveys')
 }
 
 export function getSurvey(id: number ): QueryBuilder {
-    return db('surveys').where({ id })
+    return  db('surveys').where({ id }).first()
 }
-
 
 export function getSurveyResponse(id: number): QueryBuilder {
     return db('surveys')
-        .join('questions', 'questions.survey_id', '=', 'survey.id')
+        .join('questions', 'questions.survey_id', '=', 'surveys.id')
         .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
-        .select('survey.name', 'questions.question', 'survey.isGuest', 'questions.question', 'questionAnswers.answer')
+        .select('surveys.name', 'questions.question', 'questions.question', 'questionAnswers.answer')
         .where({ survey_id: id, question_id: id })
+}
+
+export function getAllQuestionsAnswers(): QueryBuilder {
+    return db('questions')
+        .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
+        .select('questions.question', 'questionAnswers.answer')
 }
 
 export function getQuestionsAnswers(id: number): QueryBuilder {
