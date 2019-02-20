@@ -184,7 +184,7 @@ const NewGuest = (props: RouteComponentProps) => {
     */
     // TODO: Refactor to take advantage of Context API handling user info
     const url =
-      process.env.REACT_APP_backendURL || 'https://cleaner-pos.herokuapp.com';
+      process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com/';
     const token = localStorage.getItem('token');
     if (!token) {
       throw new Error('Not authenticated');

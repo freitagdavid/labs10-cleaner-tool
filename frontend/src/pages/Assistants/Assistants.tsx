@@ -62,7 +62,7 @@ const AssistantCard = (assistant: Assistant) => {
 
 const Assistants = () => {
   const url =
-    process.env.REACT_APP_backendURL || 'https://cleaner-pos.herokuapp.com';
+    process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com/';
   const [data, error, loading] = useFetch(`${url}/assistants`);
   return (
     <Container>
