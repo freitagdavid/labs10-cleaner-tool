@@ -16,7 +16,7 @@ import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
 import path from 'path';
 
-import { getSurveyQuestions, getSurvey } from './models/surveys'
+import { getSurveyQuestions, getSurvey, getQuestionsAnswers } from './models/surveys'
 
 import db from '../data/dbConfig';
 
@@ -71,8 +71,9 @@ server.get('/', (__, res) => res.sendFile('index.html'));
   
   server.get('/questionanswers', async(req,res)=>{
     try{
-    const data = await db('questionAnswers')
-    res.json(data);
+      const { id } = req.params
+    const questionAnswers = await getQuestionsAnswers(id)
+    res.json(questionAnswers);
     }catch(e){res.json(e)}
   })
   
@@ -157,11 +158,6 @@ server
   .route('/stays/:id')
   .get(stays.get)
   .put(stays.put);
-
-  //dev endpoints 
-
-
-
 
 const options = {
   filePath: '../uploads',

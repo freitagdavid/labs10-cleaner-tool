@@ -16,8 +16,15 @@ export function getSurvey(id: number ): QueryBuilder {
 export function getSurveyQuestions(id: number): QueryBuilder {
     return db('survey')
         .join('questions', 'questions.survey_id', '=', 'survey.id')
-        .select('survey.name', 'question.name', 'survey.isGuest', 'question.isGuest')
+        .select('survey.name', 'question.question', 'survey.isGuest')
         .where({ survey_id: id })
+}
+
+export function getQuestionsAnswers(id: number): QueryBuilder {
+    return db('question')
+        .join('questionAnswers', 'questionAnswers.question_id', '=', 'question.id')
+        .select('question.question', 'questionAnswer.answer')
+        .where({ question_id: id})
 }
 
 
