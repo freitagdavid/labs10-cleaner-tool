@@ -146,7 +146,7 @@ export const Checklist = (props: { stayId: number; className?: string }) => {
   const [fetch, setFetch] = useState(false);
 
   const url =
-    process.env.REACT_APP_backendURL || 'https://cleaner-pos.herokuapp.com';
+    process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
   const [lists, error, loading] = useFetch(
     `${url}/lists/${props.stayId}?stay=true`,

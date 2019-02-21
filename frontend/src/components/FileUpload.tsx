@@ -38,7 +38,7 @@ const FileUpLoad = (props: UploadProps) => {
   useEffect(() => {
     uppy
       .use(AwsS3, {
-        serverUrl: 'https://cleaner-pos.herokuapp.com/',
+        serverUrl: 'https://labs10-cleaner-app-2.herokuapp.com',
         serverHeaders: { Authorization: token },
       })
       .on('complete', (result: any) => {
@@ -95,7 +95,7 @@ export const FileUploadHOF = (cb?: (url: string, type?: string) => void) => {
     useEffect(() => {
       uppy
         .use(AwsS3, {
-          serverUrl: 'https://cleaner-pos.herokuapp.com/',
+          serverUrl: 'https://labs10-cleaner-app-2.herokuapp.com',
           serverHeaders: { Authorization: token },
         })
         .on('complete', (result: any) => {
