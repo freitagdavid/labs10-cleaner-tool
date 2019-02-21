@@ -80,8 +80,26 @@ server.get('/', (__, res) => res.sendFile('index.html'));
 server.post('/surveys', async (req, res) => {
   const body = req.body;
   try {
-    const addSurvey = await db('surveys').insert({ name: req.body.name, isGuest: req.body.isGuest, house_id:req.body.house_id })
+    const addSurvey = await db('surveys').insert(req.body)
     res.status(201).json(body)
+  }
+  catch (e) { res.json(e) }
+})
+server.put('/surveys/:id',async(req, res) => {
+  const id = req.params.id;
+  const body = req.body
+  try{
+    const updateSurvey = await db('surveys').where({ id: id }).update(req.body)
+    res.status(200).json(body)
+  }
+  catch(e){res.json(e)}
+})     
+server.delete('/surveys/:id', async (req, res) => {
+  const id = req.params.id;
+  const body = req.body
+  try {
+    const deleteSurvey = await db('surveys').where({ id: id }).del()
+    res.status(200).json(body)
   }
   catch (e) { res.json(e) }
 })   
