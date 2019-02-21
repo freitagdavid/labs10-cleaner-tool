@@ -6,22 +6,37 @@ interface Surveys {
   name: string;
   isGuest: boolean;
 }
-let getSurvey: (id: number) => QueryBuilder;
+let getSurvey: (id: string) => QueryBuilder;
 let getAllSurveys: () => QueryBuilder;
-let getSurveyQuestions: (id: number) => QueryBuilder;
+let getSurveyQuestions: (id: string) => QueryBuilder;
+// Boy this one was a bit of a stretch
+let filterByField: (
+  field: string,
+  fieldValue: string,
+) => (query: QueryBuilder) => QueryBuilder;
 
-const baseQuery = db('surveys');
+/* Don't know why but I had to protect this in a function before it would work
+   right otherwise it was returning a different sql statement every run */
+
+const baseQuery = () => db('surveys');
+
+filterByField = (field, fieldValue) => {
+  return (query) => {
+    return query.where(field, '=', fieldValue);
+  };
+};
 
 getSurvey = (id) => {
-  return baseQuery.where({ id });
+  const filteredById = filterByField('id', id);
+  return filteredById(baseQuery());
 };
 
 getAllSurveys = () => {
-  return baseQuery;
+  return baseQuery();
 };
 
 getSurveyQuestions = (id) => {
-  return baseQuery
+  return baseQuery()
     .join('questions', 'questions.survey_id', '=', 'survey.id')
     .select(
       'survey.name',
