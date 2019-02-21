@@ -14,6 +14,7 @@ import * as payments from './controller/payments';
 import * as stays from './controller/stays';
 import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
+import * as surveys from './controller/surveys';
 import path from 'path';
 
 import { getSurveyQuestions, getSurvey } from './models/surveys';
@@ -25,9 +26,9 @@ setGeneralMiddleware(server);
 
 server.get('/data', async (req, res) => {
   try {
-    const users = await db('user');
-    console.log(users);
-    res.json(users);
+    const data = await db('user');
+    console.log(data);
+    res.json(data);
   } catch (e) {
     res.json(e);
   }
@@ -84,12 +85,13 @@ server.get('/questionanswers', async (req, res) => {
 });
 
 // Authentication Middleware for *all* routes after this line
-server.use(verifyToken);
 server
   .route('/users')
   .get(verifyToken, users.get)
   .post(users.post)
   .put(verifyToken, users.putByExtId);
+
+server.use(verifyToken);
 
 server
   .route('/users/:id')
@@ -137,6 +139,7 @@ server
   .route('/items')
   .get(items.get)
   .post(items.post);
+
 server
   .route('/items/:id')
   .get(items.get)
@@ -165,9 +168,7 @@ server
   .get(stays.get)
   .put(stays.put);
 
-// server
-//   .route('/surveys/:id')
-//   .get(surveys.getByid)
+server.route('/surveys/:id?').get(surveys.get);
 
 // dev endpoints
 
