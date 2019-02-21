@@ -36,15 +36,6 @@ server.get('/data', async (req, res) => {
 server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
-server.get('/surveys', async (req, res) => {
-  try {
-    const data = await db('surveys');
-    res.json(data);
-  } catch (e) {
-    res.json(e);
-  }
-});
-
 // server.get('/surveysquestions/:id', async(req,res)=>{
 //   try{
 //     const { id } = req.params
@@ -167,6 +158,8 @@ server
   .route('/stays/:id')
   .get(stays.get)
   .put(stays.put);
+
+// Question mark makes the parameter optional
 
 server.route('/surveys/:id?').get(surveys.get);
 
