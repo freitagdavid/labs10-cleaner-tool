@@ -1,4 +1,4 @@
-const data = require('./data/surveys');
+const data = require('./data/surveysData');
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
   return knex('surveys')
