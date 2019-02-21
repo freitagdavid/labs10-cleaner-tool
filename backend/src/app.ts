@@ -40,6 +40,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     }catch(e){res.json(e)}
   })
 
+
  
   // server.get('/surveysquestions/:id', async(req,res)=>{
   //   try{
@@ -75,7 +76,15 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     res.json(data);
     }catch(e){res.json(e)}
   })
-  
+
+server.post('/surveys', async (req, res) => {
+  const body = req.body;
+  try {
+    const addSurvey = await db('surveys').insert({ name: req.body.name, isGuest: req.body.isGuest, house_id:req.body.house_id })
+    res.status(201).json(body)
+  }
+  catch (e) { res.json(e) }
+})   
 server
   .route('/users')
   .get(verifyToken, users.get)
