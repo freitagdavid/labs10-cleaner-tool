@@ -27,6 +27,7 @@ setGeneralMiddleware(server);
 server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
+//Survey List in Balsamiq
   server.get('/surveys', async(req,res)=>{
     try{
     const data = await getSurveys()
@@ -42,32 +43,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     }catch(e){res.json(e)}
   })
 
-  server.get('/surveyresponses', async(req, res) => {
-    try{
-      console.log(req.body)
-      const surveys = await getSurveys()
-      if(surveys){
-        const responses = await getAllQuestionsAnswers()
-        res.status(200).json({ surveys, responses })
-      }
-    }catch(err){
-      res.status(500).json(err)
-    }
-  });
-
-  // server.get('/surveyresponses/:id', async(req,res)=>{
-  //   try{
-  //     const { id } = req.params
-  //     console.log(id)
-  //     const survey = await getSurvey(id)
-  //     console.log(survey)
-  //     if(survey) {
-  //       const questionsAnswers = await getQuestionsAnswers(id)
-  //       res.json({ survey, questionsAnswers });
-  //     }
-  //   }catch(e){res.json(e), console.log(e)}
-  // })
-
+  //Survey Responses Route in Balsamiq 
   server.get('/surveyresponses/:id', async(req,res)=>{ 
     try{
       const { id } = req.params
@@ -78,6 +54,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     }
   });
 
+  //Questions Route
   server.get('/questions', async(req,res)=>{
     try{
     const data = await db('questions')
@@ -85,6 +62,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     }catch(e){res.json(e)}
   })
   
+  //Not needed but works
   server.get('/questionanswers/:id', async(req,res)=>{
     try{
       const { id } = req.params
