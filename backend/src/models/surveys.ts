@@ -17,6 +17,7 @@ let filterByField: (
   field: string,
   fieldValue: string,
 ) => (query: QueryBuilder) => QueryBuilder;
+let getSurveyByHouse: (id: string) => QueryBuilder;
 
 /* Don't know why but I had to protect this in a function before it would work
   right otherwise it was returning a different sql statement every run */
@@ -36,6 +37,11 @@ getSurvey = (id) => {
 
 getAllSurveys = () => {
   return baseQuery();
+};
+
+getSurveyByHouse = (id) => {
+  const filteredByHouseId = filterByField('house_id', id);
+  return filteredByHouseId(baseQuery());
 };
 
 getSurveyQuestions = (id) => {
@@ -58,7 +64,7 @@ getQuestionsAnswers = (id) => {
 };
 
 getSurveyResponse = (id) => {
-  return db('surveys')
+  return baseQuery()
     .join('questions', 'questions.survey_id', '=', 'survey.id')
     .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
     .select(
