@@ -17,7 +17,11 @@ import * as assistants from './controller/assistants';
 import * as surveys from './controller/surveys';
 import path from 'path';
 
-import { getSurveyQuestions, getSurvey } from './models/surveys';
+import {
+  getSurveyResponse,
+  getSurvey,
+  getQuestionsAnswers,
+} from './models/surveys';
 
 import db from '../data/dbConfig';
 
@@ -36,26 +40,30 @@ server.get('/data', async (req, res) => {
 server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
-// server.get('/surveysquestions/:id', async(req,res)=>{
-//   try{
-//     const { id } = req.params
-//     const survey = await db('surveys').where({ id }).first()
-//     if(survey) {
-//       const questions = await db('questions').where({ survey_id: id })
-//       res.json({ survey, questions });
-//     }
-//   }catch(e){res.json(e), console.log(e)}
-// })
-
-server.get('/surveysquestions/:id', async (req, res) => {
+server.get('/surveyResponses/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const survey = await getSurveyQuestions(id);
-    res.json({ survey });
+    console.log(id);
+    const survey = await getSurvey(id);
+    console.log(survey);
+    if (survey) {
+      const questionsAnswers = await getQuestionsAnswers(id);
+      res.json({ survey, questionsAnswers });
+    }
   } catch (e) {
     res.json(e), console.log(e);
   }
 });
+
+// server.get('/surveysquestions/:id', async(req,res)=>{
+//   try{
+//     const { id } = req.params
+//     const survey = await getSurveyResponse(id)
+//       res.json({ survey });
+//   }catch(e){
+//     res.json(e), console.log(e)
+//   }
+// });
 
 server.get('/questions', async (req, res) => {
   try {
@@ -66,22 +74,22 @@ server.get('/questions', async (req, res) => {
   }
 });
 
-server.get('/questionanswers', async (req, res) => {
+server.get('/questionanswers/:id', async (req, res) => {
   try {
-    const data = await db('questionAnswers');
-    res.json(data);
+    const { id } = req.params;
+    const questionAnswers = await getQuestionsAnswers(id);
+    res.json({ questionAnswers });
   } catch (e) {
     res.json(e);
   }
 });
 
-// Authentication Middleware for *all* routes after this line
 server
   .route('/users')
   .get(verifyToken, users.get)
   .post(users.post)
   .put(verifyToken, users.putByExtId);
-
+// Authentication Middleware for *all* routes after this line
 server.use(verifyToken);
 
 server
