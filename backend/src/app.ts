@@ -93,16 +93,11 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     }catch(e){res.json(e)}
   })
   
-<<<<<<< HEAD
   server
-=======
-server
->>>>>>> 76a7a15687f4c175807d0564b08cd0581d3d6cb5
   .route('/users')
   .get(verifyToken, users.get)
   .post(users.post)
   .put(verifyToken, users.putByExtId);
-<<<<<<< HEAD
 
 // Authentication Middleware for *all* routes after this line
 server.use(verifyToken);
@@ -111,11 +106,6 @@ server.use(verifyToken);
 //   .get(verifyToken, users.get)
 //   .post(users.post)
 //   .put(verifyToken, users.putByExtId);
-=======
-// Authentication Middleware for *all* routes after this line
-server.use(verifyToken);
-
->>>>>>> 76a7a15687f4c175807d0564b08cd0581d3d6cb5
   
 server
   .route('/users/:id')
