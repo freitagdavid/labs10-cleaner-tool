@@ -38,7 +38,7 @@ getAllSurveys = () => {
   return baseQuery();
 };
 
-getSurveyByHouse = (id) => {};
+// getSurveyByHouse = (id) => {};
 
 getSurveyQuestions = (id) => {
   return baseQuery()
