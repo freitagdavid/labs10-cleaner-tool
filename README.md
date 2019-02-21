@@ -186,4 +186,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](https://cleaner-pos.herokuapp.com/) for details on the backend of our project.
+See [Backend Documentation](https://labs10-cleaner-app-2.herokuapp.com/) for details on the backend of our project.
