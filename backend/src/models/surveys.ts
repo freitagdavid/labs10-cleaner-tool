@@ -7,30 +7,11 @@ interface Surveys {
   isGuest: boolean;
 }
 
-export function getSurveyResponse(id: number): QueryBuilder {
-  return db('surveys')
-    .join('questions', 'questions.survey_id', '=', 'survey.id')
-    .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
-    .select(
-      'survey.name',
-      'questions.question',
-      'survey.isGuest',
-      'questions.question',
-      'questionAnswers.answer',
-    )
-    .where({ survey_id: id, question_id: id });
-}
-
-export function getQuestionsAnswers(id: number): QueryBuilder {
-  return db('questions')
-    .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
-    .select('questions.question', 'questionAnswers.answer')
-    .where({ question_id: id });
-}
-
 let getSurvey: (id: string) => QueryBuilder;
 let getAllSurveys: () => QueryBuilder;
 let getSurveyQuestions: (id: string) => QueryBuilder;
+let getSurveyResponse: (id: number) => QueryBuilder;
+let getQuestionsAnswers: (id: number) => QueryBuilder;
 // Boy this one was a bit of a stretch
 let filterByField: (
   field: string,
@@ -38,7 +19,7 @@ let filterByField: (
 ) => (query: QueryBuilder) => QueryBuilder;
 
 /* Don't know why but I had to protect this in a function before it would work
-   right otherwise it was returning a different sql statement every run */
+  right otherwise it was returning a different sql statement every run */
 
 const baseQuery = () => db('surveys');
 
@@ -69,4 +50,31 @@ getSurveyQuestions = (id) => {
     .where({ survey_id: id });
 };
 
-export { getSurvey, getAllSurveys, getSurveyQuestions };
+getQuestionsAnswers = (id) => {
+  return db('questions')
+    .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
+    .select('questions.question', 'questionAnswers.answer')
+    .where({ question_id: id });
+};
+
+getSurveyResponse = (id) => {
+  return db('surveys')
+    .join('questions', 'questions.survey_id', '=', 'survey.id')
+    .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
+    .select(
+      'survey.name',
+      'questions.question',
+      'survey.isGuest',
+      'questions.question',
+      'questionAnswers.answer',
+    )
+    .where({ survey_id: id, question_id: id });
+};
+
+export {
+  getSurvey,
+  getAllSurveys,
+  getSurveyQuestions,
+  getSurveyResponse,
+  getQuestionsAnswers,
+};
