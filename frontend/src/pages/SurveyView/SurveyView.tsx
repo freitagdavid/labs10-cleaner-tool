@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Surveyview = () =>{
+const SurveyView = () =>{
     return(
         <>
         <h1>View A specific Survey Here!</h1>
@@ -8,4 +8,4 @@ const Surveyview = () =>{
     )
 }
 
-export default Surveyview
+export default SurveyView

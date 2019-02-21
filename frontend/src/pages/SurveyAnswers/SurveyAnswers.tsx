@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Surveyanswers = () =>{
+const SurveyAnswers = () =>{
     return(
         <>
         <h1>Answer surveys here!!</h1>
@@ -8,4 +8,4 @@ const Surveyanswers = () =>{
     )
 }
 
-export default Surveyanswers
+export default SurveyAnswers
