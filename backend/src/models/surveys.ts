@@ -21,7 +21,7 @@ export function getSurveyResponse(id: number): QueryBuilder {
     return db('surveys')
         .join('questions', 'questions.survey_id', '=', 'surveys.id')
         .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
-        .select('surveys.name', 'questions.question', 'questions.question', 'questionAnswers.answer')
+        .select('surveys.name', 'questions.question', 'questionAnswers.answer')
         .where({ survey_id: id, question_id: id })
 }
 

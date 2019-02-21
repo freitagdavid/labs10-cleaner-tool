@@ -1,21 +1,21 @@
 module.exports = [
     {
-      name: 'survey 1',
+      name: 'Welcome Survey',
       isGuest: true,
       house_id: 1,
     },
     {
-      name: 'survey 2',
+      name: 'Welcome Survey',
       isGuest: false,
       house_id: 1,
     },
     {
-      name: 'survey 3',
+      name: 'How is your stay',
       isGuest: true,
       house_id: 2,
     },
     {
-      name: 'survey 4',
+      name: 'How was your stay?',
       isGuest: true,
       house_id: 2,
     },
