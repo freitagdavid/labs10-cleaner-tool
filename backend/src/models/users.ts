@@ -32,19 +32,20 @@ export function findUsers(): QueryBuilder {
 // TODO: Test please.
 export async function makeUser(user: User) {
   const role = user.role;
-  const query: QueryBuilder = db('user') //query is inserting users into the users db ex: data = await db(user).insert(user) where user is what's on the req.body
+  const query: QueryBuilder = db('user')
+    // query is inserting users into the users db ex: data = await db(user).insert(user) where user is what's on the req.body
     .insert(user)
     .returning('id');
 
   if (user.role === 'guest') {
     // If created user is a guest, we will return the query now, as
     // they don't have a role table of their own
-    return query; //**  if the role is guest insert them into the db **//
+    return query; // **  if the role is guest insert them into the db **//
   } else {
     // Otherwise, proceed as normal
-    const userIds = await query; 
-    const userId = userIds[0]; 
-    console.log(userId)
+    const userIds = await query;
+    const userId = userIds[0];
+    console.log(userId);
     const roleId = await db(role)
       .insert({ user_id: userId })
       .returning('id');
