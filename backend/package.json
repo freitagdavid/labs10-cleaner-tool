@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/server.prod.js",
     "typecheck": "tsc",
-    "dev": "npm run build:dev && npm-run-all --parallel nodemon- watch:server",
+    "dev": "knex migrate:rollback && knex migrate:latest && npm run build:dev && npm-run-all --parallel nodemon- watch:server",
     "nodemon-": "node-dev ./dist/server.prod.js",
     "watch:server": "webpack --config webpack.dev.js --watch",
     "test": "jest --verbose",
