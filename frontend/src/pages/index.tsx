@@ -14,7 +14,10 @@ import Checkout from './Checkout/Checkout';
 import Assistants from './Assistants/Assistants';
 import AssistantDetails from './Assistants/AssistantsDetails';
 import InviteAst from './InviteAst/InviteAst';
-
+import Surveys from './Surveys/Surveys';
+import SurveyView from './SurveyView/SurveyView';
+import SurveyAnswers from './SurveyAnswers/SurveyAnswers';
+import GuestDashboard from './GuestDashboard/GuestDashboard';
 export {
   Properties,
   PropertiesDetail,
@@ -32,4 +35,8 @@ export {
   Assistants,
   AssistantDetails,
   InviteAst,
+  Surveys,
+  SurveyView,
+  SurveyAnswers,
+  GuestDashboard
 };

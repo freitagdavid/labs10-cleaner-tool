@@ -14,12 +14,11 @@ import * as payments from './controller/payments';
 import * as stays from './controller/stays';
 import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
-import * as surveys from './controller/surveys';
 import path from 'path';
 
 import {
+  getAllSurveys,
   getSurveyResponse,
-  getSurvey,
   getQuestionsAnswers,
 } from './models/surveys';
 
@@ -28,43 +27,41 @@ import db from '../data/dbConfig';
 export const server = express();
 setGeneralMiddleware(server);
 
-server.get('/data', async (req, res) => {
+server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
+server.get('/', (__, res) => res.sendFile('index.html'));
+
+// Survey List in Balsamiq
+server.get('/surveys', async (req, res) => {
   try {
-    const data = await db('user');
-    console.log(data);
+    const data = await getAllSurveys();
     res.json(data);
   } catch (e) {
     res.json(e);
   }
 });
-server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
-server.get('/', (__, res) => res.sendFile('index.html'));
 
-server.get('/surveyResponses/:id', async (req, res) => {
+server.get('/data', async (req, res) => {
+  try {
+    const users = await db('user');
+    console.log(users);
+    res.json(users);
+  } catch (e) {
+    res.json(e);
+  }
+});
+
+// Survey Responses Route in Balsamiq
+server.get('/surveyresponses/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
-    const survey = await getSurvey(id);
-    console.log(survey);
-    if (survey) {
-      const questionsAnswers = await getQuestionsAnswers(id);
-      res.json({ survey, questionsAnswers });
-    }
+    const survey = await getSurveyResponse(id);
+    res.json({ survey });
   } catch (e) {
     res.json(e), console.log(e);
   }
 });
 
-// server.get('/surveysquestions/:id', async(req,res)=>{
-//   try{
-//     const { id } = req.params
-//     const survey = await getSurveyResponse(id)
-//       res.json({ survey });
-//   }catch(e){
-//     res.json(e), console.log(e)
-//   }
-// });
-
+// Questions Route
 server.get('/questions', async (req, res) => {
   try {
     const data = await db('questions');
@@ -74,6 +71,7 @@ server.get('/questions', async (req, res) => {
   }
 });
 
+// Not needed but works
 server.get('/questionanswers/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -89,8 +87,14 @@ server
   .get(verifyToken, users.get)
   .post(users.post)
   .put(verifyToken, users.putByExtId);
+
 // Authentication Middleware for *all* routes after this line
 server.use(verifyToken);
+// server
+//   .route('/users')
+//   .get(verifyToken, users.get)
+//   .post(users.post)
+//   .put(verifyToken, users.putByExtId);
 
 server
   .route('/users/:id')
@@ -138,7 +142,6 @@ server
   .route('/items')
   .get(items.get)
   .post(items.post);
-
 server
   .route('/items/:id')
   .get(items.get)
@@ -166,12 +169,6 @@ server
   .route('/stays/:id')
   .get(stays.get)
   .put(stays.put);
-
-// Question mark makes the parameter optional
-
-server.route('/surveys/:id?').get(surveys.get);
-
-// dev endpoints
 
 const options = {
   filePath: '../uploads',

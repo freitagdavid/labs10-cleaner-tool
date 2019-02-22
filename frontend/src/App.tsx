@@ -15,6 +15,10 @@ import {
   Assistants,
   AssistantDetails,
   InviteAst,
+  Surveys,
+  SurveyView,
+  SurveyAnswers,
+  GuestDashboard
 } from './pages/index';
 import { Sidebar } from './components/index';
 import './App.css';
@@ -89,6 +93,10 @@ const App = () => {
           <Route exact path='/properties/new' component={NewProperty} />
           <Route exact path='/properties/:id' component={PropertyDetails} />
           <Route exact path='/settings' component={Settings} />
+          <Route exact path='/surveys' component={Surveys} />
+          <Route exact path='/surveys/:id' component={SurveyView} />
+          <Route exact path='/surveys/:id/answers' component={SurveyAnswers} />
+          <Route exact path='/guestdashboard' component={GuestDashboard} />
         </Switch>
       </UserContext.Provider>
     </div>
