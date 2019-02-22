@@ -16,62 +16,73 @@ import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
 import path from 'path';
 
-import { getSurveys, getSurvey, getSurveyResponse, getAllQuestionsAnswers, getQuestionsAnswers } from './models/surveys'
+import {
+  getAllSurveys,
+  getSurveyResponse,
+  getQuestionsAnswers,
+} from './models/surveys';
 
 import db from '../data/dbConfig';
 
 export const server = express();
 setGeneralMiddleware(server);
 
-
 server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
-//Survey List in Balsamiq
-  server.get('/surveys', async(req,res)=>{
-    try{
-    const data = await getSurveys()
+// Survey List in Balsamiq
+server.get('/surveys', async (req, res) => {
+  try {
+    const data = await getAllSurveys();
     res.json(data);
-    }catch(e){res.json(e)}
-  })
+  } catch (e) {
+    res.json(e);
+  }
+});
 
-  server.get('/data', async(req,res)=>{
-    try{
-    const users = await db('user')
-    console.log(users)
+server.get('/data', async (req, res) => {
+  try {
+    const users = await db('user');
+    console.log(users);
     res.json(users);
-    }catch(e){res.json(e)}
-  })
+  } catch (e) {
+    res.json(e);
+  }
+});
 
-  //Survey Responses Route in Balsamiq 
-  server.get('/surveyresponses/:id', async(req,res)=>{ 
-    try{
-      const { id } = req.params
-      const survey = await getSurveyResponse(id)
-        res.json({ survey });   
-    }catch(e){
-      res.json(e), console.log(e)
-    }
-  });
+// Survey Responses Route in Balsamiq
+server.get('/surveyresponses/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const survey = await getSurveyResponse(id);
+    res.json({ survey });
+  } catch (e) {
+    res.json(e), console.log(e);
+  }
+});
 
-  //Questions Route
-  server.get('/questions', async(req,res)=>{
-    try{
-    const data = await db('questions')
+// Questions Route
+server.get('/questions', async (req, res) => {
+  try {
+    const data = await db('questions');
     res.json(data);
-    }catch(e){res.json(e)}
-  })
-  
-  //Not needed but works
-  server.get('/questionanswers/:id', async(req,res)=>{
-    try{
-      const { id } = req.params
-      const questionAnswers = await getQuestionsAnswers(id)
-      res.json({questionAnswers});
-    }catch(e){res.json(e)}
-  })
-  
-  server
+  } catch (e) {
+    res.json(e);
+  }
+});
+
+// Not needed but works
+server.get('/questionanswers/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const questionAnswers = await getQuestionsAnswers(id);
+    res.json({ questionAnswers });
+  } catch (e) {
+    res.json(e);
+  }
+});
+
+server
   .route('/users')
   .get(verifyToken, users.get)
   .post(users.post)
@@ -84,7 +95,7 @@ server.use(verifyToken);
 //   .get(verifyToken, users.get)
 //   .post(users.post)
 //   .put(verifyToken, users.putByExtId);
-  
+
 server
   .route('/users/:id')
   .get(users.get)
