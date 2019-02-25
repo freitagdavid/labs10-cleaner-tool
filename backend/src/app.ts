@@ -16,27 +16,26 @@ import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
 import path from 'path';
 
-import { getSurveyQuestions, getSurvey } from './models/surveys'
+import {
+  getAllSurveys,
+  getSurveyResponse,
+  getQuestionsAnswers,
+} from './models/surveys';
 
 import db from '../data/dbConfig';
 
 export const server = express();
 setGeneralMiddleware(server);
 
-server.get('/data', async(req,res)=>{
-  try{
-  const users = await db('user')
-  console.log(users)
-  res.json(users);
-  }catch(e){res.json(e)}
-})
 server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
-  server.get('/surveys', async(req,res)=>{
-    try{
-    const data = await db('surveys')
+// Survey List in Balsamiq
+server.get('/surveys', async (req, res) => {
+  try {
+    const data = await getAllSurveys();
     res.json(data);
+<<<<<<< HEAD
     }catch(e){res.json(e)}
   })
 
@@ -66,12 +65,69 @@ server.get('/', (__, res) => res.sendFile('index.html'));
   })
 // Authentication Middleware for *all* routes after this line
 server.use(verifyToken);
+=======
+  } catch (e) {
+    res.json(e);
+  }
+});
+
+server.get('/data', async (req, res) => {
+  try {
+    const users = await db('user');
+    console.log(users);
+    res.json(users);
+  } catch (e) {
+    res.json(e);
+  }
+});
+
+// Survey Responses Route in Balsamiq
+server.get('/surveyresponses/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const survey = await getSurveyResponse(id);
+    res.json({ survey });
+  } catch (e) {
+    res.json(e), console.log(e);
+  }
+});
+
+// Questions Route
+server.get('/questions', async (req, res) => {
+  try {
+    const data = await db('questions');
+    res.json(data);
+  } catch (e) {
+    res.json(e);
+  }
+});
+
+// Not needed but works
+server.get('/questionanswers/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const questionAnswers = await getQuestionsAnswers(id);
+    res.json({ questionAnswers });
+  } catch (e) {
+    res.json(e);
+  }
+});
+
+>>>>>>> 62cfba58b0c0a52ab23385594fa5b924547d27e7
 server
   .route('/users')
   .get(verifyToken, users.get)
   .post(users.post)
   .put(verifyToken, users.putByExtId);
-  
+
+// Authentication Middleware for *all* routes after this line
+server.use(verifyToken);
+// server
+//   .route('/users')
+//   .get(verifyToken, users.get)
+//   .post(users.post)
+//   .put(verifyToken, users.putByExtId);
+
 server
   .route('/users/:id')
   .get(users.get)
@@ -145,11 +201,6 @@ server
   .route('/stays/:id')
   .get(stays.get)
   .put(stays.put);
-
-  //dev endpoints 
-
-
-
 
 const options = {
   filePath: '../uploads',

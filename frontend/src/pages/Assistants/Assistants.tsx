@@ -33,7 +33,11 @@ const AssistantCard = (assistant: Assistant) => {
         <CardBody>
           <CardHeading>
             <h1>{assistant.full_name}</h1>
-            <p>Test Address</p>
+            <p>
+              {assistant.address && assistant.address.split('\n')[0]}
+              {', '}
+              {assistant.address && assistant.address.split('\n')[2]}
+            </p>
           </CardHeading>
           <div className='check-boxes'>
             <InfoBox>
@@ -62,7 +66,7 @@ const AssistantCard = (assistant: Assistant) => {
 
 const Assistants = () => {
   const url =
-    process.env.REACT_APP_backendURL || 'https://cleaner-pos.herokuapp.com';
+    process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
   const [data, error, loading] = useFetch(`${url}/assistants`);
   return (
     <Container>
