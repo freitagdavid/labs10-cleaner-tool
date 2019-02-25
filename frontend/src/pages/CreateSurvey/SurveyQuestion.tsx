@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-const SurveyQuestion = () => {
+const SurveyQuestion = (questionNumber: any) => {
     return (
         <div>
             <h2>Question {}</h2>
