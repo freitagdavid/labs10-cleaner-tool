@@ -5,3 +5,5 @@ export interface Survey {
     id: number,
     name: string,
 }
+
+export type FilterArgs = 'all' | 'guest' | 'assistant';
