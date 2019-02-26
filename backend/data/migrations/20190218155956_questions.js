@@ -7,6 +7,7 @@ exports.up = function (knex, Promise) {
         table
             .string('question')
         table.integer('survey_id').unsigned();
+        table.integer('type')
         table
             .foreign('survey_id')
             .references('surveys.id')
