@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import SurveyQuestion from './SurveyQuestion'
+
 const CreateSurvey = ()=>{
     const [dropdown, setDropdown] = useState(3)
     const [surveyName, setSurveyName] = useState('')
+    const [isGuest, setIsGuest] = useState(true)
+    const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
     const handleDropdown = (ev: any) =>{
         setDropdown(ev.target.value)
     }
@@ -16,9 +19,7 @@ const CreateSurvey = ()=>{
         }
         return survey
     }
-    const submitHandler = () => {
 
-    }
         return (
             <div>
                 <form>
