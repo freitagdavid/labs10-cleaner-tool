@@ -5,7 +5,7 @@ import { Survey, FilterArgs } from './types';
 import loadingIndicator from '../utils/loading.svg';
 import { Button, Container } from '../../components/index';
 import { Link } from 'react-router-dom';
-
+import './Surveys.css'
 
 const Surveys = () => {
     const url =
