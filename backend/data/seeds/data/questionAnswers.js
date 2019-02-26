@@ -3,6 +3,7 @@ module.exports = [
     answer: 'test 1',
     question_id: 1,
     stay_id: 1,
+    answer_type: 3,
   },
   {
     answer: 'test 2',
