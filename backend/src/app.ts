@@ -109,6 +109,15 @@ server.post('/surveys', verifyToken, async(req,res) =>{
     res.json(e)
   }
 })
+server.post('/questions', verifyToken, async (req, res) => {
+  const body = req.body
+  const createQuestion = await db('questions').insert({...body })
+  try {
+    res.status(201).json(createQuestion)
+  } catch (e) {
+    res.json(e)
+  }
+})
 server
   .route('/users/:id')
   .get(users.get)
