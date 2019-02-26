@@ -1,5 +1,6 @@
 import { QueryBuilder } from 'knex';
 import db from '../../data/dbConfig';
+import { findAllHousesByManagerId } from './houses';
 
 interface Surveys {
   id: number;
@@ -8,7 +9,7 @@ interface Surveys {
 }
 
 let getSurvey: (id: string) => QueryBuilder;
-let getAllSurveys: () => QueryBuilder;
+// let getAllSurveys: () => QueryBuilder;
 let getSurveyQuestions: (id: string) => QueryBuilder;
 let getSurveyResponse: (id: number) => QueryBuilder;
 let getQuestionsAnswers: (id: number) => QueryBuilder;
@@ -17,6 +18,7 @@ let filterByField: (
   field: string,
   fieldValue: string,
 ) => (query: QueryBuilder) => QueryBuilder;
+let getSurveyByHouse: (id: string) => QueryBuilder;
 
 /* Don't know why but I had to protect this in a function before it would work
   right otherwise it was returning a different sql statement every run */
@@ -29,16 +31,27 @@ filterByField = (field, fieldValue) => {
   };
 };
 
+const getAllSurveys = async (managerId: number) => {
+  const surveys = await db('surveys').where({user_id: managerId})
+  return surveys
+};
+
 getSurvey = (id) => {
   const filteredById = filterByField('id', id);
   return filteredById(baseQuery());
 };
 
-getAllSurveys = () => {
-  return baseQuery();
-};
+// [
+//   questionId: {
+//     type: '',
+//     answer: ''
+//   }
+// ]
 
-// getSurveyByHouse = (id) => {};
+getSurveyByHouse = (id) => {
+  const filteredByHouseId = filterByField('house_id', id);
+  return filteredByHouseId(baseQuery());
+};
 
 getSurveyQuestions = (id) => {
   return baseQuery()
