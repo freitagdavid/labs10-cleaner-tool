@@ -33,7 +33,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
 // Survey List in Balsamiq
 server.get('/surveys', async (req, res) => {
   try {
-    const data = await getAllSurveys();
+    const data = await getAllSurveys(req.body.managerId);
     res.json(data);
   } catch (e) {
     res.json(e);
@@ -42,9 +42,8 @@ server.get('/surveys', async (req, res) => {
 
 server.get('/data', async (req, res) => {
   try {
-    const users = await db('user');
-    console.log(users);
-    res.json(users);
+    const usersList = await db('user');
+    res.json(usersList);
   } catch (e) {
     res.json(e);
   }

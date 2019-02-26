@@ -1,5 +1,6 @@
 import { QueryBuilder } from 'knex';
 import db from '../../data/dbConfig';
+import { findAllHousesByManagerId } from './houses';
 
 interface Surveys {
   id: number;
@@ -8,7 +9,7 @@ interface Surveys {
 }
 
 let getSurvey: (id: string) => QueryBuilder;
-let getAllSurveys: () => QueryBuilder;
+// let getAllSurveys: () => QueryBuilder;
 let getSurveyQuestions: (id: string) => QueryBuilder;
 let getSurveyResponse: (id: number) => QueryBuilder;
 let getQuestionsAnswers: (id: number) => QueryBuilder;
@@ -29,14 +30,30 @@ filterByField = (field, fieldValue) => {
   };
 };
 
+const getAllSurveys = async (managerId: number) => {
+  const houses = await findAllHousesByManagerId(managerId);
+  for (let i = 0; i < houses.length; i++) {
+    const surveysList = await db('surveys').where('house_id', houses[i].id);
+    houses[i].surveys = surveysList;
+  }
+  let surveys = houses.map((house: any) => {
+    return house.surveys;
+  });
+  surveys = surveys.flat();
+  return surveys;
+};
+
 getSurvey = (id) => {
   const filteredById = filterByField('id', id);
   return filteredById(baseQuery());
 };
 
-getAllSurveys = () => {
-  return baseQuery();
-};
+// [
+//   questionId: {
+//     type: '',
+//     answer: ''
+//   }
+// ]
 
 // getSurveyByHouse = (id) => {};
 
