@@ -10,28 +10,35 @@ import { Link } from 'react-router-dom';
 const Surveys = () => {
     const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+    const [active, setActive] = useState(true as FilterArgs);
     const [data, err, loading] = useFetch(`${url}/surveys`)
-    const [active, setActive] = useState('all' as FilterArgs);
+
     
     const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
 
+    
     return (
         <Container>
-            <h1> Surveys page </h1>
+            <div className="surveys-header">
+                <h1> Surveys page </h1>
+                <Link to="/createsurvey">
+                    <Button text="+ New Survey" color='var(--color-accent)'></Button>
+                </Link>
+            </div>
             <div className='surveys-filter-buttons'>
             <Button
-          className={`button-filter guest ${activeClass('guest')}`}
+          className={`button-filter guest ${activeClass(true)}`}
           text='Guest'
           color='var(--color-text-accent)'
-          onClick={() => setActive('guest')}
+          onClick={() => setActive(true)}
           datatestid='button-guest'
         />
         <Button
-          className={`button-filter assistant ${activeClass('assistant')}`}
+          className={`button-filter assistant ${activeClass(false)}`}
           text='Assistant'
           color='var(--color-text-accent)'
-          onClick={() => setActive('assistant')}
+          onClick={() => setActive(false)}
           datatestid='button-assistant'
         />
         </div>
@@ -40,7 +47,7 @@ const Surveys = () => {
                     <img src={loadingIndicator} alt='animated loading indicator' />
                 ) : data ? (
                 data.map((survey: Survey) => 
-                    (<div className='survey' key={survey.id}>{survey.name}</div> 
+                    (<div className={`survey${activeClass(survey.isGuest)}`} key={survey.id}>{`${survey.name} ${survey.isGuest} responces:0`}</div> 
                 ))
             ) : null}
             </div>
