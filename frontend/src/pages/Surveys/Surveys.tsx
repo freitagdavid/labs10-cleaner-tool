@@ -5,6 +5,7 @@ import { Survey, FilterArgs } from './types';
 import loadingIndicator from '../utils/loading.svg';
 import { Button, Container } from '../../components/index';
 import { Link } from 'react-router-dom';
+import SurveyCard from './SurveyCard'
 import './Surveys.css'
 
 const Surveys = () => {
@@ -47,7 +48,10 @@ const Surveys = () => {
                     <img src={loadingIndicator} alt='animated loading indicator' />
                 ) : data ? (
                 data.map((survey: Survey) => 
-                    (<div className={`survey${activeClass(survey.isGuest)}`} key={survey.id}>{`${survey.name} ${survey.isGuest} responces:0`}</div> 
+                    (
+                    <div className={`survey${activeClass(survey.isGuest)}`}>
+                        <SurveyCard {...survey} key={survey.id}></SurveyCard> 
+                    </div>
                 ))
             ) : null}
             </div>
