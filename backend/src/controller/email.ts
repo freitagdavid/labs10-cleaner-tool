@@ -74,3 +74,23 @@ export const send = async (req: Requests, res: Responses, next: Nexts) => {
     next(e);
   }
 };
+
+export const sendLink = async (req: Requests, res: Responses, next: Nexts) =>{
+  try{
+    const { to, guestCode } = req.body;
+    console.log 
+    const msg = {
+      to,
+      from: 'test@example.com',
+      subject: 'Your Guest DashBoard Link',
+      text: 'Click to view the progress of your booking.',
+      html: `<a href='xenodochial-murdock-91cfeb.netlify.com/dashboard/${guestCode}'>Link To Your Guest DashBoard</a>`,
+    };;
+    
+     await sgSend(msg);
+    res.status(200).json({ status: 'success' });
+  } catch (e) {
+    e.statUsCode = 400;
+    next(e);
+  }
+}
