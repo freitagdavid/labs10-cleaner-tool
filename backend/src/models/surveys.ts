@@ -55,11 +55,11 @@ getSurveyByHouse = (id) => {
 
 getSurveyQuestions = (id) => {
   return baseQuery()
-    .join('questions', 'questions.survey_id', '=', 'survey.id')
+    .join('questions', 'questions.survey_id', '=', 'surveys.id')
     .select(
-      'survey.name',
+      'surveys.name',
       'question.name',
-      'survey.isGuest',
+      'surveys.isGuest',
       'question.isGuest',
     )
     .where({ survey_id: id });
@@ -74,13 +74,12 @@ getQuestionsAnswers = (id) => {
 
 getSurveyResponse = (id) => {
   return baseQuery()
-    .join('questions', 'questions.survey_id', '=', 'survey.id')
+    .join('questions', 'questions.survey_id', '=', 'surveys.id')
     .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
     .select(
-      'survey.name',
+      'surveys.name',
       'questions.question',
-      'survey.isGuest',
-      'questions.question',
+      'surveys.isGuest',
       'questionAnswers.answer',
     )
     .where({ survey_id: id, question_id: id });
