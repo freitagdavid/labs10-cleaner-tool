@@ -4,7 +4,7 @@ export interface Survey {
     survey: any,
     id: number,
     name: string,
-    isGuest: boolean,
+    isGuest: number,
 }
 
-export type FilterArgs =  true | false
+export type FilterArgs =  number

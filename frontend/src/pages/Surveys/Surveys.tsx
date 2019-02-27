@@ -11,13 +11,13 @@ import './Surveys.css'
 const Surveys = () => {
     const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
-    const [active, setActive] = useState(true as FilterArgs);
+    const [active, setActive] = useState( 1 as any);
     const [data, err, loading] = useFetch(`${url}/surveys`)
 
     
     const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
-    // const [data, err, loading] = useFetch(`${url}/surveys`)
+   
 
     
     return (
@@ -30,22 +30,22 @@ const Surveys = () => {
             </div>
             <div className='surveys-filter-buttons'>
             <Button
-          className={`button-filter guest ${activeClass(true)}`}
+          className={`button-filter guest ${activeClass(1)}`}
           text='Guest'
           color='var(--color-text-accent)'
-          onClick={() => setActive(true)}
+          onClick={() => setActive(1)}
           datatestid='button-guest'
         />
         <Button
-          className={`button-filter assistant ${activeClass(false)}`}
+          className={`button-filter assistant ${activeClass(0)}`}
           text='Assistant'
           color='var(--color-text-accent)'
-          onClick={() => setActive(false)}
+          onClick={() => setActive(0)}
           datatestid='button-assistant'
         />
         </div>
             <div>
-                {/* {loading ? (
+                {loading ? (
                     <img src={loadingIndicator} alt='animated loading indicator' />
                 ) : data ? (
                 data.map((survey: Survey) => 
@@ -54,7 +54,7 @@ const Surveys = () => {
                         <SurveyCard {...survey} key={survey.id}></SurveyCard> 
                     </div>
                 ))
-            ) : null} */}
+            ) : null}
             </div>
         </Container>
     )
