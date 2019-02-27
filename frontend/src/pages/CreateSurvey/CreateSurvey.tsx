@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import SurveyQuestion from './SurveyQuestion'
+import { CreateSurveysWrapper, CreateSurveyLables, CreateSurveyInput, SurveyOptions, SurveyType } from './CreateSurvey.styling';
+import './createsurvey.css' 
 
 const CreateSurvey = ()=>{
     const [dropdown, setDropdown] = useState(3)
     const [surveyName, setSurveyName] = useState('')
     const [isGuest, setIsGuest] = useState(true)
+    const [activeSurvey, setActive] = useState('')
     const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
     const handleDropdown = (ev: any) =>{
         setDropdown(ev.target.value)
@@ -19,16 +22,16 @@ const CreateSurvey = ()=>{
         }
         return survey
     }
-
+    
         return (
-            <div>
+            <CreateSurveysWrapper>
                 <form>
                     <h1>Create a Survey</h1>
-                    <h2>Survey Name</h2>
-                    <input type='text' placeholder='Survey Name' onChange = {handleSurveyName}/>
-                    <div>
-                        <h3>Survey Type:</h3>
-                        <button type = 'button'>Guest Survey</button>
+                    <CreateSurveyLables>Survey Name</CreateSurveyLables>
+                    <CreateSurveyInput type='text' placeholder='Survey Name' onChange = {handleSurveyName}/>
+                    <SurveyOptions>
+                        <SurveyType>Survey Type:</SurveyType>
+                        <button type = 'button' className={activeSurvey} onClick={()=>{setActive('')}}>Guest Survey</button>
                         <button type = 'button'>Assitant Survey</button>
                         <h3>How Many Questions:</h3>
                         <select defaultValue = '3' onChange={handleDropdown}>
@@ -36,7 +39,7 @@ const CreateSurvey = ()=>{
                             <option value="2">2</option>
                             <option value="3">3</option>
                         </select>
-                    </div>
+                    </SurveyOptions>
                     <div>
                         {questionLength()}
                     </div>
@@ -45,7 +48,7 @@ const CreateSurvey = ()=>{
                         <button>Cancel</button>
                     </div>
                 </form>
-            </div>
+            </CreateSurveysWrapper>
         )
     
 }
