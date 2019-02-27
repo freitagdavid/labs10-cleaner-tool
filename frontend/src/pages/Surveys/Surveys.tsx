@@ -17,6 +17,7 @@ const Surveys = () => {
     
     const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
+    // const [data, err, loading] = useFetch(`${url}/surveys`)
 
     
     return (
@@ -44,7 +45,7 @@ const Surveys = () => {
         />
         </div>
             <div>
-                {loading ? (
+                {/* {loading ? (
                     <img src={loadingIndicator} alt='animated loading indicator' />
                 ) : data ? (
                 data.map((survey: Survey) => 
@@ -53,7 +54,7 @@ const Surveys = () => {
                         <SurveyCard {...survey} key={survey.id}></SurveyCard> 
                     </div>
                 ))
-            ) : null}
+            ) : null} */}
             </div>
         </Container>
     )
