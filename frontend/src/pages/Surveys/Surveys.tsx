@@ -8,21 +8,19 @@ import loadingIndicator from '../utils/loading.svg';
 const Surveys = () => {
     const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
-    const [data, err, loading] = useFetch(`${url}/surveys`)
-
-    console.log(data)
+    // const [data, err, loading] = useFetch(`${url}/surveys`)
 
     return (
         <>
             <h1> Surveys page </h1>
             <div>
-                {loading ? (
+                {/* {loading ? (
                     <img src={loadingIndicator} alt='animated loading indicator' />
                 ) : data ? (
                 data.map((survey: Survey) => 
                     (<div className='survey' key={survey.id}>{survey.name}</div> 
                 ))
-            ) : null}
+            ) : null} */}
             </div>
         </>
     )

@@ -9,10 +9,10 @@ exports.up = function(knex, Promise) {
         .string('name')
     table
         .boolean('isGuest')
-    table.integer('house_id').unsigned();
+    table.integer('user_id').unsigned();
     table
-        .foreign('house_id')
-        .references('house.id')
+        .foreign('user_id')
+        .references('user.id')
         .onDelete('CASCADE');
   })
 };
