@@ -5,6 +5,7 @@ import { RequestMock, ResponseMock } from '../../__tests__/helpers';
 import { getRoleId } from '../models/users';
 type NextFunctionMock = (a: any) => any;
 const sgKey: any = process.env.SENDGRID_API_KEY;
+const URL: any = process.env.FRONT_END_URL || 'xenodochial-murdock-91cfeb.netlify.com/dashboard'
 sgMail.setApiKey(sgKey);
 
 /*
@@ -84,7 +85,7 @@ export const sendLink = async (req: Requests, res: Responses, next: Nexts) =>{
       from: 'test@example.com',
       subject: 'Your Guest DashBoard Link',
       text: 'Click to view the progress of your booking.',
-      html: `<a href='xenodochial-murdock-91cfeb.netlify.com/dashboard/${guestCode}'>Link To Your Guest DashBoard</a>`,
+      html: `<a href='${URL}/dashboard/${guestCode}'>Link To Your Guest DashBoard</a>`,
     };;
     
      await sgSend(msg);
