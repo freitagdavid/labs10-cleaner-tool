@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import { useFetch } from '../../helpers';
 import { Survey } from './types';
@@ -13,18 +14,19 @@ const Surveys = () => {
     console.log(data)
 
     return (
-        <>
+        <div>
             <h1> Surveys page </h1>
             <div>
                 {loading ? (
                     <img src={loadingIndicator} alt='animated loading indicator' />
                 ) : data ? (
-                data.map((survey: Survey) => 
-                    (<div className='survey' key={survey.id}>{survey.name}</div> 
+                data.map((survey: Survey) =>
+                    
+                    (<div className='survey' key={survey.id}>{survey.name}</div>
                 ))
             ) : null}
             </div>
-        </>
+        </div>
     )
 }
 
