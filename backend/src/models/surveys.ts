@@ -68,12 +68,12 @@ getQuestionsAnswers = (id) => {
 
 getSurveyResponse = (id) => {
   return baseQuery()
-    .join('questions', 'questions.survey_id', '=', 'survey.id')
+    .join('questions', 'questions.survey_id', '=', 'surveys.id')
     .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
     .select(
-      'survey.name',
+      'surveys.name',
       'questions.question',
-      'survey.isGuest',
+      'surveys.isGuest',
       'questions.question',
       'questionAnswers.answer',
     )
