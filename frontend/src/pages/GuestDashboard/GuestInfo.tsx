@@ -2,14 +2,17 @@ import React, { ComponentClass } from 'react';
 import styled from '@emotion/styled';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-const GuestInfo = ({
-  name,
-  picture,
-  houseLink,
-  houseName,
-  checkIn,
-  checkOut,
-}) => {
+interface guestInfoProps {
+  name: string;
+  picture: string;
+  houseLink: string;
+  houseName: string;
+  checkIn: string;
+  checkOut: string;
+}
+
+const GuestInfo = (props: guestInfoProps) => {
+  const { name, picture, houseLink, houseName, checkIn, checkOut } = props;
   return (
     <StyledGuestInfo>
       <img src={picture} alt={`Picture of ${name}`} />
