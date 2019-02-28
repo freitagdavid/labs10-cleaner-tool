@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import SurveyQuestion from './SurveyQuestion'
 import axios, { AxiosRequestConfig } from 'axios';
-import { CreateSurveysWrapper, CreateSurveyLables, CreateSurveyInput, SurveyOptions, SurveyType, SurveyTypeButton, SurveyQuestions } from './CreateSurvey.styling';
-import './createsurvey.css' 
+import { CreateSurveysWrapper, CreateSurveyLables, CreateSurveyInput, SurveyOptions, SurveyType, SurveyTypeButton, SurveyQuestions, CreateSurveyButtonWrapper } from './CreateSurvey.styling';
 import { ActionEvent } from 'material-ui/svg-icons';
 
 const CreateSurvey = (props: any)=>{
@@ -130,10 +129,10 @@ const CreateSurvey = (props: any)=>{
                     <div>
                        {questionLength(dropdown, survey)}
                     </div>
-                    <div>
-                        <button type ='button' onClick={() => handleSubmit(surveyName, isGuest, dropdown)}>Save</button>
+                    <CreateSurveyButtonWrapper>
+                        <button type = 'button' onClick={() => handleSubmit(surveyName, isGuest, dropdown)}>Save</button>
                         <button>Cancel</button>
-                    </div>
+                    </CreateSurveyButtonWrapper>
                 </form>
             </CreateSurveysWrapper>   
                 )

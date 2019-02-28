@@ -101,6 +101,11 @@ server.get('/questionanswers/:id', async (req, res) => {
   }
 });
 
+/* for Guest dashboard Info*/
+server
+  .route('/guestStay/:id')
+  .get(stays.getGuest)
+
 server
   .route('/users')
   .get(verifyToken, users.get)
@@ -207,6 +212,9 @@ server
 server.route('/itemComplete').post(items.itemComplete);
 
 server.route('/email').post(verifyToken, email.send);
+
+// sends guest an email with link to dashboard
+server.route('/guestemail').post(verifyToken, email.sendLink)
 
 server
   .route('/stays')
