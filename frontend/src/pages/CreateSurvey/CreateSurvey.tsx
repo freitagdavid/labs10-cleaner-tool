@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import SurveyQuestion from './SurveyQuestion'
 import { CreateSurveysWrapper, CreateSurveyLables, CreateSurveyInput, SurveyOptions, SurveyType, SurveyTypeButton, SurveyQuestions, CreateSurveyButtonWrapper } from './CreateSurvey.styling';
-import './createsurvey.css' 
+
 import { ActionEvent } from 'material-ui/svg-icons';
 
 const CreateSurvey = ()=>{

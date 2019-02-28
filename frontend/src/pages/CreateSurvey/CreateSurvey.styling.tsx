@@ -10,7 +10,7 @@ export const CreateSurveysWrapper = styled.div`
         // flex-direction: column;
         margin: 0 auto;
         width: 90%;
-        text-align: center;
+        
         border: 1px solid blue;
     }
 `;
@@ -70,6 +70,10 @@ export const CreateSurveyQuestionInput = styled.input`
     width: 70%;
     height: 50px;
     border: 1.5px solid #D8D8D8;
+
+    @media (max-width: 780px) {
+        width: 100%;
+    }
 `;
 
 export const CreateSurveyButtonWrapper = styled.div`
