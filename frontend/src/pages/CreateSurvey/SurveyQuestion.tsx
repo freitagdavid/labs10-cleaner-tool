@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { CreateSurveyLables, CreateSurveyInput, } from './CreateSurvey.styling';
+
 const SurveyQuestion = (props: any) => {
 
     return (
         <div>
-            <h2>Question {props.questionNumber}</h2>
-            <input type='text'
-                placeholder='Add question text here'
-                onChange={(ev: any) => { props.setQuestion(ev.target.value) }} />
+
+            <CreateSurveyLables>Question {props.questionNumber}</CreateSurveyLables>
+            <CreateSurveyInput type = 'text' placeholder = 'Add question text here' onChange = {(ev:any)=>{props.setQuestion(ev.target.value)}}/>
             <div>
                 <button type='button' onClick={() => props.setQuestionType(1)}>Yes/No</button>
                 <button type='button' onClick={() => props.setQuestionType(2)}>1-5 Rating</button>

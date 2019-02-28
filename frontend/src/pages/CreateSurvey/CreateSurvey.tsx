@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import SurveyQuestion from './SurveyQuestion'
-import { useFetch, axiosFetch }  from '../../helpers/'
 import axios, { AxiosRequestConfig } from 'axios';
-import { async } from 'q';
+import { CreateSurveysWrapper, CreateSurveyLables, CreateSurveyInput, SurveyOptions, SurveyType, SurveyTypeButton, SurveyQuestions } from './CreateSurvey.styling';
+import './createsurvey.css' 
+import { ActionEvent } from 'material-ui/svg-icons';
+
 const CreateSurvey = ()=>{
     const [dropdown, setDropdown] = useState('3')
     const [surveyName, setSurveyName] = useState('')
@@ -16,6 +18,7 @@ const CreateSurvey = ()=>{
     const [question3, setQuestion3] = useState('')
     const [isGuest, setIsGuest] = useState(true)
     const [fetch, setFetch] = useState(false)
+    const [activeSurvey, setActiveSurvey] = useState('')
     const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
     async function handleSubmit(surveyName: string, isGuest: boolean, dropdown: string) {
@@ -95,21 +98,21 @@ const CreateSurvey = ()=>{
                 setQuestion = {setQuestion3} />)
         }
         const answer = survey
-
         return answer
     }
+
         return (
-            <div>
-                <form onSubmit={() => handleSubmit(surveyName, isGuest, dropdown)}>
+            <CreateSurveysWrapper>
+                <form>
                     <h1>Create a Survey</h1>
-                    <h2>Survey Name</h2>
-                    <input type='text' placeholder='Survey Name' onChange={(event: any) => { setSurveyName(event.target.value) }}/>
-                    <div>
-                        <h3>Survey Type:</h3>
-                        <button type='button' name='guest' onClick={() => setIsGuest(true)}>Guest Survey</button>
-                        <button type='button' name='assistant' onClick={() => setIsGuest(false)}>Assitant Survey</button>
-                        <h3>How Many Questions:</h3>
-                        <select defaultValue='3' onChange={(event: any) => {
+                    <CreateSurveyLables>Survey Name</CreateSurveyLables>
+                    <CreateSurveyInput type='text' placeholder='Survey Name' onChange={(event: any) => { setSurveyName(event.target.value) }}/>
+                    <SurveyOptions>
+                        <SurveyType>Survey Type:</SurveyType>
+                        <SurveyTypeButton type = 'button'>Guest Survey</SurveyTypeButton>
+                        <SurveyTypeButton type = 'button'>Assitant Survey</SurveyTypeButton>
+                        <SurveyQuestions>How Many Questions:</SurveyQuestions>
+                        <select defaultValue = '3' onChange={(event: any) => {
                             event.preventDefault()
                             setDropdown(event.target.value)
                         }}>
@@ -117,7 +120,7 @@ const CreateSurvey = ()=>{
                             <option value="2">2</option>
                             <option value="3">3</option>
                         </select>
-                    </div>
+                    </SurveyOptions>
                     <div>
                        {questionLength(dropdown, survey)}
                     </div>
@@ -126,8 +129,8 @@ const CreateSurvey = ()=>{
                         <button>Cancel</button>
                     </div>
                 </form>
-            </div>
+            </CreateSurveysWrapper>
         )
-    
+                    
 }
 export default CreateSurvey
