@@ -15,11 +15,11 @@ const SurveyCard = (props : Survey) => {
                 <div className ='survey-left-content'>
                     <h3>{`${name}`}</h3>
                     <Link to='#'>
-                        <Button text="View Survey Responces" color='var(--color-accent)'></Button>
+                        <Button text="View Survey Responses" color='var(--color-accent)'></Button>
                     </Link>
                 </div>
-                <div className ='survey-rigth-content'>
-                    <p>Responces</p>
+                <div className ='survey-right-content'>
+                    <p>Responses</p>
                     {/* need data */}
                     <h2>10</h2>
                 </div>
