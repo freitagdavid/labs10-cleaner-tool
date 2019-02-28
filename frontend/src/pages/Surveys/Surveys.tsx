@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import { useFetch } from '../../helpers';
 import { Survey, FilterArgs } from './types';
@@ -49,6 +49,7 @@ const Surveys = () => {
                 {loading ? (
                     <img src={loadingIndicator} alt='animated loading indicator' />
                 ) : data ? (
+
                 data.map((survey: Survey) => 
                     (
                     <div className={`survey${activeClass(survey.isGuest)}`}>
