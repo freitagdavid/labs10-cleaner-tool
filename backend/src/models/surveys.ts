@@ -31,18 +31,18 @@ filterByField = (field, fieldValue) => {
   };
 };
 
-const getAllSurveys = async (managerId: number) => {
-  const houses = await findAllHousesByManagerId(managerId);
-  for (let i = 0; i < houses.length; i++) {
-    const surveys = await db('surveys').where('house_id', houses[i].id);
-    houses[i].surveys = surveys;
-  }
-  let surveys = houses.map((house: any) => {
-    return house.surveys;
-  });
-  surveys = surveys.flat();
-  return surveys;
-};
+// const getAllSurveys = async (managerId: number) => {
+//   const houses = await findAllHousesByManagerId(managerId);
+//   for (let i = 0; i < houses.length; i++) {
+//     const surveys = await db('surveys').where('house_id', houses[i].id);
+//     houses[i].surveys = surveys;
+//   }
+//   let surveys = houses.map((house: any) => {
+//     return house.surveys;
+//   });
+//   surveys = surveys.flat();
+//   return surveys;
+// };
 
 getSurvey = (id) => {
   const filteredById = filterByField('id', id);
