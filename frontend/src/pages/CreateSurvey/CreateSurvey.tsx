@@ -23,6 +23,10 @@ const CreateSurvey = ()=>{
         }
         return survey
     }
+
+    const toggleClass = () => {
+        
+    }
     
         return (
             <CreateSurveysWrapper>
