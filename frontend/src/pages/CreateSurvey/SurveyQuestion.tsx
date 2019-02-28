@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreateSurveyLables, CreateSurveyInput, } from './CreateSurvey.styling';
+import { CreateSurveyQuestionWrapper, CreateSurveyQuestionLables, CreateSurveyQuestionInput, } from './CreateSurvey.styling';
 
 const SurveyQuestion = (props: any) => {
     const [questionType, setQuestionType] = useState(1)
@@ -8,15 +8,15 @@ const SurveyQuestion = (props: any) => {
         setQuestion(ev.target.value)
     }
     return (
-        <div>
-            <CreateSurveyLables>Question {props.questionNumber}</CreateSurveyLables>
-            <CreateSurveyInput type = 'text' placeholder = 'Add question text here' onChange = {handleQuestion}/>
+        <CreateSurveyQuestionWrapper>
+            <CreateSurveyQuestionLables>Question {props.questionNumber}</CreateSurveyQuestionLables>
+            <CreateSurveyQuestionInput type = 'text' placeholder = 'Add question text here' onChange = {handleQuestion}/>
             <div>
                 <button type = 'button' onClick = {()=> setQuestionType(1)}>Yes/No</button>
                 <button type='button' onClick={()=>setQuestionType(2)}>1-5 Rating</button>
                 <button type='button' onClick={()=>setQuestionType(3)}>Free Text</button>
             </div>
-        </div>
+        </CreateSurveyQuestionWrapper>
     )
 }
 export default SurveyQuestion
