@@ -1,21 +1,25 @@
 module.exports = [
     {
-      question: 'surveyquestion',
+      name: 'survey 1',
+      isGuest: true,
       survey_id: 1,
       type: 1,
     },
     {
-      question: 'survey 2',
+      name: 'survey 2',
+      isGuest: false,
       survey_id: 1,
       type: 2,
     },
     {
-      question: 'survey 3',
+      name: 'survey 3',
+      isGuest: true,
       survey_id: 2,
       type: 2,
     },
     {
-      question: 'survey 4', 
+      name: 'survey 4',
+      isGuest: true,
       survey_id: 2,
       type: 1,
     },

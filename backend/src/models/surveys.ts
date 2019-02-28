@@ -49,12 +49,6 @@ getSurvey = (id) => {
   return filteredById(baseQuery());
 };
 
-// [
-//   questionId: {
-//     type: '',
-//     answer: ''
-//   }
-// ]
 
 getSurveyByHouse = (id) => {
   const filteredByHouseId = filterByField('house_id', id);
