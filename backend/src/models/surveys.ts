@@ -20,19 +20,6 @@ let filterByField: (
 ) => (query: QueryBuilder) => QueryBuilder;
 let getSurveyByHouse: (id: string) => QueryBuilder;
 
-<<<<<<< HEAD
-export async function getSurveyQuestions(id: number): Promise<QueryBuilder> {
-    return db('survey').where({ id }).first()
-        const questions = await db('questions').where({ survey_id: id })
-       
-}
-// export function getSurveyQuestions(id: number): QueryBuilder {
-//     return db('survey')
-//         .join('questions', 'questions.survey_id', '=', 'survey.id')
-//         .select('survey.name', 'question.name', 'survey.isGuest', 'question.isGuest')
-//         .where({ survey_id: id })
-// }
-=======
 /* Don't know why but I had to protect this in a function before it would work
   right otherwise it was returning a different sql statement every run */
 
@@ -53,14 +40,7 @@ getSurvey = (id) => {
   const filteredById = filterByField('id', id);
   return filteredById(baseQuery());
 };
->>>>>>> 62cfba58b0c0a52ab23385594fa5b924547d27e7
 
-// [
-//   questionId: {
-//     type: '',
-//     answer: ''
-//   }
-// ]
 
 getSurveyByHouse = (id) => {
   const filteredByHouseId = filterByField('house_id', id);

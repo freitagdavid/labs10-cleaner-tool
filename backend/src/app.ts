@@ -31,16 +31,7 @@ server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
 // Survey List in Balsamiq
-<<<<<<< HEAD
-server.get('/surveys', async (req, res) => {
-  try {
-    const data = await getAllSurveys();
-    res.json(data);
-<<<<<<< HEAD
-    }catch(e){res.json(e)}
-  })
 
- 
   server.get('/surveysquestions/:id', async(req,res)=>{
     try{
       const { id } = req.params
@@ -65,15 +56,8 @@ server.get('/surveys', async (req, res) => {
     }catch(e){res.json(e)}
   })
 // Authentication Middleware for *all* routes after this line
-server.use(verifyToken);
-=======
-  } catch (e) {
-    res.json(e);
-  }
-});
-=======
 
->>>>>>> bad1d0f8514216d390ba53e0e6a8b54b1c275146
+
 
 server.get('/data', async (req, res) => {
   try {
@@ -117,7 +101,6 @@ server.get('/questionanswers/:id', async (req, res) => {
   }
 });
 
->>>>>>> 62cfba58b0c0a52ab23385594fa5b924547d27e7
 server
   .route('/users')
   .get(verifyToken, users.get)
