@@ -5,9 +5,6 @@ export const CreateSurveysWrapper = styled.div`
     margin: 0 8rem 0 15rem;
     border: 1px solid red;
     @media (max-width: 780px) {
-        // display: flex;
-        // justify-content: center;
-        // flex-direction: column;
         margin: 0 auto;
         width: 90%;
         
