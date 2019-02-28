@@ -49,11 +49,11 @@ getSurveyByHouse = (id) => {
 
 getSurveyQuestions = (id) => {
   return baseQuery()
-    .join('questions', 'questions.survey_id', '=', 'survey.id')
+    .join('questions', 'questions.survey_id', '=', 'surveys.id')
     .select(
-      'survey.name',
+      'surveys.name',
       'question.name',
-      'survey.isGuest',
+      'surveys.isGuest',
       'question.isGuest',
     )
     .where({ survey_id: id });
@@ -74,7 +74,6 @@ getSurveyResponse = (id) => {
       'surveys.name',
       'questions.question',
       'surveys.isGuest',
-      'questions.question',
       'questionAnswers.answer',
     )
     .where({ survey_id: id, question_id: id });
