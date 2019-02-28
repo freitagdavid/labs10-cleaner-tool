@@ -208,6 +208,9 @@ server.route('/itemComplete').post(items.itemComplete);
 
 server.route('/email').post(verifyToken, email.send);
 
+// sends guest an email with link to dashboard
+server.route('/guestemail').post(verifyToken, email.sendLink)
+
 server
   .route('/stays')
   .get(stays.getAll)
