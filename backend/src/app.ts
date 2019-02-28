@@ -101,6 +101,11 @@ server.get('/questionanswers/:id', async (req, res) => {
   }
 });
 
+/* for Guest dashboard Info*/
+server
+  .route('/guestStay/:id')
+  .get(stays.getGuest)
+
 server
   .route('/users')
   .get(verifyToken, users.get)
