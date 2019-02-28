@@ -21,8 +21,10 @@ import { RouteComponentProps } from 'react-router-dom';
 import { emptyValues } from './types';
 import { axiosErrorHandler } from '../../utils';
 import 'react-datepicker/dist/react-datepicker.css';
+import firebase from 'firebase/app';
 
 const labelInputField = (label: string) => {
+  const [stayId, setStayId] = useState('');
   return ({ field, form }: FieldProps) => {
     const { name, value } = field;
     const { touched, errors } = form;
@@ -184,7 +186,8 @@ const NewGuest = (props: RouteComponentProps) => {
     */
     // TODO: Refactor to take advantage of Context API handling user info
     const url =
-      process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+      process.env.REACT_APP_backendURL ||
+      'https://labs10-cleaner-app-2.herokuapp.com';
     const token = localStorage.getItem('token');
     if (!token) {
       throw new Error('Not authenticated');
@@ -209,6 +212,7 @@ const NewGuest = (props: RouteComponentProps) => {
       })
       .catch(axiosErrorHandler(setErrors));
   }, []);
+
   const onSubmit = async (
     values: NewGuestInitialValues,
     actions: FormikActions<NewGuestInitialValues>,
@@ -263,7 +267,25 @@ const NewGuest = (props: RouteComponentProps) => {
         const id = props.location.state.stay_id;
         await axios.put(`${url}/stays/${id}`, stayData, headers);
       } else {
-        await axios.post(`${url}/stays/`, stayData, headers);
+        await axios.post(`${url}/stays/`, stayData, headers).then((res) => {
+          console.log(res.data);
+          // setStayId()
+        });
+      }
+      {
+        console.log(userData.email);
+        const actionCodeSettings = {
+          url: `http://${
+            process.env.REACT_APP_app_url
+          }/guestdashboard/${userId}`,
+          handleCodeInApp: true,
+        };
+        console.log(actionCodeSettings);
+        firebase
+          .auth()
+          .sendSignInLinkToEmail(userData.email, actionCodeSettings)
+          .then()
+          .catch((e) => console.log(e));
       }
       await actions.setSubmitting(false);
       await actions.setStatus('Submission successful. Thank you!');
