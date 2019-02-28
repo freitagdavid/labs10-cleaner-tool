@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CreateSurveyLables, CreateSurveyInput, } from './CreateSurvey.styling';
 
 const SurveyQuestion = (props: any) => {
     const [questionType, setQuestionType] = useState(1)
@@ -8,8 +9,8 @@ const SurveyQuestion = (props: any) => {
     }
     return (
         <div>
-            <h2>Question {props.questionNumber}</h2>
-            <input type = 'text' placeholder = 'Add question text here' onChange = {handleQuestion}/>
+            <CreateSurveyLables>Question {props.questionNumber}</CreateSurveyLables>
+            <CreateSurveyInput type = 'text' placeholder = 'Add question text here' onChange = {handleQuestion}/>
             <div>
                 <button type = 'button' onClick = {()=> setQuestionType(1)}>Yes/No</button>
                 <button type='button' onClick={()=>setQuestionType(2)}>1-5 Rating</button>

@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import SurveyQuestion from './SurveyQuestion'
-import { CreateSurveysWrapper, CreateSurveyLables, CreateSurveyInput, SurveyOptions, SurveyType } from './CreateSurvey.styling';
+import { CreateSurveysWrapper, CreateSurveyLables, CreateSurveyInput, SurveyOptions, SurveyType, SurveyTypeButton, SurveyQuestions } from './CreateSurvey.styling';
 import './createsurvey.css' 
+import { ActionEvent } from 'material-ui/svg-icons';
 
 const CreateSurvey = ()=>{
     const [dropdown, setDropdown] = useState(3)
     const [surveyName, setSurveyName] = useState('')
     const [isGuest, setIsGuest] = useState(true)
-    const [activeSurvey, setActive] = useState('')
+    const [activeSurvey, setActiveSurvey] = useState('')
     const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
     const handleDropdown = (ev: any) =>{
         setDropdown(ev.target.value)
@@ -31,9 +32,9 @@ const CreateSurvey = ()=>{
                     <CreateSurveyInput type='text' placeholder='Survey Name' onChange = {handleSurveyName}/>
                     <SurveyOptions>
                         <SurveyType>Survey Type:</SurveyType>
-                        <button type = 'button' className={activeSurvey} onClick={()=>{setActive('')}}>Guest Survey</button>
-                        <button type = 'button'>Assitant Survey</button>
-                        <h3>How Many Questions:</h3>
+                        <SurveyTypeButton type = 'button'>Guest Survey</SurveyTypeButton>
+                        <SurveyTypeButton type = 'button'>Assitant Survey</SurveyTypeButton>
+                        <SurveyQuestions>How Many Questions:</SurveyQuestions>
                         <select defaultValue = '3' onChange={handleDropdown}>
                             <option value="1">1</option>
                             <option value="2">2</option>
