@@ -46,7 +46,7 @@ const Surveys = () => {
                 {loading ? (
                     <img src={loadingIndicator} alt='animated loading indicator' />
                 ) : data ? (
-                data.map((survey: any) => 
+                data.map((survey: Survey) => 
                     (
                     <div className={`survey${activeClass(survey.isGuest)}`}>
                         <SurveyCard {...survey} key={survey.id}></SurveyCard> 
