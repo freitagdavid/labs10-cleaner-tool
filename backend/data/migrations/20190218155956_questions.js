@@ -6,7 +6,11 @@ exports.up = function (knex, Promise) {
             .primary()
         table.string('question')
         table.integer('type')
-        table.integer('survey_id')
+        table.integer ('survey_id').unsigned ();
+        table
+            .foreign ('survey_id')
+            .references ('surveys.id')
+            .onDelete ('CASCADE');
     })
 };
 
