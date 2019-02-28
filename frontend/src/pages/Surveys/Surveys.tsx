@@ -7,6 +7,7 @@ import { Button, Container } from '../../components/index';
 import { Link } from 'react-router-dom';
 import SurveyCard from './SurveyCard'
 import './Surveys.css'
+//import console = require('console');
 
 const Surveys = () => {
     const url =
@@ -14,7 +15,7 @@ const Surveys = () => {
     const [active, setActive] = useState( 1 as any);
     const [data, err, loading] = useFetch(`${url}/surveys`)
 
-    
+    console.log(data)
     const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
    

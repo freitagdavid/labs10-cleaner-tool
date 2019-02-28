@@ -32,6 +32,32 @@ server.get('/', (__, res) => res.sendFile('index.html'));
 
 // Survey List in Balsamiq
 
+  server.get('/surveysquestions/:id', async(req,res)=>{
+    try{
+      const { id } = req.params
+      const survey = await db('surveys').where({ id }).first()
+      if(survey) {
+        const questions = await db('questions').where({ survey_id: id })
+        res.json({ survey, questions });
+      }
+    }catch(e){res.json(e), console.log(e)}
+  })
+
+  server.get('/questions', async(req,res)=>{
+    try{
+    const data = await db('questions')
+    res.json(data);
+    }catch(e){res.json(e)}
+  })
+  server.get('/questionanswers', async(req,res)=>{
+    try{
+    const data = await db('questionAnswers')
+    res.json(data);
+    }catch(e){res.json(e)}
+  })
+// Authentication Middleware for *all* routes after this line
+
+
 
 server.get('/data', async (req, res) => {
   try {
