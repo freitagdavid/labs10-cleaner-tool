@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
+import { CreateSurveyQuestionWrapper, CreateSurveyQuestionLables, CreateSurveyQuestionInput, } from './CreateSurvey.styling';
+
 const SurveyQuestion = (props: any) => {
-    const [questionType, setQuestionType] = useState(1)
-    const [question, setQuestion] = useState('')
-    const handleQuestion = (ev:any) =>{
-        setQuestion(ev.target.value)
-    }
+
     return (
-        <div>
-            <h2>Question {props.questionNumber}</h2>
-            <input type = 'text' placeholder = 'Add question text here' onChange = {handleQuestion}/>
+        <CreateSurveyQuestionWrapper>
+            <CreateSurveyQuestionLables>Question {props.questionNumber}</CreateSurveyQuestionLables>
+            {/* <CreateSurveyQuestionInput type = 'text' placeholder = 'Add question text here' onChange = {handleQuestion}/> */}
+        <div></div>
+
+            <CreateSurveyQuestionLables>Question {props.questionNumber}</CreateSurveyQuestionLables>
+            <CreateSurveyQuestionInput type = 'text' placeholder = 'Add question text here' onChange = {(ev:any)=>{props.setQuestion(ev.target.value)}}/>
             <div>
-                <button type = 'button' onClick = {()=> setQuestionType(1)}>Yes/No</button>
-                <button type='button' onClick={()=>setQuestionType(2)}>1-5 Rating</button>
-                <button type='button' onClick={()=>setQuestionType(3)}>Free Text</button>
+                <button type='button' onClick={() => props.setQuestionType(1)}>Yes/No</button>
+                <button type='button' onClick={() => props.setQuestionType(2)}>1-5 Rating</button>
+                <button type='button' onClick={() => props.setQuestionType(3)}>Free Text</button>
             </div>
-        </div>
+        </CreateSurveyQuestionWrapper>
     )
 }
 export default SurveyQuestion

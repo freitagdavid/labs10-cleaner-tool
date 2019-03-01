@@ -14,11 +14,9 @@ const Surveys = () => {
     const [active, setActive] = useState( 1 as any);
     const [data, err, loading] = useFetch(`${url}/surveys`)
 
-    
+    console.log(data)
     const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
-   
-
     
     return (
         <Container>
