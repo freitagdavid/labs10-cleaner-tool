@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const CreateSurveysWrapper = styled.div`
     text-align: left;
     margin: 0 8rem 0 15rem;
-    border: 1px solid red;
+    //border: 1px solid red;
     @media only screen and (max-width: 400px) {
         margin: 0 auto; 
         border: 1px solid blue;
@@ -20,7 +20,7 @@ export const CreateSurveyOptions = styled.div`
 export const CreateSurveyHeader = styled.h1`
     font-size: 2rem;
     font-weight: normal;
-    border: 1px solid green;
+    //border: 1px solid green;
     @media only screen and (max-width: 400px) {
         text-align: center;
         
@@ -80,12 +80,12 @@ export const SurveyQuestions = styled.h3`
 export const CreateSurveyQuestionWrapper = styled.div`
     background-color: white;
     margin-top: 1rem;
-    border: 1px solid purple;
+    //border: 1px solid purple;
 `;
 
 export const CreateSurveyQuestionLables = styled.h3`
     margin-top: 2rem;
-    border: 1px solid blue;
+    //border: 1px solid blue;
 `;
 
 export const CreateSurveyQuestionInput = styled.input`
@@ -105,5 +105,5 @@ export const CreateSurveyButtonWrapper = styled.div`
     width: 50%;
     margin-top: 2rem;
     margin-left: 5rem;
-    border: 1px solid black;
+   //border: 1px solid black;
 `;

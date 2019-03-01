@@ -2,6 +2,8 @@ import React from 'react';
 import { Survey, FilterArgs } from './types';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/index';
+import './Surveys.css';
+
 const SurveyCard = (props : Survey) => {
     const{
         survey,
@@ -11,7 +13,7 @@ const SurveyCard = (props : Survey) => {
     } = props
     return(
         <>
-            <div>  
+            <div className='survey-card'>  
                 <div className ='survey-left-content'>
                     <h3>{`${name}`}</h3>
                     <Link to='#'>
