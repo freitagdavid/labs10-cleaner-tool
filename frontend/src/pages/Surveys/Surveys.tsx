@@ -7,7 +7,6 @@ import { Button, Container } from '../../components/index';
 import { Link } from 'react-router-dom';
 import SurveyCard from './SurveyCard'
 import './Surveys.css'
-//import console = require('console');
 
 const Surveys = () => {
     const url =
@@ -18,8 +17,6 @@ const Surveys = () => {
     console.log(data)
     const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
-   
-
     
     return (
         <Container>
