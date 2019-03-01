@@ -18,6 +18,8 @@ import Surveys from './Surveys/Surveys';
 import SurveyView from './SurveyView/SurveyView';
 import SurveyAnswers from './SurveyAnswers/SurveyAnswers';
 import GuestDashboard from './GuestDashboard/GuestDashboard';
+import SurveyResponse from './SurveyResponse/SurveyResponse';
+import CreateSurvey from './CreateSurvey/CreateSurvey';
 export {
   Properties,
   PropertiesDetail,
@@ -38,5 +40,7 @@ export {
   Surveys,
   SurveyView,
   SurveyAnswers,
-  GuestDashboard
+  GuestDashboard,
+  SurveyResponse,
+  CreateSurvey
 };

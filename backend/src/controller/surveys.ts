@@ -25,7 +25,7 @@ get = async (req, res, next) => {
     }
   } else {
     try {
-      const surveys: QueryBuilder = await getAllSurveys();
+      const surveys: QueryBuilder = await getAllSurveys(id);
       res.status(200).json(surveys);
     } catch (e) {
       e.statusCode = e.statusCode || 400;

@@ -19,6 +19,8 @@ import {
   SurveyView,
   SurveyAnswers,
   GuestDashboard,
+  SurveyResponse,
+  CreateSurvey,
 } from './pages/index';
 import { Sidebar } from './components/index';
 import './App.css';

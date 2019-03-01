@@ -7,7 +7,7 @@ import {
 
 const SurveyQuestion = (props: any) => {
   return (
-    <div>
+    <CreateSurveyQuestionWrapper>
       <CreateSurveyQuestionLables>
         Question {props.questionNumber}
       </CreateSurveyQuestionLables>
@@ -29,7 +29,7 @@ const SurveyQuestion = (props: any) => {
           Free Text
         </button>
       </div>
-    </div>
+    </CreateSurveyQuestionWrapper>
   );
 };
 export default SurveyQuestion;

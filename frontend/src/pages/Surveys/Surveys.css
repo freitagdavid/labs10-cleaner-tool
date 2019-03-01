@@ -1,0 +1,29 @@
+.survey {
+    display: none
+}
+
+.surveys-header {
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid green; */
+}
+.create-survey {
+    /* justify-content: flex-end; */
+    border: 1px solid red;
+}
+
+.surveys-filter-buttons {
+    display: flex;
+    flex-direction: flex-start;
+    /* border: 1px solid purple; */
+}
+
+.surveys-filter-buttons button {
+    margin-right: 1rem;
+}
+
+.survey-card {
+    display: flex;
+    margin-top: 1.5rem;
+    border: 1px solid black;
+}

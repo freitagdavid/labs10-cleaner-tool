@@ -4,13 +4,13 @@ exports.up = function (knex, Promise) {
             .increments()
             .unique()
             .primary()
+        table.string('question')
+        table.integer('type')
+        table.integer ('survey_id').unsigned ();
         table
-            .string('question')
-        table.integer('survey_id').unsigned();
-        table
-            .foreign('survey_id')
-            .references('surveys.id')
-            .onDelete('CASCADE');
+            .foreign ('survey_id')
+            .references ('surveys.id')
+            .onDelete ('CASCADE');
     })
 };
 

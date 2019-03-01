@@ -18,5 +18,5 @@ const app = firebase.initializeApp({
   projectId: REACT_APP_projectId,
   storageBucket: REACT_APP_storageBucket,
 });
-console.log(process.env.REACT_APP_apiKey, 'key')
+
 export default app;
