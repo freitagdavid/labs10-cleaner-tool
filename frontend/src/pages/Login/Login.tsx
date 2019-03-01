@@ -15,7 +15,7 @@ import app from '../../firebase.setup';
 import Container from '../../components/Container';
 import LoginDiv from './Login.styling';
 import queryString from 'query-string';
-import { UserContext } from '../../App';
+import { UserContext } from '../../UserContext';
 import logo from '../../assets/lodgel.jpg';
 
 interface LoginProps extends RouteComponentProps {
@@ -28,7 +28,7 @@ const Login: FunctionComponent<LoginProps> = ({ history, location }) => {
   // creates a ref that will be used as component wide variable and exists
   // throughout it's lifecycle
   const observer: MutableRefObject<any> = useRef<Unsubscribe>(null);
-  const { setRole } = useContext(UserContext);
+  const { state, dispatch } = useContext(UserContext);
   const { ast, manager } = queryString.parse(location.search);
 
   // Configuration for the firebase OAuth component
@@ -62,14 +62,11 @@ const Login: FunctionComponent<LoginProps> = ({ history, location }) => {
     };
   }, []);
 
-  useEffect(
-    () => {
-      // Listens to changes in userState and submits them
-      // to our backend
-      submitUser();
-    },
-    [user],
-  );
+  useEffect(() => {
+    // Listens to changes in userState and submits them
+    // to our backend
+    submitUser();
+  }, [user]);
 
   async function submitUser() {
     /* Commits user to the backend and redirects new users to
@@ -85,17 +82,19 @@ const Login: FunctionComponent<LoginProps> = ({ history, location }) => {
         managerID: manager,
       };
       const url =
-        process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+        process.env.REACT_APP_backendURL ||
+        'https://labs10-cleaner-app-2.herokuapp.com';
       try {
         const { data } = await axios.post(`${url}/users/`, nUser);
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
-        console.log(data.role)
+        console.log(data.role);
         localStorage.setItem('subscription', data.stripePlan);
-
+        // TODO I think this is what's causing the intermittent login issues. The entire login system needs to be redone.
         if (data.first) {
           history.push('/postreg');
-          setRole(ast ? 'assistant' : 'manager');
+          dispatch({ type: 'manager' });
+          // setRole(ast ? 'assistant' : 'manager');
         } else {
           history.push('/properties');
         }

@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { FileUploadHOF } from '../../components/FileUpload';
 import { PostRegister } from '../../pages/';
 import { useFetch, axiosFetch } from '../../helpers';
-import { UserContext } from '../../App';
+import { UserContext } from '../../UserContext';
 import { Container, Button } from '../../components/';
 import {
   Card,
@@ -19,14 +19,15 @@ import loadingIndicator from '../utils/loading.svg';
 import defaultUser from '../../assets/default-user.jpg';
 
 const url =
-  process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+  process.env.REACT_APP_backendURL ||
+  'https://labs10-cleaner-app-2.herokuapp.com';
 
 const clientId = process.env.REACT_APP_clientid;
 const stripeOauthUrl = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=
 ${clientId}&scope=read_write`;
 
 const Settings: React.SFC<RouteComponentProps> = (props) => {
-  const userC = useContext(UserContext);
+  const { state, dispatch } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [fetch, setFetch] = useState(false);
   const [pic, setPic] = useState('');
@@ -37,9 +38,9 @@ const Settings: React.SFC<RouteComponentProps> = (props) => {
     addressArray.splice(1, 0, '');
   }
   let subInfo = 'Not Subscribed';
-  if (userC.subscription === 1) {
+  if (state.subscription === 1) {
     subInfo = 'Basic';
-  } else if (userC.subscription === 2) {
+  } else if (state.subscription === 2) {
     subInfo = 'Professional';
   }
   useEffect(() => {

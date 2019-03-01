@@ -24,15 +24,17 @@ import { TextField } from '@material-ui/core';
 import axios, { AxiosRequestConfig } from 'axios';
 import { axiosErrorHandler } from '../utils';
 import { useFetch } from '../../helpers';
-import { UserContext } from '../../App';
+import { UserContext } from '../../UserContext';
 import { Lists, List } from './types';
 import loadingIndicator from '../utils/loading.svg';
 import { Link } from 'react-router-dom';
 
 // TODO: fix types
 const PropertyDetails = (props: any) => {
+  const { state, dispatch } = useContext(UserContext);
   const url =
-    process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+    process.env.REACT_APP_backendURL ||
+    'https://labs10-cleaner-app-2.herokuapp.com';
 
   const [property, propertyError, loading] = useFetch(
     `${url}/houses/${props.match.params.id}`,
@@ -43,7 +45,7 @@ const PropertyDetails = (props: any) => {
   const [newItem, setNewItem] = useState('');
   const [inputItem, setInputItem] = useState(false);
   const [lists, setLists] = useState({} as Lists);
-  const { role } = useContext(UserContext);
+  const { role } = state;
 
   const headers: AxiosRequestConfig = {
     headers: { Authorization: localStorage.getItem('token') },

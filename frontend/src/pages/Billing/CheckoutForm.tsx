@@ -8,10 +8,11 @@ import { Button } from '../../components/index';
 import axios, { AxiosRequestConfig } from 'axios';
 import { BillingContext } from './Billing';
 import loadingIndicator from '../utils/loading.svg';
-import { UserContext } from '../../App';
+import { UserContext } from '../../UserContext';
 
 const url =
-  process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+  process.env.REACT_APP_backendURL ||
+  'https://labs10-cleaner-app-2.herokuapp.com';
 
 const headers: AxiosRequestConfig = {
   headers: { Authorization: localStorage.getItem('token') },
@@ -20,7 +21,8 @@ const headers: AxiosRequestConfig = {
 const CheckoutForm = (props: ReactStripeElements.InjectedStripeProps) => {
   // @ts-ignore
   const { setConfirm, setShownIndex } = useContext(BillingContext);
-  const { setValue } = useContext(UserContext);
+  const { state, dispatch } = useContext(UserContext);
+  const { setSubscription } = state;
 
   const [loading, setLoading] = useState(false);
   const [plan, setPlan] = useState<any>(0);
@@ -43,15 +45,12 @@ const CheckoutForm = (props: ReactStripeElements.InjectedStripeProps) => {
         headers,
       );
       const sub = response.data.plan === '1' ? 1 : 2;
-      console.log(response.data.plan, sub);
       localStorage.setItem('subscription', String(sub));
       setLoading(false);
       setConfirm({ confirm: response.data });
       setShownIndex(1);
-      setValue(sub);
-    } catch (e) {
-      console.log(e);
-    }
+      setSubscription(sub);
+    } catch (e) {}
     /* tslint:disable-next-line */
   };
 
