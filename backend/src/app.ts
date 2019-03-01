@@ -101,6 +101,11 @@ server.get('/questionanswers/:id', async (req, res) => {
   }
 });
 
+/* for Guest dashboard Info*/
+server
+  .route('/guestStay/:id')
+  .get(stays.getGuest)
+
 server
   .route('/users')
   .get(verifyToken, users.get)
@@ -117,7 +122,7 @@ server.use(verifyToken);
 server.get('/surveys', verifyToken, async (req, res) => {
   const id = req.token.id
   try {
-    const data = await getAllSurveys(id);
+    const data = await db('surveys').where({user_id: id});
     res.json(data);
   } catch (e) {
     res.json(e);

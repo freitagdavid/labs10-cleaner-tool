@@ -15,7 +15,7 @@ import {
 } from './CreateSurvey.styling';
 import { ActionEvent } from 'material-ui/svg-icons';
 
-const CreateSurvey = ()=>{
+const CreateSurvey = (props: any)=>{
     const [dropdown, setDropdown] = useState('3')
     const [surveyName, setSurveyName] = useState('')
     const [survey, setSurvey] = useState([])
@@ -61,16 +61,22 @@ const CreateSurvey = ()=>{
             console.log(data)
         }
         if(dropdown ==='1'){
-            handleQuestions(question1,questionType1, id)
+            handleQuestions(question1, questionType1, id).then(res => {
+                props.history.push('/surveys');
+            });
         }
         if (dropdown === '2') {
             handleQuestions(question1, questionType1, id)
-            handleQuestions(question2, questionType2, id)
+            handleQuestions(question2, questionType2, id).then(res => {
+                props.history.push('/surveys');
+            });
         }
         if(dropdown === '3'){
             handleQuestions(question1, questionType1, id)
             handleQuestions(question2, questionType2, id)
-            handleQuestions(question3, questionType3, id)
+            handleQuestions(question3, questionType3, id).then(res =>{
+                props.history.push('/surveys');
+            });
         }
     }
     const questionLength = (num: string, survey: any) => {
@@ -110,8 +116,8 @@ const CreateSurvey = ()=>{
         const answer = survey
         return answer
     }
-
         return (
+            
             <CreateSurveysWrapper>
                 <form>
                     <CreateSurveyHeader>Create a Survey</CreateSurveyHeader>
@@ -141,8 +147,8 @@ const CreateSurvey = ()=>{
                         <button>Cancel</button>
                     </CreateSurveyButtonWrapper>
                 </form>
-            </CreateSurveysWrapper>
-        )
-                    
+            </CreateSurveysWrapper>   
+                )
+            
 }
 export default CreateSurvey
