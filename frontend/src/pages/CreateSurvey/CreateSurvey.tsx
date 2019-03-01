@@ -115,7 +115,7 @@ const CreateSurvey = (props: any)=>{
                     <SurveyOptions>
                         <SurveyType>Survey Type:</SurveyType>
                         <SurveyTypeButton type = 'button'>Guest Survey</SurveyTypeButton>
-                        <SurveyTypeButton type = 'button'>Assitant Survey</SurveyTypeButton>
+                        <SurveyTypeButton type = 'button'>Assistant Survey</SurveyTypeButton>
                         <SurveyQuestions>How Many Questions:</SurveyQuestions>
                         <select defaultValue = '3' onChange={(event: any) => {
                             event.preventDefault()
