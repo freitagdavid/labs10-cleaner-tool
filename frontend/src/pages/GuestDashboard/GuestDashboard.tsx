@@ -8,6 +8,10 @@ import styled from '@emotion/styled';
 const StyledGuestDashboard = styled.div`
   width: 90%;
   margin: 0 auto;
+
+  @media only screen and (min-width: 780px) {
+    border: 1px solid red;
+  }
 `;
 
 const GuestDashboard = () => {

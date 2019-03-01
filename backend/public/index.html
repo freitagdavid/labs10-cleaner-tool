@@ -107,6 +107,9 @@
 				<li>
 					<a href="#oauth">oAuth</a>
 				</li>
+				<li>
+					<a href="#getGuestDashInfo">Get GuestDash Info</a>
+				</li>
 			</ul>
 			<hr />
 		</header>
@@ -444,6 +447,99 @@
 "ast_guide": null,
 "check_in": "1/27/2018",
 "check_out": "1/30/2018"
+}</code></pre>
+	</section>
+	<hr />
+	<section id="getGuestDashInfo" class="row">
+		<h4>Get GuestDash info by Stay ID</h4>
+			<p><span>Endpoint URL: </span><code>/gueststay/:id</code> <span>Method: </span><code>GET</code></p>
+				<strong>Expected Output</strong>
+					<pre><code>{
+"guest_id": 2,
+"guest_name": "Gerhard Schroeder",
+"email": null,
+"phone": null,
+"address": null,
+"house_id": 1,
+"house_name": "house name 1",
+"photo_url": "https://www.samplemcdougald.org/wp-content/uploads/2017/10/visit-sample-mcdougald-300x300.jpg",
+"house_address": "420 Throckmorton St\n\nFort Worth\nTX - Texas\nUSA\n76102",
+"default_ast": 1,
+"guest_guide": null,
+"ast_guide": null,
+"price": 450.5,
+"extra_fee": 30,
+"cleaning_fee": 65,
+"extra_guests": null,
+"stay_receipt": null,
+"stay_id": 2,
+"check_in": "2200-02-25T00:00:00Z",
+"check_out": "2200-02-28T00:00:00Z",
+"diff": 0,
+"checklist": {
+	"before": [
+		{
+			"complete": null,
+			"task": "clean 1",
+			"items_id": 1,
+			"stay_id": 2
+		},
+		{
+			"complete": null,
+			"task": "clean 13",
+			"items_id": 13,
+			"stay_id": 2
+		}
+	],
+	"during": [
+		{
+			"complete": null,
+			"task": "clean 16",
+			"items_id": 16,
+			"stay_id": 2
+		},
+		{
+			"complete": null,
+			"task": "clean 4",
+			"items_id": 4,
+			"stay_id": 2
+		}
+	],
+	"after": [
+		{
+			"hours after 1": [
+				{
+					"complete": null,
+					"task": "clean 7",
+					"items_id": 7,
+					"stay_id": 2
+				},
+				{
+					"complete": null,
+					"task": "clean 19",
+					"items_id": 19,
+					"stay_id": 2
+				}
+			]
+		},
+		{
+			"hours after 3": [
+				{
+					"complete": null,
+					"task": "clean 8",
+					"items_id": 8,
+					"stay_id": 2
+				},
+				{
+					"complete": null,
+					"task": "clean 20",
+					"items_id": 20,
+					"stay_id": 2
+				}
+				]
+			}
+		]
+	}
 }</code></pre>
 	</section>
 	<hr />
