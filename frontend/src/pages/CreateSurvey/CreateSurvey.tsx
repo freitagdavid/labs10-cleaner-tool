@@ -1,7 +1,18 @@
 import React, {useState} from 'react';
 import SurveyQuestion from './SurveyQuestion'
 import axios, { AxiosRequestConfig } from 'axios';
-import { CreateSurveysWrapper, CreateSurveyLables, CreateSurveyInput, SurveyOptions, SurveyType, SurveyTypeButton, SurveyQuestions, CreateSurveyButtonWrapper } from './CreateSurvey.styling';
+import { 
+     CreateSurveysWrapper,
+     CreateSurveyOptions,
+     CreateSurveyHeader, 
+     CreateSurveyLables, 
+     CreateSurveyInput, 
+     SurveyOptions, 
+     SurveyType, 
+     SurveyTypeButton, 
+     SurveyQuestions, 
+     CreateSurveyButtonWrapper 
+} from './CreateSurvey.styling';
 import { ActionEvent } from 'material-ui/svg-icons';
 
 const CreateSurvey = (props: any)=>{
@@ -109,23 +120,25 @@ const CreateSurvey = (props: any)=>{
             
             <CreateSurveysWrapper>
                 <form>
-                    <h1>Create a Survey</h1>
-                    <CreateSurveyLables>Survey Name</CreateSurveyLables>
-                    <CreateSurveyInput type='text' placeholder='Survey Name' onChange={(event: any) => { setSurveyName(event.target.value) }}/>
-                    <SurveyOptions>
-                        <SurveyType>Survey Type:</SurveyType>
-                        <SurveyTypeButton type = 'button'>Guest Survey</SurveyTypeButton>
-                        <SurveyTypeButton type = 'button'>Assitant Survey</SurveyTypeButton>
-                        <SurveyQuestions>How Many Questions:</SurveyQuestions>
-                        <select defaultValue = '3' onChange={(event: any) => {
-                            event.preventDefault()
-                            setDropdown(event.target.value)
-                        }}>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </SurveyOptions>
+                    <CreateSurveyHeader>Create a Survey</CreateSurveyHeader>
+                    <CreateSurveyOptions>
+                        <CreateSurveyLables>Survey Name</CreateSurveyLables>
+                        <CreateSurveyInput type='text' placeholder='Survey Name' onChange={(event: any) => { setSurveyName(event.target.value) }}/>
+                        <SurveyOptions>
+                            <SurveyType>Survey Type:</SurveyType>
+                            <SurveyTypeButton type = 'button'>Guest Survey</SurveyTypeButton>
+                            <SurveyTypeButton type = 'button'>Assitant Survey</SurveyTypeButton>
+                            <SurveyQuestions>How Many Questions:</SurveyQuestions>
+                            <select defaultValue = '3' onChange={(event: any) => {
+                                event.preventDefault()
+                                setDropdown(event.target.value)
+                            }}>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </SurveyOptions>
+                    </CreateSurveyOptions>
                     <div>
                        {questionLength(dropdown, survey)}
                     </div>
