@@ -7,9 +7,11 @@ import {
 
 const SurveyQuestion = (props: any) => {
   return (
-    <div>
-      <CreateSurveyLables>Question {props.questionNumber}</CreateSurveyLables>
-      <CreateSurveyInput
+    <CreateSurveyQuestionWrapper>
+      <CreateSurveyQuestionLables>
+        Question {props.questionNumber}
+      </CreateSurveyQuestionLables>
+      <CreateSurveyQuestionInput
         type='text'
         placeholder='Add question text here'
         onChange={(ev: any) => {
@@ -27,7 +29,7 @@ const SurveyQuestion = (props: any) => {
           Free Text
         </button>
       </div>
-    </div>
+    </CreateSurveyQuestionWrapper>
   );
 };
 export default SurveyQuestion;

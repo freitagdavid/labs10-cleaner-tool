@@ -7,6 +7,7 @@ interface MiscInfoProps {}
 const StyledLinks = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
   a {
     padding: 10px;
     display: flex;

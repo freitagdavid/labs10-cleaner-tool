@@ -7,7 +7,6 @@ import { Button, Container } from '../../components/index';
 import { Link } from 'react-router-dom';
 import SurveyCard from './SurveyCard'
 import './Surveys.css'
-//import console = require('console');
 
 const Surveys = () => {
     const url =
@@ -18,18 +17,18 @@ const Surveys = () => {
     console.log(data)
     const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
-   
-
     
     return (
         <Container>
             <div className="surveys-header">
-                <h1> Surveys page </h1>
-                <Link to="/createsurvey">
-                    <Button text="+ New Survey" color='var(--color-accent)'></Button>
+                <h2>Surveys</h2>
+                <Link to="/createsurvey" >
+                    {/* <button className='create-survey'>+ Create New Survey</button> */}
+                    <Button className='create-survey' text="+ Create New Survey" color='var(--color-accent)'></Button>
                 </Link>
             </div>
             <div className='surveys-filter-buttons'>
+            
             <Button
           className={`button-filter guest ${activeClass(1)}`}
           text='Guest'

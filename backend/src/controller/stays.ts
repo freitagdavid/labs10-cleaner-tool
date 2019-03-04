@@ -7,6 +7,7 @@ import {
   postStayData,
   putStayData,
 } from '../models/stays';
+import { findListsStay } from '../models/lists'
 import { getRoleId } from '../models/users';
 import { findAstMan } from '../models/assistants';
 // Type Definitions
@@ -22,6 +23,32 @@ type Requests = Request | RequestMock;
 type Responses = Response | ResponseMock;
 type Nexts = NextFunction | NextFunctionMock;
 
+
+//For getting guest dashboard info
+export async function getGuest(
+  req: Requests,
+  res: Responses,
+  next: Nexts,
+): Promise<void> {
+  const { id } = req.params;
+
+  try {
+    const summary: any = await findStaySummaryStandardized(id);
+    if (summary === undefined) {
+      const e: any = new Error(`Stay with given ID ${id} not found.`);
+      e.statusCode = 404;
+      throw e;
+    }
+    const house_id = summary.house_id
+    const stay_id = summary.stay_id
+    const checklist: any = await findListsStay(house_id, stay_id )
+    summary.checklist = checklist
+    res.status(200).json(summary);
+  } catch (e) {
+    e.statusCode = e.statusCode || 400;
+    next(e);
+  }
+}
 // Stay Route Handler Functions
 export async function get(
   req: Requests,

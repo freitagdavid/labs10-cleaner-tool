@@ -12,6 +12,11 @@ const backendURL = process.env.REACT_APP_backendURL;
 const StyledGuestDashboard = styled.div`
   width: 90%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  @media only screen and (min-width: 780px) {
+    border: 1px solid red;
+  }
 `;
 
 const GuestDashboard = (props: any) => {
