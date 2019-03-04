@@ -3,8 +3,6 @@ import SurveyQuestion from './SurveyQuestion';
 import axios, { AxiosRequestConfig } from 'axios';
 import {
   CreateSurveysWrapper,
-  CreateSurveyOptions,
-  CreateSurveyHeader,
   CreateSurveyLables,
   CreateSurveyInput,
   SurveyOptions,
@@ -15,7 +13,7 @@ import {
 } from './CreateSurvey.styling';
 import { ActionEvent } from 'material-ui/svg-icons';
 
-const CreateSurvey = (props: any) => {
+const CreateSurvey = () => {
   const [dropdown, setDropdown] = useState('3');
   const [surveyName, setSurveyName] = useState('');
   const [survey, setSurvey] = useState([]);
@@ -67,22 +65,16 @@ const CreateSurvey = (props: any) => {
       console.log(data);
     }
     if (dropdown === '1') {
-      handleQuestions(question1, questionType1, id).then((res) => {
-        props.history.push('/surveys');
-      });
+      handleQuestions(question1, questionType1, id);
     }
     if (dropdown === '2') {
       handleQuestions(question1, questionType1, id);
-      handleQuestions(question2, questionType2, id).then((res) => {
-        props.history.push('/surveys');
-      });
+      handleQuestions(question2, questionType2, id);
     }
     if (dropdown === '3') {
       handleQuestions(question1, questionType1, id);
       handleQuestions(question2, questionType2, id);
-      handleQuestions(question3, questionType3, id).then((res) => {
-        props.history.push('/surveys');
-      });
+      handleQuestions(question3, questionType3, id);
     }
   }
   const questionLength = (num: string, survey: any) => {
@@ -146,39 +138,38 @@ const CreateSurvey = (props: any) => {
     const answer = survey;
     return answer;
   };
+
   return (
     <CreateSurveysWrapper>
       <form>
-        <CreateSurveyHeader>Create a Survey</CreateSurveyHeader>
-        <CreateSurveyOptions>
-          <CreateSurveyLables>Survey Name</CreateSurveyLables>
-          <CreateSurveyInput
-            type='text'
-            placeholder='Survey Name'
+        <h1>Create a Survey</h1>
+        <CreateSurveyLables>Survey Name</CreateSurveyLables>
+        <CreateSurveyInput
+          type='text'
+          placeholder='Survey Name'
+          onChange={(event: any) => {
+            setSurveyName(event.target.value);
+          }}
+        />
+        <SurveyOptions>
+          <SurveyType>Survey Type:</SurveyType>
+          <SurveyTypeButton type='button'>Guest Survey</SurveyTypeButton>
+          <SurveyTypeButton type='button'>Assitant Survey</SurveyTypeButton>
+          <SurveyQuestions>How Many Questions:</SurveyQuestions>
+          <select
+            defaultValue='3'
             onChange={(event: any) => {
-              setSurveyName(event.target.value);
+              event.preventDefault();
+              setDropdown(event.target.value);
             }}
-          />
-          <SurveyOptions>
-            <SurveyType>Survey Type:</SurveyType>
-            <SurveyTypeButton type='button'>Guest Survey</SurveyTypeButton>
-            <SurveyTypeButton type='button'>Assitant Survey</SurveyTypeButton>
-            <SurveyQuestions>How Many Questions:</SurveyQuestions>
-            <select
-              defaultValue='3'
-              onChange={(event: any) => {
-                event.preventDefault();
-                setDropdown(event.target.value);
-              }}
-            >
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-            </select>
-          </SurveyOptions>
-        </CreateSurveyOptions>
+          >
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+          </select>
+        </SurveyOptions>
         <div>{questionLength(dropdown, survey)}</div>
-        <CreateSurveyButtonWrapper>
+        <div>
           <button
             type='button'
             onClick={() => handleSubmit(surveyName, isGuest, dropdown)}
@@ -186,7 +177,8 @@ const CreateSurvey = (props: any) => {
             Save
           </button>
           <button>Cancel</button>
-        </CreateSurveyButtonWrapper>
+        </div>
+        <CreateSurveyButtonWrapper />
       </form>
     </CreateSurveysWrapper>
   );

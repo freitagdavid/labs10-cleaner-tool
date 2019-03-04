@@ -34,9 +34,9 @@ server.get('/', (__, res) => res.sendFile('index.html'));
 
 server.get('/data', async (req, res) => {
   try {
-    const users = await db('user');
-    console.log(users);
-    res.json(users);
+    const usersData = await db('user');
+    console.log(usersData);
+    res.json(usersData);
   } catch (e) {
     res.json(e);
   }

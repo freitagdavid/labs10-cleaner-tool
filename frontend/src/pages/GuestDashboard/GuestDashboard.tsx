@@ -6,7 +6,6 @@ import MiscInfo from './MiscInfo';
 import styled from '@emotion/styled';
 import firebase from 'firebase';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
-
 const backendURL = process.env.REACT_APP_backendURL;
 
 const StyledGuestDashboard = styled.div`
@@ -44,7 +43,7 @@ const GuestDashboard = (props: any) => {
   useEffect(() => {
     if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
       let email: any;
-      email = window.localStorage.getItem('emailForSignIn');
+      email = localStorage.getItem('emailForSignIn');
       if (!email) {
         email = window.prompt(
           'Please provide your email to see your dashboard',
@@ -59,13 +58,35 @@ const GuestDashboard = (props: any) => {
         })
         .catch((error) => {
           console.log(error);
-        });
+        })
+        .then(() => {});
     }
   }, []);
 
+  const setUpUrlAndHeaders = () => {
+    /*
+    Sets default URL, loads/checks token, and sets header
+    Returns url and header as an array in said order
+    */
+    // TODO: Refactor to take advantage of Context API handling user info
+    const url =
+      process.env.REACT_APP_backendURL ||
+      'https://labs10-cleaner-app-2.herokuapp.com';
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Not authenticated');
+    }
+    const headers: AxiosRequestConfig = {
+      headers: {
+        Authorization: token,
+      },
+    };
+    return { url, headers };
+  };
+
   // @ts-ignore
   const [fetchData, fetchErr, fetchLoading] = useFetch(
-    `http://${backendURL}/guestdata/${props.match.params.id}`,
+    `${backendURL}/stays/${props.match.params.id}`,
     true,
     'get',
   );
@@ -77,18 +98,19 @@ const GuestDashboard = (props: any) => {
     return <h1>Loading</h1>;
   } else {
     console.log(fetchData);
-    const user = fetchData.results[0];
-    console.log(user);
+    // console.log(fetchData);
+    // const user = fetchData.results[0];
+    // console.log(user);
     return (
       <StyledGuestDashboard>
-        <GuestInfo
+        {/* <GuestInfo
           name={`${user.name.first} ${user.name.last}`}
           picture={user.picture.large}
           houseLink='http://example.com'
           houseName='whatever'
           checkIn='1/27'
           checkOut='1/28'
-        />
+        /> */}
         <GuestProgressBar previousCheckout={true} currentProgress={50} />
         <MiscInfo />
       </StyledGuestDashboard>
