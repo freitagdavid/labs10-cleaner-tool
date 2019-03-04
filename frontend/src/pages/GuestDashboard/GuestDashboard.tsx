@@ -43,7 +43,7 @@ const GuestDashboard = (props: any) => {
   useEffect(() => {
     if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
       let email: any;
-      email = window.localStorage.getItem('emailForSignIn');
+      email = localStorage.getItem('emailForSignIn');
       if (!email) {
         email = window.prompt(
           'Please provide your email to see your dashboard',

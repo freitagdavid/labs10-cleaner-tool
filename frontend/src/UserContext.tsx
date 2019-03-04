@@ -1,7 +1,8 @@
 import React, { createContext, useReducer } from 'react';
 import { ReactNodeLike } from 'prop-types';
 
-const UserContext = createContext({});
+// @ts-ignore
+const UserContext = createContext();
 
 const initialState = {
   loggedIn: localStorage.getItem('token') || false,
@@ -41,6 +42,9 @@ export { UserContext, UserContextProvider, UserContextConsumer };
 
 export interface UserState {
   loggedIn: string | boolean;
+  role: string;
+  subscription: number | string;
+  connected: boolean | string;
 }
 
 export interface UserContextProviderProps {

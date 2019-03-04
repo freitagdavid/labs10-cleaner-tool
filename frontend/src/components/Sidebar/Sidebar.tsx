@@ -26,7 +26,6 @@ interface LinkProps extends RouteComponentProps {
 
 const Sidebar = (props: LinkProps) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  // @ts-ignore
   const { state, dispatch } = useContext(UserContext);
   const { role } = state;
 

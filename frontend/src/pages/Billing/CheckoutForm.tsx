@@ -19,11 +19,10 @@ const headers: AxiosRequestConfig = {
 };
 
 const CheckoutForm = (props: ReactStripeElements.InjectedStripeProps) => {
-  // @ts-ignore
   const { setConfirm, setShownIndex } = useContext(BillingContext);
-  // @ts-ignore
   const { state, dispatch } = useContext(UserContext);
-  const { setSubscription } = state;
+  const setSubscription = (sub: number) =>
+    dispatch({ type: 'setSubscription', payload: sub });
 
   const [loading, setLoading] = useState(false);
   const [plan, setPlan] = useState<any>(0);

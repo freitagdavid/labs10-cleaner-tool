@@ -30,6 +30,8 @@ const Login: FunctionComponent<LoginProps> = ({ history, location }) => {
   const observer: MutableRefObject<any> = useRef<Unsubscribe>(null);
   // @ts-ignore
   const { state, dispatch } = useContext(UserContext);
+  const setRole = (role: string) =>
+    dispatch({ type: 'setRole', payload: role });
   const { ast, manager } = queryString.parse(location.search);
 
   // Configuration for the firebase OAuth component
@@ -94,8 +96,7 @@ const Login: FunctionComponent<LoginProps> = ({ history, location }) => {
         // login issues. The entire login system needs to be redone.
         if (data.first) {
           history.push('/postreg');
-          dispatch({ type: 'manager' });
-          // setRole(ast ? 'assistant' : 'manager');
+          setRole(ast ? 'assistant' : 'manager');
         } else {
           history.push('/properties');
         }
