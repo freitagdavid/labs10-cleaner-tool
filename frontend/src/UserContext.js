@@ -35,4 +35,4 @@ const UserContextProvider = (props) => {
 const UserContextConsumer = UserContext.Consumer;
 const state = UserContext;
 
-export { state, UserContextProvider, UserContextConsumer };
+export { UserContext, UserContextProvider, UserContextConsumer };
