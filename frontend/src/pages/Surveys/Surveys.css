@@ -24,6 +24,24 @@
 
 .survey-card {
     display: flex;
+    justify-content: space-between;
+    width: 80%;
     margin-top: 1.5rem;
-    border: 1px solid black;
+    border: 1.2px solid black;
+}
+
+.survey-left-content {
+    /* border: 1px solid blue; */
+}
+
+.survey-right-content {
+    /* border: 1px solid pink; */
+}
+
+.survey-response-button {
+    background-color: green;
+}
+
+.active-survey {
+    border: 1px solid green
 }

@@ -13,6 +13,7 @@ import {
      SurveyQuestions, 
      CreateSurveyButtonWrapper 
 } from './CreateSurvey.styling';
+import '../Surveys/Surveys.css';
 import { ActionEvent } from 'material-ui/svg-icons';
 
 const CreateSurvey = (props: any)=>{
@@ -28,7 +29,7 @@ const CreateSurvey = (props: any)=>{
     const [question3, setQuestion3] = useState('')
     const [isGuest, setIsGuest] = useState(true)
     const [fetch, setFetch] = useState(false)
-    const [activeSurvey, setActiveSurvey] = useState('')
+    const [activeSurvey, setActiveSurvey] = useState(0)
     const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
     async function handleSubmit(surveyName: string, isGuest: boolean, dropdown: string) {
@@ -126,7 +127,7 @@ const CreateSurvey = (props: any)=>{
                         <CreateSurveyInput type='text' placeholder='Survey Name' onChange={(event: any) => { setSurveyName(event.target.value) }}/>
                         <SurveyOptions>
                             <SurveyType>Survey Type:</SurveyType>
-                            <SurveyTypeButton type = 'button'>Guest Survey</SurveyTypeButton>
+                            <SurveyTypeButton className={activeSurvey ? 'active-survey' : ''} onClick={() => {setActiveSurvey(1)}} type = 'button'>Guest Survey</SurveyTypeButton>
                             <SurveyTypeButton type = 'button'>Assitant Survey</SurveyTypeButton>
                             <SurveyQuestions>How Many Questions:</SurveyQuestions>
                             <select defaultValue = '3' onChange={(event: any) => {

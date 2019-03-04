@@ -1,7 +1,7 @@
 import React from 'react';
 import Response from './Response';
 import { useFetch } from '../../helpers';
-import loadingIndicator from '../utils/loading.svg';
+//import loadingIndicator from '../utils/loading.svg';
 
 
 const Responses = (props:any) => {

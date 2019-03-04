@@ -4,6 +4,7 @@
  import loadingIndicator from '../utils/loading.svg';
 
  import Responses from './Responses';
+// import console = require('console');
  
 const SurveyResponse = () => {
 
@@ -11,7 +12,7 @@ const url =
 process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
 const [response, err, loading] = useFetch(`${url}/surveyresponses/1`, true, 'get');
-          
+console.log(response)
 if (loading === true) {
     return(
         <img src = {loadingIndicator} />

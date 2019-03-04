@@ -51,7 +51,7 @@ const Surveys = () => {
 
                 data.map((survey: Survey) => 
                     (
-                    <div className={`survey${activeClass(survey.isGuest)}`}>
+                    <div className={`survey${activeClass(survey.isGuest)}`} key={survey.id}>
                         <SurveyCard {...survey} key={survey.id}></SurveyCard> 
                     </div>
                 ))

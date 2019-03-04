@@ -17,7 +17,7 @@ const SurveyCard = (props : Survey) => {
                 <div className ='survey-left-content'>
                     <h3>{`${name}`}</h3>
                     <Link to='#'>
-                        <Button text="View Survey Responses" color='var(--color-accent)'></Button>
+                        <Button className='survey-response-button' text="View Survey Responses" color='var(--color-accent)'></Button>
                     </Link>
                 </div>
                 <div className ='survey-right-content'>
