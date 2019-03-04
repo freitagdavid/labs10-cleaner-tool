@@ -6,10 +6,6 @@ const SurveyQuestion = (props: any) => {
     return (
         <CreateSurveyQuestionWrapper>
             <CreateSurveyQuestionLables>Question {props.questionNumber}</CreateSurveyQuestionLables>
-            {/* <CreateSurveyQuestionInput type = 'text' placeholder = 'Add question text here' onChange = {handleQuestion}/> */}
-        <div></div>
-
-            <CreateSurveyQuestionLables>Question {props.questionNumber}</CreateSurveyQuestionLables>
             <CreateSurveyQuestionInput type = 'text' placeholder = 'Add question text here' onChange = {(ev:any)=>{props.setQuestion(ev.target.value)}}/>
             <div>
                 <button type='button' onClick={() => props.setQuestionType(1)}>Yes/No</button>
