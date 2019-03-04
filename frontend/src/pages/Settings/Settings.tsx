@@ -27,6 +27,7 @@ const stripeOauthUrl = `https://connect.stripe.com/oauth/authorize?response_type
 ${clientId}&scope=read_write`;
 
 const Settings: React.SFC<RouteComponentProps> = (props) => {
+  // @ts-ignore
   const { state, dispatch } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [fetch, setFetch] = useState(false);
@@ -58,7 +59,8 @@ const Settings: React.SFC<RouteComponentProps> = (props) => {
         .post(`${url}/connect`, { authorizationCode }, headers)
         .then((res) => {
           localStorage.setItem('connteced', 'true');
-          userC.setConnect(true);
+          dispatch({ type: 'connected', payload: true });
+          // userC.setConnect(true);
           props.history.replace('/settings');
         })
         .catch((e) => e);
@@ -126,7 +128,7 @@ const Settings: React.SFC<RouteComponentProps> = (props) => {
                       <span>Role: </span>
                       <div className='line-info'>{user.role}</div>
                     </div>
-                    {userC.role === 'manager' ? (
+                    {state.role === 'manager' ? (
                       <>
                         <div className='line-item'>
                           <span>Subscription: </span>
@@ -135,7 +137,7 @@ const Settings: React.SFC<RouteComponentProps> = (props) => {
                         <div className='line-item'>
                           <span>Stripe: </span>
                           <div>
-                            {userC.connected ? (
+                            {state.connected ? (
                               'Connected!'
                             ) : (
                               <a href={stripeOauthUrl}>

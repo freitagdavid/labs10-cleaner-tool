@@ -25,13 +25,14 @@ import { AxiosRequestConfig } from 'axios';
 import { House } from './types';
 // Utils
 import { useFetch } from '../../helpers/';
-import { state } from '../../UserContext';
+import { UserContext } from '../../UserContext';
 // Assets
 import loadingIndicator from '../utils/loading.svg';
 import defaultHouse from '../../assets/house_alt.jpg';
 
 const Properties = () => {
-  const { state, dispatch } = useContext(state);
+  // @ts-ignore
+  const { state, dispatch } = useContext(UserContext);
   const url =
     process.env.REACT_APP_backendURL ||
     'https://labs10-cleaner-app-2.herokuapp.com';

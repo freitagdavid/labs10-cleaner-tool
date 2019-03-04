@@ -252,7 +252,6 @@ const NewGuest = (props: RouteComponentProps) => {
         result = await axios.post(`${url}/guests/`, userData, headers);
       }
       const userId = result.data[0];
-      console.log(result.data);
       const stayData = {
         guest_id: userId,
         house_id: houseId,

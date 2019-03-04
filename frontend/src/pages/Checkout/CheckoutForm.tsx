@@ -14,6 +14,7 @@ const url =
 
 const CheckoutForm = (props: any) => {
   const { sum, stay_id } = useContext(PaymentContext);
+  // @ts-ignore
   const { state, dispatch } = useContext(UserContext);
   const { subscription } = state;
   const [loading, setLoading] = useState(false);

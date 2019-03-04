@@ -31,6 +31,7 @@ import { Link } from 'react-router-dom';
 
 // TODO: fix types
 const PropertyDetails = (props: any) => {
+  // @ts-ignore
   const { state, dispatch } = useContext(UserContext);
   const url =
     process.env.REACT_APP_backendURL ||
