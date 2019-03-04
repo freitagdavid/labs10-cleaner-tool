@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from 'react';
+import { ReactNodeLike } from 'prop-types';
 
 const UserContext = createContext({});
 
@@ -9,7 +10,7 @@ const initialState = {
   connected: localStorage.getItem('connected') || false,
 };
 
-const reducer = (state, action) => {
+const reducer = (state: UserState, action: UserReducerAction) => {
   switch (action.type) {
     case 'setLogin':
       return { ...state, loggedIn: !state.loggedIn };
@@ -23,16 +24,30 @@ const reducer = (state, action) => {
       return state;
   }
 };
-const UserContextProvider = (props) => {
+
+function UserContextProvider(props: UserContextProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const user = { state, dispatch };
 
   return (
-    <UserContext.Provider user={user}>{props.children}</UserContext.Provider>
+    <UserContext.Provider value={user}>{props.children}</UserContext.Provider>
   );
-};
+}
 
 const UserContextConsumer = UserContext.Consumer;
-const state = UserContext;
+// const state = UserContext;
 
 export { UserContext, UserContextProvider, UserContextConsumer };
+
+export interface UserState {
+  loggedIn: string | boolean;
+}
+
+export interface UserContextProviderProps {
+  children: ReactNodeLike;
+}
+
+export interface UserReducerAction {
+  type: string;
+  payload: any;
+}

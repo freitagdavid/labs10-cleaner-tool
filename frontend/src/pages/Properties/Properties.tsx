@@ -38,7 +38,7 @@ const Properties = () => {
     'https://labs10-cleaner-app-2.herokuapp.com';
   /* Axios calls to fetch / update properties */
   const [houses, error, loading] = useFetch(`${url}/houses`);
-  const [token, role, subscription] = state;
+  const { token, role, subscription } = state;
   // Snackbar state
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 

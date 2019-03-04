@@ -26,7 +26,7 @@ import {
 
 const Landing = (props: RouteComponentProps) => {
   // @ts-ignore
-  const [state, dispatch] = useContext(UserContext);
+  const { state, dispatch } = useContext(UserContext);
   const { loggedIn } = state;
   return (
     <Container>
