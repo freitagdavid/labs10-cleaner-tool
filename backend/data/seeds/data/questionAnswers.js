@@ -6,6 +6,7 @@ module.exports = [
     answer_type: 3,
     created_at: '02/25/19',
     name: 'Lisa',
+    house_name: "Log Cabin",
     photo: 'https://randomuser.me/api/portraits/women/8.jpg'
   },
   {
@@ -15,6 +16,7 @@ module.exports = [
     answer_type: 3,
     created_at: '03/05/19',
     name: 'Bill',
+    house_name: "Beach House",
     photo: null
   },
   {
@@ -24,6 +26,7 @@ module.exports = [
     answer_type: 1,
     created_at: '02/25/19',
     name: 'Lisa',
+    house_name: "Log Cabin",
     photo: 'https://randomuser.me/api/portraits/women/8.jpg'
   },
   {
@@ -33,6 +36,7 @@ module.exports = [
     answer_type: 1,
     created_at: '03/05/19',
     name: 'Bill',
+    house_name: "Beach House",
     photo: null
 
   },
@@ -43,6 +47,7 @@ module.exports = [
     answer_type: 2,
     created_at: '02/25/19',
     name: 'Lisa',
+    house_name: "Log Cabin",
     photo: 'https://randomuser.me/api/portraits/women/8.jpg'
   },
 ];

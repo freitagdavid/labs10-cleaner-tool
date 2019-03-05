@@ -83,6 +83,7 @@ getSurveyResponse = (id) => {
       'surveys.isGuest',
       'questionAnswers.name',
       'questionAnswers.photo',
+      'questionAnswers.house_name',
       'questions.question',
       'questionAnswers.answer',
       'questionAnswers.created_at'

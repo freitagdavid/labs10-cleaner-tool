@@ -18,6 +18,7 @@ exports.up = function(knex, Promise) {
       .onDelete('CASCADE');
     table.string('name');
     table.string('photo');
+    table.integer('house_name');
     table
     .timestamp('created_at')
     .defaultTo(knex.fn.now());
