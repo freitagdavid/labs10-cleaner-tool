@@ -27,7 +27,9 @@ const GuestDetail = (props: RouteComponentProps) => {
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
   const [fetch, setFetch] = useState(false);
-
+  // modal state and functions
+  const [show, setShow] = useState(false);
+  
   const [stay, error, loading] = useFetch(`${url}/stays/${id}`, fetch);
 
   const guideUpload = FileUploadHOF(
@@ -48,6 +50,13 @@ const GuestDetail = (props: RouteComponentProps) => {
 
   const goBack = () => props.history.push('/guests');
 
+  const modal = () => {
+    if(show===false){
+      setShow(true);
+    }else{ setShow(false);}
+  }
+  
+
   return (
     <>
       {stay ? (
@@ -56,6 +65,7 @@ const GuestDetail = (props: RouteComponentProps) => {
           Uppy={guideUpload}
           goBack={goBack}
           errors={error}
+          modal={modal}
         />
       ) : (
         <img
@@ -88,6 +98,7 @@ export const GuestDetailView = (props: GuestProps) => {
     errors,
     Uppy,
     goBack,
+    modal,
   } = props;
 
   const stayDetails = {
@@ -135,9 +146,9 @@ export const GuestDetailView = (props: GuestProps) => {
           </Link>
           <Button
             className='back'
-            text='Send Survey'
+            text= 'Send Survey'
             color='var(--color-button-background)'
-            //onClick=
+            onClick={modal}
           />
           <Button
             className='back'
