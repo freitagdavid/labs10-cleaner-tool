@@ -68,8 +68,6 @@ server.get('/surveys/:id', async (req, res) => {
 // Authentication Middleware for *all* routes after this line
 
 
-=======
-
 
 server.get('/data', async (req, res) => {
   try {
