@@ -4,21 +4,13 @@
  import loadingIndicator from '../utils/loading.svg';
 
  import Responses from './Responses';
-<<<<<<< HEAD
-// import console = require('console');
-=======
  import './SurveyResponse.css';
->>>>>>> a98c8ac4eca372b5b2ff5930c146a7ede1c053c0
  
 const SurveyResponse = (props:any) => {
 
 const url =
 process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
-<<<<<<< HEAD
-const [response, err, loading] = useFetch(`${url}/surveyresponses/1`, true, 'get');
-console.log(response)
-=======
 const [response, err, loading] = useFetch(`${url}/surveyresponses/${props.match.params.id}`, true, 'get');
 
 let surveyName = () => {
@@ -29,7 +21,6 @@ let surveyName = () => {
         }
     }
           
->>>>>>> a98c8ac4eca372b5b2ff5930c146a7ede1c053c0
 if (loading === true) {
     return(
         <img src = {loadingIndicator} />

@@ -1,12 +1,8 @@
 import React from 'react';
 import Response from './Response';
 import { useFetch } from '../../helpers';
-<<<<<<< HEAD
-//import loadingIndicator from '../utils/loading.svg';
-=======
 import loadingIndicator from '../utils/loading.svg';
 import './SurveyResponse.css';
->>>>>>> a98c8ac4eca372b5b2ff5930c146a7ede1c053c0
 
 
 const Responses = (props:any) => {
