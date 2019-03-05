@@ -144,9 +144,7 @@ server.get('/surveys', verifyToken, async (req, res) => {
 server.post('/questionanswers', verifyToken, async (req, res) => {
   const body = req.body
   const token = req.token
-  // @ts-ignore
   const name = token.full_name
-  // @ts-ignore
   const photo = token.photoUrl
     try {
       const data = await db('questionAnswers').insert({...body, name: name, photo: photo})
