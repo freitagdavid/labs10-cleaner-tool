@@ -26,16 +26,10 @@ import {
 import { Sidebar } from './components/index';
 import './App.css';
 import Billing from './pages/Billing/Billing';
-import { UserContextProvider } from './UserContext';
-// const token = localStorage.getitem('token');
-// const subscription = localStorage.getItem('subscription');
-// const savedRole = localStorage.getItem('role');
-// const connected = localStorage.getItem('connected');
 
 const App = () => {
   return (
     <div className='App'>
-      <UserContextProvider>
         <Sidebar />
         <Switch>
           <Route exact path='/' component={LandingPage} />
@@ -65,7 +59,6 @@ const App = () => {
           <Route exact path='/createsurvey' component={CreateSurvey} />
           <Route exact path='/linklogin/:id' component={LinkLogin} />
         </Switch>
-      </UserContextProvider>
     </div>
   );
 };
