@@ -35,14 +35,14 @@ const Surveys = () => {
             <Button
           className={`button-filter guest ${activeClass(1)}`}
           text='Guest'
-          color='var(--color-text-accent)'
+          color='var(--color-button-background-alt)'
           onClick={() => setActive(1)}
           datatestid='button-guest'
         />
         <Button
           className={`button-filter assistant ${activeClass(0)}`}
           text='Assistant'
-          color='var(--color-text-accent)'
+          color='var(--color-button-background-alt)'
           onClick={() => setActive(0)}
           datatestid='button-assistant'
         />
