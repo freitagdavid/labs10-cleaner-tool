@@ -31,7 +31,15 @@ server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
 // Survey List in Balsamiq
-
+server.get('/surveys/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    const data = await db('surveys').where({ user_id: id });
+    res.json(data);
+  } catch (e) {
+    res.json(e);
+  }
+});
   server.get('/surveysquestions/:id', async(req,res)=>{
     try{
       const { id } = req.params
@@ -55,6 +63,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
     res.json(data);
     }catch(e){res.json(e)}
   })
+
 // Authentication Middleware for *all* routes after this line
 
 
@@ -128,7 +137,19 @@ server.get('/surveys', verifyToken, async (req, res) => {
     res.json(e);
   }
 });
-
+server.post('/questionanswers', verifyToken, async (req, res) => {
+  const body = req.body
+  const token = req.token
+  // @ts-ignore
+  const name = token.full_name
+  // @ts-ignore
+  const photo = token.photoUrl
+    try {
+      const data = await db('questionAnswers').insert({...body, name: name, photo: photo})
+      const response = await db('questionAnswers').where({id: data[0]})
+      res.json(response)
+    } catch (e) { res.json(e) }
+})
 server.post('/surveys', verifyToken, async(req,res) =>{
   const token = req.token
   const body = req.body

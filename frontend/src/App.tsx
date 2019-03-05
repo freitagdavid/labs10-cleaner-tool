@@ -19,7 +19,9 @@ import {
   SurveyView,
   SurveyAnswers,
   GuestDashboard,
+  GuestSurveys,
   SurveyResponse,
+  FillSurvey,
   CreateSurvey
 } from './pages/index';
 import { Sidebar } from './components/index';
@@ -101,7 +103,8 @@ const App = () => {
           <Route exact path='/guestdashboard' component={GuestDashboard} />
           <Route exact path='/surveys/:id/responses' component={SurveyResponse} />
           <Route exact path='/createsurvey' component={CreateSurvey} />
-
+          <Route exact path = '/guestdashboard/surveys' component = {GuestSurveys} />
+          <Route exact path='/guestdashboard/surveys/:id/:surveyId' component={FillSurvey} />
         </Switch>
       </UserContext.Provider>
     </div>
