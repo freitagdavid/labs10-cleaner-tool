@@ -31,6 +31,7 @@ server.use(express.static(path.resolve(path.join(__dirname, '../public'))));
 server.get('/', (__, res) => res.sendFile('index.html'));
 
 // Survey List in Balsamiq
+
 server.get('/surveys/:id', async (req, res) => {
   const id = req.params.id
   try {
@@ -67,12 +68,13 @@ server.get('/surveys/:id', async (req, res) => {
 // Authentication Middleware for *all* routes after this line
 
 
+=======
+
 
 server.get('/data', async (req, res) => {
   try {
-    const users = await db('user');
-    console.log(users);
-    res.json(users);
+    const usersData = await db('user');
+    res.json(usersData);
   } catch (e) {
     res.json(e);
   }
@@ -85,7 +87,7 @@ server.get('/surveyresponses/:id', async (req, res) => {
     const survey = await getSurveyResponse(id);
     res.json({ survey });
   } catch (e) {
-    res.json(e), console.log(e);
+    res.json(e);
   }
 });
 
@@ -111,9 +113,7 @@ server.get('/questionanswers/:id', async (req, res) => {
 });
 
 /* for Guest dashboard Info*/
-server
-  .route('/guestStay/:id')
-  .get(stays.getGuest)
+server.route('/guestStay/:id').get(stays.getGuest);
 
 server
   .route('/users')
@@ -129,14 +129,15 @@ server.use(verifyToken);
 //   .post(users.post)
 //   .put(verifyToken, users.putByExtId);
 server.get('/surveys', verifyToken, async (req, res) => {
-  const id = req.token.id
+  const id = req.token.id;
   try {
-    const data = await db('surveys').where({user_id: id});
+    const data = await db('surveys').where({ user_id: id });
     res.json(data);
   } catch (e) {
     res.json(e);
   }
 });
+
 server.post('/questionanswers', verifyToken, async (req, res) => {
   const body = req.body
   const token = req.token
@@ -163,17 +164,17 @@ server.post('/surveys', verifyToken, async(req,res) =>{
     res.status(201).json({...survey[0], message: 'successfully created survey'})
   } catch(e){
     res.json(e)
-  }
-})
+}
+});
 server.post('/questions', verifyToken, async (req, res) => {
-  const body = req.body
-  const createQuestion = await db('questions').insert({...body })
+  const body = req.body;
+  const createQuestion = await db('questions').insert({ ...body });
   try {
-    res.status(201).json(createQuestion)
+    res.status(201).json(createQuestion);
   } catch (e) {
-    res.json(e)
+    res.json(e);
   }
-})
+});
 server
   .route('/users/:id')
   .get(users.get)
@@ -237,9 +238,6 @@ server
 server.route('/itemComplete').post(items.itemComplete);
 
 server.route('/email').post(verifyToken, email.send);
-
-// sends guest an email with link to dashboard
-server.route('/guestemail').post(verifyToken, email.sendLink)
 
 server
   .route('/stays')

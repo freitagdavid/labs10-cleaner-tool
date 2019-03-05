@@ -22,6 +22,7 @@ import GuestSurveys from './GuestDashboard/GuestSurveys/GuestSurveys'
 import SurveyResponse from './SurveyResponse/SurveyResponse';
 import CreateSurvey from './CreateSurvey/CreateSurvey';
 import FillSurvey from './GuestDashboard/GuestSurveys/FillSurvey'
+import LinkLogin from './GuestDashboard/LinkLogin';
 export {
   Properties,
   PropertiesDetail,
@@ -46,5 +47,6 @@ export {
   SurveyResponse,
   GuestSurveys,
   FillSurvey,
-  CreateSurvey
+  CreateSurvey,
+  LinkLogin,
 };

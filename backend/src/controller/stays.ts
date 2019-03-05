@@ -7,7 +7,7 @@ import {
   postStayData,
   putStayData,
 } from '../models/stays';
-import { findListsStay } from '../models/lists'
+import { findListsStay } from '../models/lists';
 import { getRoleId } from '../models/users';
 import { findAstMan } from '../models/assistants';
 // Type Definitions
@@ -23,8 +23,7 @@ type Requests = Request | RequestMock;
 type Responses = Response | ResponseMock;
 type Nexts = NextFunction | NextFunctionMock;
 
-
-//For getting guest dashboard info
+// For getting guest dashboard info
 export async function getGuest(
   req: Requests,
   res: Responses,
@@ -39,10 +38,10 @@ export async function getGuest(
       e.statusCode = 404;
       throw e;
     }
-    const house_id = summary.house_id
-    const stay_id = summary.stay_id
-    const checklist: any = await findListsStay(house_id, stay_id )
-    summary.checklist = checklist
+    const house_id = summary.house_id;
+    const stay_id = summary.stay_id;
+    const checklist: any = await findListsStay(house_id, stay_id);
+    summary.checklist = checklist;
     res.status(200).json(summary);
   } catch (e) {
     e.statusCode = e.statusCode || 400;

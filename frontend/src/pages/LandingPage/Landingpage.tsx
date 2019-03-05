@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../../App';
+import { UserContext } from '../../UserContext';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Button, Container } from '../../components/index';
@@ -25,7 +25,9 @@ import {
 } from './LandingPage.styling';
 
 const Landing = (props: RouteComponentProps) => {
-  const { loggedIn } = useContext(UserContext);
+  // @ts-ignore
+  const { state, dispatch } = useContext(UserContext);
+  const { loggedIn } = state;
   return (
     <Container>
       {/* <DescHeader>A POS that helps you keep things clean</DescHeader> */}

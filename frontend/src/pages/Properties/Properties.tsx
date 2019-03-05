@@ -25,17 +25,20 @@ import { AxiosRequestConfig } from 'axios';
 import { House } from './types';
 // Utils
 import { useFetch } from '../../helpers/';
-import { UserContext } from '../../App';
+import { UserContext } from '../../UserContext';
 // Assets
 import loadingIndicator from '../utils/loading.svg';
 import defaultHouse from '../../assets/house_alt.jpg';
 
 const Properties = () => {
+  // @ts-ignore
+  const { state, dispatch } = useContext(UserContext);
   const url =
-    process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+    process.env.REACT_APP_backendURL ||
+    'https://labs10-cleaner-app-2.herokuapp.com';
   /* Axios calls to fetch / update properties */
   const [houses, error, loading] = useFetch(`${url}/houses`);
-  const { subscription, role } = useContext(UserContext);
+  const { token, role, subscription } = state;
   // Snackbar state
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
@@ -51,7 +54,6 @@ const Properties = () => {
     event: React.FormEvent<HTMLSelectElement>,
     id: number | undefined,
   ) {
-    const token = localStorage.getItem('token');
     const headers: AxiosRequestConfig = {
       headers: { Authorization: token },
     };
