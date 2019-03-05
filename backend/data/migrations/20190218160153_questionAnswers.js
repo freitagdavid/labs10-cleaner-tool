@@ -18,6 +18,9 @@ exports.up = function(knex, Promise) {
       .onDelete('CASCADE');
     table.string('name');
     table.string('photo');
+    table
+    .timestamp('created_at')
+    .defaultTo(knex.fn.now());
   });
 };
 

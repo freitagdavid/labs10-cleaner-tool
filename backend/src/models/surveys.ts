@@ -80,9 +80,12 @@ getSurveyResponse = (id) => {
     .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
     .select(
       'surveys.name',
-      'questions.question',
       'surveys.isGuest',
+      'questionAnswers.name',
+      'questionAnswers.photo',
+      'questions.question',
       'questionAnswers.answer',
+      'questionAnswers.created_at'
     )
     .where({ survey_id: id, question_id: id });
 };
