@@ -135,6 +135,12 @@ export const GuestDetailView = (props: GuestProps) => {
           </Link>
           <Button
             className='back'
+            text='Send Survey'
+            color='var(--color-button-background)'
+            //onClick=
+          />
+          <Button
+            className='back'
             text='Go Back ↩'
             color='var(--color-button-background)'
             datatestid='button-back'
