@@ -74,7 +74,9 @@ server.get('/surveyresponses/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const survey = await getSurveyResponse(id);
-    res.json({ survey });
+    const responce = await db('questionAnswers').count({'response': 'answer'}).where({question_id: id})
+    console.log(responce)
+    res.json({ survey, responce });
   } catch (e) {
     res.json(e), console.log(e);
   }
@@ -119,6 +121,7 @@ server.use(verifyToken);
 //   .get(verifyToken, users.get)
 //   .post(users.post)
 //   .put(verifyToken, users.putByExtId);
+
 server.get('/surveys', verifyToken, async (req, res) => {
   const id = req.token.id
   try {

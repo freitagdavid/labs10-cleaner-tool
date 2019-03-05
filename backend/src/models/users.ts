@@ -44,7 +44,6 @@ export async function makeUser(user: User) {
     // Otherwise, proceed as normal
     const userIds = await query;
     const userId = userIds[0];
-    console.log(userId);
     const roleId = await db(role)
       .insert({ user_id: userId })
       .returning('id');
