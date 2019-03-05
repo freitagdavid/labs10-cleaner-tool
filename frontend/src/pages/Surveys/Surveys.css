@@ -3,8 +3,6 @@
 }
 
 
-<<<<<<< HEAD
-=======
 .survey-card {
     display: flex;
     margin-top: 1.5rem;
@@ -23,4 +21,3 @@
     color: var(--color-button-text);
     background-color: var(--color-button-background);
   }
->>>>>>> 64264eae690d272e879302202c186a5ebb8a62ce

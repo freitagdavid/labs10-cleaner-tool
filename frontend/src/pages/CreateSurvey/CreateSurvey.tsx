@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import SurveyQuestion from './SurveyQuestion'
 import axios, { AxiosRequestConfig } from 'axios';
+import { Button,  } from '../../components/index';
 import { 
      CreateSurveysWrapper,
      CreateSurveyOptions,
      CreateSurveyHeader, 
-     CreateSurveyLables, 
+    //  CreateSurveyLables, 
      CreateSurveyInput, 
      SurveyOptions, 
      SurveyType, 
@@ -123,13 +124,26 @@ const CreateSurvey = (props: any)=>{
                 <form>
                     <CreateSurveyHeader>Create a Survey</CreateSurveyHeader>
                     <CreateSurveyOptions>
-                        <CreateSurveyLables>Survey Name</CreateSurveyLables>
+                        <h2>Survey Name</h2>
                         <CreateSurveyInput type='text' placeholder='Survey Name' onChange={(event: any) => { setSurveyName(event.target.value) }}/>
                         <SurveyOptions>
-                            <SurveyType>Survey Type:</SurveyType>
+                            <h3>Survey Type:</h3>
+                            {/* <Button
+                                className={`button-filter guest`}
+                                text='Guest Survey'
+                                color='var(--color-button-background-alt)'
+                                onClick={() => {setActiveSurvey(1)}}
+                                datatestid='button-guest'
+                                />
+                                <Button
+                                className={`button-filter assistant`}
+                                text='Assistant Survey'
+                                color='var(--color-button-background-alt)'
+                                datatestid='button-assistant'
+                                /> */}
                             <SurveyTypeButton className={activeSurvey ? 'active-survey' : ''} onClick={() => {setActiveSurvey(1)}} type = 'button'>Guest Survey</SurveyTypeButton>
                             <SurveyTypeButton type = 'button'>Assitant Survey</SurveyTypeButton>
-                            <SurveyQuestions>How Many Questions:</SurveyQuestions>
+                            <h3>How Many Questions:</h3>
                             <select defaultValue = '3' onChange={(event: any) => {
                                 event.preventDefault()
                                 setDropdown(event.target.value)
