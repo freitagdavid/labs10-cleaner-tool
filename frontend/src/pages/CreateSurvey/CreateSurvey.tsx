@@ -12,7 +12,8 @@ import {
      SurveyType, 
      SurveyTypeButton, 
      SurveyQuestions, 
-     CreateSurveyButtonWrapper 
+     CreateSurveyButtonWrapper,
+     SurveyStyledButton 
 } from './CreateSurvey.styling';
 import '../Surveys/Surveys.css';
 import { ActionEvent } from 'material-ui/svg-icons';
@@ -158,8 +159,8 @@ const CreateSurvey = (props: any)=>{
                        {questionLength(dropdown, survey)}
                     </div>
                     <CreateSurveyButtonWrapper>
-                        <button type = 'button' onClick={() => handleSubmit(surveyName, isGuest, dropdown)}>Save</button>
-                        <button>Cancel</button>
+                        <SurveyStyledButton type = 'button' onClick={() => handleSubmit(surveyName, isGuest, dropdown)}>Save</SurveyStyledButton>
+                        <SurveyStyledButton>Cancel</SurveyStyledButton>
                     </CreateSurveyButtonWrapper>
                 </form>
             </CreateSurveysWrapper>   
