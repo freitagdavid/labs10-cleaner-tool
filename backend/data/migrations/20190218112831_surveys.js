@@ -14,6 +14,9 @@ exports.up = function(knex, Promise) {
         .foreign('user_id')
         .references('user.id')
         .onDelete('CASCADE');
+    table
+        .timestamp('created_at')
+        .defaultTo(knex.fn.now());
   })
 };
 

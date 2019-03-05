@@ -70,7 +70,11 @@ server.get('/data', async (req, res) => {
 });
 
 // Survey Responses Route in Balsamiq
-server.get('/surveyresponses/:id', async (req, res) => {
+server.get('/surveyresponses/:id', verifyToken, async (req, res) => {
+  const name = req.token.full_name;
+  const photo = req.token.photoUrl;
+  console.log(name);
+  console.log(req.token);
   try {
     const { id } = req.params;
     const survey = await getSurveyResponse(id);
