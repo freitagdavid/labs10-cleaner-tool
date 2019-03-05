@@ -10,6 +10,21 @@ const initialState = {
   subscription: localStorage.getItem('subscription') || 0,
   connected: localStorage.getItem('connected') || false,
 };
+export interface UserState {
+  loggedIn: string | boolean;
+  role: string;
+  subscription: number | string;
+  connected: boolean | string;
+}
+
+export interface UserContextProviderProps {
+  children: ReactNodeLike;
+}
+
+export interface UserReducerAction {
+  type: string;
+  payload: any;
+}
 
 const reducer = (state: UserState, action: UserReducerAction) => {
   switch (action.type) {
@@ -39,19 +54,3 @@ const UserContextConsumer = UserContext.Consumer;
 // const state = UserContext;
 
 export { UserContext, UserContextProvider, UserContextConsumer };
-
-export interface UserState {
-  loggedIn: string | boolean;
-  role: string;
-  subscription: number | string;
-  connected: boolean | string;
-}
-
-export interface UserContextProviderProps {
-  children: ReactNodeLike;
-}
-
-export interface UserReducerAction {
-  type: string;
-  payload: any;
-}

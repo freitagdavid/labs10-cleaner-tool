@@ -50,7 +50,9 @@ const CheckoutForm = (props: ReactStripeElements.InjectedStripeProps) => {
       setConfirm({ confirm: response.data });
       setShownIndex(1);
       setSubscription(sub);
-    } catch (e) {}
+    } catch (e) {
+      throw e;
+    }
     /* tslint:disable-next-line */
   };
 

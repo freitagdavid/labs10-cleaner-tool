@@ -35,7 +35,6 @@ server.get('/', (__, res) => res.sendFile('index.html'));
 server.get('/data', async (req, res) => {
   try {
     const usersData = await db('user');
-    console.log(usersData);
     res.json(usersData);
   } catch (e) {
     res.json(e);
@@ -49,7 +48,7 @@ server.get('/surveyresponses/:id', async (req, res) => {
     const survey = await getSurveyResponse(id);
     res.json({ survey });
   } catch (e) {
-    res.json(e), console.log(e);
+    res.json(e);
   }
 });
 
@@ -75,9 +74,7 @@ server.get('/questionanswers/:id', async (req, res) => {
 });
 
 /* for Guest dashboard Info*/
-server
-  .route('/guestStay/:id')
-  .get(stays.getGuest)
+server.route('/guestStay/:id').get(stays.getGuest);
 
 server
   .route('/users')
@@ -95,7 +92,7 @@ server.use(verifyToken);
 server.get('/surveys', verifyToken, async (req, res) => {
   const id = req.token.id;
   try {
-    const data = await db('surveys').where({user_id: id});
+    const data = await db('surveys').where({ user_id: id });
     res.json(data);
   } catch (e) {
     res.json(e);
@@ -200,8 +197,6 @@ server
   .route('/stays/:id')
   .get(stays.get)
   .put(stays.put);
-  
-server.route('/stays/genlink/:id').post(stays.generateGuestLink);
 
 const options = {
   filePath: '../uploads',

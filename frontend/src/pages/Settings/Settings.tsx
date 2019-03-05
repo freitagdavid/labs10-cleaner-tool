@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../../UserContext';
 import axios, { AxiosRequestConfig } from 'axios';
 import { FileUploadHOF } from '../../components/FileUpload';
 import { PostRegister } from '../../pages/';
 import { useFetch, axiosFetch } from '../../helpers';
-import { UserContext } from '../../UserContext';
 import { Container, Button } from '../../components/';
 import {
   Card,
@@ -26,8 +26,7 @@ const clientId = process.env.REACT_APP_clientid;
 const stripeOauthUrl = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=
 ${clientId}&scope=read_write`;
 
-const Settings: React.SFC<RouteComponentProps> = (props) => {
-  // @ts-ignore
+const Settings: React.SFC<RouteComponentProps> = (props: any) => {
   const { state, dispatch } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [fetch, setFetch] = useState(false);

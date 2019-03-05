@@ -275,9 +275,7 @@ const NewGuest = (props: RouteComponentProps) => {
       {
         console.log(userData.email);
         const actionCodeSettings = {
-          url: `http://${
-            process.env.REACT_APP_app_url
-          }/guestdashboard/${userId}`,
+          url: `http://${process.env.REACT_APP_app_url}/linklogin/${userId}`,
           handleCodeInApp: true,
         };
         console.log(actionCodeSettings);

@@ -25,9 +25,11 @@ interface LinkProps extends RouteComponentProps {
 }
 
 const Sidebar = (props: LinkProps) => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const { state, dispatch } = useContext(UserContext);
+  const [anchorEl, setAnchorEl] = useState(null);
   const { role } = state;
+  const setLogin = () => dispatch({ type: 'setLogin' });
+  // const { setLogin, role } = useContext(UserContext);
 
   const handleClick = (e: any) => {
     setAnchorEl(e.currentTarget);
@@ -47,7 +49,7 @@ const Sidebar = (props: LinkProps) => {
     localStorage.removeItem('id');
     localStorage.removeItem('role');
     localStorage.removeItem('firebaseui::rememberedAccounts');
-    dispatch({ type: 'setLogin' });
+    setLogin();
     // TODO: Use actual firebase signout function to sign out
     props.history.push('/');
   };

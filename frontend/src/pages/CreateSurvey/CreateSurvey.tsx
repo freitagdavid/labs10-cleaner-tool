@@ -48,7 +48,7 @@ const CreateSurvey = () => {
         Authorization: localStorage.getItem('token'),
       },
     };
-    const data = await axios.post(`${url}/surveys`, body, headers);
+    let data = await axios.post(`${url}/surveys`, body, headers);
     setId(data.data.id);
     setFetch(true);
     console.log(data);
@@ -61,8 +61,7 @@ const CreateSurvey = () => {
         type,
         survey_id: id,
       };
-      const data = await axios.post(`${url}/questions`, body, headers);
-      console.log(data);
+      data = await axios.post(`${url}/questions`, body, headers);
     }
     if (dropdown === '1') {
       handleQuestions(question1, questionType1, id);

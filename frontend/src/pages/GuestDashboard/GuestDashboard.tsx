@@ -1,11 +1,20 @@
-import React, { useEffect } from 'react';
+import React, {
+  useEffect,
+  useContext,
+  useRef,
+  MutableRefObject,
+  useState,
+} from 'react';
+import axios from 'axios';
 import GuestInfo from './GuestInfo';
 import useFetch from '../../helpers/useFetch';
 import GuestProgressBar from './GuestProgressBar';
 import MiscInfo from './MiscInfo';
 import styled from '@emotion/styled';
-import firebase from 'firebase';
+import firebase, { Unsubscribe, User } from 'firebase';
+import { UserContext } from '../../UserContext';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import app from '../../firebase.setup';
 const backendURL = process.env.REACT_APP_backendURL;
 
 const StyledGuestDashboard = styled.div`
@@ -19,98 +28,38 @@ const StyledGuestDashboard = styled.div`
 `;
 
 const GuestDashboard = (props: any) => {
-  // const setUpUrlAndHeaders = () => {
-  //   /*
-  //   Sets default URL, loads/checks token, and sets header
-  //   Returns url and header as an array in said order
-  //   */
-  //   // TODO: Refactor to take advantage of Context API handling user info
-  //   const url =
-  //     process.env.REACT_APP_backendURL ||
-  //     'https://labs10-cleaner-app-2.herokuapp.com';
-  //   const token = localStorage.getItem('token');
-  //   if (!token) {
-  //     throw new Error('Not authenticated');
-  //   }
-  //   const headers: AxiosRequestConfig = {
-  //     headers: {
-  //       Authorization: token,
-  //     },
-  //   };
-  //   return { url, headers };
-  // };
-
-  useEffect(() => {
-    if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-      let email: any;
-      email = localStorage.getItem('emailForSignIn');
-      if (!email) {
-        email = window.prompt(
-          'Please provide your email to see your dashboard',
-        );
-      }
-      firebase
-        .auth()
-        .signInWithEmailLink(email, window.location.href)
-        .then((result) => {
-          window.localStorage.removeItem('emailForSignIn');
-          console.log(result);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .then(() => {});
-    }
-  }, []);
-
-  const setUpUrlAndHeaders = () => {
-    /*
-    Sets default URL, loads/checks token, and sets header
-    Returns url and header as an array in said order
-    */
-    // TODO: Refactor to take advantage of Context API handling user info
-    const url =
-      process.env.REACT_APP_backendURL ||
-      'https://labs10-cleaner-app-2.herokuapp.com';
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('Not authenticated');
-    }
-    const headers: AxiosRequestConfig = {
-      headers: {
-        Authorization: token,
-      },
-    };
-    return { url, headers };
-  };
+  const { state, dispatch } = useContext(UserContext);
+  const setRole = (role: string) =>
+    dispatch({ type: 'setRole', payload: role });
 
   // @ts-ignore
   const [fetchData, fetchErr, fetchLoading] = useFetch(
-    `${backendURL}/stays/${props.match.params.id}`,
+    `${backendURL}/gueststay/${props.match.params.id}`,
     true,
     'get',
   );
   if (fetchErr) {
-    console.log(fetchErr);
+    throw fetchErr;
   }
   if (fetchLoading === true) {
-    console.log(props.match);
-    return <h1>Loading</h1>;
+    return (
+      <div>
+        <img src='../utils/Loading.svg' />
+      </div>
+    );
   } else {
-    console.log(fetchData);
-    // console.log(fetchData);
-    // const user = fetchData.results[0];
+    // const user = fetchData
     // console.log(user);
     return (
       <StyledGuestDashboard>
-        {/* <GuestInfo
-          name={`${user.name.first} ${user.name.last}`}
-          picture={user.picture.large}
+        <GuestInfo
+          name={`${fetchData.name}`}
+          picture={fetchData.photo_url}
           houseLink='http://example.com'
-          houseName='whatever'
-          checkIn='1/27'
-          checkOut='1/28'
-        /> */}
+          houseName={fetchData.house_name}
+          checkIn={fetchData.check_in}
+          checkOut={fetchData.check_out}
+        />
         <GuestProgressBar previousCheckout={true} currentProgress={50} />
         <MiscInfo />
       </StyledGuestDashboard>
