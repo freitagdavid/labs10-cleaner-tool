@@ -76,12 +76,12 @@ const CreateSurvey = () => {
       handleQuestions(question3, questionType3, id);
     }
   }
-  const questionLength = (num: string, survey: any) => {
-    for (let i = 0; i <= survey.length + 1; i++) {
-      survey.pop();
+  const questionLength = (num: string, surveyData: any) => {
+    for (let i = 0; i <= surveyData.length + 1; i++) {
+      surveyData.pop();
     }
     if (num === '1') {
-      survey.push(
+      surveyData.push(
         <SurveyQuestion
           key={1}
           questionNumber={1}
@@ -91,7 +91,7 @@ const CreateSurvey = () => {
       );
     }
     if (num === '2') {
-      survey.push(
+      surveyData.push(
         <SurveyQuestion
           key={1}
           questionNumber={1}
@@ -99,7 +99,7 @@ const CreateSurvey = () => {
           setQuestion={setQuestion1}
         />,
       );
-      survey.push(
+      surveyData.push(
         <SurveyQuestion
           key={2}
           questionNumber={2}
@@ -109,7 +109,7 @@ const CreateSurvey = () => {
       );
     }
     if (num === '3') {
-      survey.push(
+      surveyData.push(
         <SurveyQuestion
           key={1}
           questionNumber={1}
@@ -117,7 +117,7 @@ const CreateSurvey = () => {
           setQuestion={setQuestion1}
         />,
       );
-      survey.push(
+      surveyData.push(
         <SurveyQuestion
           key={2}
           questionNumber={2}
@@ -125,7 +125,7 @@ const CreateSurvey = () => {
           setQuestion={setQuestion2}
         />,
       );
-      survey.push(
+      surveyData.push(
         <SurveyQuestion
           key={3}
           questionNumber={3}

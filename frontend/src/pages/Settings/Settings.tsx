@@ -28,7 +28,6 @@ ${clientId}&scope=read_write`;
 
 const Settings: React.SFC<RouteComponentProps> = (props: any) => {
   const { state, dispatch } = useContext(UserContext);
-  console.log(state)
   const [show, setShow] = useState(false);
   const [fetch, setFetch] = useState(false);
   const [pic, setPic] = useState('');

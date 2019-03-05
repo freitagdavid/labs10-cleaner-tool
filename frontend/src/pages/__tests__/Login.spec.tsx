@@ -3,7 +3,7 @@ import { cleanup, wait } from 'react-testing-library';
 import { renderWithRouter } from '../../helpers/functions';
 import Login from '../Login';
 import 'jest';
-import {UserContextProvider} from '../../UserContext'
+import {UserContextProvider} from '../../UserContext';
 
 jest.mock('react-firebaseui/StyledFirebaseAuth', () => () => {
   return (

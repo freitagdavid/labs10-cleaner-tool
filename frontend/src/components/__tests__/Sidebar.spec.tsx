@@ -4,7 +4,7 @@ import { cleanup } from 'react-testing-library';
 import { renderWithRouter } from '../../helpers/functions';
 import 'jest';
 import 'jest-dom/extend-expect';
-import {UserContextProvider} from '../../UserContext'
+import {UserContextProvider} from '../../UserContext';
 
 afterEach(cleanup);
 

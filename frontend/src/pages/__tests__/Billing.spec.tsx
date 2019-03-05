@@ -4,7 +4,7 @@ import { StripeProvider } from 'react-stripe-elements';
 import 'jest';
 import 'jest-dom/extend-expect';
 import { cleanup, render } from 'react-testing-library';
-import {UserContextProvider} from '../../UserContext'
+import {UserContextProvider} from '../../UserContext';
 
 afterEach(cleanup);
 
@@ -16,7 +16,7 @@ describe('Stripe Button', () => {
         <StripeProvider stripe={null}>
           <MyStoreCheckout />
         </StripeProvider>,
-      </UserContextProvider>
+      </UserContextProvider>,
     );
     const button = container.querySelector('button');
     expect(button).toBeInTheDocument();
