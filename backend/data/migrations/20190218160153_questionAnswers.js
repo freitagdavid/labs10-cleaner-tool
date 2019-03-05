@@ -18,7 +18,7 @@ exports.up = function(knex, Promise) {
       .onDelete('CASCADE');
     table.string('name')
     table.string('photo')
-    table.integer('house_id')
+    table.integer('house_name')
   });
 };
 

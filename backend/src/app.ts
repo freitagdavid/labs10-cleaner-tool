@@ -145,8 +145,10 @@ server.post('/questionanswers', verifyToken, async (req, res) => {
     try {
       const stay = await db('stay').where({id: req.body.stay_id})
       const houseId = stay[0].house_id;
-      console.log(houseId)
-      const data = await db('questionAnswers').insert({...body, name: name, photo: photo, house_id: houseId})
+      const house = await db('house').where({id: houseId})
+      const houseName = house[0].name
+      console.log(house)
+      const data = await db('questionAnswers').insert({...body, name: name, photo: photo, house_name: houseName})
       
       const response = await db('questionAnswers').where({id: data[0]})
       res.json(response)
