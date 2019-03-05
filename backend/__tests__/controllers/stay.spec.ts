@@ -32,11 +32,13 @@ describe('Stay Route Handler Functions:', () => {
   test('GET all sends 200 upon success', async () => {
     jest
       .spyOn(stayModels, 'findAllStays')
+      // @ts-ignore
       .mockImplementation((extit: number, filter: string) =>
         Promise.resolve({ extit, filter }),
       );
     jest
       .spyOn(usersModels, 'getRoleId')
+      // @ts-ignore
       .mockImplementation((id: number) => Promise.resolve([1]));
     // TODO: modify test for req.token.ext_it once complete
     req.token = { ext_it: '2', id: 2, role: 'manager' };
@@ -50,11 +52,13 @@ describe('Stay Route Handler Functions:', () => {
   test('GET accepts filter query', async () => {
     jest
       .spyOn(stayModels, 'findAllStays')
+      // @ts-ignore
       .mockImplementation((extit: string, filter: string) =>
         Promise.resolve({ extit, filter }),
       );
     jest
       .spyOn(usersModels, 'getRoleId')
+      // @ts-ignore
       .mockImplementation((id: number) => Promise.resolve([1]));
     // TODO: modify test for req.token.ext_it once complete
     req.token = { ext_it: '2', id: 2, role: 'manager' };
@@ -70,6 +74,7 @@ describe('Stay Route Handler Functions:', () => {
   test.skip('GET all test functionality works', async () => {
     jest
       .spyOn(stayModels, 'findAllStays')
+      // @ts-ignore
       .mockImplementation((extit: string, filter: string) =>
         Promise.resolve({ extit, filter }),
       );
@@ -103,6 +108,7 @@ describe('Stay Route Handler Functions:', () => {
     // Arrange
     jest
       .spyOn(stayModels, 'findStaySummaryStandardized')
+      // @ts-ignore
       .mockImplementationOnce(() => Promise.resolve(true));
     req.params = { id: 1 };
     // Act
@@ -117,6 +123,7 @@ describe('Stay Route Handler Functions:', () => {
     // Arrange
     jest
       .spyOn(stayModels, 'findStaySummary')
+      // @ts-ignore
       .mockImplementationOnce(() => Promise.resolve(undefined));
     req.params = { id: 1 };
     // Act
@@ -131,6 +138,7 @@ describe('Stay Route Handler Functions:', () => {
     // Arrange
     jest
       .spyOn(stayModels, 'postStayData')
+      // @ts-ignore
       .mockImplementationOnce(() => Promise.resolve([1]));
     jest
       .spyOn(itemsModels, 'postItemsStay')
@@ -162,6 +170,7 @@ describe('Stay Route Handler Functions:', () => {
     // Arrange
     jest
       .spyOn(stayModels, 'putStayData')
+      // @ts-ignore
       .mockImplementationOnce(() => Promise.resolve(1));
     req.body = {
       guest_id: 1,
@@ -179,6 +188,7 @@ describe('Stay Route Handler Functions:', () => {
     // Arrange
     jest
       .spyOn(stayModels, 'deleteStayData')
+      // @ts-ignore
       .mockImplementationOnce(() => Promise.resolve(1));
     req.params = { id: 1 };
     // Act
