@@ -36,9 +36,11 @@ describe('/test email routes', () => {
   test('able send email using post', async () => {
     jest
       .spyOn(email, 'sgSend')
+      // @ts-ignore
       .mockImplementationOnce(() => Promise.resolve(undefined));
     jest
       .spyOn(user, 'getRoleId')
+      // @ts-ignore
       .mockImplementationOnce(() => Promise.resolve(5));
 
     await send(req, res, next);
@@ -56,6 +58,7 @@ describe('/test email routes', () => {
     };
     jest
       .spyOn(email, 'sgSend')
+      // @ts-ignore
       .mockImplementationOnce(() => Promise.resolve(undefined));
     const response = await supertest.post('/email/').send(sends);
 

@@ -20,6 +20,7 @@ import SurveyAnswers from './SurveyAnswers/SurveyAnswers';
 import GuestDashboard from './GuestDashboard/GuestDashboard';
 import SurveyResponse from './SurveyResponse/SurveyResponse';
 import CreateSurvey from './CreateSurvey/CreateSurvey';
+import LinkLogin from './GuestDashboard/LinkLogin';
 export {
   Properties,
   PropertiesDetail,
@@ -42,5 +43,6 @@ export {
   SurveyAnswers,
   GuestDashboard,
   SurveyResponse,
-  CreateSurvey
+  CreateSurvey,
+  LinkLogin,
 };
