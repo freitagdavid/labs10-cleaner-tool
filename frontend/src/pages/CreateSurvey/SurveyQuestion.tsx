@@ -19,13 +19,13 @@ const SurveyQuestion = (props: any) => {
         }}
       />
       <div>
-        <button type='button' onClick={() => props.setQuestionType(1)}>
+        <button className = {`${props.activeClass(1, props.questionType)}`} type='button' onClick={() => props.setQuestionType(1)}>
           Yes/No
         </button>
-        <button type='button' onClick={() => props.setQuestionType(2)}>
+        <button className = {`${props.activeClass(2, props.questionType)}`} type='button' onClick={() => props.setQuestionType(2)}>
           1-5 Rating
         </button>
-        <button type='button' onClick={() => props.setQuestionType(3)}>
+        <button className = {`${props.activeClass(3, props.questionType)}`}  type='button' onClick={() => props.setQuestionType(3)}>
           Free Text
         </button>
       </div>
