@@ -21,6 +21,26 @@ let surveyName = () => {
         return(`${response.survey[0].name} - Responses`);
         }
     }
+
+let guestPic = () => {
+    let sIndex = -1;
+    for(let i=0; i< response.survey.length; i++){
+        sIndex += 1;
+        console.log(sIndex);
+    if(response.survey[sIndex].photo === null){
+        response.survey[sIndex].photo = "https://nahealth.com/sites/default/files/styles/max_image_size/public/var/sites/nah/sites/default/files/media/profile-placeholder_0_0_0_0.png?itok=ywlRw7Li";
+        }else{
+            response.survey[sIndex].photo = response.survey[sIndex].photo;
+        }
+    } 
+}
+
+let questionNum = () => {
+    let qNum = 0;
+    for(let i=0; i< response.survey.length; i++){
+        qNum += 1;
+    }
+}
           
 if (loading === true) {
     return(
@@ -40,7 +60,7 @@ if (loading === true) {
                 </div>  
                 
                 {response.survey.map((survey: any) =>
-                <Responses key={survey.id} survey={response.survey} sr_name="Guest Name" sr_date='02-24-19' sr_img='images/profile_default.png' />
+                <Responses key={survey.id} survey={response.survey} sr_name={survey.guest_name} sr_date={survey.created_at} guestPic={guestPic()} sr_img={survey.photo} />
                 )}
                  {console.log(response.survey)}
             </div>
