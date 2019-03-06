@@ -81,7 +81,7 @@ getSurveyResponse = (id) => {
     .select(
       'surveys.name',
       'surveys.isGuest',
-      'questionAnswers.name',
+      'questionAnswers.guest_name',
       'questionAnswers.photo',
       'questionAnswers.house_name',
       'questions.question',

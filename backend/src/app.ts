@@ -140,7 +140,7 @@ server.get('/surveys', verifyToken, async (req, res) => {
 server.post('/questionanswers', verifyToken, async (req, res) => {
   const body = req.body
   const token = req.token
-  const name = token.full_name
+  const guest_name = token.full_name
   const photo = token.photoUrl
     try {
       const stay = await db('stay').where({id: req.body.stay_id})
@@ -148,7 +148,7 @@ server.post('/questionanswers', verifyToken, async (req, res) => {
       const house = await db('house').where({id: houseId})
       const houseName = house[0].name
       console.log(house)
-      const data = await db('questionAnswers').insert({...body, name: name, photo: photo, house_name: houseName})
+      const data = await db('questionAnswers').insert({...body, guest_name: guest_name, photo: photo, house_name: houseName})
       
       const response = await db('questionAnswers').where({id: data[0]})
       res.json(response)
