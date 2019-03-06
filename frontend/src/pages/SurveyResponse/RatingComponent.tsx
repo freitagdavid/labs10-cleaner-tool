@@ -1,4 +1,4 @@
-import Reacr from 'react';
+import React from 'react';
 
 const RatingComponent = () => {
     return(
