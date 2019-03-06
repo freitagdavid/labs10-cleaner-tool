@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../../UserContext';
 import axios, { AxiosRequestConfig } from 'axios';
 import { FileUploadHOF } from '../../components/FileUpload';
 import { PostRegister } from '../../pages/';
 import { useFetch, axiosFetch } from '../../helpers';
-import { UserContext } from '../../App';
 import { Container, Button } from '../../components/';
 import {
   Card,
@@ -19,14 +19,15 @@ import loadingIndicator from '../utils/loading.svg';
 import defaultUser from '../../assets/default-user.jpg';
 
 const url =
-  process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+  process.env.REACT_APP_backendURL ||
+  'https://labs10-cleaner-app-2.herokuapp.com';
 
 const clientId = process.env.REACT_APP_clientid;
 const stripeOauthUrl = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=
 ${clientId}&scope=read_write`;
 
-const Settings: React.SFC<RouteComponentProps> = (props) => {
-  const userC = useContext(UserContext);
+const Settings: React.SFC<RouteComponentProps> = (props: any) => {
+  const { state, dispatch } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [fetch, setFetch] = useState(false);
   const [pic, setPic] = useState('');
@@ -37,9 +38,9 @@ const Settings: React.SFC<RouteComponentProps> = (props) => {
     addressArray.splice(1, 0, '');
   }
   let subInfo = 'Not Subscribed';
-  if (userC.subscription === 1) {
+  if (state.subscription === 1) {
     subInfo = 'Basic';
-  } else if (userC.subscription === 2) {
+  } else if (state.subscription === 2) {
     subInfo = 'Professional';
   }
   useEffect(() => {
@@ -57,7 +58,8 @@ const Settings: React.SFC<RouteComponentProps> = (props) => {
         .post(`${url}/connect`, { authorizationCode }, headers)
         .then((res) => {
           localStorage.setItem('connteced', 'true');
-          userC.setConnect(true);
+          dispatch({ type: 'connected', payload: true });
+          // userC.setConnect(true);
           props.history.replace('/settings');
         })
         .catch((e) => e);
@@ -125,7 +127,7 @@ const Settings: React.SFC<RouteComponentProps> = (props) => {
                       <span>Role: </span>
                       <div className='line-info'>{user.role}</div>
                     </div>
-                    {userC.role === 'manager' ? (
+                    {state.role === 'manager' ? (
                       <>
                         <div className='line-item'>
                           <span>Subscription: </span>
@@ -134,7 +136,7 @@ const Settings: React.SFC<RouteComponentProps> = (props) => {
                         <div className='line-item'>
                           <span>Stripe: </span>
                           <div>
-                            {userC.connected ? (
+                            {state.connected ? (
                               'Connected!'
                             ) : (
                               <a href={stripeOauthUrl}>

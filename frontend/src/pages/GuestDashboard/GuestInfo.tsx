@@ -2,7 +2,7 @@ import React, { ComponentClass } from 'react';
 import styled from '@emotion/styled';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-interface guestInfoProps {
+interface GuestInfoProps {
   name: string;
   picture: string;
   houseLink: string;
@@ -11,13 +11,13 @@ interface guestInfoProps {
   checkOut: string;
 }
 
-const GuestInfo = (props: guestInfoProps) => {
+const GuestInfo = (props: GuestInfoProps) => {
   const { name, picture, houseLink, houseName, checkIn, checkOut } = props;
   return (
     <StyledGuestInfo>
       <img src={picture} alt={`Picture of ${name}`} />
       <h3>{name}</h3>
-      <a href={houseLink}>{`Staying: ${houseName}`}</a>
+      <div>{`Staying: ${houseName}`}</div>
       <div>
         <p>Check-in</p>
         <p>{checkIn}</p>

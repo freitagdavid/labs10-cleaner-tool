@@ -1,6 +1,6 @@
 import React, { FormEvent, useContext, useState } from 'react';
 import { injectStripe, CardElement } from 'react-stripe-elements';
-import { UserContext } from '../../App';
+import { UserContext } from '../../UserContext';
 import { Link } from 'react-router-dom';
 import { PaymentContext } from './Checkout';
 import { Button } from '../../components/index';
@@ -9,11 +9,14 @@ import { SVGContainer } from './Checkout.styles';
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
 const url =
-  process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+  process.env.REACT_APP_backendURL ||
+  'https://labs10-cleaner-app-2.herokuapp.com';
 
 const CheckoutForm = (props: any) => {
   const { sum, stay_id } = useContext(PaymentContext);
-  const { subscription } = useContext(UserContext);
+  // @ts-ignore
+  const { state, dispatch } = useContext(UserContext);
+  const { subscription } = state;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
   const [success, setSuccess] = useState({
@@ -29,7 +32,7 @@ const CheckoutForm = (props: any) => {
     // tokenize, since there's only one in this group.
     async function triggerPayment() {
       // return;
-
+      // TODO the authentication system needs to desperately be changed.
       const headers: AxiosRequestConfig = {
         headers: { Authorization: localStorage.getItem('token') },
       };
