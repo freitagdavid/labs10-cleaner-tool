@@ -53,6 +53,8 @@ jest.mock('axios', () => {
 
 localStorage.setItem('token', 'testToken!');
 
+// TODO: Figure out why this is broken.
+
 describe('Checkout Page UI', () => {
   test.skip('should be rendering the Container component', async () => {
     const { getByTestId } = render(
