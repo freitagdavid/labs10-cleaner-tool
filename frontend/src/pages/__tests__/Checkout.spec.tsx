@@ -1,9 +1,15 @@
 import React from 'react';
 import { Checkout } from '../index';
-import { cleanup, waitForElement, render, wait } from 'react-testing-library';
+import {
+  cleanup,
+  waitForElement,
+  render,
+  wait,
+  act,
+} from 'react-testing-library';
 import 'jest';
 import 'jest-dom/extend-expect';
-import {UserContextProvider} from '../../UserContext';
+import { UserContextProvider } from '../../UserContext';
 
 afterEach(cleanup);
 const props: any = {
@@ -48,8 +54,12 @@ jest.mock('axios', () => {
 localStorage.setItem('token', 'testToken!');
 
 describe('Checkout Page UI', () => {
-  test('should be rendering the Container component', async () => {
-    const { getByTestId } = render(<UserContextProvider><Checkout {...props} /></UserContextProvider>);
+  test.skip('should be rendering the Container component', async () => {
+    const { getByTestId } = render(
+      <UserContextProvider>
+        <Checkout {...props} />
+      </UserContextProvider>,
+    );
     const container = getByTestId('container-component');
     await wait(() => {
       expect(container).toBeTruthy();
@@ -57,7 +67,11 @@ describe('Checkout Page UI', () => {
   });
 
   test.skip('should render a name from stay', async () => {
-    const { getByTestId } = render(<UserContextProvider><Checkout {...props} /></UserContextProvider>);
+    const { getByTestId } = render(
+      <UserContextProvider>
+        <Checkout {...props} />
+      </UserContextProvider>,
+    );
     const header = await waitForElement(() => getByTestId('guest-name'));
     await wait(() => {
       expect(header).toHaveTextContent(mockData.guest_name);
@@ -65,7 +79,11 @@ describe('Checkout Page UI', () => {
   });
 
   test.skip('should render a payment button, displaying "Pay $total amount"', async () => {
-    const { getByText } = render(<UserContextProvider><Checkout {...props} /></UserContextProvider>);
+    const { getByText } = render(
+      <UserContextProvider>
+        <Checkout {...props} />
+      </UserContextProvider>,
+    );
     const { diff, price, cleaning_fee } = mockData;
     const total = diff * +price + +cleaning_fee;
     const payButton = await waitForElement(() => getByText(`Pay $${total}`));
@@ -76,7 +94,11 @@ describe('Checkout Page UI', () => {
   });
 
   test.skip('should display the correct total amount of the stay', async () => {
-    const { getByText } = render(<UserContextProvider><Checkout {...props} /></UserContextProvider>);
+    const { getByText } = render(
+      <UserContextProvider>
+        <Checkout {...props} />
+      </UserContextProvider>,
+    );
     const { diff, price, cleaning_fee } = mockData;
     const total = diff * +price + +cleaning_fee;
     const totalDisplay = await waitForElement(() => getByText(`Pay $${total}`));
@@ -86,7 +108,11 @@ describe('Checkout Page UI', () => {
   });
 
   test.skip('should not display the Extra Guest invoice box when there are 0 extra guests', async () => {
-    const { queryByTestId } = render(<UserContextProvider><Checkout {...props} /></UserContextProvider>);
+    const { queryByTestId } = render(
+      <UserContextProvider>
+        <Checkout {...props} />
+      </UserContextProvider>,
+    );
     await waitForElement(() => setTimeout(() => null, 2000));
 
     await wait(() => {
