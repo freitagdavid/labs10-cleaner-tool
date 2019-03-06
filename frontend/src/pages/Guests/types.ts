@@ -43,6 +43,7 @@ export interface GuestProps extends IncomingGuestProps {
   Uppy: (props: { type?: string; id?: number; text?: string }) => JSX.Element;
   goBack: () => void;
   modal: () => void;
+  show: any;
 }
 
 // Checklists
