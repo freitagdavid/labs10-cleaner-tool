@@ -30,6 +30,8 @@ declare global {
     ext_it: string;
     role: string;
     id: number;
+    photoUrl:string;
+    full_name: string;
   }
 
   namespace Express {
