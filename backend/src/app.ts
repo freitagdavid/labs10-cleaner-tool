@@ -113,6 +113,19 @@ server.get('/questionanswers/:id', async (req, res) => {
 /* for Guest dashboard Info*/
 server.route('/guestStay/:id').get(stays.getGuest);
 
+server.get('/stay/surveys/:id', async(req,res)=>{
+    const id = req.params.id
+    const stay = await db('stay').where({id})
+    const houseId = stay[0].house_id
+    const house = await db('house').where({id: houseId})
+    const managerId = house[0].manager
+    const manager = await db('manager').where({id: managerId})
+    const userId = manager[0].user_id
+    const surveys = await db('surveys').where({user_id: userId})
+    console.log(managerId)
+    res.json(surveys)
+})
+
 server
   .route('/users')
   .get(verifyToken, users.get)
@@ -138,21 +151,14 @@ server.get('/surveys', verifyToken, async (req, res) => {
 
 server.post('/questionanswers', verifyToken, async (req, res) => {
   const body = req.body
-  const token = req.token
-  const name = token.full_name
-  const photo = token.photoUrl
     try {
-      const stay = await db('stay').where({id: req.body.stay_id})
-      const houseId = stay[0].house_id;
-      const house = await db('house').where({id: houseId})
-      const houseName = house[0].name
-      console.log(house)
-      const data = await db('questionAnswers').insert({...body, name: name, photo: photo, house_name: houseName})
+      const data = await db('questionAnswers').insert(body)
       
       const response = await db('questionAnswers').where({id: data[0]})
       res.json(response)
     } catch (e) { res.json(e) }
 })
+
 server.post('/surveys', verifyToken, async(req,res) =>{
   const token = req.token
   const body = req.body
@@ -182,7 +188,10 @@ server
 server.route('/guests').post(guests.post);
 
 server.route('/guests/:id').put(guests.put);
-
+server.get('/s', async(req,res)=>{
+  const data = await db('manager')
+  res.json(data)
+})
 server
   .route('/houses')
   .get(houses.get)
