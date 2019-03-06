@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 
-const OutOfFive = () => {
+const FreeText = (props: any) => {
+    const [input, setInput] = useState('')
+
     return (
         <div>
-            <h3>Question</h3>
+            <h3>{props.question.question}</h3>
             <div>
-                <p></p>
+                <input type='text' value={props.answer} onChange={(ev: any) => {
+                    props.setAnswers(ev.target.value);
+                }}/>
             </div>
         </div>
     )
 
 }
 
-export default OutOfFive
+export default FreeText
