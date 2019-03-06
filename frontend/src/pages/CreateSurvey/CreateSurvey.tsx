@@ -31,6 +31,9 @@ const CreateSurvey = (props: any)=>{
     const [activeSurvey, setActiveSurvey] = useState('')
     const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
+    const activeClass = (filter: any, active: any) =>
+    active === filter ? 'active' : '';
+
     async function handleSubmit(surveyName: string, isGuest: boolean, dropdown: string) {
         if(!surveyName){
             return console.log('missing survey name')
@@ -87,31 +90,43 @@ const CreateSurvey = (props: any)=>{
             survey.push(<SurveyQuestion key={1} 
                 questionNumber={1} 
                 setQuestionType = {setQuestionType1} 
-                setQuestion = {setQuestion1} />)
+                setQuestion = {setQuestion1} 
+                activeClass = {activeClass}
+                questionType = {questionType1}/>)
         }
         if (num === '2') {
             survey.push(<SurveyQuestion key={1} 
                 questionNumber={1} 
                 setQuestionType = {setQuestionType1} 
-                setQuestion = {setQuestion1} />)
+                setQuestion = {setQuestion1} 
+                activeClass = {activeClass}
+                questionType = {questionType1}/>)
             survey.push(<SurveyQuestion key={2} 
                 questionNumber={2} 
                 setQuestionType = {setQuestionType2} 
-                setQuestion = {setQuestion2} />)
+                setQuestion = {setQuestion2} 
+                activeClass = {activeClass}
+                questionType = {questionType2}/>)
         }
         if (num === '3') {
             survey.push(<SurveyQuestion key={1} 
                 questionNumber={1} 
                 setQuestionType = {setQuestionType1} 
-                setQuestion = {setQuestion1}/>)
+                setQuestion = {setQuestion1}
+                activeClass = {activeClass}
+                questionType = {questionType1}/>)
             survey.push(<SurveyQuestion key={2} 
                 questionNumber={2} 
                 setQuestionType = {setQuestionType2} 
-                setQuestion = {setQuestion2} />)
+                setQuestion = {setQuestion2} 
+                activeClass = {activeClass}
+                questionType = {questionType2}/>)
             survey.push(<SurveyQuestion key={3} 
                 questionNumber={3} 
                 setQuestionType = {setQuestionType3} 
-                setQuestion = {setQuestion3} />)
+                setQuestion = {setQuestion3} 
+                activeClass = {activeClass}
+                questionType = {questionType3}/>)
         }
         const answer = survey
         return answer
@@ -126,8 +141,8 @@ const CreateSurvey = (props: any)=>{
                         <CreateSurveyInput type='text' placeholder='Survey Name' onChange={(event: any) => { setSurveyName(event.target.value) }}/>
                         <SurveyOptions>
                             <SurveyType>Survey Type:</SurveyType>
-                            <SurveyTypeButton type = 'button' onClick = {()=> setIsGuest(true)}>Guest Survey</SurveyTypeButton>
-                            <SurveyTypeButton type = 'button' onClick = {()=> setIsGuest(false)}>Assitant Survey</SurveyTypeButton>
+                            <SurveyTypeButton className = {`${activeClass(true, isGuest)}`} type = 'button' onClick = {()=> setIsGuest(true)}>Guest Survey</SurveyTypeButton>
+                            <SurveyTypeButton className = {`${activeClass(false, isGuest)}`} type = 'button' onClick = {()=> setIsGuest(false)}>Assitant Survey</SurveyTypeButton>
                             <SurveyQuestions>How Many Questions:</SurveyQuestions>
                             <select defaultValue = '3' onChange={(event: any) => {
                                 event.preventDefault()
