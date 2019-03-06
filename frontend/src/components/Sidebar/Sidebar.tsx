@@ -18,15 +18,18 @@ import {
 } from './Sidebar.styling';
 import logo from '../../assets/lodgel.jpg';
 import notxt_Lodgel from '../../assets/notxt_Lodgel.jpg';
-import { UserContext } from '../../App';
+import { UserContext } from '../../UserContext';
 
 interface LinkProps extends RouteComponentProps {
   onClick?: () => MouseEvent;
 }
 
 const Sidebar = (props: LinkProps) => {
+  const { state, dispatch } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { setLogin, role } = useContext(UserContext);
+  const { role } = state;
+  const setLogin = () => dispatch({ type: 'setLogin' });
+  // const { setLogin, role } = useContext(UserContext);
 
   const handleClick = (e: any) => {
     setAnchorEl(e.currentTarget);
@@ -46,7 +49,7 @@ const Sidebar = (props: LinkProps) => {
     localStorage.removeItem('id');
     localStorage.removeItem('role');
     localStorage.removeItem('firebaseui::rememberedAccounts');
-    setLogin(false);
+    setLogin();
     // TODO: Use actual firebase signout function to sign out
     props.history.push('/');
   };
@@ -82,9 +85,7 @@ const Sidebar = (props: LinkProps) => {
                 <MenuItem onClick={goAndClose('/assistants')}>
                   Assistants
                 </MenuItem>
-                <MenuItem onClick={goAndClose('/surveys')}>
-                  Surveys
-                </MenuItem>
+                <MenuItem onClick={goAndClose('/surveys')}>Surveys</MenuItem>
                 <MenuItem onClick={goAndClose('/billing')}>Subscribe</MenuItem>
               </>
             )}
