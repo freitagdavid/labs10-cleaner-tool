@@ -79,11 +79,13 @@ getSurveyResponse = (id) => {
     .join('questions', 'questions.survey_id', '=', 'surveys.id')
     .join('questionAnswers', 'questionAnswers.question_id', '=', 'questions.id')
     .select(
+      'surveys.id as survey_id',
       'surveys.name',
       'surveys.isGuest',
       'questionAnswers.guest_name',
       'questionAnswers.photo',
       'questionAnswers.house_name',
+      'questions.id as question_id',
       'questions.question',
       'questionAnswers.answer',
       'questionAnswers.created_at'
