@@ -19,7 +19,7 @@ const Responses = (props:any) => {
             </div>
             <div className = 'responses-answers'>
                 {props.survey.map((instance:any) => 
-                <Response key={instance.id} question = {instance.question} answer = {instance.answer} />
+                <Response key={instance.id} question = {instance.question} answer = {instance.answer} answerType={instance.answer_type}/>
                 )}
             </div>
         </div>

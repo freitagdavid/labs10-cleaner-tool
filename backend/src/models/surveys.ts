@@ -88,6 +88,7 @@ getSurveyResponse = (id) => {
       'questions.id as question_id',
       'questions.question',
       'questionAnswers.answer',
+      'questionAnswers.answer_type',
       'questionAnswers.created_at'
     )
     .where({ survey_id: id, question_id: id });

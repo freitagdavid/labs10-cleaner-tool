@@ -11,3 +11,5 @@ const RatingComponent = () => {
         </div>
     )
 }
+
+export default RatingComponent;

@@ -8,3 +8,5 @@ const YNComponent = (props:any) => {
         </div>
     )
 }
+
+export default YNComponent;
