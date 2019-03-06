@@ -22,7 +22,8 @@ export function findStaySummary(stayId: number): QueryBuilder {
   // TODO: Query list status once lists are set up
   return db('stay')
     .where({ 'stay.id': stayId })
-    .select( //select all this stuff FROM the stay table gives back the matching reservation for each guest
+    .select(
+      // select all this stuff FROM the stay table gives back the matching reservation for each guest
       'user.full_name AS guestName',
       'house.id AS houseId',
       'house.name AS houseName',
@@ -36,15 +37,23 @@ export function findStaySummary(stayId: number): QueryBuilder {
       'check_in',
       'check_out',
     )
-    .join('user', 'user.id', '=', 'stay.guest_id') //finds matching user for the reservation
-    .join('house', 'house.id', '=', 'stay.house_id') // only return the matching house for the reservation 
+    .join('user', 'user.id', '=', 'stay.guest_id') // finds matching user for the reservation
+    .join('house', 'house.id', '=', 'stay.house_id') // only return the matching house for the reservation
     .first();
 }
 
-export function findStaySummaryStandardized(stayId: number): QueryBuilder {
-  // TODO: Query list status once lists are set up
-  return db('stay')
-    .where({ 'stay.id': stayId })
+const baseQuery = () => db('stay');
+
+const filterByStayId = (stayId: number) => {
+  return (query: QueryBuilder) => query.where('stay.id', stayId);
+};
+
+const filterByGuestId = (guestId: number) => {
+  return (query: QueryBuilder) => query.where('stay.guest_id', guestId);
+};
+
+const staySummaryStandardized = (query: QueryBuilder) => {
+  return query
     .select(
       'user.id AS guest_id',
       'user.full_name AS guest_name',
@@ -71,7 +80,24 @@ export function findStaySummaryStandardized(stayId: number): QueryBuilder {
     .join('user', 'user.id', '=', 'stay.guest_id')
     .join('house', 'house.id', '=', 'stay.house_id')
     .first();
-}
+};
+
+export const findStaySummaryStandardized = (stayId: number): QueryBuilder => {
+  const applyStayIdFilter = filterByStayId(stayId);
+  const filteredQuery = applyStayIdFilter(baseQuery());
+  const completedQuery = staySummaryStandardized(filteredQuery);
+  return completedQuery;
+};
+
+export const findStaySummaryStandardizedByGuestId = (
+  guestId: number,
+): QueryBuilder => {
+  const applyGuestIdFilter = filterByGuestId(guestId);
+  const filteredQuery = applyGuestIdFilter(baseQuery());
+  const completedQuery = staySummaryStandardized(filteredQuery);
+  console.log(completedQuery.toSQL());
+  return completedQuery;
+};
 
 export async function findAllStays(
   id: number[],
