@@ -7,13 +7,16 @@ interface ProgressBar {
 }
 
 const StyledGuestProgressBar = styled.div`
-  width: 100%;
+  width: 93%;
   display: grid;
   grid-template-columns: 1fr 8fr 1fr;
   grid-template-areas:
     'lable1 label2 label3'
     'previous current overall';
+  margin-left: 1rem;
   span:nth-child(4) {
+    height: 50px;
+    border: 1px solid red;
     background: linear-gradient(
       to right,
       blue
@@ -26,6 +29,8 @@ const StyledGuestProgressBar = styled.div`
     );
   }
   span:nth-child(5) {
+    border: 1px solid red;
+
     background: linear-gradient(
       to right,
       blue ${(props) => props.currentProgress}%,
@@ -33,6 +38,8 @@ const StyledGuestProgressBar = styled.div`
     );
   }
   span:nth-child(6) {
+    border: 1px solid red;
+
     background: ${(props) =>
       props.overallProgress === 100 ? 'green' : '#00000000'};
   }
