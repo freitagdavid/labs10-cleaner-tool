@@ -152,7 +152,7 @@ export const GuestDetailView = (props: GuestProps) => {
               />
             </Link>
             <Button
-              className='back'
+              className='send-survey'
               text= 'Send Survey'
               color='var(--color-button-background)'
               onClick={modal}

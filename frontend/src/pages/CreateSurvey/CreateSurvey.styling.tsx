@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+
+
 export const CreateSurveysWrapper = styled('div')`
     text-align: left;
     margin: 0 8rem 0 15rem;
@@ -84,12 +86,13 @@ export const SurveyTypeButton = styled.button`
     max-height: 64px;
     height: auto;
     padding: 0.5rem 1rem;
-    border: 0;
+    border: 1px solid var(${props=>(props.theme.text)});
     border-radius: var(--border-radius);
     font-weight: normal;
     font-size: 1rem;
-    background: var(--color-accent);
-    color: var(--color-button-text);
+    background: var(${props=>(props.theme.bg)});
+    color: var(${props=>(props.theme.text)});
+    outline:none;
     cursor: pointer;
     margin-right: 1.2rem;
 `;
@@ -140,14 +143,15 @@ export  const SurveyStyledButton = styled('button')`
     max-height: 64px;
     height: 30px;
     padding: 0.5rem 1rem;
-    border: 0;
+    border: 1px solid var(${props=>(props.theme.text ?props.theme.text:'--color-button-text')});
     border-radius: var(--border-radius);
     font-weight: normal;
     font-size: 1rem;
-    background: var(--color-accent);
-    color: var(--color-button-text);
+    background: var(${props=>(props.theme.bg ? props.theme.bg:'--color-accent')});
+    color: var(${props=>(props.theme.text ?props.theme.text:'--color-button-text')});
     cursor: pointer;
     margin-right: 1.2rem;
+    outline:none;
     @media only screen and (max-width: 900px) {
         width: 180px;
     }
