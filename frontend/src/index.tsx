@@ -9,7 +9,6 @@ import WebFont from 'webfontloader';
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create, JSS } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
-import { UserContextProvider } from './UserContext';
 
 const generateClassName = createGenerateClassName();
 const insertionPoint = document.getElementById('jss-insertion-point');
@@ -29,13 +28,11 @@ WebFont.load({
 });
 
 ReactDOM.render(
-  <UserContextProvider>
-    <JssProvider jss={jss} generateClassName={generateClassName}>
-      <Router>
-        <App />
-      </Router>
-    </JssProvider>
-  </UserContextProvider>,
+  <JssProvider jss={jss} generateClassName={generateClassName}>
+    <Router>
+      <App />
+    </Router>
+  </JssProvider>,
   document.getElementById('root'),
 );
 
