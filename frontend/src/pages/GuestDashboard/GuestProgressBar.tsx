@@ -104,6 +104,14 @@ const TrackerChunk = styled.ol`
   flex-direction: row;
 `;
 
+const FinalTrackerChunk = styled.span`
+  border: solid 1px black;
+  flex: 1;
+  background: ${(props: { complete: boolean }) =>
+    props.complete ? 'blue' : 'red'};
+  }
+`;
+
 const GuestProgressBar = (props: ProgressBar) => {
   const { before, during, after } = props.tasks;
   const beforeProgress =
@@ -137,7 +145,7 @@ const GuestProgressBar = (props: ProgressBar) => {
       </TrackerChunk>
       <p>Overall</p>
       <span>{overallProgress}%</span>
-      <span />
+      <FinalTrackerChunk complete={overallProgress === 100 ? true : false} />
     </StyledGuestProgressBar>
   );
 };
