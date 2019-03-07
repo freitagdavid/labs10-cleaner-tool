@@ -48,7 +48,7 @@ const GuestDashboard = (props: any) => {
           checkOut={fetchData.check_out}
         />
         <GuestProgressBar previousCheckout={true} currentProgress={50} />
-        <MiscInfo />
+        <MiscInfo id = {props.match.params.id} />
       </StyledGuestDashboard>
     );
   }

@@ -17,6 +17,7 @@ import {
 } from './CreateSurvey.styling';
 import '../Surveys/Surveys.css';
 import { ActionEvent } from 'material-ui/svg-icons';
+
 //style vars
 const active = {
     text: '--color-button-text',
@@ -26,7 +27,6 @@ const active = {
     text: "--color-button-text-alt",
     bg: "--color-button-background-alt"
   }
-
 const CreateSurvey = (props: any)=>{
     const [dropdown, setDropdown] = useState('3')
     const [surveyName, setSurveyName] = useState('')
@@ -60,9 +60,10 @@ const CreateSurvey = (props: any)=>{
             },
         };
         const data = await axios.post(`${url}/surveys`, body,headers)
-        setId(data.data.id)
+        const newId = data.data.id
+        setId(newId)
         setFetch(true)
-        console.log(data)
+        
         async function handleQuestions(question: string, type: number, id: number){
             if(!question){
                 return console.log('missing question')
@@ -76,20 +77,20 @@ const CreateSurvey = (props: any)=>{
             console.log(data)
         }
         if(dropdown ==='1'){
-            handleQuestions(question1, questionType1, id).then(res => {
+            handleQuestions(question1, questionType1, newId).then(res => {
                 props.history.push('/surveys');
             });
         }
         if (dropdown === '2') {
-            handleQuestions(question1, questionType1, id)
-            handleQuestions(question2, questionType2, id).then(res => {
+            handleQuestions(question1, questionType1, newId)
+            handleQuestions(question2, questionType2, newId).then(res => {
                 props.history.push('/surveys');
             });
         }
         if(dropdown === '3'){
-            handleQuestions(question1, questionType1, id)
-            handleQuestions(question2, questionType2, id)
-            handleQuestions(question3, questionType3, id).then(res =>{
+            handleQuestions(question1, questionType1, newId)
+            handleQuestions(question2, questionType2, newId)
+            handleQuestions(question3, questionType3, newId).then(res =>{
                 props.history.push('/surveys');
             });
         }
@@ -143,8 +144,10 @@ const CreateSurvey = (props: any)=>{
         const answer = survey
         return answer
     }
+    const handleCancel = () =>{
+        props.history.push(`/surveys`)
+    }
         return (
-            
             <CreateSurveysWrapper>
                 <form>
                     <CreateSurveyHeader>Create a Survey</CreateSurveyHeader>
@@ -184,7 +187,7 @@ const CreateSurvey = (props: any)=>{
                     </div>
                     <CreateSurveyButtonWrapper>
                         <SurveyStyledButton type = 'button' onClick={() => handleSubmit(surveyName, isGuest, dropdown)}>Save</SurveyStyledButton>
-                        <SurveyStyledButton>Cancel</SurveyStyledButton>
+                        <SurveyStyledButton onClick = {handleCancel}>Cancel</SurveyStyledButton>
                     </CreateSurveyButtonWrapper>
                 </form>
             </CreateSurveysWrapper>   
