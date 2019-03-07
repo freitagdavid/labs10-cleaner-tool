@@ -1,22 +1,9 @@
-import React, {
-  useEffect,
-  useContext,
-  useRef,
-  MutableRefObject,
-  useState,
-} from 'react';
-import axios from 'axios';
+import React from 'react';
 import GuestInfo from './GuestInfo';
 import useFetch from '../../helpers/useFetch';
 import GuestProgressBar from './GuestProgressBar';
 import MiscInfo from './MiscInfo';
 import styled from '@emotion/styled';
-import firebase, { Unsubscribe, User } from 'firebase';
-import { UserContext } from '../../UserContext';
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import app from '../../firebase.setup';
-import { Properties } from '..';
-
 const backendURL = process.env.REACT_APP_backendURL;
 
 const StyledGuestDashboard = styled.div`
@@ -30,43 +17,34 @@ const StyledGuestDashboard = styled.div`
 `;
 
 const GuestDashboard = (props: any) => {
-  const { state, dispatch } = useContext(UserContext);
-  const [fetchData, setFetchData] = useState([])
-  const setRole = (role: string) =>
-    dispatch({ type: 'setRole', payload: role });
-  useEffect(() => {
-    (async () => {
-      const response = await axios.get(`${backendURL}/gueststay/${props.match.params.id}`)
-      setFetchData(response.data)
-      
-    })()
-  }, []);
-  // if (fetchErr) {
-  //   throw fetchErr;
-  // }
-  // if (fetchLoading === true) {
-  //   return (
-  //     <div>
-  //       <img src='../utils/Loading.svg' />
-  //     </div>
-  //   );
-  // } else {
+  console.log(props.match);
+  const [fetchData, fetchErr, fetchLoading] = useFetch(
+    `${backendURL}/gueststay/${props.match.params.id}`,
+    true,
+    'get',
+  );
+  if (fetchErr.error === true) {
+    console.log(fetchErr);
+    throw fetchErr;
+  }
+  if (fetchLoading === true) {
+    console.log('loading');
+    return (
+      <div>
+        <img src='../utils/loading.svg' />
+      </div>
+    );
+  } else {
     // const user = fetchData
     // console.log(user);
-  console.log(fetchData)
     return (
       <StyledGuestDashboard>
         <GuestInfo
-        //@ts-ignore
           name={`${fetchData.guest_name}`}
-          //@ts-ignore
           picture={fetchData.photo_url}
           houseLink='http://example.com'
-          //@ts-ignore
           houseName={fetchData.house_name}
-          //@ts-ignore
           checkIn={fetchData.check_in}
-          //@ts-ignore
           checkOut={fetchData.check_out}
         />
         <GuestProgressBar previousCheckout={true} currentProgress={50} />
@@ -74,6 +52,6 @@ const GuestDashboard = (props: any) => {
       </StyledGuestDashboard>
     );
   }
-
+};
 
 export default GuestDashboard;
