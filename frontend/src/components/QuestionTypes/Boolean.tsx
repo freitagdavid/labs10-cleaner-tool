@@ -1,7 +1,31 @@
 
 import React, { useState, useEffect } from 'react'
 import { SurveyAnswers } from '../../pages';
+import {
+    CreateSurveyInput,
+    CreateSurveyOptions
+} from '../../pages/CreateSurvey/CreateSurvey.styling'
+import styled from '@emotion/styled';
+const BooleanButton = styled.button`
+    background-color: white;
+    margin-right: 5px;
+    &.active {
+        color: white;
+        background-color:#428ACB;
+    }
+    color: #428ACB;
+    font-weight: bold;
+    width: 60px;
+    height: 30px;
+    border: 2px solid #428ACB;
+    :focus {
+        outline: none;
 
+    }
+`
+const BooleanDiv = styled.div`
+    margin-bottom: .5rem;
+`
 const Boolean = (props: any)=>{
     const [selected, setSelected] = useState('yes')
     useEffect(() => {
@@ -21,17 +45,17 @@ const Boolean = (props: any)=>{
             props.setAnswers(selected)
         })()
     }, [selected]);
-
+    let arr = ['yes','no']
     return (
-    <div>
+    <CreateSurveyOptions>
         <h3>{props.question.question}</h3>
-        <div>
-                <button type='button' value='yes' onClick={async (event) => { await handleClick(event) }
-                }>yes</button>
-                <button type='button' value='no' onClick={async (event) => { await handleClick(event) }
-                }>no</button>
-        </div>
-    </div>
+        <BooleanDiv>
+            {arr.map((item, index)=>{
+                return <BooleanButton type='button' value={`${item}`} className={`${selected === item ? 'active' : ''}`} onClick={async (event) => { await handleClick(event) }
+                }>{item}</BooleanButton>
+            })}
+        </BooleanDiv>
+    </CreateSurveyOptions>
     )
 }
 

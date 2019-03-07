@@ -3,9 +3,16 @@ import axios, { AxiosRequestConfig }  from 'axios'
 import Boolean from '../../../components/QuestionTypes/Boolean'
 import OutOfFive from '../../../components/QuestionTypes/OutOfFive'
 import FreeText from '../../../components/QuestionTypes/FreeText'
+import { 
+    CreateSurveyButtonWrapper,
+    SurveyStyledButton,
+    CreateSurveysWrapper
+} from '../../CreateSurvey/CreateSurvey.styling'
+import styled from '@emotion/styled';
 
-
-
+const StyledForm = styled.form`
+    margin-top: 30px;
+`
 const FillSurvey = (props: any)=>{
     const surveyId = props.match.params.surveyId
     const [questions, setQuestions]= useState([])
@@ -78,7 +85,8 @@ const FillSurvey = (props: any)=>{
         props.history.push(`/guestdashboard/${props.match.params.stayId}/surveys`)
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <CreateSurveysWrapper>
+        <StyledForm onSubmit={handleSubmit}>
             {
         questions.map((question: any,index)=>{
             if (index == 0) {
@@ -176,9 +184,12 @@ const FillSurvey = (props: any)=>{
             }
         })
             }
-            <button type = 'submit'>Save</button>
-            <button type='button' onClick ={handleCancel}>Cancel</button>
-        </form>
+            <CreateSurveyButtonWrapper>
+            <SurveyStyledButton type = 'submit'>Save</SurveyStyledButton>
+            <SurveyStyledButton type='button' onClick ={handleCancel}>Cancel</SurveyStyledButton>
+            </CreateSurveyButtonWrapper>
+        </StyledForm>
+        </CreateSurveysWrapper>
     )
 }
 
