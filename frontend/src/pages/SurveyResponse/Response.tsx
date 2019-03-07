@@ -1,12 +1,6 @@
 import React from 'react';
 
-interface ResponseProps {
-  qid: number;
-  question: string;
-  answer: string;
-}
-
-const Response = (props: ResponseProps) => {
+const Response = (props: any) => {
   return (
     <div className='single-response'>
       <h3>Question{props.qid}</h3>
