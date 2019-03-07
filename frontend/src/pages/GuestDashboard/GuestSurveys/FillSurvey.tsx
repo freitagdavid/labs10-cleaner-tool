@@ -10,6 +10,7 @@ import {
 } from '../../CreateSurvey/CreateSurvey.styling'
 import styled from '@emotion/styled';
 
+
 const StyledForm = styled.form`
     margin-top: 30px;
 `
@@ -25,10 +26,8 @@ const FillSurvey = (props: any)=>{
     useEffect(() => {
         (async () => {
             const questionResponse = await axios.get(`${url}/surveysquestions/${surveyId}`)
-            console.log(questionResponse)
             setQuestions(questionResponse.data.questions);
             const stayResponse = await axios.get(`${url}/gueststay/${props.match.params.stayId}`)
-            console.log(stayResponse.data)
             setStayInfo(stayResponse.data)
         })()
     }, []);
@@ -44,7 +43,7 @@ const FillSurvey = (props: any)=>{
             //@ts-ignore
             house_name: stayInfo.house_name,
             //@ts-ignore
-            name: stayInfo.guest_name,
+            guest_name: stayInfo.guest_name,
             //@ts-ignore
             photo: stayInfo.photo_url
         }
@@ -86,7 +85,7 @@ const FillSurvey = (props: any)=>{
     }
     return (
         <CreateSurveysWrapper>
-        <StyledForm onSubmit={handleSubmit}>
+        <StyledForm onSubmit = {handleSubmit}>
             {
         questions.map((question: any,index)=>{
             if (index == 0) {
