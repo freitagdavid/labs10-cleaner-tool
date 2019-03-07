@@ -54,7 +54,8 @@ interface Task {
 }
 
 const StyledGuestProgressBar = styled.div`
-  width: 100%;
+  width: 98%;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 8fr 1fr;
   grid-template-rows: auto auto 30px;
@@ -64,36 +65,17 @@ const StyledGuestProgressBar = styled.div`
     'previous current overall';
   align-items: stretch;
   justify-content: stretch;
-  /* span:nth-child(4) {
-    background: linear-gradient(
-      to right,
-      blue
-        ${(props: {
-          previousCheckout: boolean;
-          currentProgress: number;
-          overallProgress: number;
-        }) => (props.previousCheckout ? '100%' : '0%')},
-      #00000000 ${(props) => (props.previousCheckout ? '0%' : '100%')}
-    );
-  } */
-  /* span:nth-child(5) {
-    background: linear-gradient(
-      to right,
-      blue ${(props) => props.currentProgress}%,
-      #00000000 ${(props) => 100 - props.currentProgress}%
-    );
-  } */
-  /* span:nth-child(6) {
-    background: ${(props) =>
-      props.overallProgress === 100 ? 'green' : '#00000000'};
-  } */
+  ol:nth-child(3) {
+    background: purple;
+    border-radius: 5px 0 0 5px;
+  }
 `;
 
 const StyledLi = styled.li`
   border: solid 1px black;
   flex: 1;
   background: ${(props: { complete: number }) =>
-    props.complete === 1 ? 'blue' : 'red'};
+    props.complete === 1 ? 'var(--color-accent-light)' : 'var(--color-error)'};
 `;
 
 const TrackerChunk = styled.ol`
@@ -108,12 +90,12 @@ const FinalTrackerChunk = styled.span`
   border: solid 1px black;
   flex: 1;
   background: ${(props: { complete: boolean }) =>
-    props.complete ? 'blue' : 'red'};
-  }
+    props.complete ? 'var(--color-accent-light)' : 'var(--color-error)'};
 `;
 
 const GuestProgressBar = (props: ProgressBar) => {
   const { before, during, after } = props.tasks;
+  console.log(before, 'Before mutation');
   const beforeProgress =
     (before.filter((task: Task) => task.complete === 1).length /
       before.length) *
@@ -123,23 +105,33 @@ const GuestProgressBar = (props: ProgressBar) => {
       before.length) *
     100;
   const overallProgress = beforeProgress + duringProgress;
-  console.log(beforeProgress);
-  console.log(duringProgress);
-  console.log(overallProgress);
+  const reducer = (a: Task, b: Task) => {
+    if (a.complete > b.complete) {
+      return -1;
+    }
+    if (b.complete > a.complete) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const beforeOutput = [...before].sort(reducer);
+  const duringOutput = [...during].sort(reducer);
+
   return (
     // @ts-ignore
     <StyledGuestProgressBar>
       <p>Previous Guest Checkout</p>
       <span>{beforeProgress}%</span>
       <TrackerChunk>
-        {before.map((item: Task) => {
+        {beforeOutput.map((item: Task) => {
           return <StyledLi complete={item.complete} />;
         })}
       </TrackerChunk>
       <p>Getting Ready for you</p>
       <span>{duringProgress}%</span>
       <TrackerChunk>
-        {during.map((item: Task) => {
+        {duringOutput.map((item: Task) => {
           return <StyledLi complete={item.complete} />;
         })}
       </TrackerChunk>
