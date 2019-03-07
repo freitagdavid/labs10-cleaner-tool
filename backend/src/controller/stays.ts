@@ -3,6 +3,7 @@ import {
   deleteStayData,
   findStaySummary,
   findStaySummaryStandardized,
+  findStaySummaryStandardizedByGuestId,
   findAllStays,
   postStayData,
   putStayData,
@@ -32,7 +33,7 @@ export async function getGuest(
   const { id } = req.params;
 
   try {
-    const summary: any = await findStaySummaryStandardized(id);
+    const summary: any = await findStaySummaryStandardizedByGuestId(id);
     if (summary === undefined) {
       const e: any = new Error(`Stay with given ID ${id} not found.`);
       e.statusCode = 404;

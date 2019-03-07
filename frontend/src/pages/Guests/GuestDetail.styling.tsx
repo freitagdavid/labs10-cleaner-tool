@@ -431,4 +431,7 @@ export const GuestDetailStyle = styled(Container)`
       justify-self: center;
     }
   }
+  .display-none{
+    display:none
+  }
 `;

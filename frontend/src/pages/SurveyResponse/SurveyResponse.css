@@ -55,3 +55,7 @@
 .sr-title select{
     font-size: 1rem;
 }
+
+.select{
+    background: rgba(134, 191, 241, 0.863);
+}

@@ -28,10 +28,12 @@ import {
 import { Sidebar } from './components/index';
 import './App.css';
 import Billing from './pages/Billing/Billing';
+import { UserContextProvider } from './UserContext';
 
 const App = () => {
   return (
     <div className='App'>
+      <UserContextProvider>
         <Sidebar />
         <Switch>
           <Route exact path='/' component={LandingPage} />
@@ -63,6 +65,7 @@ const App = () => {
           <Route exact path='/guestdashboard/:stayId/surveys/:id/:surveyId' component={FillSurvey} />
           <Route exact path='/linklogin/:id' component={LinkLogin} />
         </Switch>
+      </UserContextProvider>
     </div>
   );
 };

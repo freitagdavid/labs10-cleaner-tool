@@ -33,7 +33,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
 // Survey List in Balsamiq
 
 server.get('/surveys/:id', async (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
   try {
     const data = await db('surveys').where({ user_id: id });
     res.json(data);
@@ -41,33 +41,39 @@ server.get('/surveys/:id', async (req, res) => {
     res.json(e);
   }
 });
-  server.get('/surveysquestions/:id', async(req,res)=>{
-    try{
-      const { id } = req.params
-      const survey = await db('surveys').where({ id }).first()
-      if(survey) {
-        const questions = await db('questions').where({ survey_id: id })
-        res.json({ survey, questions });
-      }
-    }catch(e){res.json(e), console.log(e)}
-  })
+server.get('/surveysquestions/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const survey = await db('surveys')
+      .where({ id })
+      .first();
+    if (survey) {
+      const questions = await db('questions').where({ survey_id: id });
+      res.json({ survey, questions });
+    }
+  } catch (e) {
+    res.json(e), console.log(e);
+  }
+});
 
-  server.get('/questions', async(req,res)=>{
-    try{
-    const data = await db('questions')
+server.get('/questions', async (req, res) => {
+  try {
+    const data = await db('questions');
     res.json(data);
-    }catch(e){res.json(e)}
-  })
-  server.get('/questionanswers', async(req,res)=>{
-    try{
-    const data = await db('questionAnswers')
+  } catch (e) {
+    res.json(e);
+  }
+});
+server.get('/questionanswers', async (req, res) => {
+  try {
+    const data = await db('questionAnswers');
     res.json(data);
-    }catch(e){res.json(e)}
-  })
+  } catch (e) {
+    res.json(e);
+  }
+});
 
 // Authentication Middleware for *all* routes after this line
-
-
 
 server.get('/data', async (req, res) => {
   try {
@@ -79,11 +85,15 @@ server.get('/data', async (req, res) => {
 });
 
 // Survey Responses Route in Balsamiq
-server.get('/surveyresponses/:id', async (req, res) => {
+server.get('/surveyresponses/:id', verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
     const survey = await getSurveyResponse(id);
-    res.json({ survey });
+    const responce = await db('questionAnswers')
+      .count({ response: 'answer' })
+      .where({ question_id: id });
+    console.log(responce);
+    res.json({ survey, responce });
   } catch (e) {
     res.json(e);
   }
@@ -111,7 +121,7 @@ server.get('/questionanswers/:id', async (req, res) => {
 });
 
 /* for Guest dashboard Info*/
-server.route('/guestStay/:id').get(stays.getGuest);
+server.route('/gueststay/:id').get(stays.getGuest);
 
 server.get('/stay/surveys/:id', async(req,res)=>{
     const id = req.params.id
@@ -139,6 +149,7 @@ server.use(verifyToken);
 //   .get(verifyToken, users.get)
 //   .post(users.post)
 //   .put(verifyToken, users.putByExtId);
+
 server.get('/surveys', verifyToken, async (req, res) => {
   const id = req.token.id;
   try {

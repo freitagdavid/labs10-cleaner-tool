@@ -1,18 +1,21 @@
 import React, {useState} from 'react';
 import SurveyQuestion from './SurveyQuestion'
 import axios, { AxiosRequestConfig } from 'axios';
+import { Button,  } from '../../components/index';
 import { 
      CreateSurveysWrapper,
      CreateSurveyOptions,
      CreateSurveyHeader, 
-     CreateSurveyLables, 
+    //  CreateSurveyLables, 
      CreateSurveyInput, 
      SurveyOptions, 
      SurveyType, 
      SurveyTypeButton, 
      SurveyQuestions, 
-     CreateSurveyButtonWrapper 
+     CreateSurveyButtonWrapper,
+     SurveyStyledButton 
 } from './CreateSurvey.styling';
+import '../Surveys/Surveys.css';
 import { ActionEvent } from 'material-ui/svg-icons';
 const CreateSurvey = (props: any)=>{
     const [dropdown, setDropdown] = useState('3')
@@ -27,8 +30,11 @@ const CreateSurvey = (props: any)=>{
     const [question3, setQuestion3] = useState('')
     const [isGuest, setIsGuest] = useState(true)
     const [fetch, setFetch] = useState(false)
-    const [activeSurvey, setActiveSurvey] = useState('')
+    const [activeSurvey, setActiveSurvey] = useState(0)
     const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+
+    const activeClass = (filter: any, active: any) =>
+    active === filter ? 'active' : '';
 
     async function handleSubmit(surveyName: string, isGuest: boolean, dropdown: string) {
         if(!surveyName){
@@ -87,31 +93,43 @@ const CreateSurvey = (props: any)=>{
             survey.push(<SurveyQuestion key={1} 
                 questionNumber={1} 
                 setQuestionType = {setQuestionType1} 
-                setQuestion = {setQuestion1} />)
+                setQuestion = {setQuestion1} 
+                activeClass = {activeClass}
+                questionType = {questionType1}/>)
         }
         if (num === '2') {
             survey.push(<SurveyQuestion key={1} 
                 questionNumber={1} 
                 setQuestionType = {setQuestionType1} 
-                setQuestion = {setQuestion1} />)
+                setQuestion = {setQuestion1} 
+                activeClass = {activeClass}
+                questionType = {questionType1}/>)
             survey.push(<SurveyQuestion key={2} 
                 questionNumber={2} 
                 setQuestionType = {setQuestionType2} 
-                setQuestion = {setQuestion2} />)
+                setQuestion = {setQuestion2} 
+                activeClass = {activeClass}
+                questionType = {questionType2}/>)
         }
         if (num === '3') {
             survey.push(<SurveyQuestion key={1} 
                 questionNumber={1} 
                 setQuestionType = {setQuestionType1} 
-                setQuestion = {setQuestion1}/>)
+                setQuestion = {setQuestion1}
+                activeClass = {activeClass}
+                questionType = {questionType1}/>)
             survey.push(<SurveyQuestion key={2} 
                 questionNumber={2} 
                 setQuestionType = {setQuestionType2} 
-                setQuestion = {setQuestion2} />)
+                setQuestion = {setQuestion2} 
+                activeClass = {activeClass}
+                questionType = {questionType2}/>)
             survey.push(<SurveyQuestion key={3} 
                 questionNumber={3} 
                 setQuestionType = {setQuestionType3} 
-                setQuestion = {setQuestion3} />)
+                setQuestion = {setQuestion3} 
+                activeClass = {activeClass}
+                questionType = {questionType3}/>)
         }
         const answer = survey
         return answer
@@ -124,13 +142,26 @@ const CreateSurvey = (props: any)=>{
                 <form>
                     <CreateSurveyHeader>Create a Survey</CreateSurveyHeader>
                     <CreateSurveyOptions>
-                        <CreateSurveyLables>Survey Name</CreateSurveyLables>
+                        <h2>Survey Name</h2>
                         <CreateSurveyInput type='text' placeholder='Survey Name' onChange={(event: any) => { setSurveyName(event.target.value) }}/>
                         <SurveyOptions>
-                            <SurveyType>Survey Type:</SurveyType>
-                            <SurveyTypeButton type = 'button' onClick = {()=> setIsGuest(true)}>Guest Survey</SurveyTypeButton>
-                            <SurveyTypeButton type = 'button' onClick = {()=> setIsGuest(false)}>Assitant Survey</SurveyTypeButton>
-                            <SurveyQuestions>How Many Questions:</SurveyQuestions>
+                            <h3>Survey Type:</h3>
+                            {/* <Button
+                                className={`button-filter guest`}
+                                text='Guest Survey'
+                                color='var(--color-button-background-alt)'
+                                onClick={() => {setActiveSurvey(1)}}
+                                datatestid='button-guest'
+                                />
+                                <Button
+                                className={`button-filter assistant`}
+                                text='Assistant Survey'
+                                color='var(--color-button-background-alt)'
+                                datatestid='button-assistant'
+                                /> */}
+                            <SurveyTypeButton className={activeSurvey ? 'active-survey' : ''} onClick={() => {setActiveSurvey(1)}} type = 'button'>Guest Survey</SurveyTypeButton>
+                            <SurveyTypeButton type = 'button'>Assitant Survey</SurveyTypeButton>
+                            <h3>How Many Questions:</h3>
                             <select defaultValue = '3' onChange={(event: any) => {
                                 event.preventDefault()
                                 setDropdown(event.target.value)
@@ -145,8 +176,8 @@ const CreateSurvey = (props: any)=>{
                        {questionLength(dropdown, survey)}
                     </div>
                     <CreateSurveyButtonWrapper>
-                        <button type = 'button' onClick={() => handleSubmit(surveyName, isGuest, dropdown)}>Save</button>
-                        <button onClick = {handleCancel}>Cancel</button>
+                        <SurveyStyledButton type = 'button' onClick={() => handleSubmit(surveyName, isGuest, dropdown)}>Save</SurveyStyledButton>
+                        <SurveyStyledButton onClick = {handleCancel}>Cancel</SurveyStyledButton>
                     </CreateSurveyButtonWrapper>
                 </form>
             </CreateSurveysWrapper>   
