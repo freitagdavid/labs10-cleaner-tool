@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { IncomingGuestProps, GuestProps } from './types';
 // Components
-import {Modal} from './SurveyModal';
+import {Modal} from './Modal/SurveyModal';
 import { InfoBox } from './InfoBox';
 import { Checklist } from './Checklist';
 import { AstDropdown } from './AstDropdown/AstDropdown';
