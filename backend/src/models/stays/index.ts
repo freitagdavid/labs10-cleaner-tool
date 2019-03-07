@@ -5,6 +5,7 @@ import {
   postStayData,
   putStayData,
   deleteStayData,
+  findStaySummaryStandardizedByGuestId,
 } from './stays';
 
 export {
@@ -14,4 +15,5 @@ export {
   findStaySummary,
   postStayData,
   putStayData,
+  findStaySummaryStandardizedByGuestId,
 };
