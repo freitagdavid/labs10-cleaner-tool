@@ -96,14 +96,16 @@ const FinalTrackerChunk = styled.span`
 const GuestProgressBar = (props: ProgressBar) => {
   const { before, during, after } = props.tasks;
   console.log(before, 'Before mutation');
-  const beforeProgress =
+  const beforeProgress = Math.floor(
     (before.filter((task: Task) => task.complete === 1).length /
       before.length) *
-    100;
-  const duringProgress =
+      100,
+  );
+  const duringProgress = Math.floor(
     (during.filter((task: Task) => task.complete === 1).length /
       before.length) *
-    100;
+      100,
+  );
   const overallProgress = beforeProgress + duringProgress;
   const reducer = (a: Task, b: Task) => {
     if (a.complete > b.complete) {
