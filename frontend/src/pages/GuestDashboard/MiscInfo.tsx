@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Route } from 'react-router-dom'
 import { NavigationFullscreenExit } from 'material-ui/svg-icons';
-
+import { Link } from 'react-router-dom'
 interface MiscInfoProps {}
 
 const StyledLinks = styled.div`
@@ -28,7 +29,7 @@ const StyledLinks = styled.div`
     }
   }
 `;
-const MiscInfo = () => {
+const MiscInfo = (props: any) => {
   return (
     <StyledLinks>
       <div className='guides'>  
@@ -41,7 +42,7 @@ const MiscInfo = () => {
       </div>
       <div className='guides'>
       <i className="far fa-file-alt fa-4x"></i>
-      <a href='http://example.com'>Complete a Survey</a>
+      <Link to = {`/guestdashboard/${props.id}/surveys`}>Complete a Survey</Link>
       </div>
     </StyledLinks>
   );
