@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import Button from '../../../components/Button';
+
 import { useFetch } from '../../../helpers';
 import loadingIndicator from '../../utils/loading.svg';
-import {ModalContainer, SurveySelectButton} from './SurveyModal.styling'
+import {ModalContainer, SurveySelectButton} from './AssistantsModal.styling'
  interface Survey {
   survey: any,
   id: number,
@@ -21,7 +22,7 @@ const inactive = {
 //logs data and closes modal will make axios call later
 const selectAndClose = (data: any,func: any)=>{console.log(data); func()}
 
-export const Modal = ( props: any) => {
+export const SurveyModal = ( props: any) => {
     const showHideClassName = !props.show ?  "modal display-none" : "modal display-flex";
     const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com'
@@ -35,7 +36,7 @@ export const Modal = ( props: any) => {
               {loading ? (
                   <img src={loadingIndicator} alt='animated loading indicator' />
                 ) : data ? (
-                  data.filter((survey:Survey)=>survey.isGuest === 1).map((survey: Survey) => 
+                  data.filter((survey:Survey)=>survey.isGuest === 0).map((survey: Survey) => 
                     (
                       <>
                     <div className='survey-card' key={survey.id}>
@@ -68,5 +69,3 @@ export const Modal = ( props: any) => {
       </div>
     );
   };
-
- 

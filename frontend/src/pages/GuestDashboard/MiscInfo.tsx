@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Route } from 'react-router-dom'
 import { NavigationFullscreenExit } from 'material-ui/svg-icons';
-
+import { Link } from 'react-router-dom'
 interface MiscInfoProps {}
 
 const StyledLinks = styled.div`
@@ -18,12 +19,12 @@ const StyledLinks = styled.div`
     align-items: flex-end;
   }
 `;
-const MiscInfo = () => {
+const MiscInfo = (props: any) => {
   return (
     <StyledLinks>
       <a href='http://example.com'>Your Guest Guide</a>
       <a href='http://example.com'>Directions</a>
-      <a href='http://example.com'>Complete a Survey</a>
+      <Link to = {`/guestdashboard/${props.id}/surveys`}>Complete a Survey</Link>
     </StyledLinks>
   );
 };

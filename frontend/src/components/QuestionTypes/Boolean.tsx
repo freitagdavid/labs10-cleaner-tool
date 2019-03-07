@@ -1,54 +1,61 @@
 
 import React, { useState, useEffect } from 'react'
 import { SurveyAnswers } from '../../pages';
+import {
+    CreateSurveyInput,
+    CreateSurveyOptions
+} from '../../pages/CreateSurvey/CreateSurvey.styling'
+import styled from '@emotion/styled';
+const BooleanButton = styled.button`
+    background-color: white;
+    margin-right: 5px;
+    &.active {
+        color: white;
+        background-color:#428ACB;
+    }
+    color: #428ACB;
+    font-weight: bold;
+    width: 60px;
+    height: 30px;
+    border: 2px solid #428ACB;
+    :focus {
+        outline: none;
 
+    }
+`
+const BooleanDiv = styled.div`
+    margin-bottom: .5rem;
+`
 const Boolean = (props: any)=>{
     const [selected, setSelected] = useState('yes')
-    const questionNumber = `question${props.question.id}`
     useEffect(() => {
         (() => {
-            let obj: any = {}
-            obj[questionNumber] = selected
-            props.answers.push(obj)
-            console.log(props.answers)
+            setSelected('yes')
+            props.setAnswers(selected)
         })()
     }, []);
+    const handleClick = (event: any) => {
+        if (selected != event.target.value) {
+            setSelected(event.target.value)
+            props.setAnswers(selected)
+        }
+    }
     useEffect(() => {
         (() => {
-            const answers = props.answers[0]
-            const keys = Object.keys(answers)
-            for (let i = 0; i < keys.length; i++) {
-                if (keys[i] == questionNumber) {
-                    if (selected == 'no') {
-                        answers[keys[i]] = 'no'
-                        console.log(props.answers)
-                    }
-                    if (selected == 'yes') {
-                        answers[keys[i]] = 'yes'
-                    }
-                }
-            }
+            props.setAnswers(selected)
         })()
     }, [selected]);
-
+    let arr = ['yes','no']
     return (
-    <div>
+    <CreateSurveyOptions>
         <h3>{props.question.question}</h3>
-        <div>
-            <button type = 'button' onClick = {()=> {
-                if(selected!= 'yes'){
-                setSelected('yes')
-                }
-            }}
-            >Yes</button>
-            <button type = 'button' onClick = {()=> {
-                if(selected != 'no'){
-                    setSelected('no')
-                }
-        }
-        }>No</button>
-        </div>
-    </div>
+        <BooleanDiv>
+            {arr.map((item, index)=>{
+                return <BooleanButton type='button' value={`${item}`} className={`${selected === item ? 'active' : ''}`} onClick={async (event) => { await handleClick(event) }
+                }>{item}</BooleanButton>
+            })}
+        </BooleanDiv>
+    </CreateSurveyOptions>
     )
 }
 
