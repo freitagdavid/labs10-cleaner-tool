@@ -24,11 +24,9 @@ const GuestDashboard = (props: any) => {
     'get',
   );
   if (fetchErr.error === true) {
-    console.log(fetchErr);
     throw fetchErr;
   }
   if (fetchLoading === true) {
-    console.log('loading');
     return (
       <div>
         <img src='../utils/loading.svg' />
@@ -47,7 +45,7 @@ const GuestDashboard = (props: any) => {
           checkIn={fetchData.check_in}
           checkOut={fetchData.check_out}
         />
-        <GuestProgressBar previousCheckout={true} currentProgress={50} />
+        <GuestProgressBar tasks={fetchData.checklist} />
         <MiscInfo />
       </StyledGuestDashboard>
     );
