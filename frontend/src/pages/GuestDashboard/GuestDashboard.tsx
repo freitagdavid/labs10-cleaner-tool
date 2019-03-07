@@ -1,20 +1,9 @@
-import React, {
-  useEffect,
-  useContext,
-  useRef,
-  MutableRefObject,
-  useState,
-} from 'react';
-import axios from 'axios';
+import React from 'react';
 import GuestInfo from './GuestInfo';
 import useFetch from '../../helpers/useFetch';
 import GuestProgressBar from './GuestProgressBar';
 import MiscInfo from './MiscInfo';
 import styled from '@emotion/styled';
-import firebase, { Unsubscribe, User } from 'firebase';
-import { UserContext } from '../../UserContext';
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import app from '../../firebase.setup';
 const backendURL = process.env.REACT_APP_backendURL;
 
 const StyledGuestDashboard = styled.div`
@@ -28,23 +17,21 @@ const StyledGuestDashboard = styled.div`
 `;
 
 const GuestDashboard = (props: any) => {
-  const { state, dispatch } = useContext(UserContext);
-  const setRole = (role: string) =>
-    dispatch({ type: 'setRole', payload: role });
-
-  // @ts-ignore
+  console.log(props.match);
   const [fetchData, fetchErr, fetchLoading] = useFetch(
     `${backendURL}/gueststay/${props.match.params.id}`,
     true,
     'get',
   );
-  if (fetchErr) {
+  if (fetchErr.error === true) {
+    console.log(fetchErr);
     throw fetchErr;
   }
   if (fetchLoading === true) {
+    console.log('loading');
     return (
       <div>
-        <img src='../utils/Loading.svg' />
+        <img src='../utils/loading.svg' />
       </div>
     );
   } else {
@@ -53,7 +40,7 @@ const GuestDashboard = (props: any) => {
     return (
       <StyledGuestDashboard>
         <GuestInfo
-          name={`${fetchData.name}`}
+          name={`${fetchData.guest_name}`}
           picture={fetchData.photo_url}
           houseLink='http://example.com'
           houseName={fetchData.house_name}
