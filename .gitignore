@@ -50,3 +50,5 @@ backend/data/devdb.sqlite3
 backend/test.db
 backend/dev.sqlite3
 backend/.directory
+.history/
+.idea/

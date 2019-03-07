@@ -5,10 +5,10 @@ import { ReactNodeLike } from 'prop-types';
 const UserContext = createContext();
 
 const initialState = {
-  loggedIn: false,
-  role: 'none',
-  subscription: 0,
-  connected: false,
+  loggedIn: localStorage.getItem('token') || false,
+  role: localStorage.getItem('role') || 'none',
+  subscription: localStorage.getItem('subscription') || 0,
+  connected: localStorage.getItem('connected') || false,
 };
 export interface UserState {
   loggedIn: string | boolean;

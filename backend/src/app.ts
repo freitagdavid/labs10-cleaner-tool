@@ -33,7 +33,7 @@ server.get('/', (__, res) => res.sendFile('index.html'));
 // Survey List in Balsamiq
 
 server.get('/surveys/:id', async (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
   try {
     const data = await db('surveys').where({ user_id: id });
     res.json(data);
@@ -41,33 +41,39 @@ server.get('/surveys/:id', async (req, res) => {
     res.json(e);
   }
 });
-  server.get('/surveysquestions/:id', async(req,res)=>{
-    try{
-      const { id } = req.params
-      const survey = await db('surveys').where({ id }).first()
-      if(survey) {
-        const questions = await db('questions').where({ survey_id: id })
-        res.json({ survey, questions });
-      }
-    }catch(e){res.json(e), console.log(e)}
-  })
+server.get('/surveysquestions/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const survey = await db('surveys')
+      .where({ id })
+      .first();
+    if (survey) {
+      const questions = await db('questions').where({ survey_id: id });
+      res.json({ survey, questions });
+    }
+  } catch (e) {
+    res.json(e), console.log(e);
+  }
+});
 
-  server.get('/questions', async(req,res)=>{
-    try{
-    const data = await db('questions')
+server.get('/questions', async (req, res) => {
+  try {
+    const data = await db('questions');
     res.json(data);
-    }catch(e){res.json(e)}
-  })
-  server.get('/questionanswers', async(req,res)=>{
-    try{
-    const data = await db('questionAnswers')
+  } catch (e) {
+    res.json(e);
+  }
+});
+server.get('/questionanswers', async (req, res) => {
+  try {
+    const data = await db('questionAnswers');
     res.json(data);
-    }catch(e){res.json(e)}
-  })
+  } catch (e) {
+    res.json(e);
+  }
+});
 
 // Authentication Middleware for *all* routes after this line
-
-
 
 server.get('/data', async (req, res) => {
   try {
@@ -80,11 +86,13 @@ server.get('/data', async (req, res) => {
 
 // Survey Responses Route in Balsamiq
 server.get('/surveyresponses/:id', verifyToken, async (req, res) => {
-    try {
+  try {
     const { id } = req.params;
     const survey = await getSurveyResponse(id);
-    const responce = await db('questionAnswers').count({'response': 'answer'}).where({question_id: id})
-    console.log(responce)
+    const responce = await db('questionAnswers')
+      .count({ response: 'answer' })
+      .where({ question_id: id });
+    console.log(responce);
     res.json({ survey, responce });
   } catch (e) {
     res.json(e);
@@ -113,7 +121,7 @@ server.get('/questionanswers/:id', async (req, res) => {
 });
 
 /* for Guest dashboard Info*/
-server.route('/guestStay/:id').get(stays.getGuest);
+server.route('/gueststay/:id').get(stays.getGuest);
 
 server
   .route('/users')
@@ -140,32 +148,44 @@ server.get('/surveys', verifyToken, async (req, res) => {
 });
 
 server.post('/questionanswers', verifyToken, async (req, res) => {
-  const body = req.body
-  const token = req.token
-  const guest_name = token.full_name
-  const photo = token.photoUrl
-    try {
-      const stay = await db('stay').where({id: req.body.stay_id})
-      const houseId = stay[0].house_id;
-      const house = await db('house').where({id: houseId})
-      const houseName = house[0].name
-      console.log(house)
-      const data = await db('questionAnswers').insert({...body, guest_name: guest_name, photo: photo, house_name: houseName})
-      
-      const response = await db('questionAnswers').where({id: data[0]})
-      res.json(response)
-    } catch (e) { res.json(e) }
-})
-server.post('/surveys', verifyToken, async(req,res) =>{
-  const token = req.token
-  const body = req.body
-  const createSurvey = await db('surveys').insert({...body,user_id:token.id})
-  const survey = await db('surveys').where({id: createSurvey[0]})
-  try{
-    res.status(201).json({...survey[0], message: 'successfully created survey'})
-  } catch(e){
-    res.json(e)
-}
+  const body = req.body;
+  const token = req.token;
+  const guest_name = token.full_name;
+  const photo = token.photoUrl;
+  try {
+    const stay = await db('stay').where({ id: req.body.stay_id });
+    const houseId = stay[0].house_id;
+    const house = await db('house').where({ id: houseId });
+    const houseName = house[0].name;
+    console.log(house);
+    const data = await db('questionAnswers').insert({
+      ...body,
+      guest_name,
+      photo,
+      house_name: houseName,
+    });
+
+    const response = await db('questionAnswers').where({ id: data[0] });
+    res.json(response);
+  } catch (e) {
+    res.json(e);
+  }
+});
+server.post('/surveys', verifyToken, async (req, res) => {
+  const token = req.token;
+  const body = req.body;
+  const createSurvey = await db('surveys').insert({
+    ...body,
+    user_id: token.id,
+  });
+  const survey = await db('surveys').where({ id: createSurvey[0] });
+  try {
+    res
+      .status(201)
+      .json({ ...survey[0], message: 'successfully created survey' });
+  } catch (e) {
+    res.json(e);
+  }
 });
 server.post('/questions', verifyToken, async (req, res) => {
   const body = req.body;
