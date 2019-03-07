@@ -7,10 +7,11 @@ interface MiscInfoProps {}
 const StyledLinks = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: 4rem;
   margin-left: 1rem;
+  width: 98%;
     .guides {
-      border: solid 1px brown;
+      border: solid 1px rgba(0, 0, 0, 0.2);
       padding: 10px;
       display: flex;
       width: 30%;
@@ -21,8 +22,10 @@ const StyledLinks = styled.div`
       background-color: white;
     }
   a {
-   text-decoration: underline;
    color: var(--color-text-accent);
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 const MiscInfo = () => {

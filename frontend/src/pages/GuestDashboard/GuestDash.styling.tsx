@@ -1,15 +1,17 @@
 import styled from '@emotion/styled';
 
  export const StyledGuestDashboard = styled('div')`
-  width: 90%;
+  width: 70%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   //border: 1px solid green;
   h1 {
-     font-family: 'Roboto Medium',Arial,sans-serif;
-     font-size: 2.5rem;
+    font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 2.25rem;
      text-align: left;
+     padding-left: .5rem;
   }
   @media only screen and (max-width: 900px) {
   
@@ -26,6 +28,7 @@ export const GuestInfoWrapper = styled('div')`
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 1rem;
   .guest-info {
       display: flex;
       //width: 80%;
@@ -42,6 +45,10 @@ export const GuestInfoWrapper = styled('div')`
             display: block;
             margin-left: 2rem;
             //border: 1px solid green;
+            h3{
+                font-size: 1.5rem;
+                font-weight: normal
+            }
         }
   }
  
