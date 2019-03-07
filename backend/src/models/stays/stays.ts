@@ -95,7 +95,6 @@ export const findStaySummaryStandardizedByGuestId = (
   const applyGuestIdFilter = filterByGuestId(guestId);
   const filteredQuery = applyGuestIdFilter(baseQuery());
   const completedQuery = staySummaryStandardized(filteredQuery);
-  console.log(completedQuery.toSQL());
   return completedQuery;
 };
 
