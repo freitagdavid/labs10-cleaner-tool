@@ -1,18 +1,21 @@
 import React, {useState} from 'react';
 import SurveyQuestion from './SurveyQuestion'
 import axios, { AxiosRequestConfig } from 'axios';
+import { Button,  } from '../../components/index';
 import { 
      CreateSurveysWrapper,
      CreateSurveyOptions,
      CreateSurveyHeader, 
-     CreateSurveyLables, 
+    //  CreateSurveyLables, 
      CreateSurveyInput, 
      SurveyOptions, 
      SurveyType, 
      SurveyTypeButton, 
      SurveyQuestions, 
-     CreateSurveyButtonWrapper 
+     CreateSurveyButtonWrapper,
+     SurveyStyledButton 
 } from './CreateSurvey.styling';
+import '../Surveys/Surveys.css';
 import { ActionEvent } from 'material-ui/svg-icons';
 
 const CreateSurvey = (props: any)=>{
@@ -28,7 +31,7 @@ const CreateSurvey = (props: any)=>{
     const [question3, setQuestion3] = useState('')
     const [isGuest, setIsGuest] = useState(true)
     const [fetch, setFetch] = useState(false)
-    const [activeSurvey, setActiveSurvey] = useState('')
+    const [activeSurvey, setActiveSurvey] = useState(0)
     const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
 
     const activeClass = (filter: any, active: any) =>
@@ -137,13 +140,26 @@ const CreateSurvey = (props: any)=>{
                 <form>
                     <CreateSurveyHeader>Create a Survey</CreateSurveyHeader>
                     <CreateSurveyOptions>
-                        <CreateSurveyLables>Survey Name</CreateSurveyLables>
+                        <h2>Survey Name</h2>
                         <CreateSurveyInput type='text' placeholder='Survey Name' onChange={(event: any) => { setSurveyName(event.target.value) }}/>
                         <SurveyOptions>
-                            <SurveyType>Survey Type:</SurveyType>
-                            <SurveyTypeButton className = {`${activeClass(true, isGuest)}`} type = 'button' onClick = {()=> setIsGuest(true)}>Guest Survey</SurveyTypeButton>
-                            <SurveyTypeButton className = {`${activeClass(false, isGuest)}`} type = 'button' onClick = {()=> setIsGuest(false)}>Assitant Survey</SurveyTypeButton>
-                            <SurveyQuestions>How Many Questions:</SurveyQuestions>
+                            <h3>Survey Type:</h3>
+                            {/* <Button
+                                className={`button-filter guest`}
+                                text='Guest Survey'
+                                color='var(--color-button-background-alt)'
+                                onClick={() => {setActiveSurvey(1)}}
+                                datatestid='button-guest'
+                                />
+                                <Button
+                                className={`button-filter assistant`}
+                                text='Assistant Survey'
+                                color='var(--color-button-background-alt)'
+                                datatestid='button-assistant'
+                                /> */}
+                            <SurveyTypeButton className={activeSurvey ? 'active-survey' : ''} onClick={() => {setActiveSurvey(1)}} type = 'button'>Guest Survey</SurveyTypeButton>
+                            <SurveyTypeButton type = 'button'>Assitant Survey</SurveyTypeButton>
+                            <h3>How Many Questions:</h3>
                             <select defaultValue = '3' onChange={(event: any) => {
                                 event.preventDefault()
                                 setDropdown(event.target.value)
@@ -158,8 +174,8 @@ const CreateSurvey = (props: any)=>{
                        {questionLength(dropdown, survey)}
                     </div>
                     <CreateSurveyButtonWrapper>
-                        <button type = 'button' onClick={() => handleSubmit(surveyName, isGuest, dropdown)}>Save</button>
-                        <button>Cancel</button>
+                        <SurveyStyledButton type = 'button' onClick={() => handleSubmit(surveyName, isGuest, dropdown)}>Save</SurveyStyledButton>
+                        <SurveyStyledButton>Cancel</SurveyStyledButton>
                     </CreateSurveyButtonWrapper>
                 </form>
             </CreateSurveysWrapper>   

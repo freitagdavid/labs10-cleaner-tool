@@ -42,6 +42,8 @@ export interface GuestProps extends IncomingGuestProps {
   // tslint:disable-next-line
   Uppy: (props: { type?: string; id?: number; text?: string }) => JSX.Element;
   goBack: () => void;
+  modal: () => void;
+  show: any;
 }
 
 // Checklists

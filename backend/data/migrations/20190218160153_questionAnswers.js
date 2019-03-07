@@ -16,9 +16,12 @@ exports.up = function(knex, Promise) {
       .foreign('stay_id')
       .references('stay.id')
       .onDelete('CASCADE');
-    table.string('name')
-    table.string('photo')
-    table.integer('house_name')
+    table.string('guest_name');
+    table.string('photo');
+    table.integer('house_name');
+    table
+    .timestamp('created_at')
+    .defaultTo(knex.fn.now());
   });
 };
 
