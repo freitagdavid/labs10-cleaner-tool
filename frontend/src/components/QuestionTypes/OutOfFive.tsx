@@ -35,7 +35,6 @@ const OutOfFive = (props:any) => {
         })()
     }, []);
     const handleClick = (event: any) =>{
-        event.target.className = `${event.target.className} active`
         if(selected != event.target.value){
         setSelected(event.target.value)
         props.setAnswers(selected) 
