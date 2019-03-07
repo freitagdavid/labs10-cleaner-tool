@@ -16,6 +16,29 @@ const StyledGuestDashboard = styled.div`
   }
 `;
 
+const timeObject = (dateTime: string) => {
+  const re = /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d)\:(\d\d)\:(\d\d)\.(\d\d\d)Z/i;
+  // Run regex on the passed in dateTime to split it into seperate date/time items
+  const date = dateTime.match(re);
+  // Convert the data to integers to make TS shutup
+  let integerified = new Array<number>(8);
+  integerified = date!.map((i) => parseInt(i, 10));
+  // Remove first result since it's a duplicate of the second
+  let cruftRemoved = Array<number>(7);
+  cruftRemoved = [...integerified].slice(1, 7);
+  // @ts-ignore
+  return new Date(...cruftRemoved);
+};
+
+const formatDate = (dateTime: Date) => {
+  return `${dateTime.getDay()}/${dateTime.getMonth()}/${dateTime.getFullYear()}`;
+};
+
+const handleDate = (dateTime: string) => {
+  const dateObj = timeObject(dateTime);
+  return formatDate(dateObj);
+};
+
 const GuestDashboard = (props: any) => {
   console.log(props.match);
   const [fetchData, fetchErr, fetchLoading] = useFetch(
@@ -33,8 +56,8 @@ const GuestDashboard = (props: any) => {
       </div>
     );
   } else {
-    // const user = fetchData
-    // console.log(user);
+    console.log(timeObject(fetchData.check_in));
+
     return (
       <StyledGuestDashboard>
         <GuestInfo
