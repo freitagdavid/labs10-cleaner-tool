@@ -8,7 +8,7 @@ const Response = (props:any) => {
             <div className="single-response">
                 <h3>Question{props.qid}</h3>
                 <h4>{props.question}</h4>
-                <YNComponent />
+                <YNComponent yn_answer={props.answer} />
             </div>
         ) 
     }
@@ -18,7 +18,7 @@ const Response = (props:any) => {
             <div className="single-response">
                 <h3>Question{props.qid}</h3>
                 <h4>{props.question}</h4>
-                <RatingComponent />
+                <RatingComponent rating_answer={props.answer} />
             </div>
         )
     }
