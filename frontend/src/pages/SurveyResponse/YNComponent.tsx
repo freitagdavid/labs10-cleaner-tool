@@ -1,21 +1,13 @@
-import React,{useState} from 'react';
+import React from 'react';
 
 const YNComponent = (props:any) => {
 
-    let selectAnswer = () => {
-         const button = String(props.children);
-         console.log(button);
-        if(props.name == button.toLowerCase()){
-            return("select");
-        }else{
-            return("");
-        }
-    }   
+    
 
     return(
         <div>
-            <button className={selectAnswer()} name={props.yn_answer}>Yes</button>
-            <button className={selectAnswer()} name={props.yn_answer}>No</button> 
+            <input checked={props.yn_answer==="yes"} type="radio" disabled={true} value="yes" />
+            <input checked={props.yn_answer==="no"} type="radio" disabled={true} value="no" />        
         </div>
     )
 }
