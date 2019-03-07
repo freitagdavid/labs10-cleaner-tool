@@ -8,22 +8,35 @@ const StyledLinks = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
+    .guides {
+      border: solid 1px brown;
+      padding: 10px;
+      display: flex;
+      width: 30%;
+      height: calc(100vw * 0.3 * 0.4);
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+      background-color: white;
+    }
   a {
-    padding: 10px;
-    display: flex;
-    width: 30%;
-    height: calc(100vw * 0.3 * 0.4);
-    border: solid 1px black;
-    justify-content: center;
-    align-items: flex-end;
+   text-decoration: underline;
+   color: var(--color-text-accent);
   }
 `;
 const MiscInfo = () => {
   return (
     <StyledLinks>
-      <a href='http://example.com'>Your Guest Guide</a>
+      <div className='guides'>  
+        <i className="far fa-file-alt fa-4x"></i>
+        <a href='http://example.com'>Your Guest Guide</a>
+      </div>
+      <div className='guides'>
       <a href='http://example.com'>Directions</a>
+      </div>
+      <div className='guides'>
       <a href='http://example.com'>Complete a Survey</a>
+      </div>
     </StyledLinks>
   );
 };
