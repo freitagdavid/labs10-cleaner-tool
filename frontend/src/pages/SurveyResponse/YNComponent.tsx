@@ -2,12 +2,23 @@ import React from 'react';
 
 const YNComponent = (props:any) => {
 
-    
+    let selectYes = () => {
+        if(props.yn_answer.toLowerCase() === "yes"){
+            return("select");
+        }
+    }
+
+    let selectNo = () => {
+        if(props.yn_answer.toLowerCase() === "no"){
+            return("select");
+        }
+    }
+ 
 
     return(
         <div>
-            <input checked={props.yn_answer==="yes"} type="radio" disabled={true} value="yes" />
-            <input checked={props.yn_answer==="no"} type="radio" disabled={true} value="no" />        
+            <button className={selectYes()}>Yes</button>
+            <button className={selectNo()}>No</button>       
         </div>
     )
 }

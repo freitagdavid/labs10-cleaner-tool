@@ -1,13 +1,44 @@
 import React from 'react';
 
 const RatingComponent = (props:any) => {
+
+    let selectOne = () => {
+        if(props.yn_answer == "1"){
+            return("select");
+        }
+    }
+
+    let selectTwo = () => {
+        if(props.yn_answer == "2"){
+            return("select");
+        }
+    }
+
+    let selectThree = () => {
+        if(props.yn_answer == "3"){
+            return("select");
+        }
+    }
+
+    let selectFour = () => {
+        if(props.yn_answer == "4"){
+            return("select");
+        }
+    }
+
+    let selectFive = () => {
+        if(props.yn_answer == "5"){
+            return("select");
+        }
+    }
+
     return(
         <div>
-            <input checked={props.yn_answer=="1"} type="radio" disabled={true} value="1" />
-            <input checked={props.yn_answer=="2"} type="radio" disabled={true} value="2" />
-            <input checked={props.yn_answer=="3"} type="radio" disabled={true} value="3" />
-            <input checked={props.yn_answer=="4"} type="radio" disabled={true} value="4" />
-            <input checked={props.yn_answer=="5"} type="radio" disabled={true} value="5" />
+          <button className = {selectOne()}>1</button>
+          <button className = {selectTwo()}>2</button>
+          <button className = {selectThree()}>3</button>
+          <button className = {selectFour()}>4</button>
+          <button className = {selectFive()}>5</button> 
         </div>
     )
 }
