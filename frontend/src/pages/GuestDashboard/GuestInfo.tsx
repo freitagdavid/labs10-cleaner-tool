@@ -21,7 +21,7 @@ const GuestInfo = (props: GuestInfoProps) => {
       <img src={picture} alt={`Picture of ${name}`} />
       <div>
       <h3>{name}</h3>
-      <p>{`Staying: ${houseName}`}</p> 
+      <a href='#'>{`Staying: ${houseName}`}</a> 
       </div>
       </div>
         <CheckIn>

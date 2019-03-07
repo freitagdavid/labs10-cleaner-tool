@@ -13,7 +13,13 @@ const StyledGuestProgressBar = styled.div`
   grid-template-areas:
     'lable1 label2 label3'
     'previous current overall';
+    // p{
+    //   border: 1px solid red;
+    // }
   span:nth-child(4) {
+    height: 50px;
+    border: 1px solid red;
+    background-color: #65BAE6;
     background: linear-gradient(
       to right,
       blue
@@ -26,6 +32,8 @@ const StyledGuestProgressBar = styled.div`
     );
   }
   span:nth-child(5) {
+    border: 1px solid red;
+
     background: linear-gradient(
       to right,
       blue ${(props) => props.currentProgress}%,
@@ -33,6 +41,8 @@ const StyledGuestProgressBar = styled.div`
     );
   }
   span:nth-child(6) {
+    border: 1px solid red;
+
     background: ${(props) =>
       props.overallProgress === 100 ? 'green' : '#00000000'};
   }
