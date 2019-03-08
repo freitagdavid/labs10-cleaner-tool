@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Card from '../../components/Card';
 
 export const StyledGuestDashboard = styled('div')`
   max-width: 1000px;
@@ -17,16 +18,11 @@ export const StyledGuestDashboard = styled('div')`
   }
 `;
 
-export const GuestInfoWrapper = styled('div')`
+export const GuestInfoWrapper = styled(Card)`
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin: 0 auto;
-  background-color: white;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 1rem;
   .guest-info {
     display: flex;
     img {
@@ -47,29 +43,34 @@ export const GuestInfoWrapper = styled('div')`
     }
   }
 `;
-export const CheckIn = styled('div')`
+
+export const CheckInOut = styled('div')`
   display: flex;
   justify-content: space-around;
   width: 50%;
-  margin-right: 2rem;
-  //border: 1px solid red;
+`;
 
-  .check-in {
-    background-color: white;
-    width: 35%;
-    //text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-
-    .in {
-      font-family: 'Roboto Medium', Arial, sans-serif;
-      color: var(--color-text-accent);
-      font-size: 1.5rem;
-      margin: 0.5rem 0;
-    }
-    .date {
-      font-family: 'Roboto Light', Arial, sans-serif;
-      font-size: 1rem;
-      color: var(--color-text-dark);
-    }
+export const DateContainer = styled('div')`
+  background-color: var(--color-bg-secondary);
+  flex: 1;
+  border: var(--border);
+  padding: 1.5rem 1rem;
+  align-content: center;
+  justify-content: center;
+  h2 {
+    padding: 0;
+    font-family: 'Roboto Medium', Arial, Helvetica, sans-serif;
+    color: var(--color-text-accent);
+    font-size: var(--header-font-size-secondary);
+    margin-bottom: 0.8rem;
   }
+  div {
+    font-family: 'Roboto Light', Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+  }
+`;
+
+export const CheckIn = styled(DateContainer)`
+  margin-right: 2rem;
 `;

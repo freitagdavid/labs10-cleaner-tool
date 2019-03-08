@@ -3,7 +3,12 @@ import styled from '@emotion/styled';
 import { generateDisplayDate } from '../utils';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { InfoDiv } from '../Guests/Guests.styling';
-import { GuestInfoWrapper, CheckIn } from './GuestDash.styling';
+import {
+  GuestInfoWrapper,
+  CheckInOut,
+  DateContainer,
+  CheckIn,
+} from './GuestDash.styling';
 interface GuestInfoProps {
   name: string;
   picture: string;
@@ -24,16 +29,16 @@ const GuestInfo = (props: GuestInfoProps) => {
           <a href='#'>{`Staying: ${houseName}`}</a>
         </div>
       </div>
-      <CheckIn>
-        <div className='check-in'>
-          <div className='in'>Check-in</div>
+      <CheckInOut>
+        <CheckIn>
+          <h2>Check-in</h2>
           <div className='date'>{generateDisplayDate(checkIn)}</div>
-        </div>
-        <div className='check-in'>
-          <div className='in'>Check-out</div>
-          <div className='date'>{generateDisplayDate(checkOut)}</div>
-        </div>
-      </CheckIn>
+        </CheckIn>
+        <DateContainer>
+          <h2>Check-out</h2>
+          <div>{generateDisplayDate(checkOut)}</div>
+        </DateContainer>
+      </CheckInOut>
     </GuestInfoWrapper>
   );
 };
