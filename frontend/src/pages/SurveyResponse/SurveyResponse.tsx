@@ -4,7 +4,6 @@
  import loadingIndicator from '../utils/loading.svg';
 
  import Responses from './Responses';
- import Properties from './Properties';
  import './images/profile_pic_default.png';
  import './SurveyResponse.css';
  
