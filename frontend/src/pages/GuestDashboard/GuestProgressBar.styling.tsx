@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
+import Container from '../../components/Container';
 
-export const StyledGuestProgressBar = styled.div`
-  width: 98%;
+export const StyledGuestProgressBar = styled(Container)`
   margin: 40px auto 40px auto;
   display: grid;
   background-color: white;

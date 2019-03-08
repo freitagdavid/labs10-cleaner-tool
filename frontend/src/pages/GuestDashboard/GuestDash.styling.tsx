@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 
 export const StyledGuestDashboard = styled('div')`
-  width: 70%;
+  max-width: 1000px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -19,7 +20,7 @@ export const StyledGuestDashboard = styled('div')`
 export const GuestInfoWrapper = styled('div')`
   display: flex;
   justify-content: space-between;
-  width: 98%;
+  width: 100%;
   margin: 0 auto;
   background-color: white;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
