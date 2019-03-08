@@ -2,14 +2,20 @@ import styled from '@emotion/styled';
 
 export const StyledGuestProgressBar = styled.div`
   width: 98%;
-  margin: 0 auto;
+  margin: 40px auto 40px auto;
   display: grid;
+  background-color: white;
   grid-template-columns: 1fr 8fr 1fr;
-  grid-template-rows: auto auto 30px;
+  grid-template-rows: auto 40px 30px;
   grid-auto-flow: column;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 1rem;
   grid-template-areas:
     'lable1 label2 label3'
-    'previous current overall';
+    'previous current overall'
+    'previousProgress currentProgress overallProgress';
   align-items: stretch;
   justify-content: stretch;
   ol:nth-child(3) {

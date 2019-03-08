@@ -18,23 +18,22 @@ const GuestInfo = (props: GuestInfoProps) => {
   return (
     <GuestInfoWrapper>
       <div className='guest-info'>
-      <img src={picture} alt={`Picture of ${name}`} />
-      <div>
-      <h3>{name}</h3>
-      <a href='#'>{`Staying: ${houseName}`}</a> 
-      </div>
-      </div>
-        <CheckIn>
-        <div className='check-in'>
-           <div className='in'>Check-in</div>
-           <div className='date'>{generateDisplayDate(checkIn)}</div>
+        <img src={picture} alt={`Picture of ${name}`} />
+        <div>
+          <h3>{name}</h3>
+          <a href='#'>{`Staying: ${houseName}`}</a>
         </div>
-       <div className='check-in'>
-         <div className='in'>Check-out</div>
-        <div className='date'>{generateDisplayDate(checkOut)}</div>
       </div>
+      <CheckIn>
+        <div className='check-in'>
+          <div className='in'>Check-in</div>
+          <div className='date'>{generateDisplayDate(checkIn)}</div>
+        </div>
+        <div className='check-in'>
+          <div className='in'>Check-out</div>
+          <div className='date'>{generateDisplayDate(checkOut)}</div>
+        </div>
       </CheckIn>
-      
     </GuestInfoWrapper>
   );
 };
