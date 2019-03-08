@@ -212,6 +212,9 @@ const AssistantDetailContainer = styled(Container)`
     font-family: 'Roboto Light', Arial, Helvetica, sans-serif;
     font-weight: lighter;
   }
+  .display-none{
+    display:none
+  }
   @media screen and (max-width: 700px) {
     /* In smaller screens, make page columnar.
        Have map and AsstDetail swap places */

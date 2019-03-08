@@ -40,7 +40,24 @@ export const SurveyFilterButtons = styled('div')`
     }
     button {
         margin-right: 1rem;
+        max-width: 200px;
+    width: 200px;
+    max-height: 64px;
+    height: auto;
+    padding: 0.5rem 1rem;
+    border: 0;
+    border-radius: var(--border-radius);
+    font-weight: normal;
+    font-size: 1rem;
+    background: var(--color-button-background-alt);
+    color: var(--color-text-dark);
+    outline:none;
     }
+    .active {
+    /* Color */
+    color: var(--color-button-text) ;
+    background-color: var(--color-button-background) ;
+  }
     @media only screen and (max-width: 900px) {
         justify-content: center;
     }

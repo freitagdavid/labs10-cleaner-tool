@@ -3,18 +3,9 @@ import GuestInfo from './GuestInfo';
 import useFetch from '../../helpers/useFetch';
 import GuestProgressBar from './GuestProgressBar';
 import MiscInfo from './MiscInfo';
-import styled from '@emotion/styled';
-const backendURL = process.env.REACT_APP_backendURL;
+import { StyledGuestDashboard } from './GuestDash.styling';
 
-const StyledGuestDashboard = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  @media only screen and (min-width: 780px) {
-    border: 1px solid red;
-  }
-`;
+const backendURL = process.env.REACT_APP_backendURL;
 
 const timeObject = (dateTime: string) => {
   const re = /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d)\:(\d\d)\:(\d\d)\.(\d\d\d)Z/i;
@@ -46,6 +37,7 @@ const GuestDashboard = (props: any) => {
     true,
     'get',
   );
+  console.log(fetchData);
   if (fetchErr.error === true) {
     throw fetchErr;
   }
@@ -60,6 +52,7 @@ const GuestDashboard = (props: any) => {
 
     return (
       <StyledGuestDashboard>
+        <h1>Your House Progress</h1>
         <GuestInfo
           name={`${fetchData.guest_name}`}
           picture={fetchData.photo_url}
@@ -69,7 +62,7 @@ const GuestDashboard = (props: any) => {
           checkOut={fetchData.check_out}
         />
         <GuestProgressBar tasks={fetchData.checklist} />
-        <MiscInfo />
+        <MiscInfo id={props.match.params.id} />
       </StyledGuestDashboard>
     );
   }

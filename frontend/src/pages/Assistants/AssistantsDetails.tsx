@@ -12,6 +12,7 @@ import {
   HouseItem,
   ModalStyle,
 } from './Assistants.styling';
+import {SurveyModal} from './Modal/AssistantsModal';
 import Modal from '@material-ui/core/Modal';
 import { useFetch, axiosFetch } from '../../helpers/';
 import defaultUser from '../../assets/default-user.jpg';
@@ -56,6 +57,7 @@ const AssistantCard = (props: any) => {
           <h3>{assistant.address}</h3>
         </div>
       </AsstDetail>
+      <button onClick={()=>props.modal()}>Send Survey</button>
       <AsstProperty>
         <PropertyContainer>
           <PropertyHeading>
@@ -219,6 +221,8 @@ const AssistantDetails = (props: any) => {
     `${url}/assistants/${id}`,
     fetch,
   );
+    // modal state 
+  const [show, setShow] = useState(false);
 
   async function removeDefault(houseId: number, addD: boolean = false) {
     const dAst = addD ? id : null;
@@ -250,6 +254,12 @@ const AssistantDetails = (props: any) => {
   function goBack() {
     props.history.push('/assistants');
   }
+  //function to set modal state
+  const modal = () => {
+    if(show===false){
+      setShow(true);
+    }else{ setShow(false);}
+  }
   return loading && !assistant ? (
     <img src={loadingIndicator} alt='animated loading indicator' />
   ) : (
@@ -258,6 +268,8 @@ const AssistantDetails = (props: any) => {
 
       {assistant ? (
         <>
+          <SurveyModal  show={show} modal={modal}>
+          </SurveyModal>
           <AssistantCard
             className='assistant-card'
             assistant={assistant}
@@ -265,6 +277,7 @@ const AssistantDetails = (props: any) => {
             addRemoveHouse={addRemoveHouse}
             goBack={goBack}
             deleteAst={deleteAst}
+            modal={modal}
           />
           <LeafletMap ast={assistant} />
         </>

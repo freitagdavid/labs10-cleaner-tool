@@ -5,7 +5,7 @@ import {
   TrackerChunk,
   FinalTrackerChunk,
   StyledLi,
-} from './GuestDashBoard.styling';
+} from './GuestProgressBar.styling';
 interface ProgressBar {
   tasks: {
     before: TaskList;
@@ -71,7 +71,9 @@ const GuestProgressBar = (props: ProgressBar) => {
       before.length) *
       100,
   );
-  const overallProgress = beforeProgress + duringProgress;
+
+  // prettier-ignore
+  const overallProgress = Math.floor((20 * (beforeProgress / 100)) - (80 * (duringProgress / 100)));
   const reducer = (a: Task, b: Task) => {
     if (a.complete > b.complete) {
       return -1;
