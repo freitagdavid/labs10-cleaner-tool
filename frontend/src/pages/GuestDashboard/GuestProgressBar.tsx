@@ -1,68 +1,112 @@
 // @ts-nocheck
 import React from 'react';
-import styled from '@emotion/styled';
+import {
+  StyledGuestProgressBar,
+  TrackerChunk,
+  FinalTrackerChunk,
+  StyledLi,
+} from './GuestProgressBar.styling';
 interface ProgressBar {
-  previousCheckout: boolean;
-  currentProgress: number;
+  tasks: {
+    before: TaskList;
+    during: TaskList;
+    after: any;
+  };
 }
 
-const StyledGuestProgressBar = styled.div`
-  width: 93%;
-  display: grid;
-  grid-template-columns: 1fr 8fr 1fr;
-  grid-template-areas:
-    'lable1 label2 label3'
-    'previous current overall';
-  margin-left: 1rem;
-  span:nth-child(4) {
-    height: 50px;
-    border: 1px solid red;
-    background: linear-gradient(
-      to right,
-      blue
-        ${(props: {
-          previousCheckout: boolean;
-          currentProgress: number;
-          overallProgress: number;
-        }) => (props.previousCheckout ? '100%' : '0%')},
-      #00000000 ${(props) => (props.previousCheckout ? '0%' : '100%')}
-    );
-  }
-  span:nth-child(5) {
-    border: 1px solid red;
+interface GuestDashInfo {
+  guest_id: number;
+  guest_name: string;
+  email: string;
+  phone: number;
+  address: string;
+  house_id: number;
+  house_name: string;
+  photo_url: string;
+  house_address: string;
+  default_ast: number;
+  guest_guide: string;
+  ast_guide: string;
+  price: number;
+  extra_fee: number;
+  cleaning_fee: number;
+  extra_guests: number;
+  stay_receipt: string;
+  stay_id: number;
+  check_in: string;
+  checkout: string;
+  diff: number;
+  checklist: {
+    before: TaskList;
+    during: TaskList;
+    after: afterList;
+  };
+}
 
-    background: linear-gradient(
-      to right,
-      blue ${(props) => props.currentProgress}%,
-      #00000000 ${(props) => 100 - props.currentProgress}%
-    );
+type afterList = [
+  {
+    [key: string]: TaskList;
   }
-  span:nth-child(6) {
-    border: 1px solid red;
+];
 
-    background: ${(props) =>
-      props.overallProgress === 100 ? 'green' : '#00000000'};
-  }
-`;
+type TaskList = [Task];
+
+interface Task {
+  complete: number;
+  task: string;
+  items_id: number;
+  stay_id: number;
+}
 
 const GuestProgressBar = (props: ProgressBar) => {
-  const { previousCheckout, currentProgress } = props;
-  const overallProgress = previousCheckout
-    ? currentProgress + 10
-    : currentProgress - 10;
+  const { before, during, after } = props.tasks;
+  console.log(before, 'Before mutation');
+  const beforeProgress = Math.floor(
+    (before.filter((task: Task) => task.complete === 1).length /
+      before.length) *
+      100,
+  );
+  const duringProgress = Math.floor(
+    (during.filter((task: Task) => task.complete === 1).length /
+      before.length) *
+      100,
+  );
+
+  // prettier-ignore
+  const overallProgress = Math.floor((20 * (beforeProgress / 100)) - (80 * (duringProgress / 100)));
+  const reducer = (a: Task, b: Task) => {
+    if (a.complete > b.complete) {
+      return -1;
+    }
+    if (b.complete > a.complete) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const beforeOutput = [...before].sort(reducer);
+  const duringOutput = [...during].sort(reducer);
+
   return (
     // @ts-ignore
-    <StyledGuestProgressBar
-      previousCheckout={previousCheckout}
-      currentProgress={currentProgress}
-      overallProgress={overallProgress}
-    >
+    <StyledGuestProgressBar>
       <p>Previous Guest Checkout</p>
+      <span>{beforeProgress}%</span>
+      <TrackerChunk>
+        {beforeOutput.map((item: Task) => {
+          return <StyledLi complete={item.complete} />;
+        })}
+      </TrackerChunk>
       <p>Getting Ready for you</p>
+      <span>{duringProgress}%</span>
+      <TrackerChunk>
+        {duringOutput.map((item: Task) => {
+          return <StyledLi complete={item.complete} />;
+        })}
+      </TrackerChunk>
       <p>Overall</p>
-      <span>{previousCheckout ? '100' : '0'}%</span>
-      <span>{currentProgress}%</span>
       <span>{overallProgress}%</span>
+      <FinalTrackerChunk complete={overallProgress === 100 ? true : false} />
     </StyledGuestProgressBar>
   );
 };
