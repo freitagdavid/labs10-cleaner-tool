@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
       .unique()
       .primary();
     table.string('answer').unsigned();
-    table.integer('answer_type')
+    table.integer('answer_type');
     table.integer('question_id');
     table
       .foreign('question_id')
@@ -18,10 +18,8 @@ exports.up = function(knex, Promise) {
       .onDelete('CASCADE');
     table.string('guest_name');
     table.string('photo');
-    table.integer('house_name');
-    table
-    .timestamp('created_at')
-    .defaultTo(knex.fn.now());
+    table.string('house_name');
+    table.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };
 
