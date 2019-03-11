@@ -85,7 +85,7 @@ export const GuestDetailStyle = styled(Container)`
     display: flex;
     justify-content: space-between;
     .send-survey {
-      margin: 0 .5rem;
+      margin: 0 0.5rem;
     }
     @media only screen and (max-width: 431px) {
       flex-direction: column;
@@ -126,7 +126,6 @@ export const GuestDetailStyle = styled(Container)`
     max-width: 470px;
 
     @media only screen and (max-width: 900px) {
-      width: 96%;
       max-width: none;
     }
   }
@@ -433,7 +432,7 @@ export const GuestDetailStyle = styled(Container)`
       justify-self: center;
     }
   }
-  .display-none{
-    display:none
+  .display-none {
+    display: none;
   }
 `;
