@@ -35,12 +35,7 @@ let guestPic = () => {
     } 
 }
 
-let questionNum = () => {
-    let qNum = 0;
-    for(let i=0; i< response.survey.length; i++){
-        qNum += 1;
-    }
-}
+
           
 if (loading === true) {
     return(
@@ -51,13 +46,16 @@ if (loading === true) {
                 <div className = 'sr-title'>
                     <h1>{surveyName()}</h1>
                     {console.log(response.survey)}
+                </div> 
+
+                <div className='sr-title'>
                     <select name="properties">
                         <option value="title">Filter By Property</option>
-                        <option value="property1">Property1</option>
-                        <option value="property2">Property2</option>
-                        <option value="property3">Property3</option>
-                    </select>
-                </div>  
+                        {response.survey.map((survey:any) =>{
+                        return(<option value={survey.house_name}>{survey.house_name}</option> )
+                        })}
+                    </select> 
+                </div>
                 
                 {response.survey.map((survey: any) =>
                 <Responses key={survey.id} survey={response.survey} sr_name={survey.guest_name} sr_date={survey.created_at} guestPic={guestPic()} sr_img={survey.photo} />
