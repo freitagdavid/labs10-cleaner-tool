@@ -43,15 +43,22 @@ let changeHandler = (e:any) => {
     }
 }
 
-// let filteredSurveys = response.survey.filter((survey:any) => {
-//     console.log(response.survey);
-//     console.log(survey);
-//     if(matches === true){
-//         return survey.house_name === property;
-//     }else{
-//         return survey;
-//     }
-// })  
+
+let filteredSurveys = () => {
+    let propertyMatches = [];
+    if(matches===false){
+        propertyMatches = response.survey;
+    }else{
+        for(let i=0; i<response.survey.length; i++){
+            if(matches===true && property === response.survey[i].house_name){
+                propertyMatches.push(response.survey[i]);
+            }
+        }
+    }
+    
+    return propertyMatches;
+}
+
 
 if (loading === true) {
     return(
@@ -61,7 +68,7 @@ if (loading === true) {
             <div className = 'sr-container'>
                 <SRHeader surveys = {response.survey} />
                 <Properties surveys = {response.survey} changeHandler ={changeHandler}/> 
-                {response.survey.map((survey: any) =>
+                {filteredSurveys().map((survey: any) =>
                 <Responses key={survey.id} survey={response.survey} sr_name={survey.guest_name} sr_date={survey.created_at} guestPic={guestPic()} sr_img={survey.photo} />
                 )}
                  {console.log(response.survey)}
