@@ -62,19 +62,17 @@ interface Task {
 const GuestProgressBar = (props: ProgressBar) => {
   const { before, during, after } = props.tasks;
   console.log(before, 'Before mutation');
-  const beforeProgress = Math.floor(
+  let beforeProgress = Math.floor(
     (before.filter((task: Task) => task.complete === 1).length /
       before.length) *
       100,
   );
-  const duringProgress = Math.floor(
+  let duringProgress = Math.floor(
     (during.filter((task: Task) => task.complete === 1).length /
       before.length) *
       100,
   );
 
-  // prettier-ignore
-  const overallProgress = Math.floor((20 * (beforeProgress / 100)) - (80 * (duringProgress / 100)));
   const reducer = (a: Task, b: Task) => {
     if (a.complete > b.complete) {
       return -1;
@@ -86,7 +84,33 @@ const GuestProgressBar = (props: ProgressBar) => {
   };
 
   const beforeOutput = [...before].sort(reducer);
+  console.log(beforeOutput);
   const duringOutput = [...during].sort(reducer);
+  console.log(duringOutput);
+
+  if (beforeOutput.length === 0) {
+    beforeOutput.push({
+      complete: 1,
+      task: 'before',
+      items_id: 0,
+      stay_id: 0,
+    });
+    beforeProgress = 100;
+  }
+
+  if (duringOutput.length === 0) {
+    duringOutput.push({
+      complete: 1,
+      task: 'before',
+      items_id: 0,
+      stay_id: 0,
+    });
+    duringProgress = 100;
+  }
+
+  // prettier-ignore
+  const overallProgress = Math.floor((80 * (duringProgress / 100)) + (20 * (beforeProgress / 100)),
+  );
 
   return (
     // @ts-ignore

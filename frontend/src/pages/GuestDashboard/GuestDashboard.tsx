@@ -4,6 +4,7 @@ import useFetch from '../../helpers/useFetch';
 import GuestProgressBar from './GuestProgressBar';
 import MiscInfo from './MiscInfo';
 import { StyledGuestDashboard } from './GuestDash.styling';
+import defaultUser from '../../assets/default-user.jpg';
 
 const backendURL = process.env.REACT_APP_backendURL;
 
@@ -52,15 +53,16 @@ const GuestDashboard = (props: any) => {
 
     return (
       <StyledGuestDashboard>
-        <h1>Your House Progress</h1>
         <GuestInfo
           name={`${fetchData.guest_name}`}
-          picture={fetchData.photo_url}
+          picture={fetchData.photo_url || defaultUser}
           houseLink='http://example.com'
           houseName={fetchData.house_name}
           checkIn={fetchData.check_in}
           checkOut={fetchData.check_out}
+          houseAddress={fetchData.house_address}
         />
+
         <GuestProgressBar tasks={fetchData.checklist} />
         <MiscInfo id={props.match.params.id} />
       </StyledGuestDashboard>

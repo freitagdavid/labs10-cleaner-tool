@@ -1,5 +1,13 @@
 import styled from '@emotion/styled';
 import Card from '../../components/Card';
+import { InfoBox } from '../../components/InfoBox';
+
+const pxRem = (px: number) => `${px / 16}rem`;
+const pxToVUnitMaker = (maxSizeInPx: number) => (px: number) =>
+  `${(px / maxSizeInPx) * 100}vh`;
+const pxVw = pxToVUnitMaker(1080);
+const pxVh = pxToVUnitMaker(1920);
+const headerHeight = pxRem(144);
 
 export const StyledGuestDashboard = styled('div')`
   max-width: 1000px;
@@ -18,59 +26,115 @@ export const StyledGuestDashboard = styled('div')`
   }
 `;
 
-export const GuestInfoWrapper = styled(Card)`
-  display: flex;
+export const GuestInfoWrapper = styled('div')`
+  display: grid;
   justify-content: space-between;
-  width: 100%;
-  margin: 0 auto;
-  .guest-info {
+  margin: 2.25rem 1rem 1.5rem 1rem;
+  grid-template-areas:
+    'picture picture'
+    'guestName .'
+    'stayingInfo stayingInfo'
+    'houseAddress houseAddress'
+    'checkin checkout';
+  grid-template-rows: 25vmin auto auto auto 13vmin;
+  img {
+    width: ${pxRem(72)};
+    height: ${pxRem(72)};
+    border-radius: 100%;
+    margin: auto;
+    object-fit: cover;
+    grid-area: picture;
+  }
+  h3 {
+    margin: 0 1.5rem 0.5rem 0;
+    text-align: left;
+    grid-area: guestName;
+    font-size: 1.5rem;
+    font-weight: bolder;
+  }
+  a,
+  p {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+  }
+  a {
+    margin-right: 1.5rem;
+    text-align: left;
+    grid-area: stayingInfo;
+  }
+  p {
+    grid-area: houseAddress;
+    margin: 0;
     display: flex;
+    margin: 0rem 1.5rem 1.5rem 0;
+  }
+  .checkIn,
+  .checkOut {
+    border: var(--border);
+  }
+  .checkIn {
+    grid-area: checkin;
+  }
+  .checkOut {
+    grid-area: checkout;
+  }
+
+  @media only screen and (min-width: 900px) {
+    margin: 2.25rem auto 1.5rem auto;
+    height: ${headerHeight};
+    width: auto;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1.5fr 1.5fr auto 1fr;
+    grid-template-areas:
+      'picture guestName guestName checkinOut checkinOut checkinOut'
+      'picture stayingInfo stayingInfo checkinOut checkinOut checkinOut'
+      'picture houseAddress houseAddress . . .'
+      'picture . . . . .';
     img {
-      justify-self: center;
-      align-self: center;
-      height: 80%;
-      width: auto;
+      height: ${headerHeight};
+      width: ${pxVw(213)};
+      margin: 0;
+      border-radius: 0;
     }
-    div {
+    h3 {
+      margin: 0;
       text-align: left;
-      display: block;
-      margin-left: 2rem;
-      //border: 1px solid green;
-      h3 {
-        font-size: 1.5rem;
-        font-weight: normal;
-      }
+      display: flex;
+      align-items: flex-end;
+      height: 100%;
+    }
+    a {
+      text-align: left;
+      display: flex;
+      align-items: flex-end;
+    }
+    p {
+      text-align: left;
+    }
+    .checkIn {
+      grid-area: checkinOut;
+      width: 45%;
+      justify-self: start;
+    }
+    .checkOut {
+      grid-area: checkinOut;
+      width: 45%;
+      justify-self: end;
     }
   }
 `;
 
-export const CheckInOut = styled('div')`
-  display: flex;
-  justify-content: space-around;
-  width: 50%;
-`;
-
-export const DateContainer = styled('div')`
+export const DateContainer = styled(InfoBox)`
   background-color: var(--color-bg-secondary);
   flex: 1;
   border: var(--border);
-  padding: 1.5rem 1rem;
+  padding: 0;
   align-content: center;
   justify-content: center;
-  h2 {
-    padding: 0;
-    font-family: 'Roboto Medium', Arial, Helvetica, sans-serif;
-    color: var(--color-text-accent);
-    font-size: var(--header-font-size-secondary);
-    margin-bottom: 0.8rem;
+  .text-main {
+    font-size: 1.5rem;
   }
-  div {
-    font-family: 'Roboto Light', Arial, Helvetica, sans-serif;
+  .text-secondary {
     font-size: 1rem;
-    color: var(--color-text-dark);
   }
-`;
-
-export const CheckIn = styled(DateContainer)`
-  margin-right: 2rem;
 `;
