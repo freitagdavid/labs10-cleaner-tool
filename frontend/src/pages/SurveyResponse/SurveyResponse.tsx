@@ -69,7 +69,11 @@ if (loading === true) {
                 <SRHeader surveys = {response.survey} />
                 <Properties surveys = {response.survey} changeHandler ={changeHandler}/> 
                 {filteredSurveys().map((survey: any) =>
-                <Responses key={survey.id} survey={response.survey} sr_name={survey.guest_name} sr_date={survey.created_at} guestPic={guestPic()} sr_img={survey.photo} />
+                <Responses key={survey.id} survey={response.survey} 
+                sr_name={survey.guest_name} sr_date={survey.created_at} 
+                guestPic={guestPic()} sr_img={survey.photo} 
+                question={survey.question} answer={survey.answer} 
+                answerType={survey.answer_type}/>
                 )}
                  {console.log(response.survey)}
             </div>
