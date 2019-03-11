@@ -119,7 +119,17 @@ server.get('/questionanswers/:id', async (req, res) => {
     res.json(e);
   }
 });
-
+server.put('/surveys/:id', async (req, res) => {
+  const id = req.params.id
+  const survey = await db('surveys').where({ id: id })
+  const responses = survey[0].responses
+  const update = await db('surveys').where({ id: id }).update({ responses: responses + 1 })
+  try {
+    res.status(200).json(responses + 1)
+  } catch (e) {
+    res.json(e)
+  }
+});
 /* for Guest dashboard Info*/
 server.route('/gueststay/:id').get(stays.getGuest);
 
@@ -173,7 +183,7 @@ server.post('/questionanswers', verifyToken, async (req, res) => {
 server.post('/surveys', verifyToken, async(req,res) =>{
   const token = req.token
   const body = req.body
-  const createSurvey = await db('surveys').insert({...body,user_id:token.id})
+  const createSurvey = await db('surveys').insert({...body,responses: 0,user_id:token.id})
   const survey = await db('surveys').where({id: createSurvey[0]})
   try{
     res.status(201).json({...survey[0], message: 'successfully created survey'})
@@ -181,6 +191,7 @@ server.post('/surveys', verifyToken, async(req,res) =>{
     res.json(e)
 }
 });
+
 server.post('/questions', verifyToken, async (req, res) => {
   const body = req.body;
   const createQuestion = await db('questions').insert({ ...body });

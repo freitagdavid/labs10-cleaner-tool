@@ -11,6 +11,7 @@ import {
 import styled from '@emotion/styled';
 
 
+
 const StyledForm = styled.form`
     margin-top: 30px;
 `
@@ -50,6 +51,10 @@ const FillSurvey = (props: any)=>{
         const data = await axios.post(`${url}/questionanswers`, body, headers)
         console.log(data)
     }
+    async function handleUpdate(id: any){
+        const update = await axios.put(`${url}/surveys/${id}`);
+        return update
+    }
     const handleSubmit = () =>{
         const headers: AxiosRequestConfig = {
             headers: {
@@ -78,6 +83,8 @@ const FillSurvey = (props: any)=>{
             //@ts-ignore
             handleQuestions(answer1, questionInfo1.type, headers, questionInfo1.id)
         }
+        const update = handleUpdate(surveyId)
+        console.log(update)
         props.history.push(`/guestdashboard/${props.match.params.stayId}/surveys`)
     }
     const handleCancel = () =>{

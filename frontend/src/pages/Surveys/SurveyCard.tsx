@@ -9,6 +9,7 @@ import {
 } from './Surveys.styling';
 import './Surveys.css';
 
+
 const SurveyCard = (props : any) => {
     const{
         survey,
@@ -17,9 +18,9 @@ const SurveyCard = (props : any) => {
         name,
        
     } = props
+    console.log(props)
     const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
     const [data] = useFetch(`${url}/surveyresponses/${id}`, true, 'get');
-    console.log(data)
     return(
         
             <SurveyCards>  
@@ -31,8 +32,7 @@ const SurveyCard = (props : any) => {
                 </div>
                 <SurveyRightContent>
                     <p>Responses</p>
-                    {/* need data */}
-                    <h2>10</h2>
+                    <h2>{props.responses}</h2>
                 </SurveyRightContent>
             </SurveyCards>
         
