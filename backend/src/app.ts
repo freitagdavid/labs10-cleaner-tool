@@ -1,6 +1,7 @@
 import express from 'express';
 import { errorHandler } from './middleware/errorHandler';
 import setGeneralMiddleware from './middleware/generalMiddleware';
+import { findStaySummaryStandardizedByGuestId } from './models/stays/stays'
 // @ts-ignore
 import companion from '@uppy/companion';
 import verifyToken from './middleware/verifyToken';
@@ -135,8 +136,9 @@ server.route('/gueststay/:id').get(stays.getGuest);
 
 server.get('/stay/surveys/:id', async(req,res)=>{
     const id = req.params.id
-    const stay = await db('stay').where({id})
-    const houseId = stay[0].house_id
+    const stay = await findStaySummaryStandardizedByGuestId(id);
+    console.log(stay)
+    const houseId = stay.house_id
     const house = await db('house').where({id: houseId})
     const managerId = house[0].manager
     const manager = await db('manager').where({id: managerId})
