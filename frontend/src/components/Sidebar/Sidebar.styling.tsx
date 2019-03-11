@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 // Types
 import { RouteComponentProps } from 'react-router-dom';
 
-const bp = '780px';
+const bp = '900px';
 
 const conditionallyHideSidebar = (property: string) => (
   props: RouteComponentProps,
@@ -36,7 +36,6 @@ const Container = styled('div')`
 
   .button-sign-out {
     margin-bottom: 0;
-    margin-right: 1rem;
   }
 
   .menu {
@@ -75,7 +74,7 @@ const NavWrapper = styled('div')`
   display: none;
   @media only screen and (min-width: ${bp}) {
     display: flex;
-    padding-right: 1rem;
+    flex: 2;
   }
 `;
 
@@ -101,6 +100,7 @@ const SettingsWrapper = styled('div')`
     display: flex;
     padding-left: 1rem;
     align-items: center;
+    flex: 1;
   }
 `;
 
@@ -108,6 +108,13 @@ const StyledUL = styled('div')`
   list-style-type: none;
   display: flex;
   align-items: center;
+  @media only screen and (min-width: ${bp}) {
+    justify-content: space-around;
+    width: 100%;
+    div {
+      flex: 1;
+    }
+  }
 `;
 
 const StyledLink = styled(NavLink)`
@@ -117,11 +124,6 @@ const StyledLink = styled(NavLink)`
   }
   padding: 0 1rem 0 1rem;
   @media only screen and (min-width: ${bp}) {
-    :first-of-type {
-      padding-left: 0;
-    }
-    padding: 0 2rem;
-    float: left;
     text-decoration: none;
     color: var(--color-text-dark);
     &:active {
@@ -130,7 +132,7 @@ const StyledLink = styled(NavLink)`
     h4 {
       font-family: 'Roboto';
       font-weight: condensed;
-      font-size: 24px;
+      font-size: var(--header-font-size-primary);
     }
   }
   @media only screen and (min-width: 700) {
