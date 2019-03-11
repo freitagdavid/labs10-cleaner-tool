@@ -89,11 +89,11 @@ server.get('/surveyresponses/:id', verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
     const survey = await getSurveyResponse(id);
-    const responce = await db('questionAnswers')
-      .count({ response: 'answer' })
+    const response = await db('questionAnswers')
+      .count({ 'response' : 'answer' })
       .where({ question_id: id });
-    console.log(responce);
-    res.json({ survey, responce });
+    console.log(response);
+    res.json({ survey, response });
   } catch (e) {
     res.json(e);
   }

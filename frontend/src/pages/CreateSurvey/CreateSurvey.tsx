@@ -17,6 +17,16 @@ import {
 } from './CreateSurvey.styling';
 import '../Surveys/Surveys.css';
 import { ActionEvent } from 'material-ui/svg-icons';
+
+//style vars
+const active = {
+    text: '--color-button-text',
+    bg: "--color-accent"
+  };
+  const inactive = {
+    text: "--color-button-text-alt",
+    bg: "--color-button-background-alt"
+  }
 const CreateSurvey = (props: any)=>{
     const [dropdown, setDropdown] = useState('3')
     const [surveyName, setSurveyName] = useState('')
@@ -159,8 +169,8 @@ const CreateSurvey = (props: any)=>{
                                 color='var(--color-button-background-alt)'
                                 datatestid='button-assistant'
                                 /> */}
-                            <SurveyTypeButton className={activeSurvey ? 'active-survey' : ''} onClick={() => {setActiveSurvey(1)}} type = 'button'>Guest Survey</SurveyTypeButton>
-                            <SurveyTypeButton type = 'button'>Assitant Survey</SurveyTypeButton>
+                            <SurveyTypeButton theme={isGuest===true ? active: inactive } onClick={() => {setIsGuest(true)}} type = 'button'>Guest Survey</SurveyTypeButton>
+                            <SurveyTypeButton theme={isGuest===false ? active: inactive } onClick={() => {setIsGuest(false)}} type = 'button'>Assitant Survey</SurveyTypeButton>
                             <h3>How Many Questions:</h3>
                             <select defaultValue = '3' onChange={(event: any) => {
                                 event.preventDefault()

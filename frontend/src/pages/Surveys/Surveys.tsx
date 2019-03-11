@@ -31,21 +31,15 @@ const Surveys = () => {
                 </Link>
             </SurveysHeader>
             <SurveyFilterButtons>
-            <h2>Sort By:</h2> 
-            <Button
-          className={`button-filter guest ${activeClass(1)}`}
-          text='Guest'
-          color='var(--color-button-background-alt)'
-          onClick={() => setActive(1)}
-          datatestid='button-guest'
-        />
-        <Button
-          className={`button-filter assistant ${activeClass(0)}`}
-          text='Assistant'
-          color='var(--color-button-background-alt)'
-          onClick={() => setActive(0)}
-          datatestid='button-assistant'
-        />
+                <h2>Sort By:</h2> 
+                <button
+                    className={`${activeClass(1)}`}
+                    onClick={() => setActive(1)}
+                >Guest</button>
+                <button
+                    className={`${activeClass(0)}`}
+                    onClick={() => setActive(0)}
+                >Assistant</button>
         </SurveyFilterButtons>
             <SurveyCardWrapper>
                 {loading ? (

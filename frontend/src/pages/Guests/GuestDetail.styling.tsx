@@ -84,7 +84,9 @@ export const GuestDetailStyle = styled(Container)`
     /* Flex */
     display: flex;
     justify-content: space-between;
-
+    .send-survey {
+      margin: 0 .5rem;
+    }
     @media only screen and (max-width: 431px) {
       flex-direction: column;
       justify-content: space-between;

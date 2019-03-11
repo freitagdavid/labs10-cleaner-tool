@@ -26,6 +26,8 @@ const LinkLogin: FunctionComponent<LoginProps> = ({
   const [user, setUser] = useState<User | null>(null);
   const { state, dispatch } = useContext(UserContext);
   const observer: MutableRefObject<any> = useRef<Unsubscribe>(null);
+  let email: any;
+  email = localStorage.getItem('emailForSignIn')
 
   useEffect(() => {
     observer.current = app
