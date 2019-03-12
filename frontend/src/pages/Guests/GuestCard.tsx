@@ -2,7 +2,7 @@ import React from 'react';
 // Types
 import { GuestsProps } from './types';
 // Components
-import { InfoBox } from './InfoBox';
+import { InfoBox } from '../../components/InfoBox';
 // Styled Components
 import { MainText, SecondaryText } from './Guests.styling';
 // Utils
