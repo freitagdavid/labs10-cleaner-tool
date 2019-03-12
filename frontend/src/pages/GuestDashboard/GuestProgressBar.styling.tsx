@@ -38,11 +38,6 @@ export const StyledLi = styled.li`
   background: var(--color-accent-light);
   filter: ${(props: { complete: number }) =>
     props.complete === 1 ? 'opacity(100%)' : 'opacity(50%)'};
-  }
-  /* background: ${(props: { complete: number }) =>
-    props.complete === 1
-      ? 'var(--color-accent-light)'
-      : 'var(--color-error)'}; */
 `;
 
 export const TrackerChunk = styled.ol`
