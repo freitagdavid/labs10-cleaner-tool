@@ -54,5 +54,4 @@ export const FinalTrackerChunk = styled.span`
   background: var(--color-accent-light);
   filter: ${(props: { complete: boolean }) =>
     props.complete === true ? 'opacity(100%)' : 'opacity(50%)'};
-  }
 `;
