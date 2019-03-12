@@ -1,26 +1,48 @@
 import styled from '@emotion/styled';
 import Card from '../../components/Card';
 
-export const StyledGuestProgressBar = styled(Card)`
-  margin: 40px auto 40px auto;
+export const StyledGuestProgressBar = styled('div')`
+  padding: 1.5rem 1rem;
+  font-family: Roboto;
+  margin: 0 auto 0 auto;
   display: grid;
   background-color: white;
   grid-template-columns: 1fr 8fr 1fr;
-  grid-template-rows: auto 40px 30px;
+  grid-template-rows: 40px 30px;
   grid-auto-flow: column;
   grid-template-areas:
-    'lable1 label2 label3'
     'previous current overall'
     'previousProgress currentProgress overallProgress';
   align-items: stretch;
   justify-content: stretch;
+  font-size: var(--font-size-primary);
+  width: 100%;
+  p {
+    display: none;
+  }
+  @media only screen and (min-width: 900px) {
+    grid-template-areas:
+      'lable1 label2 label3'
+      'previous current overall'
+      'previousProgress currentProgress overallProgress';
+    grid-template-rows: auto 40px 30px;
+    p {
+      display: block;
+    }
+  }
 `;
 
 export const StyledLi = styled.li`
   border: solid 1px black;
   flex: 1;
-  background: ${(props: { complete: number }) =>
-    props.complete === 1 ? 'var(--color-accent-light)' : 'var(--color-error)'};
+  background: var(--color-accent-light);
+  filter: ${(props: { complete: number }) =>
+    props.complete === 1 ? 'opacity(100%)' : 'opacity(50%)'};
+  }
+  /* background: ${(props: { complete: number }) =>
+    props.complete === 1
+      ? 'var(--color-accent-light)'
+      : 'var(--color-error)'}; */
 `;
 
 export const TrackerChunk = styled.ol`
@@ -34,6 +56,8 @@ export const TrackerChunk = styled.ol`
 export const FinalTrackerChunk = styled.span`
   border: solid 1px black;
   flex: 1;
-  background: ${(props: { complete: boolean }) =>
-    props.complete ? 'var(--color-accent-light)' : 'var(--color-error)'};
+  background: var(--color-accent-light);
+  filter: ${(props: { complete: boolean }) =>
+    props.complete === true ? 'opacity(100%)' : 'opacity(50%)'};
+  }
 `;

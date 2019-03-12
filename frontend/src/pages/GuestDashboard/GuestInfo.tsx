@@ -1,6 +1,6 @@
 import React from 'react';
 import { generateDisplayDate } from '../utils';
-import { GuestInfoWrapper, DateContainer } from './GuestDash.styling';
+import { GuestInfoWrapper, DateContainer } from './GuestDashboard.styling';
 interface GuestInfoProps {
   name: string;
   picture: string;

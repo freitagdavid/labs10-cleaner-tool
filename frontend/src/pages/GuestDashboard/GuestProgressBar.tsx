@@ -7,6 +7,8 @@ import {
   FinalTrackerChunk,
   StyledLi,
 } from './GuestProgressBar.styling';
+
+import SectionContainer from './SectionContainer';
 interface ProgressBar {
   tasks: {
     before: TaskList;
@@ -69,7 +71,7 @@ const GuestProgressBar = (props: ProgressBar) => {
   );
   let duringProgress = Math.floor(
     (during.filter((task: Task) => task.complete === 1).length /
-      before.length) *
+      during.length) *
       100,
   );
 
@@ -114,25 +116,27 @@ const GuestProgressBar = (props: ProgressBar) => {
 
   return (
     // @ts-ignore
-    <StyledGuestProgressBar>
-      <p>Previous Guest Checkout</p>
-      <span>{beforeProgress}%</span>
-      <TrackerChunk>
-        {beforeOutput.map((item: Task) => {
-          return <StyledLi complete={item.complete} />;
-        })}
-      </TrackerChunk>
-      <p>Getting Ready for you</p>
-      <span>{duringProgress}%</span>
-      <TrackerChunk>
-        {duringOutput.map((item: Task) => {
-          return <StyledLi complete={item.complete} />;
-        })}
-      </TrackerChunk>
-      <p>Overall</p>
-      <span>{overallProgress}%</span>
-      <FinalTrackerChunk complete={overallProgress === 100 ? true : false} />
-    </StyledGuestProgressBar>
+    <SectionContainer text='Preparation Progress'>
+      <StyledGuestProgressBar>
+        <p>Previous Guest Checkout</p>
+        <span>{beforeProgress}%</span>
+        <TrackerChunk>
+          {beforeOutput.map((item: Task) => {
+            return <StyledLi complete={item.complete} />;
+          })}
+        </TrackerChunk>
+        <p>Getting Ready for you</p>
+        <span>{duringProgress}%</span>
+        <TrackerChunk>
+          {duringOutput.map((item: Task) => {
+            return <StyledLi complete={item.complete} />;
+          })}
+        </TrackerChunk>
+        <p>Overall</p>
+        <span>{overallProgress}%</span>
+        <FinalTrackerChunk complete={overallProgress === 100 ? true : false} />
+      </StyledGuestProgressBar>
+    </SectionContainer>
   );
 };
 

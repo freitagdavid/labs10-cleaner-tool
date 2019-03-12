@@ -2,32 +2,29 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import Card from '../../components/Card';
-interface MiscInfoProps {}
 
 const StyledLinks = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin: 0 auto;
-  border-radius: 5px;
-  width: 100%;
+  width: 96%;
   .guides {
-    --width: 30%;
+    border: var(--border);
+    background: var(--color-bg-secondary);
     display: flex;
-    width: 30%;
-    height: ${() => {
-      const w = Math.max(
-        document.documentElement.clientWidth,
-        window.innerWidth || 0,
-      );
-      if (w < 1000) {
-        return `${100 * 0.3 * 0.5}vw`;
-      } else {
-        return `${1000 * 0.3 * 0.5}px`;
-      }
-    }};
+    min-height: 150px;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  @media only screen and (min-width: 900px) {
+    flex-direction: row;
+    .guides {
+      width: 30%;
+      margin: 0;
+    }
   }
   a {
     color: var(--color-text-accent);
@@ -39,20 +36,20 @@ const StyledLinks = styled.div`
 const MiscInfo = (props: any) => {
   return (
     <StyledLinks>
-      <Card className='guides'>
+      <div className='guides'>
         <i className='far fa-file-alt fa-4x' />
         <a href='http://example.com'>Your Guest Guide</a>
-      </Card>
-      <Card className='guides'>
+      </div>
+      <div className='guides'>
         <i className='fas fa-map-marked-alt fa-4x' />
         <a href='http://example.com'>Directions</a>
-      </Card>
-      <Card className='guides'>
+      </div>
+      <div className='guides'>
         <i className='far fa-file-alt fa-4x' />
         <Link to={`/guestdashboard/${props.id}/surveys`}>
           Complete a Survey
         </Link>
-      </Card>
+      </div>
     </StyledLinks>
   );
 };
