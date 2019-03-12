@@ -1,6 +1,7 @@
 import React from 'react';
 import { Survey, FilterArgs } from './types';
 import { Link } from 'react-router-dom';
+import { useFetch } from '../../helpers';
 import { Button } from '../../components/index';
 import {
     SurveyCards, 
@@ -8,13 +9,17 @@ import {
 } from './Surveys.styling';
 import './Surveys.css';
 
-const SurveyCard = (props : Survey) => {
+const SurveyCard = (props : any) => {
     const{
         survey,
         id,
         isGuest,
         name,
+       
     } = props
+    const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+    const [data] = useFetch(`${url}/surveyresponses/${id}`, true, 'get');
+    console.log(data)
     return(
         
             <SurveyCards>  
