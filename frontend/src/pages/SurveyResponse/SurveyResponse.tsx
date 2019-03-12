@@ -22,7 +22,6 @@ let guestPic = () => {
     let sIndex = -1;
     for(let i=0; i< response.survey.length; i++){
         sIndex += 1;
-        console.log(sIndex);
     if(response.survey[sIndex].photo === null){
         response.survey[sIndex].photo = "https://nahealth.com/sites/default/files/styles/max_image_size/public/var/sites/nah/sites/default/files/media/profile-placeholder_0_0_0_0.png?itok=ywlRw7Li";
         }else{
