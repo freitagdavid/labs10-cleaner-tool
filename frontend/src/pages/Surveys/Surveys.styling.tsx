@@ -93,3 +93,6 @@ export const SurveyRightContent = styled('div')`
        margin-right: 1rem;
    }
 `;
+export const SimpleButton = styled('button')`
+  cursor: pointer;
+`;
