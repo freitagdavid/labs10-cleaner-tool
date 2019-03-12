@@ -1,10 +1,13 @@
 .single-response{
     line-height: 0.25rem;
     margin: 15px 15px 30px 15px;
+    word-spacing: 0.10rem; 
+    font-size: 1rem;
 }
 
 .responses-container{
-    border: 2px solid rgba(132, 132, 132, 0.5);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.20);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     width: 65%;
     margin: 20px;
@@ -19,6 +22,7 @@
     height: 90px;
     width: 75px;
     margin: 25px 15px 25px 30px;
+    border: 1.25px solid #74bef9;
 }
 
 .responses-info{
@@ -47,15 +51,31 @@
 }
 
 .sr-title h1{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1.75rem;
-    color: #393534;
+    font-size: 1.9rem;
+    font-weight: 500;
 }
 
 .sr-title select{
     font-size: 1rem;
+    border: 1.75px solid #74bef9;
+}
+
+.yn-container button{
+    width: 60px;
+    height: 25px;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;  
 }
 
 .select{
-    background: rgba(134, 191, 241, 0.863);
+    background: #428acb;
+    color: white;
+    border: 1px solid #428acb;
+}
+
+.button-style{
+    background: white;
+    border: 1px solid black;
+    color: #393534;
 }
