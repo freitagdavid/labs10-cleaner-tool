@@ -86,23 +86,9 @@ server.get('/data', async (req, res) => {
   }
 });
 
-// Survey Responses Route in Balsamiq
-// server.get('/surveyresponses/:id', verifyToken, async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const survey = await getSurveyResponse(id);
-//     const response = await db('questionAnswers')
-//       .count({ 'response' : 'answer' })
-//       .where({ question_id: id });
-//     console.log(response);
-//     res.json({ survey, response });
-//   } catch (e) {
-//     res.json(e);
-//   }
-// });
+
 server.get('/surveyresponses/:id', verifyToken, async (req, res) => {
-  const token = req.token
-  const response = await getSurveyResponsesById(token.id)
+  const response = await getSurveyResponsesById(req.params.id)
   res.status(200).json(response)
 });
 // Questions Route
