@@ -17,17 +17,20 @@ const GuestSurveys = (props: any) =>{
     console.log(surveyList)
     return(
         <div>
-            {surveyList.map((survey: any,index:number)=>{
-                if(survey.isGuest){
-                    const surveyId = survey.id;
-                    const userId = survey.user_id;
-                    const stayId = props.match.params.stayId
-                    return (
-                    <div key = {index}>
-                            <Link to={`/guestdashboard/${stayId}/surveys/${userId}/${surveyId}`}>{survey.name}</Link>
-                    </div>
-                    )   
-                } 
+                {
+                    surveyList.length=== 0? <div> No Surveys</div>:
+                        surveyList.map((survey: any, index: number) => {
+                            if (survey.isGuest) {
+                                const surveyId = survey.id;
+                                const userId = survey.user_id;
+                                const stayId = props.match.params.stayId
+                                return (
+                                    <div key={index}>
+                                        <Link to={`/guestdashboard/${stayId}/surveys/${userId}/${surveyId}`}>{survey.name}</Link>
+                                    </div>
+                                )
+                    }
+                
             })}
         </div>
     )

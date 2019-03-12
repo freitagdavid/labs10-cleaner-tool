@@ -10,6 +10,8 @@ import {
 } from '../../CreateSurvey/CreateSurvey.styling'
 import styled from '@emotion/styled';
 
+
+
 const StyledForm = styled.form`
     margin-top: 30px;
 `
@@ -25,10 +27,8 @@ const FillSurvey = (props: any)=>{
     useEffect(() => {
         (async () => {
             const questionResponse = await axios.get(`${url}/surveysquestions/${surveyId}`)
-            console.log(questionResponse)
             setQuestions(questionResponse.data.questions);
             const stayResponse = await axios.get(`${url}/gueststay/${props.match.params.stayId}`)
-            console.log(stayResponse.data)
             setStayInfo(stayResponse.data)
         })()
     }, []);
@@ -44,12 +44,16 @@ const FillSurvey = (props: any)=>{
             //@ts-ignore
             house_name: stayInfo.house_name,
             //@ts-ignore
-            name: stayInfo.guest_name,
+            guest_name: stayInfo.guest_name,
             //@ts-ignore
             photo: stayInfo.photo_url
         }
         const data = await axios.post(`${url}/questionanswers`, body, headers)
         console.log(data)
+    }
+    async function handleUpdate(id: any){
+        const update = await axios.put(`${url}/surveys/${id}`);
+        return update
     }
     const handleSubmit = () =>{
         const headers: AxiosRequestConfig = {
@@ -79,6 +83,8 @@ const FillSurvey = (props: any)=>{
             //@ts-ignore
             handleQuestions(answer1, questionInfo1.type, headers, questionInfo1.id)
         }
+        const update = handleUpdate(surveyId)
+        console.log(update)
         props.history.push(`/guestdashboard/${props.match.params.stayId}/surveys`)
     }
     const handleCancel = () =>{
@@ -86,7 +92,7 @@ const FillSurvey = (props: any)=>{
     }
     return (
         <CreateSurveysWrapper>
-        <StyledForm onSubmit={handleSubmit}>
+        <StyledForm onSubmit = {handleSubmit}>
             {
         questions.map((question: any,index)=>{
             if (index == 0) {
