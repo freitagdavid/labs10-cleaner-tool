@@ -1,1 +1,1 @@
-web: npm install -g knex && knex migrate:rollback && knex migrate:latest && knex seed:run && npm start --prefix backend
+web: npm start --prefix backend
