@@ -18,8 +18,8 @@ const Responses = (props:any) => {
                 </div>
             </div>
             <div className = 'responses-answers'>
-            {props.results.map((instance:any) => 
-                <Response key={instance.id} question = {instance.question} answer = {instance.answer} answerType={instance.answer_type}/>
+            {props.results.map((instance:any, index:any) => 
+                <Response key={instance.id} question = {instance.question} answer = {instance.answer} answerType={instance.answer_type} index={index+1}/>
                 )}    
             </div>
         </div>
