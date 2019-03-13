@@ -14,7 +14,6 @@ const GuestSurveys = (props: any) =>{
         
     })()
     },[]);
-    console.log(surveyList)
     return(
         <div>
                 {
