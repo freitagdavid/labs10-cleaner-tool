@@ -14,10 +14,10 @@ type Responses = Response | ResponseMock;
 type Nexts = NextFunction | NextFunctionMock;
 
 export const post = async (res:Response, req:Request, next:Nexts) => {
-  const { id } = req.params;
-  if (id) {
+  const { stayId, surveyId } = req.body;
+  if (stayId && surveyId) {
     try {
-      const survey = await postStaysSurveys(id);
+      const survey = await postStaysSurveys(req.body);
       res.status(200).json(survey);
     } catch (e) {
       e.statusCode = e.statusCode || 400;
