@@ -128,7 +128,6 @@ In your backend, create a .env file that includes the following:
     *  AWE_SECRET - secret key for access to aws s3
     *  REGION - Not quite sure yet but it has to do with aws s3
     *  PORT - Port that you want to serve data on. Defaults to 4500
-    *  PUBLIC_URL - Not totally sure what this is yet.
 
 ## Testing
 
