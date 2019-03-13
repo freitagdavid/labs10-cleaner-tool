@@ -13,7 +13,7 @@ type Requests = Request | RequestMock;
 type Responses = Response | ResponseMock;
 type Nexts = NextFunction | NextFunctionMock;
 
-export const post = async (res:Response, req:Request, next:Nexts) => {
+export const post = async (req:Request, res:Response, next:Nexts) => {
   const { stayId, surveyId } = req.body;
   if (stayId && surveyId) {
     try {
@@ -30,10 +30,10 @@ export const del = async () => {};
 
 // let get: (res: Responses, req: Requests, next: Nexts) => Promise<void>;
 
-export const get = async (res: Responses, req: Requests, next: Nexts) => {
-  const { id } = req.params;
+export const get = async ( req: Requests, res: Responses, next: Nexts) => {
+  const { stayId } = req.body;
   try {
-    const survey = await getSurveyByStayId(id);
+    const survey = await getSurveyByStayId(stayId);
     res.status(200).json(survey);
   } catch (e) {
     e.statusCode = e.statusCode || 400;

@@ -11,7 +11,7 @@ function baseQuery() {
 }
 
 function filterByStayId(stayId:number) {
-  return (query: QueryBuilder) => query.where('stayssurveys.stay_id', stayId);
+  return (query: QueryBuilder) => query.where({ stay_id: stayId });
 }
 
 function filterBySurveyId(surveyId:number) {

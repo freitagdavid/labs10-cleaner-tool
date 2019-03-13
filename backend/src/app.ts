@@ -15,6 +15,7 @@ import * as payments from './controller/payments';
 import * as stays from './controller/stays';
 import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
+import * as staysSurveys from './controller/staysSurveys';
 import path from 'path';
 
 import {
@@ -194,6 +195,12 @@ server.post('/questions', verifyToken, async (req, res) => {
     res.json(e);
   }
 });
+//stays surveys
+server
+  .route('/stays/surveys')
+  .get(staysSurveys.get)
+  .post(staysSurveys.post);
+
 server
   .route('/users/:id')
   .get(users.get)
