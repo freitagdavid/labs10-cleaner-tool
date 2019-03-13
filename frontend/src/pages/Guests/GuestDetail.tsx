@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { IncomingGuestProps, GuestProps } from './types';
 // Components
-import {Modal} from './Modal/SurveyModal';
-import { InfoBox } from './InfoBox';
+import { Modal } from './Modal/SurveyModal';
+import { InfoBox } from '../../components/InfoBox';
 import { Checklist } from './Checklist';
 import { AstDropdown } from './AstDropdown/AstDropdown';
 import { FileUploadHOF } from '../../components/FileUpload';
@@ -25,12 +25,13 @@ const GuestDetail = (props: RouteComponentProps) => {
   // @ts-ignore
   const id = props.match.params.id;
   const url =
-    process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
+    process.env.REACT_APP_backendURL ||
+    'https://labs10-cleaner-app-2.herokuapp.com';
 
   const [fetch, setFetch] = useState(false);
   // modal state and functions
   const [show, setShow] = useState(false);
-  
+
   const [stay, error, loading] = useFetch(`${url}/stays/${id}`, fetch);
 
   const guideUpload = FileUploadHOF(
@@ -52,11 +53,12 @@ const GuestDetail = (props: RouteComponentProps) => {
   const goBack = () => props.history.push('/guests');
 
   const modal = () => {
-    if(show===false){
+    if (show === false) {
       setShow(true);
-    }else{ setShow(false);}
-  }
-  
+    } else {
+      setShow(false);
+    }
+  };
 
   return (
     <>
@@ -101,7 +103,7 @@ export const GuestDetailView = (props: GuestProps) => {
     Uppy,
     goBack,
     modal,
-    show
+    show,
   } = props;
 
   const stayDetails = {
@@ -118,13 +120,15 @@ export const GuestDetailView = (props: GuestProps) => {
   };
   return (
     <>
-     
       <GuestDetailStyle>
-        <Modal  show={props.show} modal={props.modal}>
-        </Modal>
+        <Modal show={props.show} modal={props.modal} />
         {errors.error && <div>{errors.msg}</div>}
         <div className='guest-header'>
-          <img className='guest-header--img' src={defaultUser} alt='User Image' />
+          <img
+            className='guest-header--img'
+            src={defaultUser}
+            alt='User Image'
+          />
           <div className='guest-header--text'>
             <div className='main'>{guest_name}</div>
             <div className='sub-house'>Staying at {house_name}</div>
@@ -153,7 +157,7 @@ export const GuestDetailView = (props: GuestProps) => {
             </Link>
             <Button
               className='send-survey'
-              text= 'Send Survey'
+              text='Send Survey'
               color='var(--color-button-background)'
               onClick={modal}
             />

@@ -1,6 +1,7 @@
 import express from 'express';
 import { errorHandler } from './middleware/errorHandler';
 import setGeneralMiddleware from './middleware/generalMiddleware';
+import { findStaySummaryStandardizedByGuestId } from './models/stays/stays'
 // @ts-ignore
 import companion from '@uppy/companion';
 import verifyToken from './middleware/verifyToken';
@@ -20,6 +21,7 @@ import {
   getAllSurveys,
   getSurveyResponse,
   getQuestionsAnswers,
+  getSurveyResponsesById,
 } from './models/surveys';
 
 import db from '../data/dbConfig';
@@ -84,21 +86,11 @@ server.get('/data', async (req, res) => {
   }
 });
 
-// Survey Responses Route in Balsamiq
-server.get('/surveyresponses/:id', verifyToken, async (req, res) => {
-  try {
-    const { id } = req.params;
-    const survey = await getSurveyResponse(id);
-    const response = await db('questionAnswers')
-      .count({ 'response' : 'answer' })
-      .where({ question_id: id });
-    console.log(response);
-    res.json({ survey, response });
-  } catch (e) {
-    res.json(e);
-  }
-});
 
+server.get('/surveyresponses/:id', verifyToken, async (req, res) => {
+  const response = await getSurveyResponsesById(req.params.id)
+  res.status(200).json(response)
+});
 // Questions Route
 server.get('/questions', async (req, res) => {
   try {
@@ -119,14 +111,25 @@ server.get('/questionanswers/:id', async (req, res) => {
     res.json(e);
   }
 });
-
+server.put('/surveys/:id', async (req, res) => {
+  const id = req.params.id
+  const survey = await db('surveys').where({ id: id })
+  const responses = survey[0].responses
+  const update = await db('surveys').where({ id: id }).update({ responses: responses + 1 })
+  try {
+    res.status(200).json(responses + 1)
+  } catch (e) {
+    res.json(e)
+  }
+});
 /* for Guest dashboard Info*/
 server.route('/gueststay/:id').get(stays.getGuest);
 
 server.get('/stay/surveys/:id', async(req,res)=>{
     const id = req.params.id
-    const stay = await db('stay').where({id})
-    const houseId = stay[0].house_id
+    const stay = await findStaySummaryStandardizedByGuestId(id);
+    console.log(stay)
+    const houseId = stay.house_id
     const house = await db('house').where({id: houseId})
     const managerId = house[0].manager
     const manager = await db('manager').where({id: managerId})
@@ -173,7 +176,7 @@ server.post('/questionanswers', verifyToken, async (req, res) => {
 server.post('/surveys', verifyToken, async(req,res) =>{
   const token = req.token
   const body = req.body
-  const createSurvey = await db('surveys').insert({...body,user_id:token.id})
+  const createSurvey = await db('surveys').insert({...body,responses: 0,user_id:token.id})
   const survey = await db('surveys').where({id: createSurvey[0]})
   try{
     res.status(201).json({...survey[0], message: 'successfully created survey'})
@@ -181,6 +184,7 @@ server.post('/surveys', verifyToken, async(req,res) =>{
     res.json(e)
 }
 });
+
 server.post('/questions', verifyToken, async (req, res) => {
   const body = req.body;
   const createQuestion = await db('questions').insert({ ...body });

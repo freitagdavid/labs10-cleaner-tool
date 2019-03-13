@@ -3,33 +3,43 @@ import React from 'react';
 const RatingComponent = (props:any) => {
 
     let selectOne = () => {
+        let buttonClass = "button-style";
         if(props.yn_answer == "1"){
-            return("select");
+            buttonClass = "select";
         }
+        return buttonClass;
     }
 
     let selectTwo = () => {
+        let buttonClass = "button-style";
         if(props.yn_answer == "2"){
-            return("select");
+            buttonClass = "select";
         }
+        return buttonClass;
     }
 
     let selectThree = () => {
+        let buttonClass = "button-style";
         if(props.yn_answer == "3"){
-            return("select");
+            buttonClass = "select";
         }
+        return buttonClass;
     }
 
     let selectFour = () => {
+        let buttonClass = "button-style";
         if(props.yn_answer == "4"){
-            return("select");
+            buttonClass = "select";
         }
+        return buttonClass;
     }
 
     let selectFive = () => {
+        let buttonClass = "button-style";
         if(props.yn_answer == "5"){
-            return("select");
+            buttonClass = "select";
         }
+        return buttonClass;
     }
 
     return(

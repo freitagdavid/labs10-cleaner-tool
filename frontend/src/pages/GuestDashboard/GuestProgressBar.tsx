@@ -1,11 +1,14 @@
 // @ts-nocheck
 import React from 'react';
+
 import {
   StyledGuestProgressBar,
   TrackerChunk,
   FinalTrackerChunk,
   StyledLi,
 } from './GuestProgressBar.styling';
+
+import SectionContainer from './SectionContainer';
 interface ProgressBar {
   tasks: {
     before: TaskList;
@@ -61,19 +64,17 @@ interface Task {
 const GuestProgressBar = (props: ProgressBar) => {
   const { before, during, after } = props.tasks;
   console.log(before, 'Before mutation');
-  const beforeProgress = Math.floor(
+  let beforeProgress = Math.floor(
     (before.filter((task: Task) => task.complete === 1).length /
       before.length) *
       100,
   );
-  const duringProgress = Math.floor(
+  let duringProgress = Math.floor(
     (during.filter((task: Task) => task.complete === 1).length /
-      before.length) *
+      during.length) *
       100,
   );
 
-  // prettier-ignore
-  const overallProgress = Math.floor((20 * (beforeProgress / 100)) - (80 * (duringProgress / 100)));
   const reducer = (a: Task, b: Task) => {
     if (a.complete > b.complete) {
       return -1;
@@ -85,29 +86,57 @@ const GuestProgressBar = (props: ProgressBar) => {
   };
 
   const beforeOutput = [...before].sort(reducer);
+  console.log(beforeOutput);
   const duringOutput = [...during].sort(reducer);
+  console.log(duringOutput);
+
+  if (beforeOutput.length === 0) {
+    beforeOutput.push({
+      complete: 1,
+      task: 'before',
+      items_id: 0,
+      stay_id: 0,
+    });
+    beforeProgress = 100;
+  }
+
+  if (duringOutput.length === 0) {
+    duringOutput.push({
+      complete: 1,
+      task: 'before',
+      items_id: 0,
+      stay_id: 0,
+    });
+    duringProgress = 100;
+  }
+
+  // prettier-ignore
+  const overallProgress = Math.floor((80 * (duringProgress / 100)) + (20 * (beforeProgress / 100)),
+  );
 
   return (
     // @ts-ignore
-    <StyledGuestProgressBar>
-      <p>Previous Guest Checkout</p>
-      <span>{beforeProgress}%</span>
-      <TrackerChunk>
-        {beforeOutput.map((item: Task) => {
-          return <StyledLi complete={item.complete} />;
-        })}
-      </TrackerChunk>
-      <p>Getting Ready for you</p>
-      <span>{duringProgress}%</span>
-      <TrackerChunk>
-        {duringOutput.map((item: Task) => {
-          return <StyledLi complete={item.complete} />;
-        })}
-      </TrackerChunk>
-      <p>Overall</p>
-      <span>{overallProgress}%</span>
-      <FinalTrackerChunk complete={overallProgress === 100 ? true : false} />
-    </StyledGuestProgressBar>
+    <SectionContainer text='Preparation Progress'>
+      <StyledGuestProgressBar>
+        <p>Previous Guest Checkout</p>
+        <span>{beforeProgress}%</span>
+        <TrackerChunk>
+          {beforeOutput.map((item: Task) => {
+            return <StyledLi complete={item.complete} />;
+          })}
+        </TrackerChunk>
+        <p>Getting Ready for you</p>
+        <span>{duringProgress}%</span>
+        <TrackerChunk>
+          {duringOutput.map((item: Task) => {
+            return <StyledLi complete={item.complete} />;
+          })}
+        </TrackerChunk>
+        <p>Overall</p>
+        <span>{overallProgress}%</span>
+        <FinalTrackerChunk complete={overallProgress === 100 ? true : false} />
+      </StyledGuestProgressBar>
+    </SectionContainer>
   );
 };
 

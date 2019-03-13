@@ -1,25 +1,30 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-interface MiscInfoProps {}
+import Card from '../../components/Card';
 
 const StyledLinks = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin: 0 auto;
-  margin-top: 4rem;
-  width: 98%;
-  border-radius: 5px;
+  width: 96%;
   .guides {
-    border: solid 1px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    border: var(--border);
+    background: var(--color-bg-secondary);
     display: flex;
-    width: 30%;
-    height: calc(100vw * 0.3 * 0.4);
+    min-height: 150px;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    background-color: white;
+    margin-bottom: 1rem;
+  }
+  @media only screen and (min-width: 900px) {
+    flex-direction: row;
+    .guides {
+      width: 30%;
+      margin: 0;
+    }
   }
   a {
     color: var(--color-text-accent);

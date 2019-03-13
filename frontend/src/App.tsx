@@ -55,11 +55,7 @@ const App = () => {
           <Route exact path='/surveys/:id' component={SurveyView} />
           <Route exact path='/surveys/:id/answers' component={SurveyAnswers} />
           <Route exact path='/guestdashboard/:id' component={GuestDashboard} />
-          <Route
-            exact
-            path='/surveys/:id/responses'
-            component={SurveyResponse}
-          />
+          <Route exact path='/surveys/:id/responses' component={SurveyResponse} />
           <Route exact path='/createsurvey' component={CreateSurvey} />
           <Route exact path = '/guestdashboard/:stayId/surveys' component = {GuestSurveys} />
           <Route exact path='/guestdashboard/:stayId/surveys/:id/:surveyId' component={FillSurvey} />
