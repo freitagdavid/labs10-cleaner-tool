@@ -18,11 +18,11 @@ function filterBySurveyId(surveyId:number) {
   return (query: QueryBuilder) => query.where('stayssurveys.survey_id', surveyId);
 }
 
-function insertData(data: data) {
+function insertData(data: any) {
   return (query: QueryBuilder) => query.insert(data);
 }
 
-function formatData(data:data) {
+function formatData(data: data) {
   const { surveyId, stayId } = data;
   return { survey_Id: surveyId, stay_id: stayId };
 }
@@ -34,7 +34,7 @@ export function postStaysSurveys(data:data) {
   return completedQuery;
 }
 
-export function getSurveyByStayId(stayId) {
+export function getSurveyByStayId(stayId:number) {
   const applyStayIdFilter = filterByStayId(stayId);
   const filteredQuery = applyStayIdFilter(baseQuery());
   return filteredQuery;
