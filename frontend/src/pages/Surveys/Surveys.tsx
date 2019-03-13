@@ -10,6 +10,7 @@ import {
     SurveysHeader,
     SurveyCardWrapper,
     SurveyFilterButtons,
+    SimpleButton
 } from './Surveys.styling';
 import './Surveys.css'
 
@@ -32,14 +33,14 @@ const Surveys = () => {
             </SurveysHeader>
             <SurveyFilterButtons>
                 <h2>Sort By:</h2> 
-                <button
+                <SimpleButton
                     className={`${activeClass(1)}`}
                     onClick={() => setActive(1)}
-                >Guest</button>
-                <button
+                >Guest</SimpleButton>
+                <SimpleButton
                     className={`${activeClass(0)}`}
                     onClick={() => setActive(0)}
-                >Assistant</button>
+                >Assistant</SimpleButton>
         </SurveyFilterButtons>
             <SurveyCardWrapper>
                 {loading ? (

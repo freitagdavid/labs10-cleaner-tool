@@ -17,6 +17,10 @@ const OutOfFiveButton = styled.button`
     width: 30px;
     height: 30px;
     border: 2px solid #428ACB;
+    border-radius: 5px;
+    &:hover{
+        cursor: pointer;
+    }
     :focus {
         outline: none;
 
@@ -53,7 +57,7 @@ const OutOfFive = (props:any) => {
             <h3>{props.question.question}</h3>
             <OutOfFiveDiv>
                 {arr.map((button,index)=>{
-                    return <OutOfFiveButton type='button' value={`${button}`}className={`${selected === button? 'active': ''}`} onClick={async (event: any) => { await handleClick(event) }
+                    return <OutOfFiveButton key = {index} type='button' value={`${button}`}className={`${selected === button? 'active': ''}`} onClick={async (event: any) => { await handleClick(event) }
                     }>{button}</OutOfFiveButton>
                 })}
             </OutOfFiveDiv>

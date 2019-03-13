@@ -94,10 +94,65 @@ getSurveyResponse = (id) => {
     .where({ survey_id: id, question_id: id });
 };
 
+const getSurveyResponsesById = async(id: any)=>{
+  const survey = await db('surveys').where({id: id})
+  let response = []
+  const questions = await db('questions').where({survey_id: id})
+  let questionIdArr = [];
+  for(let i = 0; i<questions.length; i++){
+    let question = questions[i].id
+    questionIdArr.push(question)
+
+  }
+  let questionAnswers:any = []
+  for(let i=0; i< questionIdArr.length; i++){
+    let questionId = questionIdArr[i]
+    let current = await db('questionAnswers').where({question_id: questionId })
+    questionAnswers.push(...current)
+  }
+ let stayIdArr = []
+  for(let i=0; i<questionAnswers.length; i++){
+    let stayId = questionAnswers[i]
+    let bool = stayIdArr.includes(stayId.stay_id);
+    if(bool === false){
+      stayIdArr.push(stayId.stay_id);
+    }
+  }
+  let questionAnswersByStay: any = []
+  for (let i = 0; i < stayIdArr.length; i++) {
+    let stayId = stayIdArr[i]
+    let current = await db('questionAnswers').where({ stay_id: stayId })
+    
+    let first = current[0]
+    let response = [{
+      survey_id: id,
+      stay_id: first.stay_id,
+      guest_name: first.guest_name,
+      house_name: first.house_name,
+      photo: first.photo, 
+      created_at: first.created_at,
+      results: [
+      ]
+    }]
+    for (let j = 0; j < current.length; j++) {
+      let index = current[j]
+      let question = await db('questions').where({id: index.question_id})
+      let questionIndex = question[0]
+      console.log(question)
+      let body:any = {answer: index.answer, answer_type: index.answer_type, question_id: index.question_id, question: questionIndex.question }
+      let myResponse = response[0]
+      //@ts-ignore
+       myResponse.results.push(body)
+    }
+   questionAnswersByStay.push(response)
+  }
+  return questionAnswersByStay
+}
 export {
   getSurvey,
   getAllSurveys,
   getSurveyQuestions,
   getSurveyResponse,
   getQuestionsAnswers,
+  getSurveyResponsesById,
 };

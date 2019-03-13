@@ -13,6 +13,7 @@ const BooleanButton = styled.button`
         color: white;
         background-color:#428ACB;
     }
+    border-radius: 5px;
     color: #428ACB;
     font-weight: bold;
     width: 60px;
@@ -21,6 +22,9 @@ const BooleanButton = styled.button`
     :focus {
         outline: none;
 
+    }
+    &:hover{
+        cursor: pointer;
     }
 `
 const BooleanDiv = styled.div`
@@ -51,7 +55,7 @@ const Boolean = (props: any)=>{
         <h3>{props.question.question}</h3>
         <BooleanDiv>
             {arr.map((item, index)=>{
-                return <BooleanButton type='button' value={`${item}`} className={`${selected === item ? 'active' : ''}`} onClick={async (event) => { await handleClick(event) }
+                return <BooleanButton key = {index} type='button' value={`${item}`} className={`${selected === item ? 'active' : ''}`} onClick={async (event) => { await handleClick(event) }
                 }>{item}</BooleanButton>
             })}
         </BooleanDiv>

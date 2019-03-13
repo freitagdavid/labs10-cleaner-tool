@@ -1,6 +1,6 @@
 import React from 'react';
 // Styled Components
-import { InfoDiv } from './Guests.styling';
+import { InfoDiv } from '../pages/Guests/Guests.styling';
 // Styles
 import styled from '@emotion/styled';
 
