@@ -274,7 +274,7 @@ const NewGuest = (props: RouteComponentProps) => {
       }
       {
         const actionCodeSettings = {
-          url: `http://${process.env.URL}/linklogin/${userId}`,
+          url: `http://${window.location.hostname}/linklogin/${userId}`,
           handleCodeInApp: true,
         };
         console.log(actionCodeSettings);
