@@ -33,7 +33,7 @@ export const SurveyModal = ( props: any) => {
     const [stays, error, loadingstay] = useFetch(`${url}/stay/ast/${props.id}`);
     const [selectedstay, setSelectedstay]= useState(Number)
     const [selectedsurvey, setSelectedsurvey]= useState(Number)
-    const selectAndClose = (data: any,func: any)=>{ axiosFetch(  'post',`http://localhost:54321/stays/surveys`,  data); func()}
+    const selectAndClose = (data: any,func: any)=>{ axiosFetch(  'post',`${url}/stays/surveys`,  data); func()}
     return (
       <div className={showHideClassName}>   
         <ModalContainer>

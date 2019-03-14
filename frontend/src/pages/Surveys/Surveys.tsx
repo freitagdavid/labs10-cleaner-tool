@@ -17,7 +17,7 @@ import './Surveys.css'
 const Surveys = () => {
     const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
-    const [active, setActive] = useState( 1 as any);
+    const [active, setActive] = useState( true as any);
     const [data, err, loading] = useFetch(`${url}/surveys`)
     const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
@@ -34,12 +34,12 @@ const Surveys = () => {
             <SurveyFilterButtons>
                 <h2>Sort By:</h2> 
                 <SimpleButton
-                    className={`${activeClass(1)}`}
-                    onClick={() => setActive(1)}
+                    className={`${activeClass(true)}`}
+                    onClick={() => setActive(true)}
                 >Guest</SimpleButton>
                 <SimpleButton
-                    className={`${activeClass(0)}`}
-                    onClick={() => setActive(0)}
+                    className={`${activeClass(false)}`}
+                    onClick={() => setActive(false)}
                 >Assistant</SimpleButton>
         </SurveyFilterButtons>
             <SurveyCardWrapper>
