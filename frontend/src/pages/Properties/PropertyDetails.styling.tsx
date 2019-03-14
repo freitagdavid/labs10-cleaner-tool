@@ -170,6 +170,7 @@ export const ListDiv = styled('div')`
   margin: ${pxToRem(36)}rem 0;
   display: flex;
   flex-direction: column;
+  height: fit-content;
   @media only screen and (max-width: 900px) {
     width: 100%;
   }
