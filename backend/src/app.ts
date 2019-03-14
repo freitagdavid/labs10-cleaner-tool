@@ -274,6 +274,10 @@ server
   .post(stays.post);
 
 server
+  .route('/stay/ast/:id')
+  .get(staysSurveys.getAststay);
+
+server
   .route('/stays/:id')
   .get(stays.get)
   .put(stays.put);

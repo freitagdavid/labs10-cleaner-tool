@@ -2,6 +2,7 @@ import { getSurveyByStayId, postStaysSurveys } from '../models/staysSurveys';
 // Type Definitions
 import { Request, Response, NextFunction } from 'express';
 import { RequestMock, ResponseMock } from '../../__tests__/helpers';
+import {findStayByAstId} from '../models/stays/stays'
 import { QueryBuilder } from 'knex';
 import { Stay } from '../interface';
 import { postItemsStay } from '../models/items';
@@ -36,6 +37,17 @@ export const get = async ( req: Requests, res: Responses, next: Nexts) => {
     const survey = await getSurveyByStayId(stayId);
     res.status(200).json(survey);
   } catch (e) {
+    e.statusCode = e.statusCode || 400;
+    next(e);
+  }
+}
+
+export const getAststay = async (req: Requests, res: Responses, next: Nexts) =>{
+  const {id} =req.params;
+  try{
+    const stays = await findStayByAstId(id);
+    res.status(200).json(stays)
+  } catch (e){
     e.statusCode = e.statusCode || 400;
     next(e);
   }

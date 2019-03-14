@@ -173,6 +173,19 @@ export async function findAllStays(
   }
 }
 
+export async function findStayByAstId(id:number){
+  const House: QueryBuilder = db('house')
+      .select('house.id')
+      .where('house.default_ast', id);
+      
+  const houses = await House.map((house: any) => house.id)
+  console.log(houses)
+  const query: QueryBuilder = db('stay')
+  .whereIn('house_id', houses);
+
+  return query;
+}
+
 export function postStayData(stayData: Stay): QueryBuilder {
   return db('stay')
     .insert(stayData)

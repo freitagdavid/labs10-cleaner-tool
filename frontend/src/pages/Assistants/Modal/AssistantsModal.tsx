@@ -29,7 +29,7 @@ export const SurveyModal = ( props: any) => {
     const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com'
     const [data, err, loading] = useFetch(`${url}/surveys`)
-    const [stays, error, loadingstay] = useFetch(`${url}/stays`);
+    const [stays, error, loadingstay] = useFetch(`${url}/stay/ast/${props.id}`);
     const [selectedstay, setSelectedstay]= useState(Number)
     const [selectedsurvey, setSelectedsurvey]= useState(Number)
     const selectAndClose = (data: any,func: any)=>{ axiosFetch(  'post',`http://localhost:54321/stays/surveys`,  data); func()}
@@ -48,14 +48,14 @@ export const SurveyModal = ( props: any) => {
                             <h3>{survey.name}</h3>
                             <p>{survey.isGuest}</p>
                             
-                              {stays ? ( console.log(stays)
-                                // stays.filter((stay:any)=>stay.default_ast === props.id).map((stay:any) =>(
-                                //   <>
-                                //     <p>{stay.id}</p>
-                                //     <p>{stay.default_ast}</p>
-                                //   </>
-                                // )
-                                // )
+                              {stays ? (
+                                stays.map((stay:any) =>(
+                                  <>
+                                    <p>{stay.check_in}</p>
+                                    <p>{stay.check_out}</p>
+                                  </>
+                                )
+                                )
                                 )
                                 : (
                                   <div>Loading</div>
