@@ -49,7 +49,6 @@ const FillSurvey = (props: any)=>{
             photo: stayInfo.photo_url
         }
         const data = await axios.post(`${url}/questionanswers`, body, headers)
-        console.log(data)
     }
     async function handleUpdate(id: any){
         const update = await axios.put(`${url}/surveys/${id}`);
@@ -84,7 +83,6 @@ const FillSurvey = (props: any)=>{
             handleQuestions(answer1, questionInfo1.type, headers, questionInfo1.id)
         }
         const update = handleUpdate(surveyId)
-        console.log(update)
         props.history.push(`/guestdashboard/${props.match.params.stayId}/surveys`)
     }
     const handleCancel = () =>{
