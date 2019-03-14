@@ -5,6 +5,10 @@
     font-size: 1rem;
 }
 
+.single-response h3{
+    color: #428acb;
+}
+
 .responses-container{
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.20);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);

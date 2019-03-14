@@ -17,10 +17,10 @@ export const ModalContainer = styled.div`
     background-color: rgba(0,0,0, 0.9); 
     overflow-x: hidden; 
     .modal-content-container{
-        
-        width:450px;
+        max-height:100%;
+        /* width:450px; */
         display:flex;
-        flex-direction:column;
+        flex-direction:row;
         background-color:var(--color-bg-secondary);
       
        

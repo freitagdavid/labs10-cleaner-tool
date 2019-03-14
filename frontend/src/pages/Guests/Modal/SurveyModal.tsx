@@ -3,6 +3,7 @@ import Button from '../../../components/Button';
 import { useFetch } from '../../../helpers';
 import loadingIndicator from '../../utils/loading.svg';
 import {ModalContainer, SurveySelectButton} from './SurveyModal.styling'
+import {axiosFetch} from '../../../helpers'
  interface Survey {
   survey: any,
   id: number,
@@ -19,14 +20,15 @@ const inactive = {
   bg: "--color-button-background-alt"
 }
 //logs data and closes modal will make axios call later
-const selectAndClose = (data: any,func: any)=>{console.log(data); func()}
+
 
 export const Modal = ( props: any) => {
     const showHideClassName = !props.show ?  "modal display-none" : "modal display-flex";
     const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com'
     const [data, err, loading] = useFetch(`${url}/surveys`)
-    const [selected, setSelected]= useState({})
+    const [selected, setSelected]= useState({surveyId:0,stayId:0})
+    const selectAndClose = (data: any,func: any)=>{ axiosFetch(  'post',`http://localhost:54321/stays/surveys`,  data); func()}
     return (
       <div className={showHideClassName}>   
         <ModalContainer>
@@ -43,8 +45,8 @@ export const Modal = ( props: any) => {
                         <p>{survey.isGuest}</p>
                     </div>
                     <SurveySelectButton
-                    theme={selected===survey ? active: inactive } 
-                    onClick= {() =>{setSelected(survey)}}
+                    theme={selected.surveyId ===survey.id ? active: inactive } 
+                    onClick= {() =>{setSelected({surveyId:survey.id, stayId:props.stay_id})}}
                     >Select</SurveySelectButton>
               </>
                 ))
@@ -61,7 +63,7 @@ export const Modal = ( props: any) => {
                       className='back'
                       text= 'Send Survey'
                       color='var(--color-button-background)'
-                      onClick={()=>selectAndClose(selected, props.modal)}
+                      onClick={()=>{selectAndClose(selected, props.modal)}}
                 />
               </div>
         </ModalContainer>
