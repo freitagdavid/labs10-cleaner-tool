@@ -28,7 +28,7 @@ export const Modal = ( props: any) => {
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com'
     const [data, err, loading] = useFetch(`${url}/surveys`)
     const [selected, setSelected]= useState({surveyId:0,stayId:0})
-    const selectAndClose = (data: any,func: any)=>{ axiosFetch(  'post',`http://localhost:54321/stays/surveys`,  data); func()}
+    const selectAndClose = (data: any,func: any)=>{ axiosFetch(  'post',`${url}/stays/surveys`,  data); func()}
     return (
       <div className={showHideClassName}>   
         <ModalContainer>
