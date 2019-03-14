@@ -5,6 +5,7 @@ import { useFetch } from '../../../helpers';
 import loadingIndicator from '../../utils/loading.svg';
 import {ModalContainer, SurveySelectButton} from './AssistantsModal.styling'
 import {axiosFetch} from '../../../helpers'
+import Card from '../../../components/Card'
 import { Formik, Field } from 'formik';
 import DropDown from '../../../components/DropDown'
  interface Survey {
@@ -37,38 +38,45 @@ export const SurveyModal = ( props: any) => {
       <div className={showHideClassName}>   
         <ModalContainer>
             <div className="modal-content-container"> 
-              <h3>Surveys</h3>
-              {loading || loadingstay ? (
-                  <img src={loadingIndicator} alt='animated loading indicator' />
-                ) : data? (
-                data.filter((survey:Survey)=>survey.isGuest === 0).map((survey: Survey) => 
-                    (
-                      <>
-                        <div className='survey-card' key={survey.id}>
-                            <h3>{survey.name}</h3>
-                            <p>{survey.isGuest}</p>
-                            
-                              {stays ? (
-                                stays.map((stay:any) =>(
-                                  <>
-                                    <p>{stay.check_in}</p>
-                                    <p>{stay.check_out}</p>
-                                  </>
-                                )
-                                )
-                                )
-                                : (
-                                  <div>Loading</div>
-                                )}
-                             
-                          <SurveySelectButton
-                          theme={selectedsurvey===survey.id ? active: inactive } 
-                          onClick= {() =>{setSelectedsurvey(survey.id)}}
-                          >Select</SurveySelectButton>
-                        </div>
-                        </>
-                ))
-                 ) : null}
+              <div className="modal-surveys-container">
+                <h3>Survey</h3>
+                {loading || loadingstay ? (
+                    <img src={loadingIndicator} alt='animated loading indicator' />
+                  ) : data? (
+                  data.filter((survey:Survey)=>survey.isGuest === 0).map((survey: Survey) => 
+                      (
+                        <Card>
+                          {/* <div className='survey-card' key={survey.id}> */}
+                              <h3>{survey.name}</h3>
+                              <p>{survey.isGuest}</p>
+                            <SurveySelectButton
+                            theme={selectedsurvey===survey.id ? active: inactive } 
+                            onClick= {() =>{setSelectedsurvey(survey.id)}}
+                            >Select</SurveySelectButton>
+                          {/* </div> */}
+                          </Card>
+                  ))
+                  ) : null}
+                
+               </div>
+              <div className="modal-stays-container">
+                <h3>Stay</h3>
+                {stays ? (
+                  stays.map((stay:any) =>(
+                    <Card>
+                      <p>house: {stay.house_name}</p>
+                      <p>check in: {stay.check_in.slice(0,10)}</p>
+                      <p>check out: {stay.check_out.slice(0,10)}</p>
+                      <SurveySelectButton
+                            theme={selectedstay===stay.stay_id ? active: inactive } 
+                            onClick= {() =>{setSelectedstay(stay.stay_id)}}
+                            >Select</SurveySelectButton>
+                    </Card>
+                  ))
+                  ):(
+                      <div>Loading</div>
+                    )}
+              </div>
             </div>
             <div className= 'modal-buttons-container'>
               <Button
