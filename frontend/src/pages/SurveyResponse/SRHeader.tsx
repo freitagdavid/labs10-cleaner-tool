@@ -7,7 +7,7 @@ const SRHeader = (props:any) => {
         if(props.surveys.length === 0){
             return("No Surveys Here");
         }else{
-            return(`${props.surveys[0].name} - Responses`);
+            return(`${props.surveys[0].survey_name} - Responses`);
             }
         }
 

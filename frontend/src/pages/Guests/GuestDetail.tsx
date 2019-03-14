@@ -121,7 +121,7 @@ export const GuestDetailView = (props: GuestProps) => {
   return (
     <>
       <GuestDetailStyle>
-        <Modal show={props.show} modal={props.modal} />
+        <Modal show={props.show} modal={props.modal} stay_id={stay_id} />
         {errors.error && <div>{errors.msg}</div>}
         <div className='guest-header'>
           <img
