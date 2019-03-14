@@ -96,7 +96,7 @@ getSurveyResponse = (id) => {
 
 const getSurveyResponsesById = async(id: any)=>{
   const survey = await db('surveys').where({id: id})
-  let response = []
+  const name = survey[0];
   const questions = await db('questions').where({survey_id: id})
   let questionIdArr = [];
   for(let i = 0; i<questions.length; i++){
@@ -124,8 +124,9 @@ const getSurveyResponsesById = async(id: any)=>{
     let current = await db('questionAnswers').where({ stay_id: stayId })
     
     let first = current[0]
-    let response = [{
+    let response = {
       survey_id: id,
+      survey_name: name.name,
       stay_id: first.stay_id,
       guest_name: first.guest_name,
       house_name: first.house_name,
@@ -133,20 +134,20 @@ const getSurveyResponsesById = async(id: any)=>{
       created_at: first.created_at,
       results: [
       ]
-    }]
+    }
     for (let j = 0; j < current.length; j++) {
       let index = current[j]
       let question = await db('questions').where({id: index.question_id})
       let questionIndex = question[0]
-      console.log(question)
       let body:any = {answer: index.answer, answer_type: index.answer_type, question_id: index.question_id, question: questionIndex.question }
-      let myResponse = response[0]
+      let myResponse = response
       //@ts-ignore
        myResponse.results.push(body)
     }
    questionAnswersByStay.push(response)
   }
-  return questionAnswersByStay
+  const surveyObj = {survey: questionAnswersByStay}
+  return surveyObj
 }
 export {
   getSurvey,
