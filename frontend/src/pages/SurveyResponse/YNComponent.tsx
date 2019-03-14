@@ -21,8 +21,8 @@ const YNComponent = (props:any) => {
 
     return(
         <div className='yn-container'>
-            <button className={selectYes()} >Yes</button>
-            <button className={selectNo()}>No</button>       
+            <button className={selectYes()} value="yes">Yes</button>
+            <button className={selectNo()} value="no">No</button>       
         </div>
     )
 }
