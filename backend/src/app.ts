@@ -178,7 +178,10 @@ server.post('/surveys', verifyToken, async(req,res) =>{
   
   try{
     const createSurvey = await db('surveys').insert({ ...body, responses: 0, user_id: token.id })
-    const survey = await db('surveys').where({ id: createSurvey[0] })
+    const surveys = await db('surveys').where({user_id: req.token.id})
+    const surveyLocation = surveys.length-1
+    const surveyId = surveys[surveyLocation]
+    const survey = await db('surveys').where({ id: surveyId })
     res.status(201).json({...survey[0], message: 'successfully created survey'})
   } catch(e){
     res.json(e)
