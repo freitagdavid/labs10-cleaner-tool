@@ -55,7 +55,7 @@ server.get('/surveysquestions/:id', async (req, res) => {
       res.json({ survey, questions });
     }
   } catch (e) {
-    res.json(e), console.log(e);
+    res.json(e)
   }
 });
 
@@ -129,14 +129,12 @@ server.route('/gueststay/:id').get(stays.getGuest);
 server.get('/stay/surveys/:id', async(req,res)=>{
     const id = req.params.id
     const stay = await findStaySummaryStandardizedByGuestId(id);
-    console.log(stay)
     const houseId = stay.house_id
     const house = await db('house').where({id: houseId})
     const managerId = house[0].manager
     const manager = await db('manager').where({id: managerId})
     const userId = manager[0].user_id
     const surveys = await db('surveys').where({user_id: userId})
-    console.log(managerId)
     res.json(surveys)
 })
 
