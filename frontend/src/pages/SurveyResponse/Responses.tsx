@@ -1,28 +1,30 @@
 import React from 'react';
 import Response from './Response';
-import { useFetch } from '../../helpers';
-import loadingIndicator from '../utils/loading.svg';
-import './SurveyResponse.css';
+import {ResponsesContainer, 
+        ResponsesGuest, 
+        ResponsesImage, 
+        ResponsesInfo, 
+        ResponsesAnswers} from './SurveyResponse.styling';
 
 
 const Responses = (props:any) => {
     return(
-        <div className='responses-container'>
-            <div className='responses-guest'>
+        <ResponsesContainer>
+            <ResponsesGuest>
                 <div className='responses-img'>
-                    <img src = {props.sr_img} />
+                    <ResponsesImage src = {props.sr_img} />
                 </div>
-                <div className='responses-info'>
+                <ResponsesInfo>
                     <p>{props.sr_name}</p>
                     <p>{props.sr_date}</p>
-                </div>
-            </div>
-            <div className = 'responses-answers'>
+                </ResponsesInfo>
+            </ResponsesGuest>
+            <ResponsesAnswers>
             {props.results.map((instance:any, index:any) => 
                 <Response key={instance.id} question = {instance.question} answer = {instance.answer} answerType={instance.answer_type} index={index+1}/>
                 )}    
-            </div>
-        </div>
+            </ResponsesAnswers>
+        </ResponsesContainer>
     )
 }
 
