@@ -21,7 +21,7 @@ const Responses = (props:any) => {
             </ResponsesGuest>
             <ResponsesAnswers>
             {props.results.map((instance:any, index:any) => 
-                <Response key={instance.id} question = {instance.question} answer = {instance.answer} answerType={instance.answer_type} index={index+1}/>
+                <Response key={index} question = {instance.question} answer = {instance.answer} answerType={instance.answer_type} index={index+1}/>
                 )}    
             </ResponsesAnswers>
         </ResponsesContainer>
