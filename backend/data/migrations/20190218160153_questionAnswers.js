@@ -20,7 +20,7 @@ exports.up = function(knex, Promise) {
     table.string('photo');
     table.string('house_name');
     table
-    .timestamp('created_at')
+    .date('created_at')
     .defaultTo(knex.fn.now());
   });
 };
