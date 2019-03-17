@@ -1,5 +1,4 @@
- import React, {useEffect, useState} from 'react';
- import axios from 'axios';
+ import React, {useState} from 'react';
  import { useFetch } from '../../helpers';
  import loadingIndicator from '../utils/loading.svg';
 
@@ -7,8 +6,9 @@
  import SRHeader from './SRHeader';
  import Properties from './Properties';
  import './images/profile_pic_default.png';
- import './SurveyResponse.css';
+ import {SurveyResponseContainer} from './SurveyResponse.styling';
  
+
 const SurveyResponse = (props:any) => {
 
 const url =
@@ -64,18 +64,18 @@ if (loading === true) {
         <img src = {loadingIndicator} />
     )}else{
         return(
-            <div className = 'sr-container'>
+            <SurveyResponseContainer>
                 <SRHeader surveys = {response.survey} />
                 <Properties surveys = {response.survey} changeHandler ={changeHandler}/> 
-                {filteredSurveys().map((survey: any) =>
-                 <Responses key={survey.id} survey={response.survey} 
+                {filteredSurveys().map((survey: any, index:number) =>
+                 <Responses key={index} survey={response.survey} 
                  sr_name={survey.guest_name} sr_date={survey.created_at} 
                  guestPic={guestPic()} sr_img={survey.photo} 
                  results={survey.results}/>
                  )}
                 
                 {console.log(response.survey)}
-            </div>
+            </SurveyResponseContainer>
             )    
         }
     }

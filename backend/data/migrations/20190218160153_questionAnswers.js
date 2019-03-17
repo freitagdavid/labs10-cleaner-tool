@@ -19,7 +19,9 @@ exports.up = function(knex, Promise) {
     table.string('guest_name');
     table.string('photo');
     table.string('house_name');
-    table.timestamp('created_at').defaultTo(knex.fn.now());
+    table
+    .date('created_at')
+    .defaultTo(knex.fn.now());
   });
 };
 

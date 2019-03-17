@@ -188,6 +188,16 @@ server.post('/surveys', verifyToken, async(req,res) =>{
 }
 });
 
+server.delete('/surveys/:id', async(req, res) => {
+  try{
+    const surveyId = req.params;
+    const deleteSurvey = await db('surveys').where(surveyId).del()
+    res.status(202).json({message:"survey deleted"})
+  }catch(e){
+    res.json(e.message)
+  }
+});
+
 server.post('/questions', verifyToken, async (req, res) => {
   const body = req.body;
   try {

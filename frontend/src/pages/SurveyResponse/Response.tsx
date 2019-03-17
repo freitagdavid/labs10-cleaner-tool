@@ -1,33 +1,35 @@
 import React from 'react';
 import RatingComponent from './RatingComponent';
 import YNComponent from './YNComponent';
+import {SingleResponse, SingleResponseH3} from './SurveyResponse.styling';
+
 
 const Response = (props:any) => {
     if(props.answerType == 1){
         return(
-            <div className="single-response">
-                <h3>Question {props.index}</h3>
+            <SingleResponse>
+                <SingleResponseH3>Question {props.index}</SingleResponseH3>
                 <p>{props.question}</p>
                 <YNComponent yn_answer={props.answer} />
-            </div>
+            </SingleResponse>
         ) 
     }
 
     if(props.answerType == 2){
         return(
-            <div className="single-response">
-                <h3>Question {props.index}</h3>
+            <SingleResponse>
+                <SingleResponseH3>Question {props.index}</SingleResponseH3>
                 <p>{props.question}</p>
                 <RatingComponent rating_answer={props.answer} />
-            </div>
+            </SingleResponse>
         )
     }
     return(
-        <div className="single-response">
-            <h3>Question {props.index}</h3>
+        <SingleResponse>
+            <SingleResponseH3>Question {props.index}</SingleResponseH3>
             <p>{props.question}</p>
             <p>{props.answer}</p>
-        </div>
+        </SingleResponse>
     )
 }
 
