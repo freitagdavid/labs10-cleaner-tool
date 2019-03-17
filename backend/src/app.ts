@@ -15,6 +15,7 @@ import * as payments from './controller/payments';
 import * as stays from './controller/stays';
 import * as connect from './controller/connect';
 import * as assistants from './controller/assistants';
+import * as staysSurveys from './controller/staysSurveys';
 import path from 'path';
 
 import {
@@ -54,7 +55,7 @@ server.get('/surveysquestions/:id', async (req, res) => {
       res.json({ survey, questions });
     }
   } catch (e) {
-    res.json(e), console.log(e);
+    res.json(e)
   }
 });
 
@@ -128,14 +129,12 @@ server.route('/gueststay/:id').get(stays.getGuest);
 server.get('/stay/surveys/:id', async(req,res)=>{
     const id = req.params.id
     const stay = await findStaySummaryStandardizedByGuestId(id);
-    console.log(stay)
     const houseId = stay.house_id
     const house = await db('house').where({id: houseId})
     const managerId = house[0].manager
     const manager = await db('manager').where({id: managerId})
     const userId = manager[0].user_id
     const surveys = await db('surveys').where({user_id: userId})
-    console.log(managerId)
     res.json(surveys)
 })
 
@@ -176,9 +175,13 @@ server.post('/questionanswers', verifyToken, async (req, res) => {
 server.post('/surveys', verifyToken, async(req,res) =>{
   const token = req.token
   const body = req.body
-  const createSurvey = await db('surveys').insert({...body,responses: 0,user_id:token.id})
-  const survey = await db('surveys').where({id: createSurvey[0]})
+  
   try{
+    const createSurvey = await db('surveys').insert({ ...body, responses: 0, user_id: token.id })
+    const surveys = await db('surveys').where({user_id: req.token.id})
+    const surveyLocation = surveys.length-1
+    const surveyId = surveys[surveyLocation]
+    const survey = await db('surveys').where({ id: surveyId })
     res.status(201).json({...survey[0], message: 'successfully created survey'})
   } catch(e){
     res.json(e)
@@ -197,13 +200,19 @@ server.delete('/surveys/:id', async(req, res) => {
 
 server.post('/questions', verifyToken, async (req, res) => {
   const body = req.body;
-  const createQuestion = await db('questions').insert({ ...body });
   try {
+    const createQuestion = await db('questions').insert({ ...body });
     res.status(201).json(createQuestion);
   } catch (e) {
     res.json(e);
   }
 });
+//stays surveys
+server
+  .route('/stays/surveys')
+  .get(staysSurveys.get)
+  .post(staysSurveys.post);
+
 server
   .route('/users/:id')
   .get(users.get)
@@ -275,6 +284,10 @@ server
   .route('/stays')
   .get(stays.getAll)
   .post(stays.post);
+
+server
+  .route('/stay/ast/:id')
+  .get(staysSurveys.getAststay);
 
 server
   .route('/stays/:id')

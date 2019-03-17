@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
       .unique()
       .primary();
     table.string('answer').unsigned();
-    table.integer('answer_type')
+    table.integer('answer_type');
     table.integer('question_id');
     table
       .foreign('question_id')

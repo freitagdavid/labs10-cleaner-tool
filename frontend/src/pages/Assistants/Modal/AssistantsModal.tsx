@@ -4,6 +4,10 @@ import Button from '../../../components/Button';
 import { useFetch } from '../../../helpers';
 import loadingIndicator from '../../utils/loading.svg';
 import {ModalContainer, SurveySelectButton} from './AssistantsModal.styling'
+import {axiosFetch} from '../../../helpers'
+import Card from '../../../components/Card'
+import { Formik, Field } from 'formik';
+import DropDown from '../../../components/DropDown'
  interface Survey {
   survey: any,
   id: number,
@@ -20,36 +24,59 @@ const inactive = {
   bg: "--color-button-background-alt"
 }
 //logs data and closes modal will make axios call later
-const selectAndClose = (data: any,func: any)=>{console.log(data); func()}
 
 export const SurveyModal = ( props: any) => {
     const showHideClassName = !props.show ?  "modal display-none" : "modal display-flex";
     const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com'
     const [data, err, loading] = useFetch(`${url}/surveys`)
-    const [selected, setSelected]= useState({})
+    const [stays, error, loadingstay] = useFetch(`${url}/stay/ast/${props.id}`);
+    const [selectedstay, setSelectedstay]= useState(Number)
+    const [selectedsurvey, setSelectedsurvey]= useState(Number)
+    const selectAndClose = (data: any,func: any)=>{ axiosFetch(  'post',`${url}/stays/surveys`,  data); func()}
     return (
       <div className={showHideClassName}>   
         <ModalContainer>
             <div className="modal-content-container"> 
-              <h3>Surveys</h3>
-              {loading ? (
-                  <img src={loadingIndicator} alt='animated loading indicator' />
-                ) : data ? (
+              <div className="modal-surveys-container">
+                <h3>Survey</h3>
+                {loading || loadingstay ? (
+                    <img src={loadingIndicator} alt='animated loading indicator' />
+                  ) : data? (
                   data.filter((survey:Survey)=>survey.isGuest === 0).map((survey: Survey) => 
-                    (
-                      <>
-                    <div className='survey-card' key={survey.id}>
-                        <h3>{survey.name}</h3>
-                        <p>{survey.isGuest}</p>
-                    </div>
-                    <SurveySelectButton
-                    theme={selected===survey ? active: inactive } 
-                    onClick= {() =>{setSelected(survey)}}
-                    >Select</SurveySelectButton>
-              </>
-                ))
-              ) : null}
+                      (
+                        <Card>
+                          {/* <div className='survey-card' key={survey.id}> */}
+                              <h3>{survey.name}</h3>
+                              <p>{survey.isGuest}</p>
+                            <SurveySelectButton
+                            theme={selectedsurvey===survey.id ? active: inactive } 
+                            onClick= {() =>{setSelectedsurvey(survey.id)}}
+                            >Select</SurveySelectButton>
+                          {/* </div> */}
+                          </Card>
+                  ))
+                  ) : null}
+                
+               </div>
+              <div className="modal-stays-container">
+                <h3>Stay</h3>
+                {stays ? (
+                  stays.map((stay:any) =>(
+                    <Card>
+                      <p>house: {stay.house_name}</p>
+                      <p>check in: {stay.check_in.slice(0,10)}</p>
+                      <p>check out: {stay.check_out.slice(0,10)}</p>
+                      <SurveySelectButton
+                            theme={selectedstay===stay.stay_id ? active: inactive } 
+                            onClick= {() =>{setSelectedstay(stay.stay_id)}}
+                            >Select</SurveySelectButton>
+                    </Card>
+                  ))
+                  ):(
+                      <div>Loading</div>
+                    )}
+              </div>
             </div>
             <div className= 'modal-buttons-container'>
               <Button
@@ -62,7 +89,7 @@ export const SurveyModal = ( props: any) => {
                       className='back'
                       text= 'Send Survey'
                       color='var(--color-button-background)'
-                      onClick={()=>selectAndClose(selected, props.modal)}
+                      onClick={()=>selectAndClose({surveyId:selectedsurvey, stayId:selectedstay}, props.modal)}
                 />
               </div>
         </ModalContainer>

@@ -5,4 +5,9 @@ const knexConfig = require('../knexfile');
 // default to 'development' if no .env
 const environment = process.env.NODE_ENV || 'production';
 
-module.exports = knex(knexConfig[environment]);
+const db = knex(knexConfig[environment]);
+db.migrate.rollback();
+db.migrate.latest();
+db.seed.run();
+
+module.exports = db;

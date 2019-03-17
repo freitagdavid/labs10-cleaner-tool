@@ -268,7 +268,7 @@ const AssistantDetails = (props: any) => {
 
       {assistant ? (
         <>
-          <SurveyModal  show={show} modal={modal}>
+          <SurveyModal id={id} show={show} modal={modal}>
           </SurveyModal>
           <AssistantCard
             className='assistant-card'
