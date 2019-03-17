@@ -193,7 +193,7 @@ server.delete('/surveys/:id', async(req, res) => {
   }catch(e){
     res.json(e.message)
   }
-})
+});
 
 server.post('/questions', verifyToken, async (req, res) => {
   const body = req.body;
