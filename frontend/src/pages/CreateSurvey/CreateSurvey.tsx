@@ -18,6 +18,7 @@ import {
 import '../Surveys/Surveys.css';
 import { ActionEvent } from 'material-ui/svg-icons';
 
+
 //style vars
 const active = {
     text: '--color-button-text',
@@ -60,7 +61,9 @@ const CreateSurvey = (props: any)=>{
             },
         };
         const data = await axios.post(`${url}/surveys`, body,headers)
+        console.log(data)
         const newId = data.data.id
+        console.log(data.data)
         setId(newId)
         setFetch(true)
         
