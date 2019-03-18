@@ -12,7 +12,7 @@ import DropDown from '../../../components/DropDown'
   survey: any,
   id: number,
   name: string,
-  isGuest: number,
+  isGuest: number | boolean,
 }
 //style vars
 const active = {
@@ -43,7 +43,7 @@ export const SurveyModal = ( props: any) => {
                 {loading || loadingstay ? (
                     <img src={loadingIndicator} alt='animated loading indicator' />
                   ) : data? (
-                  data.filter((survey:Survey)=>survey.isGuest === 0).map((survey: Survey) => 
+                  data.filter((survey:Survey)=>survey.isGuest === 0 || false).map((survey: Survey) => 
                       (
                         <Card>
                           {/* <div className='survey-card' key={survey.id}> */}
