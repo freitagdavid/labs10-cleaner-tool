@@ -43,7 +43,7 @@ export const SurveyModal = ( props: any) => {
                 {loading || loadingstay ? (
                     <img src={loadingIndicator} alt='animated loading indicator' />
                   ) : data? (
-                  data.filter((survey:Survey)=>survey.isGuest === 0 || false).map((survey: Survey) => 
+                  data.filter((survey:Survey)=>survey.isGuest === 0 || survey.isGuest === false).map((survey: Survey) => 
                       (
                         <Card>
                           {/* <div className='survey-card' key={survey.id}> */}

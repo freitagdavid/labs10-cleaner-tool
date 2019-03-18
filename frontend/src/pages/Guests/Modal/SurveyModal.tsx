@@ -37,7 +37,7 @@ export const Modal = ( props: any) => {
               {loading ? (
                   <img src={loadingIndicator} alt='animated loading indicator' />
                 ) : data ? (
-                  data.filter((survey:Survey)=>survey.isGuest === true || 1).map((survey: Survey) => 
+                  data.filter((survey:Survey)=>survey.isGuest === true || survey.isGuest === 1).map((survey: Survey) => 
                     (
                       <>
                     <div className='survey-card' key={survey.id}>
