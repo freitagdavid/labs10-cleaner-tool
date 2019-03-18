@@ -36,12 +36,11 @@ const FillSurvey = (props: any)=>{
         if (!answer) {
             return console.log('missing answer')
         }
-        const stay: any = await axios.get(`${url}/gueststay/${props.match.params.stayId}`)
-        const stayId= stay.stay_id
         const body: any = {
             answer: answer,
             answer_type: type,
-            stay_id: stayId,
+            //@ts-ignore
+            stay_id: stayInfo.stay_id,
             question_id: id,
             //@ts-ignore
             house_name: stayInfo.house_name,
