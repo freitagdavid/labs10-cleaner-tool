@@ -162,7 +162,7 @@ server.get('/surveys', verifyToken, async (req, res) => {
   }
 });
 
-server.post('/questionanswers', verifyToken, async (req, res) => {
+server.post('/questionanswers/', verifyToken, async (req, res) => {
   const body = req.body
   try {
     const data = await db('questionAnswers').insert(body)
@@ -179,10 +179,10 @@ server.post('/surveys', verifyToken, async (req, res) => {
   try {
     const createSurvey = await db('surveys').insert({ ...body, responses: 0, user_id: token.id })
     const surveys = await db('surveys').where({ user_id: req.token.id })
+    console.log(surveys)
     const surveyLocation = surveys.length - 1
     const surveyId = surveys[surveyLocation]
-    const survey = await db('surveys').where({ id: surveyId })
-    res.status(201).json({ ...survey[0], message: 'successfully created survey' })
+    res.status(201).json({ ...surveyId, message: 'successfully created survey' })
   } catch (e) {
     res.json(e)
   }

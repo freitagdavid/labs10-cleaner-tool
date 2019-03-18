@@ -36,10 +36,12 @@ const FillSurvey = (props: any)=>{
         if (!answer) {
             return console.log('missing answer')
         }
+        const stay: any = await axios.get(`${url}/gueststay/${props.match.params.stayId}`)
+        const stayId= stay.stay_id
         const body: any = {
             answer: answer,
             answer_type: type,
-            stay_id: props.match.params.stayId,
+            stay_id: stayId,
             question_id: id,
             //@ts-ignore
             house_name: stayInfo.house_name,
@@ -48,7 +50,7 @@ const FillSurvey = (props: any)=>{
             //@ts-ignore
             photo: stayInfo.photo_url
         }
-        const data = await axios.post(`${url}/questionanswers`, body, headers)
+        const data = await axios.post(`${url}/questionanswers/`, body, headers)
     }
     async function handleUpdate(id: any){
         const update = await axios.put(`${url}/surveys/${id}`);
