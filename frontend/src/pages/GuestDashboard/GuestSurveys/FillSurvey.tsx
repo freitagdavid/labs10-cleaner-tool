@@ -9,7 +9,7 @@ import {
     CreateSurveysWrapper
 } from '../../CreateSurvey/CreateSurvey.styling'
 import styled from '@emotion/styled';
-import console = require('console');
+
 
 
 
