@@ -126,16 +126,16 @@ server.put('/surveys/:id', async (req, res) => {
 /* for Guest dashboard Info*/
 server.route('/gueststay/:id').get(stays.getGuest);
 
-server.get('/stay/surveys/:id', async(req,res)=>{
-    const id = req.params.id
-    const stay = await findStaySummaryStandardizedByGuestId(id);
-    const houseId = stay.house_id
-    const house = await db('house').where({id: houseId})
-    const managerId = house[0].manager
-    const manager = await db('manager').where({id: managerId})
-    const userId = manager[0].user_id
-    const surveys = await db('surveys').where({user_id: userId})
-    res.json(surveys)
+server.get('/stay/surveys/:id', async (req, res) => {
+  const id = req.params.id
+  const stay = await findStaySummaryStandardizedByGuestId(id);
+  const houseId = stay.house_id
+  const house = await db('house').where({ id: houseId })
+  const managerId = house[0].manager
+  const manager = await db('manager').where({ id: managerId })
+  const userId = manager[0].user_id
+  const surveys = await db('surveys').where({ user_id: userId })
+  res.json(surveys)
 })
 
 server
@@ -164,36 +164,36 @@ server.get('/surveys', verifyToken, async (req, res) => {
 
 server.post('/questionanswers/', verifyToken, async (req, res) => {
   const body = req.body
-    try {
-      const data = await db('questionAnswers').insert(body)
-      
-      const response = await db('questionAnswers').where({id: data[0]})
-      res.json(response)
-    } catch (e) { res.json(e) }
+  try {
+    const data = await db('questionAnswers').insert(body)
+
+    const response = await db('questionAnswers').where({ id: data[0] })
+    res.json(response)
+  } catch (e) { res.json(e) }
 })
 
-server.post('/surveys', verifyToken, async(req,res) =>{
+server.post('/surveys', verifyToken, async (req, res) => {
   const token = req.token
   const body = req.body
-  
-  try{
+
+  try {
     const createSurvey = await db('surveys').insert({ ...body, responses: 0, user_id: token.id })
-    const surveys = await db('surveys').where({user_id: req.token.id})
+    const surveys = await db('surveys').where({ user_id: req.token.id })
     console.log(surveys)
-    const surveyLocation = surveys.length-1
+    const surveyLocation = surveys.length - 1
     const surveyId = surveys[surveyLocation]
-    res.status(201).json({...surveyId, message: 'successfully created survey'})
-  } catch(e){
+    res.status(201).json({ ...surveyId, message: 'successfully created survey' })
+  } catch (e) {
     res.json(e)
-}
+  }
 });
 
-server.delete('/surveys/:id', async(req, res) => {
-  try{
+server.delete('/surveys/:id', async (req, res) => {
+  try {
     const surveyId = req.params;
     const deleteSurvey = await db('surveys').where(surveyId).del()
-    res.status(202).json({message:"survey deleted"})
-  }catch(e){
+    res.status(202).json({ message: "survey deleted" })
+  } catch (e) {
     res.json(e.message)
   }
 });
@@ -222,7 +222,7 @@ server
 server.route('/guests').post(guests.post);
 
 server.route('/guests/:id').put(guests.put);
-server.get('/s', async(req,res)=>{
+server.get('/s', async (req, res) => {
   const data = await db('manager')
   res.json(data)
 })
