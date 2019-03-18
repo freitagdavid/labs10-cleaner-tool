@@ -12,6 +12,7 @@ import styled from '@emotion/styled';
 
 
 
+
 const StyledForm = styled.form`
     margin-top: 30px;
 `
@@ -29,18 +30,24 @@ const FillSurvey = (props: any)=>{
             const questionResponse = await axios.get(`${url}/surveysquestions/${surveyId}`)
             setQuestions(questionResponse.data.questions);
             const stayResponse = await axios.get(`${url}/gueststay/${props.match.params.stayId}`)
+            console.log(stayResponse)
             setStayInfo(stayResponse.data)
         })()
     }, []);
+    console.log(stayInfo)
     async function handleQuestions(answer: string, type: number,headers: any, id: number) {
         if (!answer) {
             return console.log('missing answer')
         }
+        //@ts-ignore
+        const stayId = stayInfo.stay_id
+        //@ts-ignore
+        console.log(stayInfo.stay_id)
         const body: any = {
             answer: answer,
             answer_type: type,
             //@ts-ignore
-            stay_id: stayInfo.stay_id,
+            stay_id: stayId,
             question_id: id,
             //@ts-ignore
             house_name: stayInfo.house_name,
