@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useFetch } from '../../helpers';
 import { Survey, FilterArgs } from './types';
@@ -6,6 +6,7 @@ import loadingIndicator from '../utils/loading.svg';
 import { Button, Container } from '../../components/index';
 import { Link } from 'react-router-dom';
 import SurveyCard from './SurveyCard';
+
 import {
   SurveysHeader,
   SurveyCardWrapper,
@@ -14,10 +15,24 @@ import {
 } from './Surveys.styling';
 import './Surveys.css'
 
+// interface SurveysType extends React.FunctionComponent {
+//   setActive: number | boolean;
+// }
+
 const Surveys = () => {
+  const stupidPostgresInconsistencyTrue = process.env.NODE_ENV === 'development' ? 1 : true
+  const stupidPostgresInconsistencyFalse = process.env.NODE_ENV === 'development' ? 0 : false
   const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
-  const [active, setActive] = useState(true as boolean);
+  const [active, setActive] = useState();
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      setActive(1);
+    }
+  }, [])
+
+
   const [data, err, loading] = useFetch(`${url}/surveys`)
   const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
@@ -34,19 +49,18 @@ const Surveys = () => {
       <SurveyFilterButtons>
         <h2>Sort By:</h2>
         <SimpleButton
-          className={`${activeClass(true)}`}
-          onClick={() => setActive(true)}
+          className={`${activeClass(stupidPostgresInconsistencyTrue)}`}
+          onClick={() => setActive(stupidPostgresInconsistencyTrue)}
         >Guest</SimpleButton>
         <SimpleButton
-          className={`${activeClass(false)}`}
-          onClick={() => setActive(false)}
+          className={`${activeClass(stupidPostgresInconsistencyFalse)}`}
+          onClick={() => setActive(stupidPostgresInconsistencyFalse)}
         >Assistant</SimpleButton>
       </SurveyFilterButtons>
       <SurveyCardWrapper>
         {loading ? (
           <img src={loadingIndicator} alt='animated loading indicator' />
         ) : data ? (
-
           data.map((survey: Survey) =>
             (
               <div className={`survey${activeClass(survey.isGuest)}`} key={survey.id}>
