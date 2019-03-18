@@ -162,7 +162,7 @@ server.get('/surveys', verifyToken, async (req, res) => {
   }
 });
 
-server.post('/questionanswers', verifyToken, async (req, res) => {
+server.post('/questionanswers/', verifyToken, async (req, res) => {
   const body = req.body
     try {
       const data = await db('questionAnswers').insert(body)
