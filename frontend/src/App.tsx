@@ -24,6 +24,7 @@ import {
   FillSurvey,
   CreateSurvey,
   LinkLogin,
+  GuestMap,
 } from './pages/index';
 import { Sidebar } from './components/index';
 import './App.css';
@@ -60,6 +61,7 @@ const App = () => {
           <Route exact path = '/guestdashboard/:stayId/surveys' component = {GuestSurveys} />
           <Route exact path='/guestdashboard/:stayId/surveys/:id/:surveyId' component={FillSurvey} />
           <Route exact path='/linklogin/:id' component={LinkLogin} />
+          <Route exact path='/guestmap/:id' component={GuestMap} />
         </Switch>
       </UserContextProvider>
     </div>
