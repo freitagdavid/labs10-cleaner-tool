@@ -116,11 +116,13 @@ export const SurveyResponseTitle = styled('div')`
     flex-direction: column;
     align-items: flex-start;
     width:65%;
+    
 `; 
 
 export const SurveyResponseH1 = styled('h1')`
     font-size: 1.9rem;
-    font-weight: 500;
+    font-weight: 500; 
+    ${(props:any) => (props.surveys === undefined ? `text-align: center` : null)}
 `;
 
 export const SurveyResponseSelect = styled('select')`

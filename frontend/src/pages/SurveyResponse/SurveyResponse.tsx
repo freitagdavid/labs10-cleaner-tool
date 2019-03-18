@@ -62,7 +62,12 @@ let filteredSurveys = () => {
 if (loading === true) {
     return(
         <img src = {loadingIndicator} />
-    )}else{
+    )
+}else if(response.survey.length === 0){
+    return(
+        <SRHeader surveys = {response.survey} />
+    )
+}else{
         return(
             <SurveyResponseContainer>
                 <SRHeader surveys = {response.survey} />
