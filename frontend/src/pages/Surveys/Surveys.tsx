@@ -17,10 +17,13 @@ import './Surveys.css'
 const Surveys = () => {
     const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
-    const [active, setActive] = useState( true as any);
+    const [active, setActive] = useState(true  as any);
     const [data, err, loading] = useFetch(`${url}/surveys`)
     const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
+    function goBack() {
+        window.location.reload();
+      }
     
     return (
         <Container>
@@ -50,7 +53,7 @@ const Surveys = () => {
                 data.map((survey: Survey) => 
                     (
                     <div className={`survey${activeClass(survey.isGuest)}`} key={survey.id}>
-                        <SurveyCard {...survey} key={survey.id}></SurveyCard> 
+                        <SurveyCard goBack={goBack}{...survey} key={survey.id}></SurveyCard> 
                     </div>
                 ))
             ) : null}
