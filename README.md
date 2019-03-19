@@ -11,6 +11,15 @@
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kelly-frohwein-30404116a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ichirohonda/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ronald-libago-96487815b/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/nandotheessen/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/william-vandolah-89717477/) |
 
 <br>
+<center>
+
+|                                                [Sasha Taylor](https://github.com/sashat14)                                                |                                         [Brooks Poltl](https://github.com/BrooksPoltl)                                         |                                             [David Freitag](https://github.com/freitagdavid)                                            |                                       [Brandon Campbell](https://github.com/BrandCam)                                          |                                             
+| :---------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------:   | :-------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
+|                                [<img src="./assets/Sasha.jpg" width = "160" />](https://github.com/sashat14)                              |                         [<img src="./assets/Brooks.jpg" width = "160" />](https://github.com/BrooksPoltl)                      |             [<img src="./assets/David.jpg" width = "160" />](https://github.com/freitagdavid)                			       |       [<img src="./assets/Brandon.jpg" width = "160" />](https://github.com/BrandCam)                                          |                                   
+|                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sashat14)                          |                    [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/BrooksPoltl)                    |                         [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/freitagdavid)                       |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/BrandCam)                        |                          
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kelly-frohwein-30404116a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ichirohonda/)   | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ronald-libago-96487815b/)| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/nandotheessen/) | 
+
+</center>
 <br>
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
@@ -31,8 +40,14 @@ You can find the project at [https://cleanerpos.netlify.com/](https://cleanerpos
     * Allow employees to track their progress
     * Allow employees to reassign tasks to other employees
     * Automatically generate guest invoices
-    * Allow property managers to add new properties, assign properties to employees, create and edit task checklists for employees, and bill guests directly
-    * Allow guests to view readiness of their assigned rental property and pay their invoice online
+    * Allow property managers to add new properties, assign properties to employees,        create and edit task checklists for employees, and bill guests directly
+    * Allow guests to view readiness of their assigned rental property and pay their        invoice online
+    * Allow managers to create and send surveys to employees and guests
+    * Allow managers to view responses to surveys
+    * Allow employees and guest to fill out surveys
+    * Email verification system securely links guests to their own guest dashboards
+    * Progress bar in guest dashboard tracks status of room readiness 
+
 
 ## Tech Stack
 
@@ -137,7 +152,7 @@ This application was tested at every stage of development by each contributor. W
 
 To install this app, make sure you have node.js and npm installed. From the root directory, run npm install or yarn to install dependencies for frontend and backend.
 
-If you are using Windows and this installation method fails, run npm install from the backend directory and then again from the frontend directory.
+If you are using Windows and this installation method fails, Remove npm installation from root, run npm install from the backend directory, and the frontend directory.
 
 Start the development server by running npm dev:server or yarn dev:server.
 
