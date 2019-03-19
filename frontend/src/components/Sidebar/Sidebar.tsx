@@ -78,8 +78,12 @@ const Sidebar = (props: LinkProps) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            {role !== 'guest' ? <MenuItem onClick={goAndClose('/properties')}>Properties</MenuItem> : null}
-            {role !== 'guest' ? <MenuItem onClick={goAndClose('/guests')}>Guests</MenuItem> : null}
+            {role !== 'guest' && (
+              <>
+                <MenuItem onClick={goAndClose('/properties')}>Properties</MenuItem>
+                <MenuItem onClick={goAndClose('/guests')}>Guests</MenuItem>
+              </>
+            )}
             {role === 'manager' && (
               <>
                 <MenuItem onClick={goAndClose('/assistants')}>
@@ -140,20 +144,21 @@ const Sidebar = (props: LinkProps) => {
               </div>
               <div>
                 {role !== 'guest' && (
-
-                  <><StyledLink to='/guests'>
-                    <h4
-                      style={{
-                        borderBottom: props.location.pathname.match(
-                          '/guests/*.*?',
-                        )
-                          ? '2px solid var(--color-accent-alt)'
-                          : '0',
-                      }}
-                    >
-                      Guests
-                  </h4>
-                  </StyledLink></>
+                  <>
+                    <StyledLink to='/guests'>
+                      <h4
+                        style={{
+                          borderBottom: props.location.pathname.match(
+                            '/guests/*.*?',
+                          )
+                            ? '2px solid var(--color-accent-alt)'
+                            : '0',
+                        }}
+                      >
+                        Guests
+                      </h4>
+                    </StyledLink>
+                  </>
                 )}
               </div>
               <div>
