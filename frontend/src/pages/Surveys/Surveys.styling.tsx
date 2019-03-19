@@ -88,11 +88,7 @@ export const SurveyCards = styled('div')`
 
 export const SurveyRightContent = styled('div')`
    display: flex;
-   flex-direction: column;
-   align-items: flex-end;
-   .responses-cantainer{
-
-   }
+   flex-direction: row-reverse;
    button{
        margin: 1px 1px 0 0;
        color: var(--color-button-text);
@@ -108,3 +104,16 @@ export const SurveyRightContent = styled('div')`
 export const SimpleButton = styled('button')`
   cursor: pointer;
 `;
+
+export const DeleteIcon = styled('img')`
+   width: 20px;
+   height: 20px;
+   margin: 8px;
+   cursor: pointer;
+` 
+
+export const ResponsesContainer = styled('div')`
+    position: relative;
+    top: 15px;
+    margin-right: 25px;
+`
