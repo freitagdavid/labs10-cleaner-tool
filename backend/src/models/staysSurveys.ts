@@ -27,6 +27,14 @@ function formatData(data: data) {
   return { survey_Id: surveyId, stay_id: stayId };
 }
 
+export function updateById(Id: number) {
+  return db('stayssurveys')
+    .where({ 'id': Id })
+    .update({
+      is_complete:true
+    });
+}
+
 export function postStaysSurveys(data:data) {
   const postData = formatData(data);
   const insert = insertData(postData);
