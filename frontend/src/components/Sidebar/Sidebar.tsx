@@ -121,26 +121,27 @@ const Sidebar = (props: LinkProps) => {
               </div>
               <div>
                 {role !== 'guest' && (
-
-                  <StyledLink to='/properties'>
-                    <h4
-                      style={{
-                        borderBottom: props.location.pathname.match(
-                          '/properties/*.*?',
-                        )
-                          ? '2px solid var(--color-accent-alt)'
-                          : '0',
-                      }}
-                    >
-                      Properties
+                  <>
+                    <StyledLink to='/properties'>
+                      <h4
+                        style={{
+                          borderBottom: props.location.pathname.match(
+                            '/properties/*.*?',
+                          )
+                            ? '2px solid var(--color-accent-alt)'
+                            : '0',
+                        }}
+                      >
+                        Properties
                   </h4>
-                  </StyledLink>
+                    </StyledLink>
+                  </>
                 )}
               </div>
               <div>
                 {role !== 'guest' && (
 
-                  <StyledLink to='/guests'>
+                  <><StyledLink to='/guests'>
                     <h4
                       style={{
                         borderBottom: props.location.pathname.match(
@@ -152,7 +153,7 @@ const Sidebar = (props: LinkProps) => {
                     >
                       Guests
                   </h4>
-                  </StyledLink>
+                  </StyledLink></>
                 )}
               </div>
               <div>
