@@ -5,7 +5,7 @@ export function findAssistants(manId: number) {
   return db('assistant')
     .join('user', 'user.id', '=', 'assistant.user_id')
     .join('manager_ast', 'assistant.id', '=', 'manager_ast.ast_id')
-    .select( 
+    .select(
       'user.id as user_id',
       'assistant.id as ast_id',
       'user.full_name as full_name',
@@ -64,6 +64,7 @@ export function findOneAssistant(astId: number, manId: number) {
       'user.full_name as full_name',
       'user.address as address',
       'user.photoUrl as photo_url',
+      'user.email as email_address'
     )
     .where({ 'assistant.id': astId })
     .first()

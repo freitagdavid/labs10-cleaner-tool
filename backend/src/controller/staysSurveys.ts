@@ -1,8 +1,9 @@
-import { getSurveyByStayId, postStaysSurveys } from '../models/staysSurveys';
+import { getSurveyByStayId, postStaysSurveys, updateById } from '../models/staysSurveys';
 // Type Definitions
 import { Request, Response, NextFunction } from 'express';
 import { RequestMock, ResponseMock } from '../../__tests__/helpers';
 import { findStayByAstId } from '../models/stays/stays'
+import db from '../../data/dbConfig';
 import { QueryBuilder } from 'knex';
 import { Stay } from '../interface';
 import { postItemsStay } from '../models/items';
@@ -32,7 +33,23 @@ export const post = async (req: Request, res: Response, next: Nexts) => {
   }
 };
 
-export const del = async () => { };
+export const put = async (req: Requests, res: Responses, next: Nexts) => { 
+  const {id} = req.params;
+  const validsurvey = await db('stayssurveys').where({id:id});
+    if (validsurvey.length === 0) {
+      throw Error('Not a valid List ID');
+    }else{
+      try{
+        const update = await updateById(id)
+        res.status(200).json(update);
+      }catch(e){
+        e.statusCode = e.statusCode || 400;
+        next(e);
+      }
+      
+    }
+
+};
 
 // let get: (res: Responses, req: Requests, next: Nexts) => Promise<void>;
 

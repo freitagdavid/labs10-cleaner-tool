@@ -12,7 +12,7 @@ import {
   HouseItem,
   ModalStyle,
 } from './Assistants.styling';
-import {SurveyModal} from './Modal/AssistantsModal';
+import { SurveyModal } from './Modal/AssistantsModal';
 import Modal from '@material-ui/core/Modal';
 import { useFetch, axiosFetch } from '../../helpers/';
 import defaultUser from '../../assets/default-user.jpg';
@@ -28,6 +28,8 @@ const AssistantCard = (props: any) => {
   function handleModal() {
     setModalStatus(!modalStatus);
   }
+
+  console.log(assistant)
 
   useEffect(
     () => {
@@ -57,7 +59,7 @@ const AssistantCard = (props: any) => {
           <h3>{assistant.address}</h3>
         </div>
       </AsstDetail>
-      <button onClick={()=>props.modal()}>Send Survey</button>
+      <button onClick={() => props.modal()}>Send Survey</button>
       <AsstProperty>
         <PropertyContainer>
           <PropertyHeading>
@@ -73,35 +75,35 @@ const AssistantCard = (props: any) => {
                   alt='animated loading indicator'
                 />
               ) : (
-                <HouseItem key={house.house_id}>
-                  <span>
-                    <i className='fas fa-home' />{' '}
-                  </span>
-                  {house.house_name}
-                  <span
-                    onClick={() => {
-                      props.removeDefault(house.house_id);
-                      setTaskLoad(house.house_id);
-                    }}
-                    className='hide'
-                  >
-                    <i className='pointer fas fa-arrow-down' />
-                  </span>
-                  <span
-                    onClick={() => {
-                      props.addRemoveHouse(house.house_id, false);
-                      props.removeDefault(house.house_id);
-                      setTaskLoad(house.house_id);
-                    }}
-                    className='hide'
-                  >
-                    <i
-                      style={{ color: 'red' }}
-                      className='pointer fas fa-times'
-                    />
-                  </span>
-                </HouseItem>
-              ),
+                  <HouseItem key={house.house_id}>
+                    <span>
+                      <i className='fas fa-home' />{' '}
+                    </span>
+                    {house.house_name}
+                    <span
+                      onClick={() => {
+                        props.removeDefault(house.house_id);
+                        setTaskLoad(house.house_id);
+                      }}
+                      className='hide'
+                    >
+                      <i className='pointer fas fa-arrow-down' />
+                    </span>
+                    <span
+                      onClick={() => {
+                        props.addRemoveHouse(house.house_id, false);
+                        props.removeDefault(house.house_id);
+                        setTaskLoad(house.house_id);
+                      }}
+                      className='hide'
+                    >
+                      <i
+                        style={{ color: 'red' }}
+                        className='pointer fas fa-times'
+                      />
+                    </span>
+                  </HouseItem>
+                ),
             )}
           </PropertyList>
         </PropertyContainer>
@@ -126,34 +128,34 @@ const AssistantCard = (props: any) => {
                   alt='animated loading indicator'
                 />
               ) : (
-                <HouseItem key={house.house_id}>
-                  <span>
-                    <i className='fas fa-home' />{' '}
-                  </span>
-                  {house.house_name}
-                  <span
-                    onClick={() => {
-                      props.removeDefault(house.house_id, true);
-                      setTaskLoad(house.house_id);
-                    }}
-                    className='hide'
-                  >
-                    <i className='pointer fas fa-arrow-up' />
-                  </span>
-                  <span
-                    onClick={() => {
-                      props.addRemoveHouse(house.house_id, false);
-                      setTaskLoad(house.house_id);
-                    }}
-                    className='hide'
-                  >
-                    <i
-                      style={{ color: 'red' }}
-                      className='pointer fas fa-times'
-                    />
-                  </span>
-                </HouseItem>
-              ),
+                  <HouseItem key={house.house_id}>
+                    <span>
+                      <i className='fas fa-home' />{' '}
+                    </span>
+                    {house.house_name}
+                    <span
+                      onClick={() => {
+                        props.removeDefault(house.house_id, true);
+                        setTaskLoad(house.house_id);
+                      }}
+                      className='hide'
+                    >
+                      <i className='pointer fas fa-arrow-up' />
+                    </span>
+                    <span
+                      onClick={() => {
+                        props.addRemoveHouse(house.house_id, false);
+                        setTaskLoad(house.house_id);
+                      }}
+                      className='hide'
+                    >
+                      <i
+                        style={{ color: 'red' }}
+                        className='pointer fas fa-times'
+                      />
+                    </span>
+                  </HouseItem>
+                ),
             )}
           </PropertyList>
         </PropertyContainer>
@@ -176,30 +178,30 @@ const AssistantCard = (props: any) => {
                     alt='animated loading indicator'
                   />
                 ) : (
-                  <HouseItem key={house.house_id}>
-                    <span>
-                      <i className='fas fa-home' />{' '}
-                    </span>
-                    <span
-                      onClick={() => {
-                        props.addRemoveHouse(house.house_id, true);
-                        setTaskLoad(house.house_id);
-                      }}
-                      className='pointer'
-                    >
-                      {house.house_name}
-                    </span>
-                    <span
-                      onClick={() => {
-                        props.addRemoveHouse(house.house_id, true);
-                        setTaskLoad(house.house_id);
-                      }}
-                      className='hide'
-                    >
-                      <i className='pointer fa fa-plus' />
-                    </span>
-                  </HouseItem>
-                ),
+                    <HouseItem key={house.house_id}>
+                      <span>
+                        <i className='fas fa-home' />{' '}
+                      </span>
+                      <span
+                        onClick={() => {
+                          props.addRemoveHouse(house.house_id, true);
+                          setTaskLoad(house.house_id);
+                        }}
+                        className='pointer'
+                      >
+                        {house.house_name}
+                      </span>
+                      <span
+                        onClick={() => {
+                          props.addRemoveHouse(house.house_id, true);
+                          setTaskLoad(house.house_id);
+                        }}
+                        className='hide'
+                      >
+                        <i className='pointer fa fa-plus' />
+                      </span>
+                    </HouseItem>
+                  ),
               )}
               <Button
                 className='modalButton'
@@ -221,7 +223,7 @@ const AssistantDetails = (props: any) => {
     `${url}/assistants/${id}`,
     fetch,
   );
-    // modal state 
+  // modal state 
   const [show, setShow] = useState(false);
 
   async function removeDefault(houseId: number, addD: boolean = false) {
@@ -256,34 +258,34 @@ const AssistantDetails = (props: any) => {
   }
   //function to set modal state
   const modal = () => {
-    if(show===false){
+    if (show === false) {
       setShow(true);
-    }else{ setShow(false);}
+    } else { setShow(false); }
   }
   return loading && !assistant ? (
     <img src={loadingIndicator} alt='animated loading indicator' />
   ) : (
-    <AssistantDetailContainer>
-      {error.error ? 'Whoops! Something went wrong! :(' : null}
+      <AssistantDetailContainer>
+        {error.error ? 'Whoops! Something went wrong! :(' : null}
 
-      {assistant ? (
-        <>
-          <SurveyModal id={id} show={show} modal={modal}>
-          </SurveyModal>
-          <AssistantCard
-            className='assistant-card'
-            assistant={assistant}
-            removeDefault={removeDefault}
-            addRemoveHouse={addRemoveHouse}
-            goBack={goBack}
-            deleteAst={deleteAst}
-            modal={modal}
-          />
-          <LeafletMap ast={assistant} />
-        </>
-      ) : null}
-    </AssistantDetailContainer>
-  );
+        {assistant ? (
+          <>
+            <SurveyModal id={id} show={show} modal={modal}>
+            </SurveyModal>
+            <AssistantCard
+              className='assistant-card'
+              assistant={assistant}
+              removeDefault={removeDefault}
+              addRemoveHouse={addRemoveHouse}
+              goBack={goBack}
+              deleteAst={deleteAst}
+              modal={modal}
+            />
+            <LeafletMap ast={assistant} />
+          </>
+        ) : null}
+      </AssistantDetailContainer>
+    );
 };
 
 export default AssistantDetails;
