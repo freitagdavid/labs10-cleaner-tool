@@ -6,8 +6,13 @@ const knexConfig = require('../knexfile');
 const environment = process.env.NODE_ENV || 'production';
 
 const db = knex(knexConfig[environment]);
-db.migrate.rollback();
-db.migrate.latest();
-db.seed.run();
+
+db.migrate.rollback()
+    .then(
+        () => db.migrate.latest()
+    ).then(
+        () => db.seed.run()
+    )
+// db.seed.run().catch(e => console.log(e))
 
 module.exports = db;

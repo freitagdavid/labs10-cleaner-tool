@@ -72,12 +72,12 @@ const GuestDetail = (props: RouteComponentProps) => {
           show={show}
         />
       ) : (
-        <img
-          style={{ margin: 'auto' }}
-          src={loadingIndicator}
-          alt='animated loading indicator'
-        />
-      )}
+          <img
+            style={{ margin: 'auto' }}
+            src={loadingIndicator}
+            alt='animated loading indicator'
+          />
+        )}
     </>
   );
 };
@@ -121,7 +121,7 @@ export const GuestDetailView = (props: GuestProps) => {
   return (
     <>
       <GuestDetailStyle>
-        <Modal show={props.show} modal={props.modal} stay_id={stay_id} />
+        <Modal show={props.show} modal={props.modal} stay_id={stay_id} email={props.email} />
         {errors.error && <div>{errors.msg}</div>}
         <div className='guest-header'>
           <img
@@ -152,7 +152,7 @@ export const GuestDetailView = (props: GuestProps) => {
                 className='edit'
                 text='Edit Reservation'
                 color='var(--color-button-background)'
-                // datatestid='button-edit'
+              // datatestid='button-edit'
               />
             </Link>
             <Button
@@ -208,13 +208,13 @@ export const GuestDetailView = (props: GuestProps) => {
                       <label>Assistant Guide</label>
                     </div>
                   ) : (
-                    <div className='guide'>
-                      {/* <i className='fas fa-question' /> */}
-                      <Uppy type='ast_guide' text='Upload' />
-                      <br />
-                      <label>No Assistant Guide</label>
-                    </div>
-                  )}
+                      <div className='guide'>
+                        {/* <i className='fas fa-question' /> */}
+                        <Uppy type='ast_guide' text='Upload' />
+                        <br />
+                        <label>No Assistant Guide</label>
+                      </div>
+                    )}
                   {guest_guide ? (
                     <div className='guide'>
                       <a href={guest_guide} target='_blank'>
@@ -224,13 +224,13 @@ export const GuestDetailView = (props: GuestProps) => {
                       <label>Guest Guide</label>
                     </div>
                   ) : (
-                    <div className='guide'>
-                      {/* <i className='fas fa-question' /> */}
-                      <Uppy type='guest_guide' text='Upload' />
-                      <br />
-                      <label>No Guest Guide</label>
-                    </div>
-                  )}
+                      <div className='guide'>
+                        {/* <i className='fas fa-question' /> */}
+                        <Uppy type='guest_guide' text='Upload' />
+                        <br />
+                        <label>No Guest Guide</label>
+                      </div>
+                    )}
                 </div>
               </div>
               <div className='guest-info--checkout'>

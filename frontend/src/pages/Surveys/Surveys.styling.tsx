@@ -71,7 +71,7 @@ export const SurveyCards = styled('div')`
     margin-top: 1.5rem;
     background-color: white;
     border-radius: 5px;
-    padding: 0 1rem;
+    padding-left:  1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     // border: 1.4px solid rgba(132, 132, 132, 0.5);
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
@@ -88,7 +88,15 @@ export const SurveyCards = styled('div')`
 
 export const SurveyRightContent = styled('div')`
    display: flex;
-   align-items: flex-end;
+   flex-direction: row-reverse;
+   button{
+       margin: 1px 1px 0 0;
+       color: var(--color-button-text);
+       background:var(--color-error);
+       border-radius: var(--border-radius);
+       border: 0;
+       cursor:pointer;
+   }
    p {
        margin-right: 1rem;
    }
@@ -96,3 +104,16 @@ export const SurveyRightContent = styled('div')`
 export const SimpleButton = styled('button')`
   cursor: pointer;
 `;
+
+export const DeleteIcon = styled('img')`
+   width: 20px;
+   height: 20px;
+   margin: 8px;
+   cursor: pointer;
+` 
+
+export const ResponsesContainer = styled('div')`
+    position: relative;
+    top: 15px;
+    margin-right: 25px;
+`

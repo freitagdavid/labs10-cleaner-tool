@@ -12,6 +12,7 @@ import styled from '@emotion/styled';
 
 
 
+
 const StyledForm = styled.form`
     margin-top: 30px;
 `
@@ -29,6 +30,7 @@ const FillSurvey = (props: any)=>{
             const questionResponse = await axios.get(`${url}/surveysquestions/${surveyId}`)
             setQuestions(questionResponse.data.questions);
             const stayResponse = await axios.get(`${url}/gueststay/${props.match.params.stayId}`)
+            console.log(stayResponse)
             setStayInfo(stayResponse.data)
         })()
     }, []);
@@ -36,10 +38,14 @@ const FillSurvey = (props: any)=>{
         if (!answer) {
             return console.log('missing answer')
         }
+        //@ts-ignore
+        const stayId = stayInfo.stay_id
+        //@ts-ignore
         const body: any = {
             answer: answer,
             answer_type: type,
-            stay_id: props.match.params.stayId,
+            //@ts-ignore
+            stay_id: stayId,
             question_id: id,
             //@ts-ignore
             house_name: stayInfo.house_name,
@@ -48,7 +54,8 @@ const FillSurvey = (props: any)=>{
             //@ts-ignore
             photo: stayInfo.photo_url
         }
-        const data = await axios.post(`${url}/questionanswers`, body, headers)
+        console.log(body)
+        const data = await axios.post(`${url}/questionanswers/`, body, headers)
     }
     async function handleUpdate(id: any){
         const update = await axios.put(`${url}/surveys/${id}`);
