@@ -59,14 +59,6 @@ server.get('/surveysquestions/:id', async (req, res) => {
   }
 });
 
-server.get('/questions', async (req, res) => {
-  try {
-    const data = await db('questions');
-    res.json(data);
-  } catch (e) {
-    res.json(e);
-  }
-});
 server.get('/questionanswers', async (req, res) => {
   try {
     const data = await db('questionAnswers');
@@ -206,6 +198,7 @@ server.post('/questions', verifyToken, async (req, res) => {
   } catch (e) {
     res.json(e);
   }
+  
 });
 //stays surveys
 server
@@ -222,10 +215,6 @@ server
 server.route('/guests').post(guests.post);
 
 server.route('/guests/:id').put(guests.put);
-server.get('/s', async (req, res) => {
-  const data = await db('manager')
-  res.json(data)
-})
 server
   .route('/houses')
   .get(houses.get)
