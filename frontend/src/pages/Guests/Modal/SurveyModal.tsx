@@ -77,7 +77,7 @@ export const Modal = (props: any) => {
                 ))
             ) : null}
             <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e) => toggleButton(e, buttonEnabled)} />
-            <Button type="null" onClick={props.modal} color='var(--color-error)'>Close</Button>
+            <Button type="null" onClick={props.modal} color='var(--color-error)' hollow={true}>Close</Button>
           </form>
         </div>
       </ModalContainer>
