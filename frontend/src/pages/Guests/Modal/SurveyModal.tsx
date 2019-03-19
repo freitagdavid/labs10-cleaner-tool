@@ -47,9 +47,15 @@ export const Modal = (props: any) => {
     }
     func()
   }
+
+  let toggleButton = (e: MouseEvent, currentState: boolean) => {
+    return !currentState;
+  }
+
   const handleClick = (item: SurveySubmit) => {
     setSelected([...selected, item])
   }
+
   return (
     <div className={showHideClassName}>
       <ModalContainer>
@@ -67,7 +73,7 @@ export const Modal = (props: any) => {
                   </div>
                 ))
             ) : null}
-            <Button type="submit" text="Submit" />
+            <Button type="submit" text="Submit" onClick={(e) => toggleButton(e)} />
             <Button type="null" onClick={props.modal} color='var(--color-error)'>Close</Button>
           </form>
         </div>
