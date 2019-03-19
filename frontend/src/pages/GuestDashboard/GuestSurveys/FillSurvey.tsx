@@ -34,7 +34,6 @@ const FillSurvey = (props: any)=>{
             setStayInfo(stayResponse.data)
         })()
     }, []);
-    console.log(stayInfo)
     async function handleQuestions(answer: string, type: number,headers: any, id: number) {
         if (!answer) {
             return console.log('missing answer')
@@ -42,7 +41,6 @@ const FillSurvey = (props: any)=>{
         //@ts-ignore
         const stayId = stayInfo.stay_id
         //@ts-ignore
-        console.log(stayInfo.stay_id)
         const body: any = {
             answer: answer,
             answer_type: type,
@@ -56,6 +54,7 @@ const FillSurvey = (props: any)=>{
             //@ts-ignore
             photo: stayInfo.photo_url
         }
+        console.log(body)
         const data = await axios.post(`${url}/questionanswers/`, body, headers)
     }
     async function handleUpdate(id: any){
