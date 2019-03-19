@@ -116,8 +116,8 @@ const NewGuestView = (formProps: MyGuestProps) => {
           {houses ? (
             <Field name='houseId' render={DropDown(houses)} />
           ) : (
-            <div>Loading</div>
-          )}
+              <div>Loading</div>
+            )}
           <br />
           <br />
           <div className='check-group'>
@@ -241,7 +241,7 @@ const NewGuest = (props: RouteComponentProps) => {
         full_name: fullName,
         address: `${address1}\n${
           address2 ? address2 + '\n' : ''
-        }${city}\n${state}\n${country}\n${postCode}`,
+          }${city}\n${state}\n${country}\n${postCode}`,
         email,
         phone,
         ext_it: null,
@@ -274,7 +274,7 @@ const NewGuest = (props: RouteComponentProps) => {
       }
       {
         const actionCodeSettings = {
-          url: `http://${window.location.hostname}/linklogin/${userId}`,
+          url: `http://${window.location.hostname}/linklogin?redir=dashboard&isguest=true&id=${userId}`,
           handleCodeInApp: true,
         };
         console.log(actionCodeSettings);
@@ -305,7 +305,7 @@ const NewGuest = (props: RouteComponentProps) => {
         await actions.setStatus({
           msg: `Request could not be processed. Please refresh the page.\n\nError:\n${
             error.message
-          }`,
+            }`,
         });
       }
     }

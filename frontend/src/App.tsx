@@ -58,10 +58,9 @@ const App = () => {
           <Route exact path='/guestdashboard/:id' component={GuestDashboard} />
           <Route exact path='/surveys/:id/responses' component={SurveyResponse} />
           <Route exact path='/createsurvey' component={CreateSurvey} />
-          <Route exact path = '/guestdashboard/:stayId/surveys' component = {GuestSurveys} />
+          <Route exact path='/guestdashboard/:stayId/surveys' component={GuestSurveys} />
           <Route exact path='/guestdashboard/:stayId/surveys/:id/:surveyId' component={FillSurvey} />
-          <Route exact path='/linklogin/:id' component={LinkLogin} />
-          <Route exact path='/guestmap/:id' component={GuestMap} />
+          <Route path='/linklogin' component={LinkLogin} />
         </Switch>
       </UserContextProvider>
     </div>

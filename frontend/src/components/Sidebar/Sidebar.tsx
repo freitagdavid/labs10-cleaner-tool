@@ -27,7 +27,7 @@ interface LinkProps extends RouteComponentProps {
 const Sidebar = (props: LinkProps) => {
   const { state, dispatch } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { role } = state;
+  const { role } = state.role;
   const setLogin = () => dispatch({ type: 'setLogin' });
   // const { setLogin, role } = useContext(UserContext);
 
@@ -78,8 +78,12 @@ const Sidebar = (props: LinkProps) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={goAndClose('/properties')}>Properties</MenuItem>
-            <MenuItem onClick={goAndClose('/guests')}>Guests</MenuItem>
+            {role !== 'guest' && (
+              <>
+                <MenuItem onClick={goAndClose('/properties')}>Properties</MenuItem>
+                <MenuItem onClick={goAndClose('/guests')}>Guests</MenuItem>
+              </>
+            )}
             {role === 'manager' && (
               <>
                 <MenuItem onClick={goAndClose('/assistants')}>
