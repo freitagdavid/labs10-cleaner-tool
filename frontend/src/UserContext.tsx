@@ -31,6 +31,7 @@ const reducer = (state: UserState, action: UserReducerAction) => {
     case 'setLogin':
       return { ...state, loggedIn: !state.loggedIn };
     case 'setRole':
+      localStorage.setItem('role', action.payload)
       return { ...state, role: action.payload };
     case 'setSubscription':
       return { ...state, subscription: action.payload };
