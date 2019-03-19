@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import Button from '../../../components/Button';
 import { useFetch } from '../../../helpers';
 import loadingIndicator from '../../utils/loading.svg';
@@ -30,7 +30,9 @@ interface SurveySubmit {
 
 export const Modal = (props: any) => {
   const showHideClassName = !props.show ? "modal display-none" : "modal display-flex";
+  const [buttonState, setButtonState] = useState(true);
   const { email } = props;
+  let buttonEnabled = false;
   const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com'
   const [data, err, loading] = useFetch(`${url}/surveys`)
@@ -48,8 +50,9 @@ export const Modal = (props: any) => {
     func()
   }
 
-  let toggleButton = (e: MouseEvent, currentState: boolean) => {
-    return !currentState;
+  let toggleButton = (e: FormEvent, currentState: boolean) => {
+    e.preventDefault();
+    buttonEnabled = !currentState
   }
 
   const handleClick = (item: SurveySubmit) => {
@@ -73,7 +76,7 @@ export const Modal = (props: any) => {
                   </div>
                 ))
             ) : null}
-            <Button type="submit" text="Submit" onClick={(e) => toggleButton(e)} />
+            <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e) => toggleButton(e, buttonEnabled)} />
             <Button type="null" onClick={props.modal} color='var(--color-error)'>Close</Button>
           </form>
         </div>
