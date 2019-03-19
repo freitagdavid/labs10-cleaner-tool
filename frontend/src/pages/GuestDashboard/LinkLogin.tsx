@@ -6,11 +6,13 @@ import React, {
   FunctionComponent,
   useState,
 } from 'react';
+import axiosFetch from '../../helpers/axiosFetch';
 import axios from 'axios';
 import { RouteComponentProps } from 'react-router';
 import firebase, { Unsubscribe, User } from 'firebase';
 import app from '../../firebase.setup';
 import { UserContext } from '../../UserContext';
+import { parseQuery } from '../utils/parseQuery';
 const backendURL = process.env.REACT_APP_backendURL;
 
 interface LoginProps extends RouteComponentProps {
@@ -25,10 +27,10 @@ const LinkLogin: FunctionComponent<LoginProps> = ({
 }) => {
   const [user, setUser] = useState<User | null>(null);
   const { state, dispatch } = useContext(UserContext);
+  const setRole = (role: string) => dispatch({ type: 'setRole', payload: role })
   const observer: MutableRefObject<any> = useRef<Unsubscribe>(null);
   let email: any;
   email = localStorage.getItem('emailForSignIn')
-
   useEffect(() => {
     observer.current = app
       .auth()
@@ -65,6 +67,37 @@ const LinkLogin: FunctionComponent<LoginProps> = ({
     }
   }, []);
 
+  const constructURL = async (args: any) => {
+    try {
+      const stayInfo = await axiosFetch('get', `${backendURL}/stays/${args.id}`)
+      //@ts-ignore
+      let baseDir: string = '';
+      let parameter1 = '';
+      if (args.redir === 'survey') {
+        if (args.isguest === 'true') {
+          //@ts-ignore
+          const guestId = stayInfo[0].data.guest_id
+          parameter1 = `guestdashboard/${guestId}/surveys`
+        }
+      }
+
+      if (args.redir === 'dashboard') {
+        if (args.isguest === 'true') {
+          const guestId = args.id
+          parameter1 = `guestdashboard/${guestId}`
+          setRole('guest')
+        }
+      }
+
+      const finalizedURL: string = `${baseDir}/${parameter1}`
+      console.log(finalizedURL)
+      return finalizedURL
+    } catch (e) {
+      return `${window.location.hostname}`
+      console.log(e)
+    }
+  }
+
   async function submitUser() {
     if (user !== null) {
       const { email, uid, displayName, photoURL } = user;
@@ -78,12 +111,17 @@ const LinkLogin: FunctionComponent<LoginProps> = ({
       const url =
         process.env.REACT_APP_backendURL ||
         'https://labs10-cleaner-app-2.herokuapp.com';
+
+      // switch ()
+
       try {
         const { data } = await axios.post(`${url}/users/`, nUser);
         localStorage.setItem('token', data.token);
-        localStorage.setItem('role', data.role);
         localStorage.setItem('subscription', data.stripePlan);
-        history.push(`/guestdashboard/${match.params.id}`);
+        const parsedQuery = parseQuery(location.search)
+        const finalDestination = await constructURL(parsedQuery);
+        localStorage.setItem('role', state.role);
+        history.push(finalDestination);
       } catch (e) {
         throw e;
       }

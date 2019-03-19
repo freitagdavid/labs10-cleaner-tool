@@ -15,10 +15,6 @@ import {
 } from './Surveys.styling';
 import './Surveys.css'
 
-// interface SurveysType extends React.FunctionComponent {
-//   setActive: number | boolean;
-// }
-
 const Surveys = () => {
   const stupidPostgresInconsistencyTrue = process.env.NODE_ENV === 'development' ? 1 : true
   const stupidPostgresInconsistencyFalse = process.env.NODE_ENV === 'development' ? 0 : false
