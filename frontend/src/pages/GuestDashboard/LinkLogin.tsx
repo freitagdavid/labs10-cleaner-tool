@@ -78,6 +78,8 @@ const LinkLogin: FunctionComponent<LoginProps> = ({
           //@ts-ignore
           const guestId = stayInfo[0].data.guest_id
           parameter1 = `guestdashboard/${guestId}/surveys`
+          setRole('guest')
+          localStorage.setItem('role', state.role)
         }
       }
 
@@ -86,6 +88,7 @@ const LinkLogin: FunctionComponent<LoginProps> = ({
           const guestId = args.id
           parameter1 = `guestdashboard/${guestId}`
           setRole('guest')
+          localStorage.setItem('role', state.role);
         }
       }
 
@@ -120,7 +123,6 @@ const LinkLogin: FunctionComponent<LoginProps> = ({
         localStorage.setItem('subscription', data.stripePlan);
         const parsedQuery = parseQuery(location.search)
         const finalDestination = await constructURL(parsedQuery);
-        localStorage.setItem('role', state.role);
         history.push(finalDestination);
       } catch (e) {
         throw e;
