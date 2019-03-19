@@ -67,15 +67,17 @@ export const Modal = (props: any) => {
           <form onSubmit={(e) => selectAndClose(e, selected, props.modal)}>
             {loading ? (
               <img src={loadingIndicator} alt='animated loading indicator' />
-            ) : data ? (
-              data.filter((survey: Survey) => survey.isGuest === 1).map((survey: Survey) =>
-                (
-                  <div key={`surveylabel${survey.id}`}>
-                    <Checkbox type="checkbox" name={survey.name} value={`${survey.id}`} onChange={() => handleClick({ surveyId: survey.id, stayId: props.stay_id })} />
-                    <label htmlFor={survey.name}>{survey.name}</label>
-                  </div>
-                ))
-            ) : null}
+            ) : (
+                data.filter((survey: Survey) => survey.isGuest === 1).map((survey: Survey) => {
+                  return (
+                    <div key={`surveylabel${survey.id}`}>
+                      <Checkbox type="checkbox" name={survey.name} value={`${survey.id}`} onChange={() => handleClick({ surveyId: survey.id, stayId: props.stay_id })} />
+                      <label htmlFor={survey.name}>{survey.name}</label>
+                    </div>
+                  )
+                }
+                )
+              )}
             <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e) => toggleButton(e, buttonEnabled)} />
             <Button type="null" onClick={props.modal} color='var(--color-error)' hollow={true}>Close</Button>
           </form>
