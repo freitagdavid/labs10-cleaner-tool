@@ -24,6 +24,7 @@ import {
   FillSurvey,
   CreateSurvey,
   LinkLogin,
+  GuestMap,
 } from './pages/index';
 import { Sidebar } from './components/index';
 import './App.css';

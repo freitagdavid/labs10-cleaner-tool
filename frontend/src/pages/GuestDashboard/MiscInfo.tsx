@@ -42,7 +42,9 @@ const MiscInfo = (props: any) => {
       </div>
       <div className='guides'>
         <i className='fas fa-map-marked-alt fa-4x' />
-        <a href='http://example.com'>Directions</a>
+        <Link to={`/guestmap/${props.id}`}>
+          Directions
+        </Link>
       </div>
       <div className='guides'>
         <i className='far fa-file-alt fa-4x' />

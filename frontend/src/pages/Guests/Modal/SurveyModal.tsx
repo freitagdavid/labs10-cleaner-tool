@@ -11,7 +11,7 @@ interface Survey {
   survey: any,
   id: number,
   name: string,
-  isGuest: number,
+  isGuest: boolean | number,
 }
 //style vars
 const active = {
