@@ -121,7 +121,7 @@ const getSurveyResponsesById = async(id: any)=>{
   let questionAnswersByStay: any = []
   for (let i = 0; i < stayIdArr.length; i++) {
     let stayId = stayIdArr[i]
-    let current = await db('questionAnswers').where({ stay_id: stayId })
+    let current = await db('questionAnswers').join('questions', 'questions.id', '=', 'questionAnswers.question_id').where({ stay_id: stayId, survey_id: id })
     
     let first = current[0]
     let response = {

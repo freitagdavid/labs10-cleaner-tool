@@ -23,6 +23,7 @@ import SurveyResponse from './SurveyResponse/SurveyResponse';
 import CreateSurvey from './CreateSurvey/CreateSurvey';
 import FillSurvey from './GuestDashboard/GuestSurveys/FillSurvey'
 import LinkLogin from './GuestDashboard/LinkLogin';
+import GuestMap from './GuestDashboard/GuestMap'
 export {
   Properties,
   PropertiesDetail,
@@ -49,4 +50,5 @@ export {
   FillSurvey,
   CreateSurvey,
   LinkLogin,
+  GuestMap,
 };
