@@ -79,7 +79,6 @@ const LinkLogin: FunctionComponent<LoginProps> = ({
           const guestId = stayInfo[0].data.guest_id
           parameter1 = `guestdashboard/${guestId}/surveys`
           setRole('guest')
-          localStorage.setItem('role', state.role)
         }
       }
 
@@ -88,7 +87,6 @@ const LinkLogin: FunctionComponent<LoginProps> = ({
           const guestId = args.id
           parameter1 = `guestdashboard/${guestId}`
           setRole('guest')
-          localStorage.setItem('role', state.role);
         }
       }
 
