@@ -76,6 +76,10 @@ server.get('/questionanswers', async (req, res) => {
   }
 });
 
+server
+  .route('/stays/surveys/:id')
+  .put(staysSurveys.put);
+  
 // Authentication Middleware for *all* routes after this line
 
 server.get('/data', async (req, res) => {
@@ -130,12 +134,17 @@ server.get('/stay/surveys/:id', async (req, res) => {
   const id = req.params.id
   const stay = await findStaySummaryStandardizedByGuestId(id);
   const houseId = stay.house_id
+  const stayId = stay.stay_id
   const house = await db('house').where({ id: houseId })
   const managerId = house[0].manager
   const manager = await db('manager').where({ id: managerId })
   const userId = manager[0].user_id
   const surveys = await db('surveys').where({ user_id: userId })
-  res.json(surveys)
+  const staySurveys = await db('surveys')
+    .join('stayssurveys', 'surveys.id', '=','stayssurveys.survey_id')
+    .where({ stay_id: stayId, is_complete: false})
+  console.log(staySurveys)
+  res.json(staySurveys)
 })
 
 server
@@ -211,7 +220,9 @@ server.post('/questions', verifyToken, async (req, res) => {
 server
   .route('/stays/surveys')
   .get(staysSurveys.get)
-  .post(staysSurveys.post);
+  .post(staysSurveys.post)
+  
+
 
 server
   .route('/users/:id')
