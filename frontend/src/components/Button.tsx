@@ -16,6 +16,7 @@ interface ButtonProps {
   type?: string;
   disabled?: boolean;
   children?: any;
+  hollow?: boolean;
 }
 
 const Button = ({
@@ -28,6 +29,7 @@ const Button = ({
   disabled,
   type,
   children,
+  hollow = false
 }: ButtonProps) => {
   const buttonColor = color || 'var(--color-button-background)';
   const StyledButton = styled('button')`
@@ -38,14 +40,15 @@ const Button = ({
     max-height: 64px;
     height: auto;
     padding: 0.5rem 1rem;
-    border: 0;
+    border: ${hollow ? 'var(--color-button-background) solid 1.5px' : '0'};
     border-radius: var(--border-radius);
     /* Text */
     font-weight: normal;
     font-size: 1rem;
     /* Color */
     background: ${!disabled ? buttonColor : '#66615e'};
-    color: var(--color-button-text);
+    background: ${hollow ? 'white' : 'var(--color-button-background)'};
+    color: ${hollow ? 'var(--color-button-background)' : 'var(--color-button-text)'};
     /* Cursor */
     cursor: ${!disabled ? 'pointer' : 'initial'};
     i {
@@ -84,8 +87,8 @@ const Button = ({
       </Tooltip>
     </>
   ) : (
-    <RetButton />
-  );
+      <RetButton />
+    );
 };
 
 export default Button;
