@@ -27,7 +27,7 @@ interface LinkProps extends RouteComponentProps {
 const Sidebar = (props: LinkProps) => {
   const { state, dispatch } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { role } = state.role;
+  const { role } = state;
   const setLogin = () => dispatch({ type: 'setLogin' });
   // const { setLogin, role } = useContext(UserContext);
 
@@ -78,12 +78,8 @@ const Sidebar = (props: LinkProps) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            {role !== 'guest' && (
-              <>
-                <MenuItem onClick={goAndClose('/properties')}>Properties</MenuItem>
-                <MenuItem onClick={goAndClose('/guests')}>Guests</MenuItem>
-              </>
-            )}
+            {role !== 'guest' ? <MenuItem onClick={goAndClose('/properties')}>Properties</MenuItem> : null}
+            {role !== 'guest' ? <MenuItem onClick={goAndClose('/guests')}>Guests</MenuItem> : null}
             {role === 'manager' && (
               <>
                 <MenuItem onClick={goAndClose('/assistants')}>
@@ -124,34 +120,40 @@ const Sidebar = (props: LinkProps) => {
                 </StyledLink>
               </div>
               <div>
-                <StyledLink to='/properties'>
-                  <h4
-                    style={{
-                      borderBottom: props.location.pathname.match(
-                        '/properties/*.*?',
-                      )
-                        ? '2px solid var(--color-accent-alt)'
-                        : '0',
-                    }}
-                  >
-                    Properties
+                {role !== 'guest' && (
+
+                  <StyledLink to='/properties'>
+                    <h4
+                      style={{
+                        borderBottom: props.location.pathname.match(
+                          '/properties/*.*?',
+                        )
+                          ? '2px solid var(--color-accent-alt)'
+                          : '0',
+                      }}
+                    >
+                      Properties
                   </h4>
-                </StyledLink>
+                  </StyledLink>
+                )}
               </div>
               <div>
-                <StyledLink to='/guests'>
-                  <h4
-                    style={{
-                      borderBottom: props.location.pathname.match(
-                        '/guests/*.*?',
-                      )
-                        ? '2px solid var(--color-accent-alt)'
-                        : '0',
-                    }}
-                  >
-                    Guests
+                {role !== 'guest' && (
+
+                  <StyledLink to='/guests'>
+                    <h4
+                      style={{
+                        borderBottom: props.location.pathname.match(
+                          '/guests/*.*?',
+                        )
+                          ? '2px solid var(--color-accent-alt)'
+                          : '0',
+                      }}
+                    >
+                      Guests
                   </h4>
-                </StyledLink>
+                  </StyledLink>
+                )}
               </div>
               <div>
                 {role === 'manager' && (
