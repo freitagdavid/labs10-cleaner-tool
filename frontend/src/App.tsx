@@ -59,7 +59,7 @@ const App = () => {
           <Route exact path='/surveys/:id/responses' component={SurveyResponse} />
           <Route exact path='/createsurvey' component={CreateSurvey} />
           <Route exact path='/guestdashboard/:stayId/surveys' component={GuestSurveys} />
-          <Route exact path='/guestdashboard/:stayId/surveys/:id/:surveyId' component={FillSurvey} />
+          <Route exact path='/guestdashboard/:stayId/surveys/:id/:surveyId/:staysurveyId' component={FillSurvey} />
           <Route path='/linklogin' component={LinkLogin} />
         </Switch>
       </UserContextProvider>
