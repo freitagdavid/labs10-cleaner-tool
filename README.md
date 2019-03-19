@@ -40,8 +40,8 @@ You can find the project at [https://cleanerpos.netlify.com/](https://cleanerpos
     * Allow employees to track their progress
     * Allow employees to reassign tasks to other employees
     * Automatically generate guest invoices
-    * Allow property managers to add new properties, assign properties to employees,        create and edit task checklists for employees, and bill guests directly
-    * Allow guests to view readiness of their assigned rental property and pay their        invoice online
+    * Allow property managers to add new properties, assign properties to employees,      create and edit task checklists for employees, and bill guests directly
+    * Allow guests to view readiness of their assigned rental property and pay their      invoice online
     * Allow managers to create and send surveys to employees and guests
     * Allow managers to view responses to surveys
     * Allow employees and guest to fill out surveys
