@@ -17,7 +17,8 @@ const StyledForm = styled.form`
     margin-top: 30px;
 `
 const FillSurvey = (props: any)=>{
-    const surveyId = props.match.params.surveyId
+    const surveyId = props.match.params.surveyId;
+    const staysurveyId = props.match.params.staysurveyId;
     const [questions, setQuestions]= useState([])
     const [stayInfo, setStayInfo] = useState([])
     const [answer1, setAnswer1] = useState('')
@@ -61,6 +62,9 @@ const FillSurvey = (props: any)=>{
         const update = await axios.put(`${url}/surveys/${id}`);
         return update
     }
+    async function markComplete(id: any){
+     await axios.put(`${url}/stays/surveys/${id}`);
+    }
     const handleSubmit = () =>{
         const headers: AxiosRequestConfig = {
             headers: {
@@ -90,6 +94,7 @@ const FillSurvey = (props: any)=>{
             handleQuestions(answer1, questionInfo1.type, headers, questionInfo1.id)
         }
         const update = handleUpdate(surveyId)
+        markComplete(staysurveyId);
         props.history.push(`/guestdashboard/${props.match.params.stayId}/surveys`)
     }
     const handleCancel = () =>{
