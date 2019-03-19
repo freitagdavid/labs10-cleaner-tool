@@ -60,6 +60,9 @@ export const ResponseButton = styled('button')`
     background: white;
     border: 1px solid black;
     color: #393534;
+    @media(max-width: 650px){
+        margin-bottom: 10px;
+    }
 
     ${(props:any) => 
         (props.yn_answer === "no" && props.value === "no" ?
@@ -116,13 +119,18 @@ export const SurveyResponseTitle = styled('div')`
     flex-direction: column;
     align-items: flex-start;
     width:65%;
-    
+    @media(max-width: 650px){
+        align-items: center;
+    }  
+    ${(props:any) => (props.surveys === undefined ? `
+    align-items: center;
+    width: 100%`: 
+    null)}
 `; 
 
 export const SurveyResponseH1 = styled('h1')`
     font-size: 1.9rem;
-    font-weight: 500; 
-    ${(props:any) => (props.surveys === undefined ? `text-align: center` : null)}
+    font-weight: 500;
 `;
 
 export const SurveyResponseSelect = styled('select')`
