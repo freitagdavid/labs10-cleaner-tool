@@ -142,7 +142,7 @@ server.get('/stay/surveys/:id', async (req, res) => {
       console.log(current)
       let status;
       status = current[0].is_complete
-      surveyExtended.push({ ...currentSurvey, is_complete: status })
+      surveyExtended.push({ ...currentSurvey, is_complete: status, stay_surveys_id: current[0].id })
     }
     res.json(surveyExtended)
   }
