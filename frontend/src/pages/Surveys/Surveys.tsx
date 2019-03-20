@@ -33,7 +33,7 @@ const Surveys = () => {
   const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
 
-    function goBack() {
+   function goBack() {
       window.location.reload();
     }
 
