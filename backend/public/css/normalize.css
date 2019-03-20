@@ -425,3 +425,11 @@ td,
 th {
   padding: 0;
 }
+
+.lists{
+  display: flex;
+}
+
+.list1{
+  margin-right: 150px;
+}
