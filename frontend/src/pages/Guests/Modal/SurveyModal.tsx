@@ -2,7 +2,7 @@ import React, { useState, FormEvent } from 'react';
 import Button from '../../../components/Button';
 import { useFetch } from '../../../helpers';
 import loadingIndicator from '../../utils/loading.svg';
-import { ModalContainer, SurveySelectButton } from './SurveyModal.styling'
+import { ModalContainer, SurveySelectButton, ModalH3 } from './SurveyModal.styling'
 import { axiosFetch } from '../../../helpers'
 import { number } from 'yup';
 import { Checkbox } from '@material-ui/core';
@@ -63,8 +63,8 @@ export const Modal = (props: any) => {
     <div className={showHideClassName}>
       <ModalContainer>
         <div className="modal-content-container">
-          <h3>Surveys</h3>
-          <form onSubmit={(e) => selectAndClose(e, selected, props.modal)}>
+          <ModalH3>Surveys</ModalH3>
+          <form onSubmit={(e:any) => selectAndClose(e, selected, props.modal)}>
             {loading ? (
               <img src={loadingIndicator} alt='animated loading indicator' />
             ) : data ? (
@@ -76,7 +76,7 @@ export const Modal = (props: any) => {
                   </div>
                 ))
             ) : null}
-            <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e) => toggleButton(e, buttonEnabled)} />
+            <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e:any) => toggleButton(e, buttonEnabled)} />
             <Button type="null" onClick={props.modal} color='var(--color-error)' hollow={true}>Close</Button>
           </form>
         </div>

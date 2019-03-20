@@ -13,7 +13,7 @@ export const ModalContainer = styled.div`
     left: 0;
     top: 0;
     background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0, 0.9); 
+    background-color: rgba(0,0,0, 0.4); 
     overflow-x: hidden; 
     .modal-content-container{
         
@@ -28,8 +28,8 @@ export const ModalContainer = styled.div`
 export const SurveySelectButton = styled.button`
     opacity: 1;
     max-width: 200px;
-    width: 200px;
-    max-height: 64px;
+    width: 150px;
+    max-height: 60px;
     height: auto;
     padding: 0.5rem 1rem;
     border: 0;
@@ -43,5 +43,17 @@ export const SurveySelectButton = styled.button`
     color: var(${props=>(props.theme.text)});
     outline:none;
     cursor: pointer;
-    margin-right: 1.2rem;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border: 1.5px solid #428acb;
+    ${(props:any)=>(props.type === "null" ? `
+    background: white;
+    color: #428acb;
+    border: 1.5px solid #428acb ` :
+    null)}
+`;
+
+export const ModalH3 = styled('h3')`
+    margin-top: 5px;
+    font-size: 20px;
 `;

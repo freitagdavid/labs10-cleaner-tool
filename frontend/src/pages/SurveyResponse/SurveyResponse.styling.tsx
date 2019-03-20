@@ -25,7 +25,6 @@ export const ResponsesImage = styled('img')`
     height: 90px;
     width: 75px;    
     margin: 25px 15px 25px 30px;
-    border: 2px solid #74bef9;
 `;
 
 export const ResponsesInfo = styled('div')`
@@ -122,10 +121,6 @@ export const SurveyResponseTitle = styled('div')`
     @media(max-width: 650px){
         align-items: center;
     }  
-    ${(props:any) => (props.surveys === undefined ? `
-    align-items: center;
-    width: 100%`: 
-    null)}
 `; 
 
 export const SurveyResponseH1 = styled('h1')`
