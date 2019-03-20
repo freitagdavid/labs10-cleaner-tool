@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Labs 9 Lodgel - Backend Documentation</title>
+  <title>Labs 10 Lodgel - Backend Documentation</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -34,10 +34,11 @@
   <div class="container">
     <div class="row">
 		<header class = "twelve column">
-			<h1><style="margin-top: 30px">Labs 9 Lodgel</style></h1>
+			<h1><style="margin-top: 30px">Labs 10 Lodgel</style></h1>
         	<p>This is the documentation for the Lodgel project.</p>
 			<strong>Contents</strong>
-			<ul>
+			<div class="lists">
+			<ul class="list1">
 				<li>
 					<a href="#getuserdata">Get User Data</a>
 				</li>
@@ -92,6 +93,8 @@
 				<li>
 					<a href="#deleteitembyID">Delete Checklist Item by ID</a>
 				</li>
+			</ul>
+			<ul class="list2">
 				<li>
 					<a href="#itemcomplete">Item Complete</a>
 				</li>
@@ -110,7 +113,45 @@
 				<li>
 					<a href="#getGuestDashInfo">Get GuestDash Info</a>
 				</li>
+				<li>
+					<a href="#surveysbyuser">Get Surveys By User</a>
+				</li>
+				<li>
+					<a href="#sqbyid">Get Surveys & Questions By Survey ID</a>
+				</li>
+				<li>
+					<a href="#allquestions">Get Qusetions By Id</a>
+				</li>
+				<li>
+					<a href="#allqa">Get All Questions & Answers</a>
+				</li>
+				<li>
+					<a href="#userdata">Get All User Data</a>
+				</li>
+				<li>
+					<a href="#responsebysurvey">Get Survey Responses By Survey Id</a>
+				</li>
+				<li>
+					<a href="#qabysurvey">Get Answers By Survey Id</a>
+				</li>
+				<li>
+					<a href="#surveycreator">Get Creator of Survey By Guest Id</a>
+				</li>
+				<li>
+					<a href="#surveysbytoken">Get Surveys From Token</a>
+				</li>
+				<li>
+					<a href="#createsurveys">Create Surveys</a>
+				</li>
+				<li>
+					<a href="#createquestions">Create Questions</a>
+				</li>
+				<li>
+					<a href="#createanswers">Create Answers</a>
+				</li>
+				
 			</ul>
+			</div>
 			<hr />
 		</header>
     </div>
@@ -585,7 +626,7 @@
       		</p>
 
 	</section>
-	<section id="getassistants" class="row">
+	<section id="surveysbyuser" class="row">
 		<h4>Get Surveys by User Id</h4>
 		<p><span>Endpoint URL: </span><code>/surveys/:id</code> <span>Method: </span><code>GET</code></p>
 		<strong>Expected Output</strong>
@@ -606,7 +647,7 @@
 		}
 ]</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="sqbyid" class="row">
 		<h4>Get surveys and questions by survey Id</h4>
 		<p><span>Endpoint URL: </span><code>/surveysquestions/:id</code> <span>Method: </span><code>GET</code></p>
 		<strong>Expected Output</strong>
@@ -634,7 +675,7 @@
 			]
 }</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="allquestions" class="row">
 		<h4>Get all questions</h4>
 		<p><span>Endpoint URL: </span><code>/questions</code> <span>Method: </span><code>GET</code></p>
 		<strong>Expected Output</strong>
@@ -677,7 +718,7 @@
 		}
 ]</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="allqa" class="row">
 		<h4>Get all questions and answers</h4>
 		<p><span>Endpoint URL: </span><code>/questionanswers</code> <span>Method: </span><code>GET</code></p>
 		<strong>Expected Output</strong>
@@ -801,7 +842,7 @@
 			}
 		]</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="userdata" class="row">
 		<h4>Get all user data</h4>
 		<p><span>Endpoint URL: </span><code>/data</code> <span>Method: </span><code>GET</code></p>
 		<strong>Expected Output</strong>
@@ -824,9 +865,9 @@
 		"id": 20,
 		"ext_it": "J5jxHs0BisSfqPUfjeShlt35EsD2",
 		"full_name": null,
-		"email": "taylork85@gmail.com",
-		"phone": "7732992004",
-		"address": "32 E 75th Street\nCHICAGO\nIllinois\nUnited States\n60619",
+		"email": "lisap@gmail.com",
+		"phone": "7085471269",
+		"address": "690 N Halsted Street\nCHICAGO\nIllinois\nUnited States\n60625",
 		"role": "manager",
 		"photoUrl": null,
 		"stripeUID": null,
@@ -836,7 +877,7 @@
 		}
 	]</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="responsebysurvey" class="row">
 		<h4>Get survey's responses by survey Id</h4>
 		<p><span>Endpoint URL: </span><code>/surveyresponses/:id</code> <span>Method: </span><code>GET</code></p>
 		<strong>Expected Output</strong>
@@ -897,7 +938,7 @@
 	]
 }</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="qabysurvey" class="row">
 		<h4>Get questionAnswers by Survey Id</h4>
 		<p><span>Endpoint URL: </span><code>/questionanswers/:id</code> <span>Method: </span><code>GET</code></p>
 		<strong>Expected Output</strong>
@@ -918,13 +959,13 @@
 			]
 	}</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="increase" class="row">
 		<h4>increment responses by 1 for survey Id</h4>
 		<p><span>Endpoint URL: </span><code>/surveys/:id</code> <span>Method: </span><code>PUT</code></p>
 		<strong>Expected Output</strong>
 		<pre><code>1</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="surveycreator" class="row">
 		<h4>Get creator of stay surveys by guest Id</h4>
 		<p><span>Endpoint URL: </span><code>/stay/surveys/:id</code> <span>Method: </span><code>GET</code></p>
 		<strong>Expected Output</strong>
@@ -945,7 +986,7 @@
 		}
 ]</code></pre>
 </section>
-	<section id="getassistants" class="row">
+	<section id="surveybytoken" class="row">
 		<h4>Get surveys from the token</h4>
 		<p><span>Endpoint URL: </span><code>/surveys</code> <span>Method: </span><code>GET</code></p>
 		<strong>Expected Output</strong>
@@ -966,7 +1007,7 @@
 		}
 ]</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="createsurveys" class="row">
 		<h4>Create Survey</h4>
 		<p><span>Endpoint URL: </span><code>/surveys</code> <span>Method: </span><code>POST</code></p>
 		<strong>Expected Input</strong>
@@ -987,7 +1028,7 @@
 		"message": "successfully created survey"
 	}</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="createquestions" class="row">
 		<h4>Create Question</h4>
 		<p><span>Endpoint URL: </span><code>/questions</code> <span>Method: </span><code>POST</code></p>
 		<strong>Expected Input</strong>
@@ -1011,7 +1052,7 @@
 		"rowAsArray": false
 		}</code></pre>
 	</section>
-	<section id="getassistants" class="row">
+	<section id="createanswers" class="row">
 		<h4>Create answer</h4>
 		<p><span>Endpoint URL: </span><code>/questionanswers</code> <span>Method: </span><code>POST</code></p>
 		<strong>Expected Input</strong>
