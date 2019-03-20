@@ -94,7 +94,7 @@ const FillSurvey = (props: any)=>{
             //@ts-ignore
             handleQuestions(answer1, questionInfo1.type, headers, questionInfo1.id)
         }
-        const update = handleUpdate(surveyId)
+        const update = handleUpdate(staysurveyId)
         markComplete(surveyId);
         props.history.push(`/guestdashboard/${props.match.params.stayId}/surveys`)
     }
