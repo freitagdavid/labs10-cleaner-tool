@@ -4,9 +4,8 @@ import { useFetch } from '../../helpers';
 import { Survey, FilterArgs } from './types';
 import loadingIndicator from '../utils/loading.svg';
 import { Button, Container } from '../../components/index';
-import { Link } from 'react-router-dom';
 import SurveyCard from './SurveyCard';
-
+import { Link } from 'react-router-dom'
 import {
   SurveysHeader,
   SurveyCardWrapper,
