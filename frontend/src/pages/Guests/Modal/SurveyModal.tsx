@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import Button from '../../../components/Button';
-import { useFetch } from '../../../helpers';
+import useFetch from '../../../helpers/useFetch';
 import loadingIndicator from '../../utils/loading.svg';
 import { ModalContainer, SurveySelectButton } from './SurveyModal.styling'
 import { axiosFetch } from '../../../helpers'
@@ -30,12 +30,11 @@ interface SurveySubmit {
 
 export const Modal = (props: any) => {
   const showHideClassName = !props.show ? "modal display-none" : "modal display-flex";
-  const [buttonState, setButtonState] = useState(true);
   const { email } = props;
   let buttonEnabled = false;
   const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com'
-  const [data, err, loading] = useFetch(`${url}/surveys`)
+  const [data, err, loading] = useFetch(`${process.env.REACT_APP_backendURL}/surveys`, true, 'get');
   const [selected, setSelected] = useState([] as SurveySubmit[])
   const selectAndClose = (e: any, data: any, func: any) => {
     e.preventDefault();
@@ -59,31 +58,80 @@ export const Modal = (props: any) => {
     setSelected([...selected, item])
   }
 
-  return (
-    <div className={showHideClassName}>
-      <ModalContainer>
-        <div className="modal-content-container">
-          <h3>Surveys</h3>
-          <form onSubmit={(e) => selectAndClose(e, selected, props.modal)}>
-            {loading ? (
-              <img src={loadingIndicator} alt='animated loading indicator' />
-            ) : (
-                data.filter((survey: Survey) => survey.isGuest === 1).map((survey: Survey) => {
-                  return (
-                    <div key={`surveylabel${survey.id}`}>
-                      <Checkbox type="checkbox" name={survey.name} value={`${survey.id}`} onChange={() => handleClick({ surveyId: survey.id, stayId: props.stay_id })} />
-                      <label htmlFor={survey.name}>{survey.name}</label>
-                    </div>
-                  )
-                }
+
+
+
+  if (data) {
+    return (
+      <div className={showHideClassName}>
+        <ModalContainer>
+          <div className="modal-content-container">
+            <h3>Surveys</h3>
+            <form onSubmit={(e) => selectAndClose(e, selected, props.modal)}>
+              {
+                data.filter((survey: Survey) => survey.isGuest === 1).map((survey: Survey) =>
+                  <div key={`surveylabel${survey.id}`}>
+                    <Checkbox type="checkbox" name={survey.name} value={`${survey.id}`} onChange={() => handleClick({ surveyId: survey.id, stayId: props.stay_id })} />
+                    <label htmlFor={survey.name}>{survey.name}</label>
+                  </div>
                 )
-              )}
-            <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e) => toggleButton(e, buttonEnabled)} />
-            <Button type="null" onClick={props.modal} color='var(--color-error)' hollow={true}>Close</Button>
-          </form>
-        </div>
-      </ModalContainer>
-    </div>
-  );
+              }
+              <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e) => toggleButton(e, buttonEnabled)} />
+              <Button type="null" onClick={props.modal} color='var(--color-error)' hollow={true}>Close</Button>
+            </form>
+          </div>
+        </ModalContainer>
+      </div>
+    )
+  } else if (err.error === true) {
+    return (
+      <div className={showHideClassName}>
+        <ModalContainer>
+          <div className="model-content-container">
+            <h3>We are having issues processing your request please try again later.</h3>
+          </div>
+        </ModalContainer>
+      </div>
+    )
+  } else {
+    return (
+      <div className={showHideClassName}>
+        <ModalContainer>
+          <div className="model-content-container">
+            <h3>Surveys</h3>
+            <img src={loadingIndicator} alt='animated loading indicator' />
+          </div>
+        </ModalContainer>
+      </div>
+    )
+  }
+
+
+  // return (
+  //   <div className={showHideClassName}>
+  //     <ModalContainer>
+  //       <div className="modal-content-container">
+  //         <h3>Surveys</h3>
+  //         <form onSubmit={(e) => selectAndClose(e, selected, props.modal)}>
+  //           {loading ? (
+  //             <img src={loadingIndicator} alt='animated loading indicator' />
+  //           ) : (
+  //               data.filter((survey: Survey) => survey.isGuest === 1).map((survey: Survey) => {
+  //                 return (
+  //                   <div key={`surveylabel${survey.id}`}>
+  //                     <Checkbox type="checkbox" name={survey.name} value={`${survey.id}`} onChange={() => handleClick({ surveyId: survey.id, stayId: props.stay_id })} />
+  //                     <label htmlFor={survey.name}>{survey.name}</label>
+  //                   </div>
+  //                 )
+  //               }
+  //               )
+  //             )}
+  //           <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e) => toggleButton(e, buttonEnabled)} />
+  //           <Button type="null" onClick={props.modal} color='var(--color-error)' hollow={true}>Close</Button>
+  //         </form>
+  //       </div>
+  //     </ModalContainer>
+  //   </div>
+  // );
 };
 
