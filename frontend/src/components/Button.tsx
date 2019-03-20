@@ -17,6 +17,7 @@ interface ButtonProps {
   disabled?: boolean;
   children?: any;
   hollow?: boolean;
+  form?: any;
 }
 
 const Button = ({
@@ -29,7 +30,8 @@ const Button = ({
   disabled,
   type,
   children,
-  hollow = false
+  hollow = false,
+  form
 }: ButtonProps) => {
   const buttonColor = color || 'var(--color-button-background)';
   const StyledButton = styled('button')`
@@ -79,6 +81,7 @@ const Button = ({
             type={type || 'button'}
             data-testid={datatestid}
             disabled={disabled}
+            form={form}
           >
             {text}
             {children}
