@@ -24,8 +24,8 @@ export const ModalContainer = styled.div`
             'submitButton closeButton'
         ;
         border: var(--border);
-        width: 40vw;
-        height: calc(40vw - 10vw);
+        width: 30vw;
+        height: calc(30vw - 10vw);
         background-color: var(--color-bg-secondary);
         h3 {
             grid-area: title;
@@ -105,14 +105,16 @@ export const ModalContainer = styled.div`
         };
         button {
             grid-area: closeButton;
-            justify-self: center;
+            justify-self: start;
             align-self: center;
+            margin-right: 40px
         }
         span {
-            justify-self: center;
+            justify-self: end;
             align-self: center;
             grid-area: submitButton;
             padding: 0;
+            margin-left: 40px;
             button {
                 border: rgba(0,0,0,0) solid 1.5px;
             }
