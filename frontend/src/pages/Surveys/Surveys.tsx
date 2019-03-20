@@ -20,7 +20,7 @@ const Surveys = () => {
   const stupidPostgresInconsistencyFalse = process.env.NODE_ENV === 'development' ? false : 0
   const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
-  const [active, setActive] = useState();
+  const [active, setActive] = useState(stupidPostgresInconsistencyTrue);
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
