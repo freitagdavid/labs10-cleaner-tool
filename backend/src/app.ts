@@ -177,7 +177,7 @@ server.get('/surveys', verifyToken, async (req, res) => {
 server.post('/questionanswers/', verifyToken, async (req, res) => {
   const body = req.body
   const findQuestion = await db('questionAnswers').where({ question_id: body.question_id, stay_id: body.stay_id })
-  console.log(findQuestion)
+
   if(findQuestion.length > 0){
     return res.status(400).json({errorMessage: 'survey already submitted'})
   }
