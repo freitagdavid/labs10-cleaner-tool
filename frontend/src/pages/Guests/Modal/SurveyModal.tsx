@@ -64,7 +64,7 @@ export const Modal = (props: any) => {
       <ModalContainer>
         <div className="modal-content-container">
           <ModalH3>Surveys</ModalH3>
-          <form onSubmit={(e) => selectAndClose(e, selected, props.modal)}>
+          <form onSubmit={(e:any) => selectAndClose(e, selected, props.modal)}>
             {loading ? (
               <img src={loadingIndicator} alt='animated loading indicator' />
             ) : data ? (
@@ -76,7 +76,7 @@ export const Modal = (props: any) => {
                   </div>
                 ))
             ) : null}
-            <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e) => toggleButton(e, buttonEnabled)} />
+            <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e:any) => toggleButton(e, buttonEnabled)} />
             <Button type="null" onClick={props.modal} color='var(--color-error)' hollow={true}>Close</Button>
           </form>
         </div>
