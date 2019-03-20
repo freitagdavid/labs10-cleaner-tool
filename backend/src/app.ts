@@ -123,6 +123,7 @@ server.put('/surveys/:id', async (req, res) => {
 server.route('/gueststay/:id').get(stays.getGuest);
 
 server.get('/stay/surveys/:id', async (req, res) => {
+
   try{
     const id = req.params.id
     const stay = await findStaySummaryStandardizedByGuestId(id);
@@ -133,7 +134,18 @@ server.get('/stay/surveys/:id', async (req, res) => {
     const manager = await db('manager').where({ id: managerId })
     const userId = manager[0].user_id
     const surveys = await db('surveys').where({ user_id: userId })
-    res.json(surveys)
+    const surveyExtended: any = []
+    for (let i = 0; i < surveys.length; i++) {
+      let currentSurvey;
+      currentSurvey = surveys[i]
+      let current;
+      current = await db('stayssurveys').where({ survey_id: currentSurvey.id })
+      console.log(current)
+      let status;
+      status = current[0].is_complete
+      surveyExtended.push({ ...currentSurvey, is_complete: status })
+    }
+    res.json(surveyExtended)
   }
   catch(e){
     res.json(e)
