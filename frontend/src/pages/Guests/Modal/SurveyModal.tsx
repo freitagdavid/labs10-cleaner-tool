@@ -2,7 +2,7 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import Button from '../../../components/Button';
 import useFetch from '../../../helpers/useFetch';
 import loadingIndicator from '../../utils/loading.svg';
-import { ModalContainer, SurveySelectButton, ModalH3 } from './SurveyModal.styling'
+import { ModalContainer } from './SurveyModal.styling'
 import { axiosFetch } from '../../../helpers'
 import { number } from 'yup';
 import { Checkbox } from '@material-ui/core';
@@ -59,32 +59,32 @@ export const Modal = (props: any) => {
     buttonEnabled = !currentState
   }
   //check object equality
-  function isEquivalent(a:any, b:any) {
+  function isEquivalent(a: any, b: any) {
     // Create arrays of property names
     var aProps = Object.getOwnPropertyNames(a);
     var bProps = Object.getOwnPropertyNames(b);
     // If number of properties is different,
     // objects are not equivalent
     if (aProps.length != bProps.length) {
-        return false;
+      return false;
     }
     for (var i = 0; i < aProps.length; i++) {
-        var propName = aProps[i];
-        // If values of same property are not equal,
-        // objects are not equivalent
-        if (a[propName] !== b[propName]) {
-            return false;
-        }
+      var propName = aProps[i];
+      // If values of same property are not equal,
+      // objects are not equivalent
+      if (a[propName] !== b[propName]) {
+        return false;
+      }
     }
     // are considered equivalent
     return true;
-}
+  }
   const handleClick = (item: SurveySubmit) => {
-    const isSelected = selected.filter(obj=> isEquivalent(obj, item))
-    const removeSelected = selected.filter(obj=> !isEquivalent(obj, item))
-    if (isSelected === undefined || isSelected.length == 0){
-    setSelected([...selected, item])
-    }if(isSelected.length){
+    const isSelected = selected.filter(obj => isEquivalent(obj, item))
+    const removeSelected = selected.filter(obj => !isEquivalent(obj, item))
+    if (isSelected === undefined || isSelected.length == 0) {
+      setSelected([...selected, item])
+    } if (isSelected.length) {
       setSelected(removeSelected)
     }
   }
@@ -104,14 +104,17 @@ export const Modal = (props: any) => {
               {
                 filteredData.map((survey: Survey) =>
                   <div key={`surveylabel${survey.id}`}>
-                    <Checkbox type="checkbox" name={survey.name} value={`${survey.id}`} onChange={() => handleClick({ surveyId: survey.id, stayId: props.stay_id })} />
-                    <label htmlFor={survey.name}>{survey.name}</label>
+                    {/* <Checkbox type="checkbox" name={survey.name} value={`${survey.id}`} onChange={() => handleClick({ surveyId: survey.id, stayId: props.stay_id })} /> */}
+                    <div>
+                      <input type="checkbox" value={survey.id} id={`${survey.id}`} onChange={() => handleClick({ surveyId: survey.id, stayId: props.stay_id })} />
+                      <label htmlFor={`${survey.id}`}>{survey.name}</label>
+                    </div>
                   </div>
                 )
               }
-              <Button disabled={buttonEnabled} type="submit" text="Submit" onClick={(e) => selectAndClose(e, selected, props.modal)} />
-              <Button type="null" onClick={props.modal} color='var(--color-error)' hollow={true}>Close</Button>
             </form>
+            <Button disabled={buttonEnabled} form="surveyForm" type="submit" text="Submit" onClick={(e) => selectAndClose(e, selected, props.modal)} />
+            <Button disabled={buttonEnabled} onClick={props.modal} hollow={true} text="close" />
           </div>
         </ModalContainer>
       </div>
