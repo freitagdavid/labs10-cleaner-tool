@@ -16,15 +16,15 @@ import {
 import './Surveys.css'
 
 const Surveys = () => {
-  const stupidPostgresInconsistencyTrue = process.env.NODE_ENV === 'development' ? 1 : true
-  const stupidPostgresInconsistencyFalse = process.env.NODE_ENV === 'development' ? 0 : false
+  const stupidPostgresInconsistencyTrue = process.env.NODE_ENV === 'development' ? true : 1
+  const stupidPostgresInconsistencyFalse = process.env.NODE_ENV === 'development' ? false : 0
   const url =
     process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
   const [active, setActive] = useState();
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
-      setActive(1);
+      setActive(true);
     }
   }, [])
 
