@@ -9,7 +9,7 @@ import {
     CreateSurveysWrapper
 } from '../../CreateSurvey/CreateSurvey.styling'
 import styled from '@emotion/styled';
-
+import { DateContainer } from '../GuestDashboard.styling';
 
 
 
@@ -24,6 +24,7 @@ const FillSurvey = (props: any)=>{
     const [answer1, setAnswer1] = useState('')
     const [answer2, setAnswer2] = useState('')
     const [answer3, setAnswer3] = useState('')
+    const [error, setError] = useState(false)
     const userId = props.match.params.id
     const url = process.env.REACT_APP_backendURL || 'https://labs10-cleaner-app-2.herokuapp.com';
     useEffect(() => {
@@ -57,11 +58,16 @@ const FillSurvey = (props: any)=>{
         }
         console.log(body)
         const data = await axios.post(`${url}/questionanswers/`, body, headers)
-
+        //@ts-ignore
+        if(data.errorMessage){
+            setError(true)
+        }
     }
     async function handleUpdate(id: any){
-        const update = await axios.put(`${url}/surveys/${id}`);
-        return update
+        if(!error){
+            const update = await axios.put(`${url}/surveys/${id}`);
+            return update
+        }
     }
     async function markComplete(id: any){
      await axios.put(`${url}/stays/surveys/${id}`);
