@@ -57,6 +57,7 @@ const FillSurvey = (props: any)=>{
         }
         console.log(body)
         const data = await axios.post(`${url}/questionanswers/`, body, headers)
+
     }
     async function handleUpdate(id: any){
         const update = await axios.put(`${url}/surveys/${id}`);
