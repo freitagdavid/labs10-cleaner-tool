@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import Button from '../../../components/Button';
 import useFetch from '../../../helpers/useFetch';
 import loadingIndicator from '../../utils/loading.svg';
@@ -13,6 +13,9 @@ interface Survey {
   name: string,
   isGuest: boolean | number,
 }
+
+type SurveyList = Array<Survey>;
+
 //style vars
 const active = {
   text: '--color-button-text',
@@ -29,6 +32,8 @@ interface SurveySubmit {
 }
 
 export const Modal = (props: any) => {
+  const stupidPostgresInconsistencyTrue = process.env.NODE_ENV === 'development' ? 1 : true
+  const stupidPostgresInconsistencyFalse = process.env.NODE_ENV === 'development' ? 0 : false
   const showHideClassName = !props.show ? "modal display-none" : "modal display-flex";
   const { email } = props;
   let buttonEnabled = false;
@@ -58,10 +63,12 @@ export const Modal = (props: any) => {
     setSelected([...selected, item])
   }
 
-
+  const filterByGuest = (input: SurveyList) => input.filter((survey: Survey) => survey.isGuest === stupidPostgresInconsistencyTrue)
 
 
   if (data) {
+    // const filteredData = data.filter((survey: Survey) => survey.isGuest === stupidPostgresInconsistencyTrue)
+    const filteredData = filterByGuest(data)
     return (
       <div className={showHideClassName}>
         <ModalContainer>
@@ -69,7 +76,7 @@ export const Modal = (props: any) => {
             <h3>Surveys</h3>
             <form onSubmit={(e) => selectAndClose(e, selected, props.modal)}>
               {
-                data.filter((survey: Survey) => survey.isGuest === 1).map((survey: Survey) =>
+                filteredData.map((survey: Survey) =>
                   <div key={`surveylabel${survey.id}`}>
                     <Checkbox type="checkbox" name={survey.name} value={`${survey.id}`} onChange={() => handleClick({ surveyId: survey.id, stayId: props.stay_id })} />
                     <label htmlFor={survey.name}>{survey.name}</label>
