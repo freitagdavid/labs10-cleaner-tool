@@ -123,11 +123,11 @@ server.put('/surveys/:id', async (req, res) => {
 server.route('/gueststay/:id').get(stays.getGuest);
 
 server.get('/stay/surveys/:id', async (req, res) => {
+  
   try{
     const id = req.params.id
-    const stay = await findStaySummaryStandardizedByGuestId(id);
-    const houseId = stay.house_id
-    const stayId = stay.stay_id
+    const stay = await db('stay').where({ guest_id: id });
+    const houseId = stay[0].house_id
     const house = await db('house').where({ id: houseId })
     const managerId = house[0].manager
     const manager = await db('manager').where({ id: managerId })
@@ -139,7 +139,6 @@ server.get('/stay/surveys/:id', async (req, res) => {
       currentSurvey = surveys[i]
       let current;
       current = await db('stayssurveys').where({ survey_id: currentSurvey.id })
-      console.log(current)
       let status;
       status = current[0].is_complete
       surveyExtended.push({ ...currentSurvey, is_complete: status, stay_surveys_id: current[0].id })
@@ -177,7 +176,8 @@ server.get('/surveys', verifyToken, async (req, res) => {
 
 server.post('/questionanswers/', verifyToken, async (req, res) => {
   const body = req.body
-  const findQuestion = await db('questionanswers').where({ question_id: body.question_id, stay_id: body.stay_id })
+  const findQuestion = await db('questionAnswers').where({ question_id: body.question_id, stay_id: body.stay_id })
+  console.log(findQuestion)
   if(findQuestion.length > 0){
     return res.status(400).json({errorMessage: 'survey already submitted'})
   }
