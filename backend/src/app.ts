@@ -123,20 +123,31 @@ server.put('/surveys/:id', async (req, res) => {
 server.route('/gueststay/:id').get(stays.getGuest);
 
 server.get('/stay/surveys/:id', async (req, res) => {
-  const id = req.params.id
-  const stay = await findStaySummaryStandardizedByGuestId(id);
-  const houseId = stay.house_id
-  const stayId = stay.stay_id
-  const house = await db('house').where({ id: houseId })
-  const managerId = house[0].manager
-  const manager = await db('manager').where({ id: managerId })
-  const userId = manager[0].user_id
-  const surveys = await db('surveys').where({ user_id: userId })
-  const staySurveys = await db('surveys')
-    .join('stayssurveys', 'surveys.id', '=','stayssurveys.survey_id')
-    .where({ stay_id: stayId, is_complete: false})
-  console.log(surveys)
-  res.json(staySurveys)
+  
+  try{
+    const id = req.params.id
+    const stay = await db('stay').where({ guest_id: id });
+    const houseId = stay[0].house_id
+    const house = await db('house').where({ id: houseId })
+    const managerId = house[0].manager
+    const manager = await db('manager').where({ id: managerId })
+    const userId = manager[0].user_id
+    const surveys = await db('surveys').where({ user_id: userId })
+    const surveyExtended: any = []
+    for (let i = 0; i < surveys.length; i++) {
+      let currentSurvey;
+      currentSurvey = surveys[i]
+      let current;
+      current = await db('stayssurveys').where({ survey_id: currentSurvey.id })
+      let status;
+      status = current[0].is_complete
+      surveyExtended.push({ ...currentSurvey, is_complete: status, stay_surveys_id: current[0].id })
+    }
+    res.json(surveyExtended)
+  }
+  catch(e){
+    res.json(e)
+  }
 })
 
 server

@@ -49,11 +49,11 @@ const GuestSurveys = (props: any) =>{
             <div> No Surveys</div>
           ) : (
             surveyList.map((survey: any, index: number) => {
-              if (survey.isGuest) {
+              if (survey.isGuest && !survey.is_complete) {
                 const surveyId = survey.survey_id;
                 const userId = survey.user_id;
                 const stayId = props.match.params.stayId;
-                const staysurveyId = survey.id
+                const staysurveyId = survey.stay_surveys_id;
                 return (
                     <SurveyLink
                         to={`/guestdashboard/${stayId}/surveys/${userId}/${surveyId}/${staysurveyId}`}
