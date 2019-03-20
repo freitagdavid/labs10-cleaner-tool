@@ -23,8 +23,8 @@ const Surveys = () => {
   const [active, setActive] = useState();
 
   useEffect(() => {
-    if (process.env.NODE_ENV !== 'development') {
-      setActive(1);
+    if (process.env.NODE_ENV === 'development') {
+      setActive(true);
     }
   }, [])
 
