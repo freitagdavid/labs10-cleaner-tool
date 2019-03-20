@@ -123,7 +123,6 @@ server.put('/surveys/:id', async (req, res) => {
 server.route('/gueststay/:id').get(stays.getGuest);
 
 server.get('/stay/surveys/:id', async (req, res) => {
-
   try{
     const id = req.params.id
     const stay = await findStaySummaryStandardizedByGuestId(id);

@@ -95,7 +95,7 @@ const FillSurvey = (props: any)=>{
             handleQuestions(answer1, questionInfo1.type, headers, questionInfo1.id)
         }
         const update = handleUpdate(surveyId)
-        markComplete(staysurveyId);
+        markComplete(surveyId);
         props.history.push(`/guestdashboard/${props.match.params.stayId}/surveys`)
     }
     const handleCancel = () =>{
