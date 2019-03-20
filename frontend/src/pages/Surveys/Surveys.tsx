@@ -33,6 +33,10 @@ const Surveys = () => {
   const activeClass = (filter: FilterArgs) =>
     active === filter ? 'active' : '';
 
+    function goBack() {
+      window.location.reload();
+    }
+
   return (
     <Container>
       <SurveysHeader >
@@ -60,7 +64,7 @@ const Surveys = () => {
           data.map((survey: Survey) =>
             (
               <div className={`survey${activeClass(survey.isGuest)}`} key={survey.id}>
-                <SurveyCard {...survey} key={survey.id}></SurveyCard>
+                <SurveyCard goBack={goBack}{...survey} key={survey.id}></SurveyCard>
               </div>
             ))
         ) : null}
