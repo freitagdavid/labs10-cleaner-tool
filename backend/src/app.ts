@@ -165,6 +165,10 @@ server.get('/surveys', verifyToken, async (req, res) => {
 
 server.post('/questionanswers/', verifyToken, async (req, res) => {
   const body = req.body
+  const findQuestion = await db('questionanswers').where({ question_id: body.question_id, stay_id: body.stay_id })
+  if(findQuestion.length > 0){
+    return res.status(400).json({errorMessage: 'survey already submitted'})
+  }
   try {
     const data = await db('questionAnswers').insert(body)
 
@@ -201,6 +205,7 @@ server.delete('/surveys/:id', async (req, res) => {
 
 server.post('/questions', verifyToken, async (req, res) => {
   const body = req.body;
+  
   try {
     const createQuestion = await db('questions').insert({ ...body });
     res.status(201).json(createQuestion);
