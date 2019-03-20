@@ -40,7 +40,7 @@ const SurveyCard = (props : any) => {
                     </Link>
                 </div>
                 <SurveyRightContent>
-                    <DeleteIcon onClick={()=>deleteSurvey()} src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fhawcons%2F32%2F699373-icon-26-trash-can-512.png&f=1" />
+                    <DeleteIcon onClick={deleteSurvey} src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fhawcons%2F32%2F699373-icon-26-trash-can-512.png&f=1" />
                     <ResponsesContainer>
                         <p>Responses</p>
                         <h2>{props.responses}</h2>

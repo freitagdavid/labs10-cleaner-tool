@@ -2,7 +2,7 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import Button from '../../../components/Button';
 import useFetch from '../../../helpers/useFetch';
 import loadingIndicator from '../../utils/loading.svg';
-import { ModalContainer, SurveySelectButton } from './SurveyModal.styling'
+import { ModalContainer, SurveySelectButton, ModalH3 } from './SurveyModal.styling'
 import { axiosFetch } from '../../../helpers'
 import { number } from 'yup';
 import { Checkbox } from '@material-ui/core';

@@ -17,7 +17,7 @@
 | :---------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------:   | :-------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
 |                                [<img src="./assets/Sasha.jpg" width = "160" />](https://github.com/sashat14)                              |                         [<img src="./assets/Brooks.jpg" width = "160" />](https://github.com/BrooksPoltl)                      |             [<img src="./assets/David.jpg" width = "160" />](https://github.com/freitagdavid)                			       |       [<img src="./assets/Brandon.jpg" width = "160" />](https://github.com/BrandCam)                                          |                                   
 |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sashat14)                          |                    [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/BrooksPoltl)                    |                         [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/freitagdavid)                       |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/BrandCam)                        |                          
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kelly-frohwein-30404116a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ichirohonda/)   | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ronald-libago-96487815b/)| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/nandotheessen/) | 
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com)   | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com)| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com) | 
 
 </center>
 <br>
@@ -40,8 +40,8 @@ You can find the project at [https://cleanerpos.netlify.com/](https://cleanerpos
     * Allow employees to track their progress
     * Allow employees to reassign tasks to other employees
     * Automatically generate guest invoices
-    * Allow property managers to add new properties, assign properties to employees,        create and edit task checklists for employees, and bill guests directly
-    * Allow guests to view readiness of their assigned rental property and pay their        invoice online
+    * Allow property managers to add new properties, assign properties to employees,      create and edit task checklists for employees, and bill guests directly
+    * Allow guests to view readiness of their assigned rental property and pay their      invoice online
     * Allow managers to create and send surveys to employees and guests
     * Allow managers to view responses to surveys
     * Allow employees and guest to fill out surveys
