@@ -4,7 +4,7 @@ import { useFetch } from '../../helpers';
 import { Survey, FilterArgs } from './types';
 import loadingIndicator from '../utils/loading.svg';
 import { Button, Container } from '../../components/index';
-import { Link } from 'react-router-dom';
+https://github.com/Lambda-School-Labs/labs10-cleaner-tool/pull/103/conflict?name=frontend%252Fsrc%252Fpages%252FSurveys%252FSurveys.tsx&ancestor_oid=ff45d52dc3fcc22c987c8d150ea3cef299c111ba&base_oid=cebbd5ed889f54dc667920428a55c21f1ca45ecd&head_oid=0a0176a7d3e79dbbba0f3e80b62a77a684e204f9import { Link } from 'react-router-dom';
 import SurveyCard from './SurveyCard';
 
 import {
@@ -25,8 +25,9 @@ const Surveys = () => {
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       setActive(1);
-    } else{
-      setActive(true)
+
+    }else{
+      setActive(true);
     }
   }, [])
 
