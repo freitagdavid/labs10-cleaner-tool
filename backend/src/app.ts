@@ -135,7 +135,7 @@ server.get('/stay/surveys/:id', async (req, res) => {
   const staySurveys = await db('surveys')
     .join('stayssurveys', 'surveys.id', '=','stayssurveys.survey_id')
     .where({ stay_id: stayId, is_complete: false})
-  console.log(staySurveys)
+  console.log(surveys)
   res.json(staySurveys)
 })
 
