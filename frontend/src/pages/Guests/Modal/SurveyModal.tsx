@@ -6,7 +6,7 @@ import { ModalContainer } from './SurveyModal.styling'
 import { axiosFetch } from '../../../helpers'
 import { number } from 'yup';
 import { Checkbox } from '@material-ui/core';
-import firebase from 'firebase/app'
+import firebase from 'firebase/app';
 interface Survey {
   survey: any,
   id: number,
