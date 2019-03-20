@@ -38,7 +38,6 @@ const Surveys = () => {
       <SurveysHeader >
         <h2>Surveys</h2>
         <Link to="/createsurvey" >
-          {/* <button className='create-survey'>+ Create New Survey</button> */}
           <Button className='create-survey' text="+ Create New Survey" color='var(--color-accent)'></Button>
         </Link>
       </SurveysHeader>
