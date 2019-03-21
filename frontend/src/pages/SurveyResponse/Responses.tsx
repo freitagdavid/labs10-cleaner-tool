@@ -10,10 +10,10 @@ import {ResponsesContainer,
 const Responses = (props:any) => {
 
     const editDate = () => {
-        const date = props.sr_date.slice(0, 11);
+        const date = props.sr_date.slice(0, 10);
             return(date);
     }
-    
+
     return(
         <ResponsesContainer>
             <ResponsesGuest>
