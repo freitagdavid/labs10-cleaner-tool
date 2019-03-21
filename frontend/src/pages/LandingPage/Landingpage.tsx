@@ -135,7 +135,7 @@ const Landing = (props: RouteComponentProps) => {
         </a>
         <a href='https://example.com'>Email</a>
         <a href='https://twitter.com'>Twitter</a>
-        <a href='https://github.com/Lambda-School-Labs/labs9-cleaner-pos'>
+        <a href='https://github.com/Lambda-School-Labs/labs10-cleaner-tool'>
           GitHub
         </a>
       </Footer>
