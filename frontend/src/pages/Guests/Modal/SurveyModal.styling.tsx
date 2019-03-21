@@ -109,15 +109,12 @@ export const ModalContainer = styled.div`
             justify-self: start;
             align-self: center;
             margin-right: 40px;
-<<<<<<< HEAD
-=======
             @media only screen and (max-width: 900px){
                 width: 100px;
             }
             @media only screen and (max-width: 550px){
                 margin-right: 10px;
             }
->>>>>>> 994bcad3cf68ff9c308448ff4fecb4c65a86aad7
         }
         span {
             justify-self: end;
