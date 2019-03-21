@@ -61,6 +61,7 @@ const App = () => {
           <Route exact path='/guestdashboard/:stayId/surveys' component={GuestSurveys} />
           <Route exact path='/guestdashboard/:stayId/surveys/:id/:surveyId/:staysurveyId' component={FillSurvey} />
           <Route path='/linklogin' component={LinkLogin} />
+          <Route exact path='/guestmap/:id' component={GuestMap} />
         </Switch>
       </UserContextProvider>
     </div>

@@ -141,7 +141,7 @@ server.get('/stay/surveys/:id', async (req, res) => {
       current = await db('stayssurveys').where({ survey_id: currentSurvey.id })
       let status;
       status = current[0].is_complete
-      surveyExtended.push({ ...currentSurvey, is_complete: status, stay_surveys_id: current[0].id })
+      surveyExtended.push({ ...currentSurvey, is_complete: status, stay_surveys_id: current[0].id, survey_id: current[0].survey_id })
     }
     res.json(surveyExtended)
   }
