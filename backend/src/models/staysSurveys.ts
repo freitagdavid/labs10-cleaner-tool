@@ -24,7 +24,7 @@ function insertData(data: any) {
 
 function formatData(data: data) {
   const { surveyId, stayId } = data;
-  return { survey_Id: surveyId, stay_id: stayId };
+  return { survey_id: surveyId, stay_id: stayId };
 }
 
 export function updateById(Id: number) {
