@@ -1,4 +1,4 @@
-# Labs 9 - Lodgel
+# Labs 10 - Lodgel
 
 <div align="center"><img src="./frontend/public/lodgel.png" alt="logo"></div>
 
