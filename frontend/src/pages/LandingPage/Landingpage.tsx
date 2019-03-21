@@ -62,11 +62,11 @@ const Landing = (props: RouteComponentProps) => {
           <Description>
             <DescHeader>Welcome To Lodgel</DescHeader>
             <p>
-              Lodgel is designed to take the hassle out of out of your property
-              management experience. You can quickly delegate tasks to your
-              turnover assistants, conveniently schedule guests and securely
-              capture their payments at the click of a button, all while
-              enjoying the support of our great team.
+              Lodgel is designed to take the hassle out of out of your
+              property management experience. You can quickly delegate tasks
+              to your turnover assistants, conveniently schedule guests and
+              securely capture their payments at the click of a button, all
+              while enjoying the support of our great team.
             </p>
           </Description>
         </DescContainer>
@@ -79,10 +79,10 @@ const Landing = (props: RouteComponentProps) => {
           <Description>
             <DescHeader>Manage Your Properties</DescHeader>
             <p>
-              A detailed view for each of your properties is at your fingertips.
-              You have the freedom to add and remove properties as your
-              portfolio changes over time, which keeps complete control of how
-              your properties are managed in your hands.
+              A detailed view for each of your properties is at your
+              fingertips. You have the freedom to add and remove properties as
+              your portfolio changes over time, which keeps complete control
+              of how your properties are managed in your hands.
             </p>
           </Description>
         </DescContainer>
@@ -98,9 +98,9 @@ const Landing = (props: RouteComponentProps) => {
             <DescHeader>Keep Tabs On Your Guests</DescHeader>
             <p>
               Your guests are the heart of your business. To help you deliver
-              the high-quality service that your guests deserve, we have created
-              customizable checklists that ensure all of your guests' needs are
-              met.
+              the high-quality service that your guests deserve, we have
+              created customizable checklists that ensure all of your guests'
+              needs are met.
             </p>
           </Description>
         </DescContainer>
@@ -117,9 +117,9 @@ const Landing = (props: RouteComponentProps) => {
             <p>
               Your time is valuable, and managing multiple properties can be
               stressful. Assistants can be invaluable in exceeding guest
-              expectations, and can be your hands when you are needed elsewhere.
-              Assign an assistant to take care of a property by default, and
-              watch in real time as they complete their tasks.
+              expectations, and can be your hands when you are needed
+              elsewhere. Assign an assistant to take care of a property by
+              default, and watch in real time as they complete their tasks.
             </p>
           </Description>
         </DescContainer>
@@ -135,7 +135,7 @@ const Landing = (props: RouteComponentProps) => {
         </a>
         <a href='https://example.com'>Email</a>
         <a href='https://twitter.com'>Twitter</a>
-        <a href='https://github.com/Lambda-School-Labs/labs9-cleaner-pos'>
+        <a href='https://github.com/Lambda-School-Labs/labs10-cleaner-tool'>
           GitHub
         </a>
       </Footer>
