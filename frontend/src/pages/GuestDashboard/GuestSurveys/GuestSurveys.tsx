@@ -50,7 +50,7 @@ const GuestSurveys = (props: any) =>{
           ) : (
             surveyList.map((survey: any, index: number) => {
               if (survey.isGuest && !survey.is_complete) {
-                const surveyId = survey.survey_id;
+                const surveyId = survey.id;
                 const userId = survey.user_id;
                 const stayId = props.match.params.stayId;
                 const staysurveyId = survey.stay_surveys_id;
