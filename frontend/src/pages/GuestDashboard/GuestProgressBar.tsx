@@ -63,53 +63,24 @@ interface Task {
 //something
 const GuestProgressBar = (props: ProgressBar) => {
   const { before, during, after } = props.tasks;
-  //@ts-ignore
-  if(before.complete === true){
-    //@ts-ignore
-    before.complete = 1
-  }
-  //@ts-ignore
-  if(during.complete === true){
-    //@ts-ignore
-    during.complete = 1
-  }
-  //@ts-ignore
-  if(after.complete === true){
-    //@ts-ignore
-    after.complete = 1
-  }
-  //@ts-ignore
-  if(before.complete === false){
-    //@ts-ignore
-    before.complete = 0
-  }
-  //@ts-ignore
-  if(during.complete === false){
-    //@ts-ignore
-    during.complete = 0
-  }
-  //@ts-ignore
-  if(after.complete === false){
-    //@ts-ignore
-    after.complete = 0
-  }
+  
   console.log(before, 'Before mutation');
   let beforeProgress = Math.floor(
-    (before.filter((task: Task) => task.complete === 1).length /
+    (before.filter((task: Task) => task.complete === true).length /
       before.length) *
       100,
   );
   let duringProgress = Math.floor(
-    (during.filter((task: Task) => task.complete === 1).length /
+    (during.filter((task: Task) => task.complete === true).length /
       during.length) *
       100,
   );
 
   const reducer = (a: Task, b: Task) => {
-    if (a.complete > b.complete) {
+    if (a.complete === true && b.complete === false) {
       return -1;
     }
-    if (b.complete > a.complete) {
+    if (b.complete === true && a.complete === false) {
       return 1;
     }
     return 0;
