@@ -55,7 +55,7 @@ type afterList = [
 type TaskList = [Task];
 
 interface Task {
-  complete: number | boolean;
+  complete: any;
   task: string;
   items_id: number;
   stay_id: number;
