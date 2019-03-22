@@ -8,6 +8,12 @@ import {ResponsesContainer,
 
 
 const Responses = (props:any) => {
+
+    const editDate = () => {
+        const date = props.sr_date.slice(0, 10);
+            return(date);
+    }
+
     return(
         <ResponsesContainer>
             <ResponsesGuest>
@@ -16,7 +22,7 @@ const Responses = (props:any) => {
                 </div>
                 <ResponsesInfo>
                     <p>{props.sr_name}</p>
-                    <p>{props.sr_date}</p>
+                    <p>{editDate()}</p>
                 </ResponsesInfo>
             </ResponsesGuest>
             <ResponsesAnswers>

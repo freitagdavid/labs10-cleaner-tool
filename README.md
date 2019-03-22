@@ -1,4 +1,4 @@
-# Labs 9 - Lodgel
+# Labs 10 - Lodgel
 
 <div align="center"><img src="./frontend/public/lodgel.png" alt="logo"></div>
 
@@ -25,14 +25,14 @@
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](https://app.netlify.com/sites/cleanerpos/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](https://app.netlify.com/sites/determined-tereshkova-b03c8b/deploys)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ## Project Overview
 
 This is a Lambda Labs Capstone Project designed for rental property management. It consolidates key tasks like invoicing and employee management into one central location.
 
-You can find the project at [https://cleanerpos.netlify.com/](https://cleanerpos.netlify.com/).
+You can find the project at [https://determined-tereshkova-b03c8b.netlify.com](https://determined-tereshkova-b03c8b.netlify.com).
 
 ### Key Features
 

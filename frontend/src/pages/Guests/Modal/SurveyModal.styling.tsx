@@ -16,16 +16,17 @@ export const ModalContainer = styled.div`
     .modal-content-container{
         padding-bottom: 1rem;
         display: grid;
-        grid-template-rows: min-content 5fr 1fr;
-        grid-gap: 8px;
+        grid-template-rows: min-content  5fr 1fr;
+        grid-template-columns: 50% 50%;
+        grid-gap: 0px;
         grid-template-areas:
             'title title'
             'checkBoxList checkBoxList'
             'submitButton closeButton'
         ;
         border: var(--border);
-        width: 30vw;
-        height: calc(30vw - 10vw);
+        width: 55%;
+        height: 40%;
         background-color: var(--color-bg-secondary);
         h3 {
             grid-area: title;
@@ -107,7 +108,13 @@ export const ModalContainer = styled.div`
             grid-area: closeButton;
             justify-self: start;
             align-self: center;
-            margin-right: 40px
+            margin-right: 40px;
+            @media only screen and (max-width: 900px){
+                width: 100px;
+            }
+            @media only screen and (max-width: 550px){
+                margin-right: 10px;
+            }
         }
         span {
             justify-self: end;

@@ -55,14 +55,29 @@ type afterList = [
 type TaskList = [Task];
 
 interface Task {
-  complete: number;
+  complete: any;
   task: string;
   items_id: number;
   stay_id: number;
 }
-
+//something
 const GuestProgressBar = (props: ProgressBar) => {
   const { before, during, after } = props.tasks;
+  //@ts-ignore
+  if(props.tasks.before.complete === true){
+    //@ts-ignore
+    props.tasks.before.complete = 1
+  }
+  //@ts-ignore
+  if(props.tasks.during.complete === true){
+    //@ts-ignore
+    props.tasks.during.complete = 1
+  }
+  //@ts-ignore
+  if(props.tasks.after.complete === true){
+    //@ts-ignore
+    props.tasks.after.complete = 1
+  }
   console.log(before, 'Before mutation');
   let beforeProgress = Math.floor(
     (before.filter((task: Task) => task.complete === 1).length /
