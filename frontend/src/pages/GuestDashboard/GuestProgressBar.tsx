@@ -76,7 +76,22 @@ const GuestProgressBar = (props: ProgressBar) => {
   //@ts-ignore
   if(after.complete === true){
     //@ts-ignore
-    complete = 1
+    after.complete = 1
+  }
+  //@ts-ignore
+  if(before.complete === false){
+    //@ts-ignore
+    before.complete = 0
+  }
+  //@ts-ignore
+  if(during.complete === false){
+    //@ts-ignore
+    during.complete = 0
+  }
+  //@ts-ignore
+  if(after.complete === false){
+    //@ts-ignore
+    after.complete = 0
   }
   console.log(before, 'Before mutation');
   let beforeProgress = Math.floor(
