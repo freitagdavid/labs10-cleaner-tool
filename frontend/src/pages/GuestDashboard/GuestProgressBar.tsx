@@ -64,19 +64,34 @@ interface Task {
 const GuestProgressBar = (props: ProgressBar) => {
   const { before, during, after } = props.tasks;
   //@ts-ignore
-  if(props.tasks.before.complete === true){
+  if(before.complete === true){
     //@ts-ignore
-    props.tasks.before.complete = 1
+    before.complete = 1
   }
   //@ts-ignore
-  if(props.tasks.during.complete === true){
+  if(during.complete === true){
     //@ts-ignore
-    props.tasks.during.complete = 1
+    during.complete = 1
   }
   //@ts-ignore
-  if(props.tasks.after.complete === true){
+  if(after.complete === true){
     //@ts-ignore
-    props.tasks.after.complete = 1
+    after.complete = 1
+  }
+  //@ts-ignore
+  if(before.complete === false){
+    //@ts-ignore
+    before.complete = 0
+  }
+  //@ts-ignore
+  if(during.complete === false){
+    //@ts-ignore
+    during.complete = 0
+  }
+  //@ts-ignore
+  if(after.complete === false){
+    //@ts-ignore
+    after.complete = 0
   }
   console.log(before, 'Before mutation');
   let beforeProgress = Math.floor(
