@@ -60,7 +60,7 @@ interface Task {
   items_id: number;
   stay_id: number;
 }
-
+//something
 const GuestProgressBar = (props: ProgressBar) => {
   const { before, during, after } = props.tasks;
   //@ts-ignore
