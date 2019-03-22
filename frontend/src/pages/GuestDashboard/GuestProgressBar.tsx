@@ -80,7 +80,7 @@ const GuestProgressBar = (props: ProgressBar) => {
     if (a.complete === true && b.complete === false) {
       return -1;
     }
-    if (b.complete === true > a.complete === false) {
+    if (b.complete === true && a.complete === false) {
       return 1;
     }
     return 0;
