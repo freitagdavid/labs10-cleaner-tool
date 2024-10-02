@@ -43,7 +43,7 @@ module.exports = {
     process: false,
   },
   output: {
-    filename: 'server.prod.js',
+    filename: 'server.dev.js',
     path: path.resolve(__dirname, './dist/'),
     publicPath: './dist/',
     // libraryTarget: 'commonjs2'

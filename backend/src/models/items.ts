@@ -9,9 +9,9 @@ this should only be called when a new stay is created.
 */
 export const postItemsStay = async (stayId: number) => {
   try {
-    const items = await db('stay') 
+    const items = await db('stay')
       .leftJoin('list', { 'stay.house_id': 'list.house_id' })
-      .leftJoin('items', { 'list.id': 'items.list_id' }) 
+      .leftJoin('items', { 'list.id': 'items.list_id' })
       .where({ 'stay.id': stayId })
       .select('items.id as item_id', 'stay.id as stay_id');
     const complete = await db('item_complete')
@@ -23,7 +23,7 @@ export const postItemsStay = async (stayId: number) => {
       return complete;
     }
   } catch (e) {
-    throw Error(e);
+    throw e;
   }
 };
 

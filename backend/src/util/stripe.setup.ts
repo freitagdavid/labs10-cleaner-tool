@@ -1,4 +1,4 @@
-const { stripe_secret } = process.env;
+const { STRIPE_SECRET } = process.env;
 
 // tslint:disable-next-line:no-var-requires
-export const stripe = require('stripe')(stripe_secret);
+export const stripe = require('stripe')(STRIPE_SECRET);

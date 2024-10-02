@@ -15,8 +15,8 @@ This is just the basic setup a post request to http://localhost:3000/email with
   "manager_name": "Steve",
   "subject":"This is the subject",
   "link_address": "https://{ourFrontEndAddress}.com/{someComponent}?managerId={managerId}",
-	"from": "william.thing@gmail.com",
-	"to": "william.some@gmail.com"
+  "from": "william.thing@gmail.com",
+  "to": "william.some@gmail.com"
 }
 We can prob grap the 'from' address off the managers decoded token when the post is submitted.
 Will need a to address.
@@ -44,9 +44,8 @@ export const send = async (req: Requests, res: Responses, next: Nexts) => {
     const subject: string = `${manager_name} invites you to do work`;
     const { id, email } = req.token;
     const roleId = await getRoleId(id);
-    const linkAddress: string = `https://cleanerpos.netlify.com/login?manager=${
-      roleId.id
-    }&ast=true`;
+    // const linkAddress: string = `https://cleanerpos.netlify.com/login?manager=${roleId.id}&ast=true`;
+    const linkAddress: string = `${URL}/login?manager=${roleId.id}&ast=true`;
     if (
       !ast_name ||
       !manager_name ||
@@ -57,17 +56,24 @@ export const send = async (req: Requests, res: Responses, next: Nexts) => {
     ) {
       throw Error('ast, manager, subject, link, from, and to are all required');
     }
+    // const msg = {
+    //   dynamic_template_data: {
+    //     astName: ast_name,
+    //     linkAddress,
+    //     managerName: manager_name,
+    //     subject,
+    //   },
+    //   from: email,
+    //   templateId: 'd-5eb00ba7abad4637bf24a96ec83281d8',
+    //   to,
+    // };
     const msg = {
-      dynamic_template_data: {
-        astName: ast_name,
-        linkAddress,
-        managerName: manager_name,
-        subject,
-      },
-      from: email,
-      templateId: 'd-5eb00ba7abad4637bf24a96ec83281d8',
       to,
-    };
+      from: email,
+      subject: subject,
+      text: 'Click to accept',
+      html: `<a href='${linkAddress}'>Link to your cleaner Dashboard</a>`
+    }
     await sgSend(msg);
     res.status(200).json({ status: 'success' });
   } catch (e) {
@@ -76,10 +82,10 @@ export const send = async (req: Requests, res: Responses, next: Nexts) => {
   }
 };
 
-export const sendLink = async (req: Requests, res: Responses, next: Nexts) =>{
-  try{
+export const sendLink = async (req: Requests, res: Responses, next: Nexts) => {
+  try {
     const { to, guestCode } = req.body;
-    console.log 
+    console.log
     const msg = {
       to,
       from: 'test@example.com',
@@ -87,8 +93,8 @@ export const sendLink = async (req: Requests, res: Responses, next: Nexts) =>{
       text: 'Click to view the progress of your booking.',
       html: `<a href='${URL}/dashboard/${guestCode}'>Link To Your Guest DashBoard</a>`,
     };;
-    
-     await sgSend(msg);
+
+    await sgSend(msg);
     res.status(200).json({ status: 'success' });
   } catch (e) {
     e.statUsCode = 400;

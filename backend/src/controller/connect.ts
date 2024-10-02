@@ -19,7 +19,7 @@ const post = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const headers: AxiosRequestConfig = {
       headers: {
-        Authorization: `BEARER ${process.env.stripe_secret}`,
+        Authorization: `BEARER ${process.env.STRIPE_SECRET}`,
       },
     };
     const response = await axios.post(

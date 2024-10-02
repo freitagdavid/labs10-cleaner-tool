@@ -52,3 +52,4 @@ backend/dev.sqlite3
 backend/.directory
 .history/
 .idea/
+.yarn
