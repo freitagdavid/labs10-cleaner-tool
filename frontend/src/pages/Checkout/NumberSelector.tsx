@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ disabled?: boolean }>`
   /* Conditional Display */
   visibility: ${({ disabled }) => (disabled ? 'hidden' : 'visible')};
   /* Box Model */
