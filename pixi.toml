@@ -1,0 +1,11 @@
+[project]
+authors = ["David Freitag <david@freitag.site>"]
+channels = ["conda-forge"]
+name = "frontend"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+nodejs = "=10"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import Pointer from './33622.svg';
@@ -77,7 +77,7 @@ const LeafletMap = (props: {
   }
 
   return (
-    <Map
+    <MapContainer
       className='container-map'
       center={[coordinates.lat, coordinates.lng]}
       zoom={coordinates.zoom}
@@ -90,7 +90,7 @@ const LeafletMap = (props: {
       {positions.map((latlng: any, index: number) => {
         return <Marker key={index} position={latlng} icon={iconPerson} />;
       })}
-    </Map>
+    </MapContainer>
   );
 };
 

@@ -23,7 +23,7 @@ import { axiosErrorHandler } from '../../utils';
 import 'react-datepicker/dist/react-datepicker.css';
 import firebase from 'firebase/app';
 
-const labelInputField = (label: string) => {
+const LabelInputField = ({ label }: { label: string }) => {
   const [stayId, setStayId] = useState('');
   return ({ field, form }: FieldProps) => {
     const { name, value } = field;
@@ -65,7 +65,7 @@ const NewGuestView = (formProps: MyGuestProps) => {
             name='fullName'
             value={values.fullName}
             autoComplete='billing name'
-            render={labelInputField('Name')}
+            render={<LabelInputField label='Name' />}
           />
           <Field
             name='email'
@@ -116,8 +116,8 @@ const NewGuestView = (formProps: MyGuestProps) => {
           {houses ? (
             <Field name='houseId' render={DropDown(houses)} />
           ) : (
-              <div>Loading</div>
-            )}
+            <div>Loading</div>
+          )}
           <br />
           <br />
           <div className='check-group'>
@@ -239,8 +239,7 @@ const NewGuest = (props: RouteComponentProps) => {
       }: { url: string; headers: AxiosRequestConfig } = setUpUrlAndHeaders();
       const userData = {
         full_name: fullName,
-        address: `${address1}\n${
-          address2 ? address2 + '\n' : ''
+        address: `${address1}\n${address2 ? address2 + '\n' : ''
           }${city}\n${state}\n${country}\n${postCode}`,
         email,
         phone,
@@ -303,8 +302,7 @@ const NewGuest = (props: RouteComponentProps) => {
         });
       } else {
         await actions.setStatus({
-          msg: `Request could not be processed. Please refresh the page.\n\nError:\n${
-            error.message
+          msg: `Request could not be processed. Please refresh the page.\n\nError:\n${error.message
             }`,
         });
       }

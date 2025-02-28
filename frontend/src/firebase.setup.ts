@@ -10,6 +10,8 @@ const {
   REACT_APP_messagingSenderId,
 } = process.env;
 
+console.log(process.env)
+
 const app = firebase.initializeApp({
   apiKey: REACT_APP_apiKey,
   authDomain: REACT_APP_authDomain,
