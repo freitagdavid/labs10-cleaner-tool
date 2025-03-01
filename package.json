@@ -8,6 +8,6 @@
   "dependencies": {
     "@types/bun": "^1.2.4",
     "bun": "^1.2.4",
-    "typescript": "3.2.2"
+    "typescript": "4"
   }
 }

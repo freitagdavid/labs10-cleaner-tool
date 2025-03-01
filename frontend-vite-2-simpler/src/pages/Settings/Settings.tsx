@@ -17,6 +17,7 @@ import {
 import { RouteComponentProps } from 'react-router';
 import loadingIndicator from '../utils/loading.svg';
 import defaultUser from '../../assets/default-user.jpg';
+import { create } from 'zustand';
 
 const url =
   import.meta.env.REACT_APP_backendURL ||

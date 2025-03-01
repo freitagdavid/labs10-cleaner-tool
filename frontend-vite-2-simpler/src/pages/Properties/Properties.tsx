@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { MouseEventHandler, useContext } from 'react';
 import axios from 'axios';
 // Components
 import { Link } from 'react-router-dom';
@@ -43,12 +43,13 @@ const Properties = () => {
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
   // Snackbar functions
-  function handleClose(event: any, reason: string) {
+
+  const handleClose = (event: any, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
     setSnackbarOpen(false);
-  }
+  };
 
   async function postAst(
     event: React.FormEvent<HTMLSelectElement>,
@@ -83,7 +84,7 @@ const Properties = () => {
             }}
             open={snackbarOpen}
             autoHideDuration={3000}
-            onClose={handleClose}
+            onClose={(e, r) => handleClose(e, r)}
             ContentProps={{
               'aria-describedby': 'message-id',
             }}
@@ -96,7 +97,7 @@ const Properties = () => {
                 aria-label='Close'
                 color='inherit'
                 // @ts-ignore
-                onClick={handleClose}
+                onClick={handleClose as MouseEventHandler<HTMLButtonElement>}
               >
                 <i className='fas fa-times' />
               </IconButton>,
@@ -145,67 +146,67 @@ const Properties = () => {
         ) : null}
         {houses
           ? houses.map((house: House) => {
-              return (
-                <HouseItem key={house.id} data-testid='house-item'>
-                  <ThumbNail
-                    src={house.photo_url || defaultHouse}
-                    alt='house'
-                  />
-                  {/* <CardContent> */}
-                  <CardHeading>
-                    <h4>{house.name}</h4>
-                    <p>{house.address}</p>
-                  </CardHeading>
-                  {/* <CardBody> */}
-                  <InfoBox>
-                    <p>Checklist Items</p>
-                    <div className='secondary'>{house.checkList[0].count}</div>
-                  </InfoBox>
-                  <Assistant
-                    label='Default Assistant'
-                    data-testid='assistant-select'
-                    onChange={(event) => postAst(event, house.id)}
+            return (
+              <HouseItem key={house.id} data-testid='house-item'>
+                <ThumbNail
+                  src={house.photo_url || defaultHouse}
+                  alt='house'
+                />
+                {/* <CardContent> */}
+                <CardHeading>
+                  <h4>{house.name}</h4>
+                  <p>{house.address}</p>
+                </CardHeading>
+                {/* <CardBody> */}
+                <InfoBox>
+                  <p>Checklist Items</p>
+                  <div className='secondary'>{house.checkList[0].count}</div>
+                </InfoBox>
+                <Assistant
+                  label='Default Assistant'
+                  data-testid='assistant-select'
+                  onChange={(event) => postAst(event, house.id)}
+                >
+                  <option defaultValue={house.default_ast}>
+                    {house.default_ast_name}
+                  </option>
+                  {house.openAst.map((ast: any) => {
+                    if (ast.ast_id !== house.default_ast) {
+                      return (
+                        <option key={ast.ast_id} value={ast.ast_id}>
+                          {ast.full_name}
+                        </option>
+                      );
+                    }
+                  })}
+                </Assistant>
+                <ButtonContainer>
+                  <Link
+                    to={{
+                      pathname: `properties/${house.id}`,
+                      hash: '#checklists',
+                      state: house,
+                    }}
                   >
-                    <option defaultValue={house.default_ast}>
-                      {house.default_ast_name}
-                    </option>
-                    {house.openAst.map((ast: any) => {
-                      if (ast.ast_id !== house.default_ast) {
-                        return (
-                          <option key={ast.ast_id} value={ast.ast_id}>
-                            {ast.full_name}
-                          </option>
-                        );
-                      }
-                    })}
-                  </Assistant>
-                  <ButtonContainer>
-                    <Link
-                      to={{
-                        pathname: `properties/${house.id}`,
-                        hash: '#checklists',
-                        state: house,
-                      }}
-                    >
-                      <Button
-                        className='property-button'
-                        text='Edit Checklists'
-                        datatestid='house-button'
-                      />
-                    </Link>
-                    <Link to={{ pathname: `/properties/new`, state: house }}>
-                      <Button
-                        className='property-button'
-                        text='Edit Property'
-                        datatestid='house-button'
-                      />
-                    </Link>
-                  </ButtonContainer>
-                  {/* </CardBody> */}
-                  {/* </CardContent> */}
-                </HouseItem>
-              );
-            })
+                    <Button
+                      className='property-button'
+                      text='Edit Checklists'
+                      datatestid='house-button'
+                    />
+                  </Link>
+                  <Link to={{ pathname: `/properties/new`, state: house }}>
+                    <Button
+                      className='property-button'
+                      text='Edit Property'
+                      datatestid='house-button'
+                    />
+                  </Link>
+                </ButtonContainer>
+                {/* </CardBody> */}
+                {/* </CardContent> */}
+              </HouseItem>
+            );
+          })
           : null}
         {houses && houses.length === 0 ? (
           <HouseItemF>
