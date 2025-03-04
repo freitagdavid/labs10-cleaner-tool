@@ -8,5 +8,5 @@ version = "0.1.0"
 [tasks]
 
 [dependencies]
-nodejs = ">=12.4.0,<22.14"
+nodejs = ">=22.0.0,<22.14"
 python = ">=3.13.2,<3.14"

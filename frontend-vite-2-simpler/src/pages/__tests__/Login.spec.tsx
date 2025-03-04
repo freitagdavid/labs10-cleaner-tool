@@ -3,9 +3,9 @@ import { cleanup, wait } from 'react-testing-library';
 import { renderWithRouter } from '../../helpers/functions';
 import Login from '../Login';
 import 'jest';
-import {UserContextProvider} from '../../UserContext';
+import { vi } from 'vitest';
 
-jest.mock('react-firebaseui/StyledFirebaseAuth', () => () => {
+vi.mock('react-firebaseui/StyledFirebaseAuth', () => () => {
   return (
     <div>
       <button />
@@ -27,7 +27,7 @@ afterEach(cleanup);
 
 describe('Login component', () => {
   test('should render the login component displaying a button for every OAuth provider', async () => {
-    const { container } = renderWithRouter(<UserContextProvider><Login {...props} /></UserContextProvider>, {});
+    const { container } = renderWithRouter(<Login {...props} />, {});
     const buttons = container.querySelectorAll('button');
     const button = document.createElement('button');
     await wait(() => {
