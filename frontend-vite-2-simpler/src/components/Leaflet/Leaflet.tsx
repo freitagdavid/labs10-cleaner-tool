@@ -24,7 +24,7 @@ export { iconPerson };
 const LeafletMap = (props: {
   className?: string;
   default?: any[];
-  ast: any;
+  ast?: any;
 }) => {
   const [coordinates, setCoordinates] = useState({
     lat: 38.695394,

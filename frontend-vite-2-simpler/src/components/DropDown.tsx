@@ -19,7 +19,7 @@ const theme = createMuiTheme({
   typography: { useNextVariants: true },
 });
 
-const StyledNativeSelect = styled(NativeSelect as ComponentClass<any>)`
+const StyledNativeSelect = styled(NativeSelect)`
   /* width: 100%; */
 `;
 

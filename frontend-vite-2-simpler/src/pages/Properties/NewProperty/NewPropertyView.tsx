@@ -32,7 +32,7 @@ const labelInputField = (label: string, currency?: 'dollar') => {
       : {};
 
   return ({ field, form }: FieldProps) => {
-    const { name, value, onChange } = field;
+    const { name, value, onChange, onBlur } = field;
     const { touched, errors } = form;
     const errorState = Boolean(errors[name] && touched[name]);
     return (
@@ -51,7 +51,6 @@ const labelInputField = (label: string, currency?: 'dollar') => {
         data-testid={`field-${name}`}
         label={errorState ? errors[name] : label}
         margin='normal'
-        {...field}
       />
     );
   };

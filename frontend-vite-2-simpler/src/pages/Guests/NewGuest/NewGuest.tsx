@@ -15,7 +15,7 @@ import {
   SignupSchema,
 } from './types';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { FormikActions, FieldProps, FormikProps } from 'formik';
+import { FieldProps, FormikProps } from 'formik';
 import { RouteComponentProps } from 'react-router-dom';
 // Utils
 import { emptyValues } from './types';
@@ -24,7 +24,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import firebase from 'firebase/app';
 
 const LabelInputField = ({ label }: { label: string }) => {
-  const [stayId, setStayId] = useState('');
   return ({ field, form }: FieldProps) => {
     const { name, value } = field;
     const { touched, errors } = form;
@@ -65,44 +64,44 @@ const NewGuestView = (formProps: MyGuestProps) => {
             name='fullName'
             value={values.fullName}
             autoComplete='billing name'
-            render={<LabelInputField label='Name' />}
+            render={LabelInputField({label: 'Name'})}
           />
           <Field
             name='email'
             value={values.email}
             autoComplete='billing email'
-            render={labelInputField('Email')}
+            render={LabelInputField({ label: 'Email' })}
           />
           <Field
             name='phone'
             autoComplete='billing phone'
-            render={labelInputField('Phone Number')}
+            render={LabelInputField({ label: 'Phone Number' })}
           />
           <Field
             name='address1'
             autoComplete='billing street-address'
-            render={labelInputField('Address')}
+            render={LabelInputField({label: 'Address'})}
           />
           <Field
             name='address2'
-            render={labelInputField('Address (continued)')}
+            render={LabelInputField({label: 'Address (continued)'})}
           />
           <Field
             name='city'
             autoComplete='billing address-level2'
-            render={labelInputField('City')}
+            render={LabelInputField({label: 'City'})}
           />
           <Field
             name='state'
             autoComplete='billing address-level1'
-            render={labelInputField('State · Province · Region')}
+            render={LabelInputField({label: 'State · Province · Region'})}
           />
           <Field
             name='country'
             autoComplete='billing country-name'
-            render={labelInputField('Country')}
+            render={LabelInputField({label: 'Country'})}
           />
-          <Field name='postCode' render={labelInputField('Post Code')} />
+          <Field name='postCode' render={LabelInputField({label: 'Post Code'})} />
         </div>
       </FormBlock>
       <FormBlock>
@@ -146,7 +145,7 @@ const NewGuestView = (formProps: MyGuestProps) => {
             <span>How many other guests are there?</span>
             <Field
               name='extraGuests'
-              render={labelInputField('Extra Guests')}
+              render={LabelInputField({label: 'Extra Guests'})}
             />
           </div>
         </div>

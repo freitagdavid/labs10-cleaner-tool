@@ -51,7 +51,7 @@ export const IconButton = styled(Button)`
   }
 `;
 
-export const StyledTextField = styled(TextField as ComponentClass<any>)`
+export const StyledTextField = styled(TextField)`
   margin-left: 1rem;
   font-size: 1.125rem;
   padding: 0.6875rem 0;

@@ -2,11 +2,11 @@
 authors = ["David Freitag <david@freitag.site>"]
 channels = ["conda-forge"]
 name = "frontend"
-platforms = ["win-64"]
+platforms = ["win-64", "osx-64"]
 version = "0.1.0"
 
 [tasks]
 
 [dependencies]
-nodejs = ">=22.13.0,<22.14"
-python = "==3.6"
+nodejs = ">=12.4.0,<22.14"
+python = ">=3.13.2,<3.14"

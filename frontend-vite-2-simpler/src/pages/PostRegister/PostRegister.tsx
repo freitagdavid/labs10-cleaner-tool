@@ -155,8 +155,8 @@ const PostForm = (props: PostFormProps) => {
               phone,
             };
             await axios.put(`${url}/users/`, userData, headers);
-            await actions.setSubmitting(false);
-            await actions.setStatus('Submission successful. Thank you!');
+            actions.setSubmitting(false);
+            actions.setStatus('Submission successful. Thank you!');
             if (setShow !== undefined) {
               setFetch(true);
               setShow(false);
