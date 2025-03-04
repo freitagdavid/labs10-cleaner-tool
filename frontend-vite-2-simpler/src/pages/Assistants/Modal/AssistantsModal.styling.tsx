@@ -34,14 +34,14 @@ export const SurveySelectButton = styled.button`
     height: auto;
     padding: 0.5rem 1rem;
     border: 0;
-    border: 1px solid var(${props=>(props.theme.text)});
+    border: 1px solid var(${(props: { theme: { text: string; bg: string } }) => (props.theme.text)});
     border-radius: var(--border-radius);
     font-weight: normal;
     font-size: 1rem;
     background: var(--color-accent);
     color: var(--color-button-text);
-    background: var(${props=>(props.theme.bg)});
-    color: var(${props=>(props.theme.text)});
+    background: var(${props => (props.theme.bg)});
+    color: var(${props => (props.theme.text)});
     outline:none;
     cursor: pointer;
     margin-right: 1.2rem;

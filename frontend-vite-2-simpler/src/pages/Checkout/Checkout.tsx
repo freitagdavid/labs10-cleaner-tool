@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect, createContext } from 'react';
 import { Container, Button } from '../../components/index';
 import { RouteComponentProps } from 'react-router';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { axiosErrorHandler } from '../utils';
 import {
   CheckoutContainer,
   CheckoutForm,

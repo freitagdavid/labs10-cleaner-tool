@@ -53,25 +53,24 @@ const InviteAst = (props: RouteComponentProps) => {
           onSubmit={async (values, actions) => {
             try {
               await axios.post(`${url}/email/`, values, headers);
-              await actions.setStatus('Submission successful. Thank you!');
+              actions.setStatus('Submission successful. Thank you!');
               // props.history.push('/');
             } catch (error) {
-              await actions.setSubmitting(false);
+              actions.setSubmitting(false);
               if (error.response) {
                 const { status, data } = error.response;
-                await actions.setStatus({
+                actions.setStatus({
                   msg: `${status}: ${data}`,
                 });
               } else if (error.request) {
-                await actions.setStatus({
+                actions.setStatus({
                   msg: 'Could not connect. Please try again later.',
                 });
               } else {
                 // Something happened in setting up the request that triggered an Error
-                await actions.setStatus({
-                  msg: `Request could not be processed. Please refresh the page.\n\nError:\n${
-                    error.message
-                  }`,
+                actions.setStatus({
+                  msg: `Request could not be processed. Please refresh the page.\n\nError:\n${error.message
+                    }`,
                 });
               }
             }

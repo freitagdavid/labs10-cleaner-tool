@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { FieldProps } from 'formik';
 import { ManagerHouse } from './types';
 
-const StyledSelect = styled(Select as ComponentClass<any>)`
+const StyledSelect = styled(Select)`
   width: 100%;
   margin-top: 0.5rem;
   /* Flex */
@@ -44,7 +44,7 @@ const MenuIcon = styled.i`
   margin-right: 2rem;
 `;
 
-const MenuItemStyled = styled(MenuItem as ComponentClass<any>)`
+const MenuItemStyled = styled(MenuItem)`
   margin: 1rem 0;
 `;
 

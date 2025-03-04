@@ -8,7 +8,7 @@ import { Button } from '../../components/index';
 import axios, { AxiosRequestConfig } from 'axios';
 import { BillingContext } from './Billing';
 import loadingIndicator from '../utils/loading.svg';
-import { UserContext } from '../../UserContext';
+import { useUserStore } from 'store';
 
 const url =
   import.meta.env.REACT_APP_backendURL ||
@@ -20,9 +20,9 @@ const headers: AxiosRequestConfig = {
 
 const CheckoutForm = (props: ReactStripeElements.InjectedStripeProps) => {
   const { setConfirm, setShownIndex } = useContext(BillingContext);
-  const { state, dispatch } = useContext(UserContext);
-  const setSubscription = (sub: number) =>
-    dispatch({ type: 'setSubscription', payload: sub });
+  const setSubscription = useUserStore(state => state.setSubscription);
+  // const setSubscription = (sub: number) =>
+  //   dispatch({ type: 'setSubscription', payload: sub });
 
   const [loading, setLoading] = useState(false);
   const [plan, setPlan] = useState<any>(0);

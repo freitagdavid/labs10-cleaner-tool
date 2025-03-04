@@ -19,16 +19,16 @@ import {
 import logo from '../../assets/lodgel.jpg';
 import notxt_Lodgel from '../../assets/notxt_Lodgel.jpg';
 import { UserContext } from '../../UserContext';
+import { useUserStore } from 'store';
 
 interface LinkProps extends RouteComponentProps {
   onClick?: () => MouseEvent;
 }
 
 const Sidebar = (props: LinkProps) => {
-  const { state, dispatch } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { role } = state;
-  const setLogin = () => dispatch({ type: 'setLogin' });
+  const role = useUserStore(state => state.role);
+  const setLoggedIn = useUserStore(state => state.setLoggedIn);
   // const { setLogin, role } = useContext(UserContext);
 
   const handleClick = (e: any) => {
@@ -49,7 +49,7 @@ const Sidebar = (props: LinkProps) => {
     localStorage.removeItem('id');
     localStorage.removeItem('role');
     localStorage.removeItem('firebaseui::rememberedAccounts');
-    setLogin();
+    setLoggedIn();
     // TODO: Use actual firebase signout function to sign out
     props.history.push('/');
   };

@@ -18,6 +18,7 @@ import { RouteComponentProps } from 'react-router';
 import loadingIndicator from '../utils/loading.svg';
 import defaultUser from '../../assets/default-user.jpg';
 import { create } from 'zustand';
+import { useUserStore } from 'store';
 
 const url =
   import.meta.env.REACT_APP_backendURL ||
@@ -28,10 +29,13 @@ const stripeOauthUrl = `https://connect.stripe.com/oauth/authorize?response_type
 ${clientId}&scope=read_write`;
 
 const Settings: React.SFC<RouteComponentProps> = (props: any) => {
-  const { state, dispatch } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [fetch, setFetch] = useState(false);
   const [pic, setPic] = useState('');
+  const subscription = useUserStore(state => state.subscription);
+  const setConnected = useUserStore(state => state.setConnected);
+  const role = useUserStore(state => state.role);
+  const connected = useUserStore(state => state.connected);
   const [user, error, loading] = useFetch(`${url}/users`, fetch);
   const [paymentError, setPaymentError] = useState({ err: false, message: '' });
   const addressArray = user && user.address ? user.address.split('\n') : '';
@@ -39,9 +43,9 @@ const Settings: React.SFC<RouteComponentProps> = (props: any) => {
     addressArray.splice(1, 0, '');
   }
   let subInfo = 'Not Subscribed';
-  if (state.subscription === 1) {
+  if (subscription === 1) {
     subInfo = 'Basic';
-  } else if (state.subscription === 2) {
+  } else if (subscription === 2) {
     subInfo = 'Professional';
   }
   useEffect(() => {
@@ -59,7 +63,7 @@ const Settings: React.SFC<RouteComponentProps> = (props: any) => {
         .post(`${url}/connect`, { authorizationCode }, headers)
         .then((res) => {
           localStorage.setItem('connteced', 'true');
-          dispatch({ type: 'connected', payload: true });
+          setConnected(true);
           // userC.setConnect(true);
           props.history.replace('/settings');
         })
@@ -128,7 +132,7 @@ const Settings: React.SFC<RouteComponentProps> = (props: any) => {
                       <span>Role: </span>
                       <div className='line-info'>{user.role}</div>
                     </div>
-                    {state.role === 'manager' ? (
+                    {role === 'manager' ? (
                       <>
                         <div className='line-item'>
                           <span>Subscription: </span>
@@ -137,7 +141,7 @@ const Settings: React.SFC<RouteComponentProps> = (props: any) => {
                         <div className='line-item'>
                           <span>Stripe: </span>
                           <div>
-                            {state.connected ? (
+                            {connected ? (
                               'Connected!'
                             ) : (
                               <a href={stripeOauthUrl}>
