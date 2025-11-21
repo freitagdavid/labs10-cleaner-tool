@@ -1,7 +1,7 @@
 import 'jest-dom/extend-expect';
 
 const localStorageMock = (function() {
-    const store = {};
+    let store = {};
 
     return {
         getItem: function(key) {
@@ -9,6 +9,9 @@ const localStorageMock = (function() {
         },
         setItem: function(key, value) {
             store[key] = value.toString();
+        },
+        removeItem: function(key) {
+            delete store[key];
         },
         clear: function() {
             store = {};

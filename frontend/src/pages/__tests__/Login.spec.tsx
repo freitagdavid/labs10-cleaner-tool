@@ -5,6 +5,32 @@ import Login from '../Login';
 import 'jest';
 import {UserContextProvider} from '../../UserContext';
 
+jest.mock('firebase/app', () => ({
+  __esModule: true,
+  default: {
+    auth: {
+      GoogleAuthProvider: { PROVIDER_ID: 'google' },
+      FacebookAuthProvider: { PROVIDER_ID: 'facebook' },
+      TwitterAuthProvider: { PROVIDER_ID: 'twitter' },
+      GithubAuthProvider: { PROVIDER_ID: 'github' },
+      EmailAuthProvider: { PROVIDER_ID: 'email' },
+      PhoneAuthProvider: { PROVIDER_ID: 'phone' },
+    },
+  },
+}));
+
+jest.mock('../../firebase.setup', () => {
+  const unsubscribe = jest.fn();
+  const auth = jest.fn(() => ({
+    onAuthStateChanged: jest.fn(() => unsubscribe),
+  }));
+
+  return {
+    __esModule: true,
+    default: { auth },
+  };
+});
+
 jest.mock('react-firebaseui/StyledFirebaseAuth', () => () => {
   return (
     <div>
@@ -19,7 +45,7 @@ jest.mock('react-firebaseui/StyledFirebaseAuth', () => () => {
 
 const props: any = {
   location: { search: 'code=34134123dsfasfdads' },
-  history: {},
+  history: { push: jest.fn() },
   match: {},
 };
 

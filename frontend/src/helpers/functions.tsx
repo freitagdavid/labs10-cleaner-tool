@@ -3,13 +3,15 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { render } from 'react-testing-library';
 
-export function useEffectAfterMount(cb: any, dependencies = []) {
+export function useEffectAfterMount(cb: any, dependencies: any[] = []) {
   const justMounted = useRef(true);
 
   useEffect(() => {
-    if (!justMounted.current) {
-      cb();
+    if (justMounted.current) {
+      justMounted.current = false;
+      return;
     }
+    cb();
   }, dependencies);
 }
 
